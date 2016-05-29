@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import Menu from './Menu';
 import Players from './Players';
+import Courses from './Courses';
 
 import React from 'react';
 import {
@@ -39,6 +40,8 @@ class Navigation extends React.Component {
         switch (route.name) {
             case 'players':
                 return (<Players {...this.props} navigator={navigator} />);
+            case 'courses':
+                return (<Courses {...this.props} navigator={navigator} />);
             default:
                 return (<Menu {...this.props} navigator={navigator} />);
         }

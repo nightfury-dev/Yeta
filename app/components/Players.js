@@ -15,7 +15,7 @@ class Players extends React.Component {
         super(props)
         this.state = {
             newPlayer: ''
-        }
+        };
     }
 
     addPlayer() {
