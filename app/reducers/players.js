@@ -1,6 +1,17 @@
 function players(state = [], action) {
-    console.log("new action", action.type);
-    return state;
+    switch (action.type) {
+        case 'ADD_PLAYER':
+            const newState = [
+                ...state,
+                {
+                    id: new Date().getTime(),
+                    name: action.name
+                }
+            ];
+            return newState;
+        default:
+            return state;
+    }
 }
 
 export default players;
