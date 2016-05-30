@@ -4,6 +4,7 @@ import * as actionCreators from '../actions/actionCreators';
 import Menu from './Menu';
 import Players from './Players';
 import Courses from './Courses';
+import Game from './Game';
 
 import React from 'react';
 import {
@@ -42,6 +43,8 @@ class Navigation extends React.Component {
                 return (<Players {...this.props} navigator={navigator} />);
             case 'courses':
                 return (<Courses {...this.props} navigator={navigator} />);
+            case 'game':
+                return (<Game {...this.props} navigator={navigator} />);
             default:
                 return (<Menu {...this.props} navigator={navigator} />);
         }
