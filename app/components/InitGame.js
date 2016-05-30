@@ -7,6 +7,7 @@ import {
 
 import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
+import Game from './Game';
 
 
 class InitGame extends React.Component {
@@ -25,9 +26,10 @@ class InitGame extends React.Component {
     }
 
     courseSelected(selectedCourse) {
-        console.log('Start game');
-        console.log('Players', this.state.selectedPlayers);
-        console.log('Course', selectedCourse);
+        this.setState({
+            selectedCourse,
+            currentState: 'startGame'
+        });
     }
 
     render() {
@@ -40,6 +42,11 @@ class InitGame extends React.Component {
             case 'selectCourse':
                 component = (<SelectCourse {...this.props}
                     courseSelected={this.courseSelected.bind(this)} />);
+                break;
+            case 'startGame':
+                component = (<Game {...this.props}
+                    players={this.state.selectedPlayers}
+                    course={this.state.selectedCourse} />);
                 break;
         }
         return (
