@@ -9,7 +9,7 @@ import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
 
 
-class Game extends React.Component {
+class InitGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,4 +50,4 @@ class Game extends React.Component {
     }
 };
 
-export default Game;
+export default InitGame;
