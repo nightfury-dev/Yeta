@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: '#404040'
+    },
+    listItem: {
+        color: '#6A9A1F',
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: 'bold',
     }
 });
 

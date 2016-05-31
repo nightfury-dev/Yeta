@@ -7,6 +7,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import styles from '../styles/styles';
+
 
 class SelectCourse extends React.Component {
     constructor(props) {
@@ -25,10 +27,21 @@ class SelectCourse extends React.Component {
         }
     }
 
+    getSelectedCourse() {
+        if (this.state && this.state.selectedCourse) {
+            return this.state.selectedCourse;
+        }
+        return null;
+    }
+
     renderRow(rowData) {
+        const selectedCourse = this.getSelectedCourse();
+        const text = (selectedCourse &&
+            selectedCourse.name === rowData.name ? '* ' : '') + rowData.name;
+
         return (
             <TouchableHighlight onPress={this.handleSelection.bind(this, rowData)}>
-                <Text>{rowData.name}</Text>
+                <Text style={styles.listItem}>{text}</Text>
             </TouchableHighlight>
         );
     }
@@ -38,13 +51,14 @@ class SelectCourse extends React.Component {
             rowHasChanged: (r1, r2) => r1.name !== r2.name
         }).cloneWithRows(this.props.courses);
         return (
-            <View>
+            <View style={styles.background}>
               <ListView
                   dataSource={dataSource}
                   renderRow={this.renderRow.bind(this)}
               />
-              <TouchableHighlight onPress={this.courseSelected.bind(this)}>
-                  <Text>Continue</Text>
+              <TouchableHighlight style={styles.menuItem}
+                    onPress={this.courseSelected.bind(this)}>
+                  <Text style={styles.menuItemText}>Continue</Text>
               </TouchableHighlight>
             </View>
         );
