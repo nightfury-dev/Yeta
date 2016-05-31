@@ -63,7 +63,6 @@ class Navigation extends React.Component {
     }
 }
 
-
 const App = connect(mapStateToProps, mapDispatchToProps)(Navigation);
 
 export default App;

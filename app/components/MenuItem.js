@@ -5,6 +5,8 @@ import {
   Navigator
 } from 'react-native';
 
+import styles from '../styles/styles';
+
 
 class MenuItem extends React.Component {
     navigate(name) {
@@ -13,11 +15,13 @@ class MenuItem extends React.Component {
 
     render() {
         return (
-            <TouchableHighlight onPress={this.navigate.bind(this, this.props.name)}>
-                <Text>{this.props.label}</Text>
+            <TouchableHighlight style={styles.menuItem}
+                onPress={this.navigate.bind(this, this.props.name)}>
+                <Text style={styles.menuItemText}>{this.props.label}</Text>
             </TouchableHighlight>
         );
     }
 };
+
 
 export default MenuItem;
