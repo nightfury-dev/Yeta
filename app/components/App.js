@@ -5,6 +5,8 @@ import Menu from './Menu';
 import Players from './Players';
 import Courses from './Courses';
 import InitGame from './InitGame';
+import ResumeGame from './ResumeGame';
+import Game from './Game';
 
 import React from 'react';
 import {
@@ -45,6 +47,10 @@ class Navigation extends React.Component {
                 return (<Courses {...this.props} navigator={navigator} />);
             case 'initGame':
                 return (<InitGame {...this.props} navigator={navigator} />);
+            case 'resumeGame':
+                return (<ResumeGame {...this.props} navigator={navigator} />);
+            case 'game':
+                return (<Game {...this.props} game={route.game} navigator={navigator} />);
             default:
                 return (<Menu {...this.props} navigator={navigator} />);
         }

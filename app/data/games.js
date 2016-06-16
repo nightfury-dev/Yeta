@@ -8,7 +8,8 @@ const games = [
             1: [4, 4, 4, 4],
             2: [3, 3, 3, 3],
             3: [5, 5, 5, 5]
-        }
+        },
+        currentHole: 1
     },
     {
         id: 2,  
@@ -18,7 +19,8 @@ const games = [
         scores: {
             1: [1, 3, 3, 3],
             3: [2, 3, 4, 4]
-        }
+        },
+        currentHole: 4
     }
 ];
 

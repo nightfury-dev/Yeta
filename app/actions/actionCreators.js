@@ -11,3 +11,11 @@ export function removePlayer(id) {
         id
     };
 }
+
+export function createGame(courseId, playerIds) {
+    return {
+        type: 'CREATE_GAME',
+        course: courseId,
+        players: playerIds
+    };
+}

@@ -13,6 +13,7 @@ class Menu extends React.Component {
         return (
             <View style={styles.background}>
                 <MenuItem label='Game' name='initGame' {...this.props} />
+                <MenuItem label='Resume game' name='resumeGame' {...this.props} />
                 <MenuItem label='Players' name='players' {...this.props} />
                 <MenuItem label='Courses' name='courses' {...this.props} />
             </View>
