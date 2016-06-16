@@ -12,10 +12,11 @@ export function removePlayer(id) {
     };
 }
 
-export function createGame(courseId, playerIds) {
+export function createGame(courseId, playerIds, coursePars) {
     return {
         type: 'CREATE_GAME',
         course: courseId,
-        players: playerIds
+        players: playerIds,
+        pars: coursePars
     };
 }

@@ -30,7 +30,8 @@ class InitGame extends React.Component {
     courseSelected(selectedCourse) {
         this.props.createGame(
             selectedCourse.id,
-            this.state.selectedPlayers.map((p) => p.id)
+            this.state.selectedPlayers.map((p) => p.id),
+            selectedCourse.pars
         );
         this.setState({
             previousGames: this.props.games,
