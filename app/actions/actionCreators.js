@@ -20,3 +20,11 @@ export function createGame(courseId, playerIds, coursePars) {
         pars: coursePars
     };
 }
+
+export function updateHole(gameId, hole) {
+    return {
+        type: 'UPDATE_HOLE',
+        game: gameId,
+        hole
+    };
+}
