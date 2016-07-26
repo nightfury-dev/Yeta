@@ -53,11 +53,11 @@ class InitGame extends React.Component {
             case 'startGame':
                 // Figure out how to do this correctly... I'd like to call
                 // this.props.navigator.push({name: 'game', game: createGame})
-                let newGame = _.difference(
+                const newGame = _.difference(
                     this.props.games,
                     this.state.previousGames
                 )[0];
-                component = (<Game {...this.props} game={newGame} />);
+                component = (<Game {...this.props} gameId={newGame.id} />);
                 break;
         }
         return (

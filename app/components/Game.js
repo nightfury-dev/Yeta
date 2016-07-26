@@ -12,21 +12,29 @@ import HoleSwitcher from './HoleSwitcher';
 class Game extends React.Component {
     changeHole(newHole) {
         const course = this.getCourse();
+        const game = this.getGame();
         if (newHole > 0 && newHole <= course.pars.length) {
-            this.props.updateHole(this.props.game.id, newHole);
+            this.props.updateHole(game.id, newHole);
         }
     }
 
     getCourse() {
+        const game = this.getGame();
         return _.find(
             this.props.courses,
-            (c) => { return c.id === this.props.game.course; }
+            (c) => { return c.id === game.course; }
+        );
+    }
+
+    getGame() {
+        return _.find(
+            this.props.games,
+            (g) => { return g.id === this.props.gameId; }
         );
     }
 
     render() {
-        const game = this.props.game;
-
+        const game = this.getGame();
         const course = this.getCourse();
 
         const players = _.filter(

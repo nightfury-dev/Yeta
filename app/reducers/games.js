@@ -18,6 +18,7 @@ function games(state = [], action) {
             return [...state, game];
         case 'UPDATE_HOLE':
             const index = _.findIndex(state, (g) => g.id === action.game );
+
             return [
                 ...state.slice(0, index),
                 {
@@ -26,8 +27,6 @@ function games(state = [], action) {
                 },
                 ...state.slice(index + 1)
             ];
-
-            return state;
         default:
             return state;
     }

@@ -50,7 +50,7 @@ class Navigation extends React.Component {
             case 'resumeGame':
                 return (<ResumeGame {...this.props} navigator={navigator} />);
             case 'game':
-                return (<Game {...this.props} game={route.game} navigator={navigator} />);
+                return (<Game {...this.props} gameId={route.gameId} navigator={navigator} />);
             default:
                 return (<Menu {...this.props} navigator={navigator} />);
         }

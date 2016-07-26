@@ -12,9 +12,11 @@ import styles from '../styles/styles';
 
 class ResumeGame extends React.Component {
     handleSelection(rowData) {
+        const index = _.findIndex(this.props.games, (g) => g.id === rowData.id);
+        const game = this.props.games[index];
         this.props.navigator.push({
             name: 'game',
-            game: rowData
+            gameId: game.id
         });
     }
 
