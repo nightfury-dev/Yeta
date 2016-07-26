@@ -24,7 +24,7 @@ class AddCourse extends React.Component {
 
     addRow() {
         this.setState({
-            pars: Array.from(this.state.pars).push(DEFAULT_PAR)
+            pars: [...this.state.pars, DEFAULT_PAR]
         });
     }
 
