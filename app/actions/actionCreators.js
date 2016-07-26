@@ -28,3 +28,11 @@ export function updateHole(gameId, hole) {
         hole
     };
 }
+
+export function addCourse(name, pars) {
+    return {
+        type: 'ADD_COURSE',
+        name,
+        pars
+    };
+}

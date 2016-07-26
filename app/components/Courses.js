@@ -14,6 +14,10 @@ class Courses extends React.Component {
         return (<Text>{rowData.name}</Text>);
     }
 
+    addCourse() {
+        this.props.navigator.push({name: 'addCourse'});
+    }
+
     render() {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => {
@@ -26,6 +30,9 @@ class Courses extends React.Component {
                     dataSource={dataSource}
                     renderRow={this.renderRow}
                 />
+                <TouchableHighlight onPress={this.addCourse.bind(this)}>
+                    <Text>Add course</Text>
+                </TouchableHighlight>
             </View>
         );
     }

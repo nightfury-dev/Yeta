@@ -35,6 +35,7 @@ class Game extends React.Component {
 
     render() {
         const game = this.getGame();
+
         const course = this.getCourse();
 
         const players = _.filter(
