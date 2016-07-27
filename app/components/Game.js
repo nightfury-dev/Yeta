@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import HoleSwitcher from './HoleSwitcher';
+import styles from '../styles/styles';
 
 
 class Game extends React.Component {
@@ -46,7 +47,7 @@ class Game extends React.Component {
         const playerList = players.map((p) => <Text>{p.name}</Text>);
 
         return (
-            <View>
+            <View style={styles.background}>
                 <HoleSwitcher
                     currentHole={game.currentHole}
                     holeChanged={this.changeHole.bind(this)} />

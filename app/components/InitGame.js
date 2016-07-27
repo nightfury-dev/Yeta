@@ -10,6 +10,7 @@ import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
 import Game from './Game';
 import store from '../store';
+import styles from '../styles/styles';
 
 
 class InitGame extends React.Component {
@@ -61,7 +62,7 @@ class InitGame extends React.Component {
                 break;
         }
         return (
-            <View>
+            <View style={styles.background}>
                 {component}
             </View>
         );
