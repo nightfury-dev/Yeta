@@ -6,6 +6,9 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import NumberPicker from './NumberPicker';
+
+
 class HoleGridElement extends React.Component {
     increasePar() {
         this.props.onParIncreased();
@@ -20,13 +23,11 @@ class HoleGridElement extends React.Component {
     render() {
         return (
             <View>
-                <Text>Hole #{this.props.holeNumber}: {this.props.par}</Text>
-                <TouchableHighlight onPress={this.increasePar.bind(this)}>
-                    <Text>Increase</Text>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this.decreasePar.bind(this)}>
-                    <Text>Decrease</Text>
-                </TouchableHighlight>
+                <Text>Hole #{this.props.holeNumber}</Text>
+                <NumberPicker
+                    number={this.props.par}
+                    numberIncreased={this.increasePar.bind(this)}
+                    numberDecreased={this.decreasePar.bind(this)}/>
             </View>
         );
     }
