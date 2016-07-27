@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Text,
   View,
+  ScrollView,
   TextInput,
   TouchableHighlight
 } from 'react-native';
@@ -41,9 +42,15 @@ class AddCourse extends React.Component {
         }
     }
 
+    parsChanged(updatedPars) {
+        this.setState({
+            pars: updatedPars
+        });
+    }
+
     render() {
         return (
-            <View>
+            <ScrollView>
                 <HoleCountSwitcher
                     holeCountIncreased={this.addRow.bind(this)}
                     holeCountDecreased={this.removeRow.bind(this)} />
@@ -53,12 +60,15 @@ class AddCourse extends React.Component {
                         onChangeText={(name) => this.setState({name})}
                         value={this.state.name} />
                 </View>
-                <HoleGrid />
+
+                <HoleGrid
+                    pars={this.state.pars}
+                    onParsChanged={this.parsChanged.bind(this)} />
 
                 <TouchableHighlight onPress={this.saveCourse.bind(this)}>
                     <Text>Save course</Text>
                 </TouchableHighlight>
-            </View>
+            </ScrollView>
         );
     }
 };
