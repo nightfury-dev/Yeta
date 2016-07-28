@@ -36,3 +36,13 @@ export function addCourse(name, pars) {
         pars
     };
 }
+
+export function updateScore(gameId, playerId, hole, score) {
+    return {
+        type: 'UPDATE_SCORE',
+        gameId,
+        playerId,
+        hole,
+        score
+    };
+}

@@ -27,6 +27,18 @@ function games(state = [], action) {
                 },
                 ...state.slice(index + 1)
             ];
+        case 'UPDATE_SCORE':
+            const i = _.findIndex(state, (g) => g.id === action.gameId);
+            const newScores = {...state[i].scores};
+            newScores[action.playerId][action.hole-1] = action.score;
+            return [
+                ...state.slice(0, i),
+                {
+                    ...state[i],
+                    scores: newScores
+                },
+                ...state.slice(i + 1)
+            ];
         default:
             return state;
     }

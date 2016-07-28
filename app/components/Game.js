@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import HoleSwitcher from './HoleSwitcher';
+import ScoreGrid from './ScoreGrid';
 import styles from '../styles/styles';
 
 
@@ -44,8 +45,6 @@ class Game extends React.Component {
             (p) => { return _.some(game.players, (id) => p.id == id) }
         )
 
-        const playerList = players.map((p) => <Text>{p.name}</Text>);
-
         return (
             <View style={styles.background}>
                 <HoleSwitcher
@@ -54,7 +53,13 @@ class Game extends React.Component {
                 <Text>
                     Render game in {course.name} ({game.timeBegin.toString()})
                 </Text>
-                {playerList}
+                <ScoreGrid
+                    {...this.props}
+                    game={game.id}
+                    course={course}
+                    players={players}
+                    scores={game.scores}
+                    hole={game.currentHole}/>
             </View>
         );
     }
