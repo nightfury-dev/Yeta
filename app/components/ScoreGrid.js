@@ -11,7 +11,7 @@ import ScoreGridElement from './ScoreGridElement';
 
 class ScoreGrid extends React.Component {
     scoreIncreased(player) {
-        const score = this.props.scores[player.id][this.props.hole-1]
+        const score = this.props.scores[player.id][this.props.hole-1];
         this.props.updateScore(this.props.gameId, player.id, this.props.hole, score + 1);
     }
 
@@ -23,10 +23,11 @@ class ScoreGrid extends React.Component {
     }
 
     render() {
-        const scoreGridElements = this.props.players.map((p) => {
+        const scoreGridElements = this.props.players.map((p, index) => {
             const score = this.props.scores[p.id][this.props.hole-1];
             return <ScoreGridElement
                 player={p}
+                key={index}
                 score={score}
                 par={3}
                 scoreIncreased={this.scoreIncreased.bind(this, p)}

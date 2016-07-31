@@ -9,6 +9,7 @@
     "lodash": "^4.13.1",
     "react": "^15.0.2",
     "react-native": "^0.28.0",
+    "react-native-awesome-button": "^1.6.0",
     "react-native-button": "^1.6.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",

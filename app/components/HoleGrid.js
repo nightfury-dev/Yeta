@@ -32,6 +32,7 @@ class HoleGrid extends React.Component {
         const gridElements = this.props.pars.map((par, index) => {
             return <HoleGridElement
                 par={par}
+                key={index}
                 holeNumber={index+1}
                 onParIncreased={this.parIncreased.bind(this, index)}
                 onParDecreased={this.parDecreased.bind(this, index)} />;

@@ -9,10 +9,15 @@ import {
 import NumberPicker from './NumberPicker';
 
 
+const style = {
+    flex: 1,
+    flexDirection: 'row'
+};
+
 class ScoreGridElement extends React.Component {
     render() {
         return (
-            <View>
+            <View style={style}>
                 <Text>
                     {this.props.player.name}
                 </Text>
