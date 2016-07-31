@@ -34,9 +34,14 @@ class InitGame extends React.Component {
             this.state.selectedPlayers.map((p) => p.id),
             selectedCourse.pars
         );
-        this.setState({
-            previousGames: this.props.games,
-            currentState: 'startGame'
+
+        const newGame = _.difference(
+            this.props.games,
+            this.state.previousGames
+        )[0];
+        this.props.navigator.replace({
+            name: 'game',
+            gameId: newGame.id
         });
     }
 
@@ -50,15 +55,6 @@ class InitGame extends React.Component {
             case 'selectCourse':
                 component = (<SelectCourse {...this.props}
                     courseSelected={this.courseSelected.bind(this)} />);
-                break;
-            case 'startGame':
-                // Figure out how to do this correctly... I'd like to call
-                // this.props.navigator.push({name: 'game', game: createGame})
-                const newGame = _.difference(
-                    this.props.games,
-                    this.state.previousGames
-                )[0];
-                component = (<Game {...this.props} gameId={newGame.id} />);
                 break;
         }
         return (
