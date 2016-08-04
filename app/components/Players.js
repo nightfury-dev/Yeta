@@ -9,6 +9,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import PlayerListElement from './PlayerListElement';
+
 
 class Players extends React.Component {
     constructor(props) {
@@ -25,8 +27,23 @@ class Players extends React.Component {
         });
     }
 
+    deletePlayer(payload) {
+        this.props.removePlayer(payload.player.id);
+    }
+
+    confirmDelete(player) {
+        this.props.navigator.push({
+            name: 'confirmation',
+            message: 'Do you really want to delete player ' + player.name + '?',
+            onConfirm: this.deletePlayer.bind(this),
+            payload: { player }
+        });
+    }
+
     renderRow(rowData) {
-        return (<Text>{rowData.name}</Text>);
+        return <PlayerListElement
+            player={rowData}
+            onDelete={this.confirmDelete.bind(this)} />;
     }
 
     render() {
@@ -37,7 +54,7 @@ class Players extends React.Component {
             <View>
                 <ListView
                     dataSource={dataSource}
-                    renderRow={this.renderRow}
+                    renderRow={this.renderRow.bind(this)}
                 />
                 <TextInput
                     onChangeText={(newPlayer) => this.setState({newPlayer})}

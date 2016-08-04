@@ -9,6 +9,7 @@ import ResumeGame from './ResumeGame';
 import Game from './Game';
 import AddCourse from './AddCourse';
 import Scorecard from './Scorecard';
+import Confirmation from './Confirmation';
 
 import React from 'react';
 import {
@@ -56,7 +57,14 @@ class Navigation extends React.Component {
             case 'addCourse':
                 return (<AddCourse {...this.props} navigator={navigator} />);
             case 'scorecard':
-                return (<Scorecard {...this.props}  gameId={route.gameId} navigator={navigator} />)
+                return (<Scorecard {...this.props}  gameId={route.gameId} navigator={navigator} />);
+            case 'confirmation':
+                return (<Confirmation
+                    {...this.props}
+                    message={route.message}
+                    onConfirm={route.onConfirm}
+                    payload={route.payload}
+                    navigator={navigator} />);
             default:
                 return (<Menu {...this.props} navigator={navigator} />);
         }
