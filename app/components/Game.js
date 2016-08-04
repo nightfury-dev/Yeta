@@ -4,6 +4,7 @@ import {
   Text,
   View,
   ListView,
+  TouchableHighlight
 } from 'react-native';
 
 import HoleSwitcher from './HoleSwitcher';
@@ -35,6 +36,14 @@ class Game extends React.Component {
         );
     }
 
+    showScorecard() {
+        const game = this.getGame();
+        this.props.navigator.push({
+            name: 'scorecard',
+            gameId: game.id
+        });
+    }
+
     render() {
         const game = this.getGame();
 
@@ -60,6 +69,10 @@ class Game extends React.Component {
                     players={players}
                     scores={game.scores}
                     hole={game.currentHole}/>
+
+                <TouchableHighlight onPress={this.showScorecard.bind(this)}>
+                    <Text>Show scorecard</Text>
+                </TouchableHighlight>
             </View>
         );
     }

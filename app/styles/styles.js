@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 25,
         fontWeight: 'bold',
+    },
+    scoreCardRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
 

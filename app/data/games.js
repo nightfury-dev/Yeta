@@ -12,7 +12,7 @@ const games = [
         currentHole: 1
     },
     {
-        id: 2,  
+        id: 2,
         timeBegin: new Date(),
         players: [1, 3],
         course: 1,
