@@ -4,6 +4,7 @@ import { ListView } from 'react-native';
 
 import ScorecardHeader from './ScorecardHeader';
 import ScorecardRow from './ScorecardRow';
+import ScorecardFooter from './ScorecardFooter';
 
 
 class Scorecard extends React.Component {
@@ -32,9 +33,31 @@ class Scorecard extends React.Component {
     }
 
     renderRow(rowData) {
+        const course = this.getCourse();
+        const par = course.pars[rowData.holeNumber - 1];
         return <ScorecardRow
             holeNumber={rowData.holeNumber}
+            par={par}
             scores={rowData.scores} />
+    }
+
+    renderFooter() {
+        const course = this.getCourse();
+        const game = this.getGame();
+
+        const players = _.filter(
+            this.props.players,
+            (p) => { return _.some(game.players, (id) => p.id == id) }
+        );
+
+        const totalScores = players.map(player => {
+            return game.scores[player.id].reduce(
+                (score, totalScore) => score + totalScore,
+                0
+            );
+        });
+
+        return <ScorecardFooter course={course} scores={totalScores} />;
     }
 
     createRowData() {
@@ -64,7 +87,8 @@ class Scorecard extends React.Component {
             <ListView
                 dataSource={dataSource}
                 renderHeader={this.renderHeader.bind(this)}
-                renderRow={this.renderRow} />
+                renderRow={this.renderRow.bind(this)}
+                renderFooter={this.renderFooter.bind(this)}/>
         );
     }
 };

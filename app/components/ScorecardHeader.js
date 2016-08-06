@@ -13,7 +13,7 @@ class ScorecardHeader extends React.Component {
         const playerNames = this.props.players.map(p => <Text>{p.name}</Text>);
         return (
             <View style={styles.scoreCardRow}>
-                <Text>#</Text>
+                <Text># (par)</Text>
                 {playerNames}
             </View>
         );
