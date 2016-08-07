@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        backgroundColor: '#404040'
+        backgroundColor: '#FFEFE0'
     },
     listItem: {
         color: '#6A9A1F',
@@ -31,6 +31,16 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    baseText: {
+        textAlign: 'center',
+        fontSize: 22,
+        fontFamily: 'Roboto',
+        color: '#0E5C06'
+    },
+    nameText: {
+        textAlign: 'left',
+        marginLeft: 10
     }
 });
 

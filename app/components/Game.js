@@ -11,6 +11,13 @@ import HoleSwitcher from './HoleSwitcher';
 import ScoreGrid from './ScoreGrid';
 import styles from '../styles/styles';
 
+const horizontalLine = {
+    borderStyle: 'solid',
+    borderRadius: 1,
+    borderWidth: 1,
+    borderColor: '#DF878B'
+};
+
 
 class Game extends React.Component {
     changeHole(newHole) {
@@ -59,9 +66,9 @@ class Game extends React.Component {
                 <HoleSwitcher
                     currentHole={game.currentHole}
                     holeChanged={this.changeHole.bind(this)} />
-                <Text>
-                    Render game in {course.name} ({game.timeBegin.toString()})
-                </Text>
+
+                <View style={horizontalLine}></View>
+
                 <ScoreGrid
                     {...this.props}
                     game={game.id}

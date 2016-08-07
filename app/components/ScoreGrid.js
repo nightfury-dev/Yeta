@@ -8,6 +8,10 @@ import {
 
 import ScoreGridElement from './ScoreGridElement';
 
+const marginStyle = {
+    marginTop: 10,
+    marginBottom: 10
+};
 
 class ScoreGrid extends React.Component {
     scoreIncreased(player) {
@@ -34,7 +38,7 @@ class ScoreGrid extends React.Component {
                 scoreDecreased={this.scoreDecreased.bind(this, p)}/>;
         });
         return (
-            <View>
+            <View style={marginStyle}>
                 {scoreGridElements}
             </View>
         );
