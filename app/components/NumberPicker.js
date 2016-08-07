@@ -6,7 +6,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import AwesomeButton from 'react-native-awesome-button';
+import Button from './Button';
 import styles from '../styles/styles';
 
 
@@ -35,8 +35,8 @@ class NumberPicker extends React.Component {
         };
         const additionalText = this.props.additionalText ?
             this.props.additionalText : '';
-        const increaseButton = <AwesomeButton style={{flex: 1}} states={increaseButtonState}/>;
-        const decreaseButton = <AwesomeButton style={{flex: 1}} states={decreaseButtonState}/>;
+        const increaseButton = <Button onPress={this.props.numberIncreased.bind(this)} text={'+'}/>;
+        const decreaseButton = <Button onPress={this.props.numberDecreased.bind(this)} text={'-'}/>;
         return (
             <View style={style}>
             {decreaseButton}

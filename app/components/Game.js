@@ -9,6 +9,7 @@ import {
 
 import HoleSwitcher from './HoleSwitcher';
 import ScoreGrid from './ScoreGrid';
+import Button from './Button';
 import styles from '../styles/styles';
 
 const horizontalLine = {
@@ -77,9 +78,9 @@ class Game extends React.Component {
                     scores={game.scores}
                     hole={game.currentHole}/>
 
-                <TouchableHighlight onPress={this.showScorecard.bind(this)}>
-                    <Text>Show scorecard</Text>
-                </TouchableHighlight>
+                <Button
+                    text={'Show scorecard'}
+                    onPress={this.showScorecard.bind(this)} />
             </View>
         );
     }
