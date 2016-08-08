@@ -1,16 +1,32 @@
-const players = [
-    {
-        id: 1,
-        name: "Foo"
-    },
-    {
-        id: 2,
-        name: "Bar"
-    },
-    {
-        id: 3,
-        name: "Baz"
-    }
-];
+import * as _ from 'lodash';
 
-export default players;
+import realm from './realm';
+
+
+function getPlayers() {
+    return _.values(realm.objects('Player'));
+}
+
+function getNextPlayerId() {
+    return _.chain(realm.objects('Player'))
+        .map((p) => p.id)
+        .max()
+        .value() + 1;
+}
+
+function addPlayer(player) {
+    realm.write(() => {
+        realm.create('Player', player);
+    });
+}
+
+function removePlayer(id) {
+    realm.write(() => {
+        const player = realm.objects('Player').filtered('id = ' + id);
+        if (player) {
+            realm.delete(player);
+        }
+    });
+}
+
+export { addPlayer, getNextPlayerId, getPlayers, removePlayer };
