@@ -21,7 +21,7 @@ class Courses extends React.Component {
     render() {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => {
-                r1.name !== r2.name || !_.isEqual(r1.pars, r2.pars)
+                r1.name !== r2.name || !_.isEqual(r1.holes, r2.holes)
             }
         }).cloneWithRows(this.props.courses);
         return (

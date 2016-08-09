@@ -34,7 +34,7 @@ class Scorecard extends React.Component {
 
     renderRow(rowData) {
         const course = this.getCourse();
-        const par = course.pars[rowData.holeNumber - 1];
+        const par = course.holes[rowData.holeNumber - 1].par;
         return <ScorecardRow
             holeNumber={rowData.holeNumber}
             par={par}
@@ -69,7 +69,7 @@ class Scorecard extends React.Component {
             (p) => { return _.some(game.players, (id) => p.id == id) }
         );
 
-        return course.pars.map((par, index) => {
+        return course.holes.map((hole, index) => {
             const currentHoleScores = players.map((player) => {
                 return game.scores[player.id][index];
             });

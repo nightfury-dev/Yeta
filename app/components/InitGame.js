@@ -32,7 +32,7 @@ class InitGame extends React.Component {
         this.props.createGame(
             selectedCourse.id,
             this.state.selectedPlayers.map((p) => p.id),
-            selectedCourse.pars
+            _.values(selectedCourse.holes).map((hole) => hole.par)
         );
 
         const newGame = _.difference(

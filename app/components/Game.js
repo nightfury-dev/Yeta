@@ -24,7 +24,7 @@ class Game extends React.Component {
     changeHole(newHole) {
         const course = this.getCourse();
         const game = this.getGame();
-        if (newHole > 0 && newHole <= course.pars.length) {
+        if (newHole > 0 && newHole <= course.holes.length) {
             this.props.updateHole(game.id, newHole);
         }
     }

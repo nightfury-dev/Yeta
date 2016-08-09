@@ -10,6 +10,8 @@ import {
 
 import HoleCountSwitcher from './HoleCountSwitcher';
 import HoleGrid from './HoleGrid';
+import { addCourse } from '../data/courses';
+
 
 const DEFAULT_PAR = 3;
 const DEFAULT_HOLE_COUNT = 9;
@@ -37,6 +39,7 @@ class AddCourse extends React.Component {
 
     saveCourse() {
         if (this.state.name) {
+            addCourse(this.state.name, this.state.pars);
             this.props.addCourse(this.state.name, this.state.pars);
             this.props.navigator.replace('menu');
         }

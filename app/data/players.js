@@ -8,6 +8,9 @@ function getPlayers() {
 }
 
 function getNextPlayerId() {
+    if (realm.objects('Player').length === 0) {
+        return 1;
+    }
     return _.chain(realm.objects('Player'))
         .map((p) => p.id)
         .max()
