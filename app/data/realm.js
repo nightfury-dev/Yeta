@@ -29,6 +29,32 @@ Course.schema = {
     }
 };
 
-const realm = new Realm({schema: [Player, Hole, Course]});
+class Score {}
+Score.schema = {
+    name: 'Score',
+    primaryKey: 'id',
+    properties: {
+        id: 'int',
+        hole: {type: 'Hole'},
+        player: {type: 'Player'},
+        score: 'int'
+    }
+};
+
+class Game {}
+Game.schema = {
+    name: 'Game',
+    primaryKey: 'id',
+    properties: {
+        id: 'int',
+        timeBegin: {type: 'date', default: new Date()},
+        players: {type: 'list', objectType: 'Player'},
+        course: {type: 'Course'},
+        currentHole: {type: 'int', default: 1},
+        scores: {type: 'list', objectType: 'Score'}
+    }
+};
+
+const realm = new Realm({schema: [Player, Hole, Course, Score, Game]});
 
 export default realm;
