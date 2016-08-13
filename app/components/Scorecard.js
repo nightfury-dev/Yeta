@@ -69,7 +69,7 @@ class Scorecard extends React.Component {
             (p) => { return _.some(game.players, (id) => p.id == id) }
         );
 
-        return course.holes.map((hole, index) => {
+        return _.values(course.holes).map((hole, index) => {
             const currentHoleScores = players.map((player) => {
                 return game.scores[player.id][index];
             });

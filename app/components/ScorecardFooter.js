@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -6,7 +7,7 @@ import styles from '../styles/styles';
 
 class ScorecardFooter extends React.Component {
     render() {
-        const coursePar = this.props.course.holes.reduce(
+        const coursePar = _.values(this.props.course.holes).reduce(
             (hole, total) => hole.par + total,
             0
         );
