@@ -5,6 +5,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import NumberPicker from './NumberPicker';
+
 
 class HoleCountSwitcher extends React.Component {
     constructor(props) {
@@ -33,13 +35,11 @@ class HoleCountSwitcher extends React.Component {
     render() {
         return (
             <View>
-                <TouchableHighlight onPress={this.increaseHoles.bind(this)}>
-                    <Text>Increase</Text>
-                </TouchableHighlight>
-                <Text>No. of holes: {this.state.holeCount}</Text>
-                <TouchableHighlight onPress={this.decreaseHoles.bind(this)}>
-                    <Text>Decrease</Text>
-                </TouchableHighlight>
+                <NumberPicker
+                    number={this.state.holeCount}
+                    additionalText={'No. of holes:'}
+                    numberIncreased={this.increaseHoles.bind(this)}
+                    numberDecreased={this.decreaseHoles.bind(this)}/>
             </View>
         );
     }

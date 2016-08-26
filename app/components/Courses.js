@@ -7,11 +7,13 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import Button from './Button';
+import styles from '../styles/styles';
 
 
 class Courses extends React.Component {
     renderRow(rowData) {
-        return (<Text>{rowData.name}</Text>);
+        return (<Text style={styles.baseText}>{rowData.name}</Text>);
     }
 
     addCourse() {
@@ -25,14 +27,14 @@ class Courses extends React.Component {
             }
         }).cloneWithRows(this.props.courses);
         return (
-            <View>
+            <View style={styles.background}>
                 <ListView
                     dataSource={dataSource}
                     renderRow={this.renderRow}
                 />
-                <TouchableHighlight onPress={this.addCourse.bind(this)}>
-                    <Text>Add course</Text>
-                </TouchableHighlight>
+                <Button
+                    onPress={this.addCourse.bind(this)}
+                    text={'Add course'} />
             </View>
         );
     }

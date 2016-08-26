@@ -9,7 +9,7 @@ class PlayerListElement extends React.Component {
     render() {
         return (
             <View style={styles.flexRow}>
-                <Text>{this.props.player.name}</Text>
+                <Text style={styles.baseText}>{this.props.player.name}</Text>
                 <Button
                     text={'Delete'}
                     onPress={this.props.onDelete.bind(this, this.props.player)} />

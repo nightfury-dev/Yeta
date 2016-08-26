@@ -8,9 +8,11 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import Button from './Button';
 import HoleCountSwitcher from './HoleCountSwitcher';
 import HoleGrid from './HoleGrid';
 import { addCourse } from '../data/courses';
+import styles from '../styles/styles';
 
 
 const DEFAULT_PAR = 3;
@@ -54,7 +56,7 @@ class AddCourse extends React.Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.background}>
                 <HoleCountSwitcher
                     holeCountIncreased={this.addRow.bind(this)}
                     holeCountDecreased={this.removeRow.bind(this)} />
@@ -70,9 +72,9 @@ class AddCourse extends React.Component {
                     pars={this.state.pars}
                     onParsChanged={this.parsChanged.bind(this)} />
 
-                <TouchableHighlight onPress={this.saveCourse.bind(this)}>
-                    <Text>Save course</Text>
-                </TouchableHighlight>
+                <Button
+                    onPress={this.saveCourse.bind(this)}
+                    text={'Save course'} />
             </ScrollView>
         );
     }

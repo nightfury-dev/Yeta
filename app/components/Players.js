@@ -9,7 +9,9 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import Button from './Button';
 import PlayerListElement from './PlayerListElement';
+import styles from '../styles/styles';
 
 
 class Players extends React.Component {
@@ -51,7 +53,7 @@ class Players extends React.Component {
             rowHasChanged: (r1, r2) => r1.name !== r2.name
         }).cloneWithRows(this.props.players);
         return (
-            <View>
+            <View style={styles.background}>
                 <ListView
                     dataSource={dataSource}
                     renderRow={this.renderRow.bind(this)}
@@ -60,9 +62,9 @@ class Players extends React.Component {
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={(newPlayer) => this.setState({newPlayer})}
                     value={this.state.newPlayer} />
-                <TouchableHighlight onPress={this.addPlayer.bind(this)}>
-                    <Text>Add player</Text>
-                </TouchableHighlight>
+                <Button
+                    onPress={this.addPlayer.bind(this)}
+                    text={'Add player'} />
             </View>
         );
     }
