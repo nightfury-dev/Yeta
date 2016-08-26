@@ -16,19 +16,15 @@ class ResumeGame extends React.Component {
         const game = this.props.games[index];
         this.props.navigator.push({
             name: 'game',
-            gameId: game.id
+            game
         });
     }
 
     renderRow(rowData) {
-        const course = _.find(
-            this.props.courses,
-            (c) => { return c.id === rowData.course; }
-        );
         return (
             <TouchableHighlight onPress={this.handleSelection.bind(this, rowData)}>
                 <Text style={styles.listItem}>
-                    {course.name} ({rowData.timeBegin.toString()})
+                    {rowData.course.name} ({rowData.timeBegin.toString()})
                 </Text>
             </TouchableHighlight>
         );

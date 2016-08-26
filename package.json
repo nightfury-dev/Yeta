@@ -14,7 +14,8 @@
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "realm": "^0.14.2",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

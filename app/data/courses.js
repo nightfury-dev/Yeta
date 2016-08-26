@@ -25,16 +25,23 @@ function getNextHoleId() {
     return getNextId('Hole');
 }
 
-function addCourse(name, pars) {
-    realm.write(() => {
-        let course = realm.create('Course', {id: getNextCourseId(), name});
-        pars.forEach((par) => {
-            course.holes.push(
-                realm.create('Hole', {id: getNextHoleId(), par})
-            );
+function saveCourse(name, pars) {
+    return new Promise((success, error) => {
+        realm.write(() => {
+            let course = realm.create('Course', {id: getNextCourseId(), name});
+            pars.forEach((par, index) => {
+                course.holes.push(
+                    realm.create('Hole', {
+                        id: getNextHoleId(),
+                        par,
+                        holenumber: index + 1
+                    })
+                );
+            });
+            success(course);
         });
     });
 }
 
 
-export { getCourses, getNextId, getNextCourseId, getNextHoleId, addCourse };
+export { getCourses, getNextId, getNextCourseId, getNextHoleId, saveCourse };

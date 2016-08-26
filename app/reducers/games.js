@@ -1,36 +1,32 @@
 import * as _ from 'lodash';
 
+import {addGame} from '../data/games';
+import realm from '../data/realm';
+
 
 function games(state = [], action) {
     switch (action.type) {
         case 'CREATE_GAME':
-            const game = {
-                id: new Date().getTime(),
-                timeBegin: new Date(),
-                players: action.players,
-                course: action.course,
-                scores: _.zipObject(
-                    action.players,
-                    Array(action.players.length).fill(action.pars)
-                ),
-                currentHole: 1
-            };
-            return [...state, game];
-        case 'UPDATE_HOLE':
-            const index = _.findIndex(state, (g) => g.id === action.game );
-
+            return state;
+        case 'GAME_CREATED':
+            action.callback(action.game);
+            return [...state, action.game];
+        case 'HOLE_UPDATED':
+            const gameIndex = _.findIndex(state, (g) => g.id === action.game.id);
             return [
-                ...state.slice(0, index),
-                {
-                    ...state[index],
-                    currentHole: action.hole
-                },
-                ...state.slice(index + 1)
+                ...state.slice(0, gameIndex),
+                action.game,
+                ...state.slice(gameIndex + 1)
             ];
         case 'UPDATE_SCORE':
             const i = _.findIndex(state, (g) => g.id === action.gameId);
+            const key = _.findKey(state[i].scores, (score) => {
+                return score.player.id === action.playerId && score.hole.holenumber === action.hole;
+            });
             const newScores = {...state[i].scores};
-            newScores[action.playerId][action.hole-1] = action.score;
+            realm.write(() => {
+                newScores[key].score = action.score;
+            });
             return [
                 ...state.slice(0, i),
                 {

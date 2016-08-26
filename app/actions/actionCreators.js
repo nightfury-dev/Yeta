@@ -1,3 +1,8 @@
+import * as _ from 'lodash';
+import {addGame, updateGameHole} from '../data/games';
+import {saveCourse} from '../data/courses';
+
+
 export function addPlayer(name) {
     return {
         type: 'ADD_PLAYER',
@@ -12,28 +17,32 @@ export function removePlayer(id) {
     };
 }
 
-export function createGame(courseId, playerIds, coursePars) {
-    return {
-        type: 'CREATE_GAME',
-        course: courseId,
-        players: playerIds,
-        pars: coursePars
+export function createGame(courseId, playerIds, coursePars, callback) {
+    return function(dispatch) {
+        return addGame(courseId, playerIds).then((savedGame) => dispatch({
+            type: 'GAME_CREATED',
+            game: savedGame,
+            callback
+        }));
     };
 }
 
 export function updateHole(gameId, hole) {
-    return {
-        type: 'UPDATE_HOLE',
-        game: gameId,
-        hole
+    return function(dispatch) {
+        return updateGameHole(gameId, hole).then((game) => dispatch({
+            type: 'HOLE_UPDATED',
+            game
+        }));
     };
 }
 
-export function addCourse(name, pars) {
-    return {
-        type: 'ADD_COURSE',
-        name,
-        pars
+export function addCourse(name, pars, callback) {
+    return (dispatch) => {
+        return saveCourse(name, pars).then((savedCourse) => dispatch({
+            type: 'COURSE_ADDED',
+            course: savedCourse,
+            callback
+        }));
     };
 }
 

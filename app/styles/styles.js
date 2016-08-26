@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     baseText: {
         textAlign: 'center',
         fontSize: 22,
-        fontFamily: 'Roboto',
         color: '#0E5C06'
     },
     nameText: {

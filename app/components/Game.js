@@ -22,15 +22,14 @@ const horizontalLine = {
 
 class Game extends React.Component {
     changeHole(newHole) {
-        const course = this.getCourse();
-        const game = this.getGame();
-        if (newHole > 0 && newHole <= course.holes.length) {
+        const game = this.props.game;
+        if (newHole > 0 && newHole <= game.course.holes.length) {
             this.props.updateHole(game.id, newHole);
         }
     }
 
     getCourse() {
-        const game = this.getGame();
+        const game = this.props.game;
         return _.find(
             this.props.courses,
             (c) => { return c.id === game.course; }
@@ -45,22 +44,17 @@ class Game extends React.Component {
     }
 
     showScorecard() {
-        const game = this.getGame();
+        const game = this.props.game;
         this.props.navigator.push({
             name: 'scorecard',
-            gameId: game.id
+            game: game
         });
     }
 
     render() {
-        const game = this.getGame();
-
-        const course = this.getCourse();
-
-        const players = _.filter(
-            this.props.players,
-            (p) => { return _.some(game.players, (id) => p.id == id) }
-        )
+        const game = this.props.game;
+        const course = game.course;
+        const players = game.players;
 
         return (
             <View style={styles.background}>
@@ -72,7 +66,7 @@ class Game extends React.Component {
 
                 <ScoreGrid
                     {...this.props}
-                    game={game.id}
+                    gameId={game.id}
                     course={course}
                     players={players}
                     scores={game.scores}

@@ -57,6 +57,7 @@ class Players extends React.Component {
                     renderRow={this.renderRow.bind(this)}
                 />
                 <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={(newPlayer) => this.setState({newPlayer})}
                     value={this.state.newPlayer} />
                 <TouchableHighlight onPress={this.addPlayer.bind(this)}>

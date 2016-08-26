@@ -53,11 +53,11 @@ class Navigation extends React.Component {
             case 'resumeGame':
                 return (<ResumeGame {...this.props} navigator={navigator} />);
             case 'game':
-                return (<Game {...this.props} gameId={route.gameId} navigator={navigator} />);
+                return (<Game {...this.props} game={route.game} navigator={navigator} />);
             case 'addCourse':
                 return (<AddCourse {...this.props} navigator={navigator} />);
             case 'scorecard':
-                return (<Scorecard {...this.props}  gameId={route.gameId} navigator={navigator} />);
+                return (<Scorecard {...this.props}  game={route.game} navigator={navigator} />);
             case 'confirmation':
                 return (<Confirmation
                     {...this.props}
@@ -78,6 +78,7 @@ class Navigation extends React.Component {
                     name: 'menu'
                 }}
                 renderScene={this.renderScene.bind(this)}
+                style={{paddingTop: 20}}
             />
         );
     }

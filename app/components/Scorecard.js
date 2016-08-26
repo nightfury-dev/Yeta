@@ -8,73 +8,51 @@ import ScorecardFooter from './ScorecardFooter';
 
 
 class Scorecard extends React.Component {
-    getCourse() {
-        const game = this.getGame();
-        return _.find(
-            this.props.courses,
-            (c) => { return c.id === game.course; }
-        );
-    }
-
-    getGame() {
-        return _.find(
-            this.props.games,
-            (g) => { return g.id === this.props.gameId; }
-        );
-    }
-
     renderHeader() {
-        const game = this.getGame();
-        const players = _.filter(
-            this.props.players,
-            (p) => { return _.some(game.players, (id) => p.id == id) }
-        );
-        return <ScorecardHeader players={players} />
+        return <ScorecardHeader players={_.values(this.props.game.players)} />
     }
 
     renderRow(rowData) {
-        const course = this.getCourse();
-        const par = course.holes[rowData.holeNumber - 1].par;
+        const hole = _.find(
+            _.values(this.props.game.course.holes),
+            (hole) => { return hole.holenumber === rowData.holeNumber; }
+        );
         return <ScorecardRow
             holeNumber={rowData.holeNumber}
-            par={par}
+            par={hole.par}
             scores={rowData.scores} />
     }
 
     renderFooter() {
-        const course = this.getCourse();
-        const game = this.getGame();
-
-        const players = _.filter(
-            this.props.players,
-            (p) => { return _.some(game.players, (id) => p.id == id) }
-        );
-
-        const totalScores = players.map(player => {
-            return game.scores[player.id].reduce(
-                (score, totalScore) => score + totalScore,
+        const totalScores = _.values(this.props.players).map(player => {
+            const playerScores = _.filter(
+                _.values(this.props.game.scores),
+                (score) => { return score.player.id === player.id; }
+            );
+            return playerScores.reduce(
+                (totalScore, score) => totalScore + score.score,
                 0
             );
         });
 
-        return <ScorecardFooter course={course} scores={totalScores} />;
+        return <ScorecardFooter course={this.props.game.course} scores={totalScores} />;
     }
 
     createRowData() {
-        const course = this.getCourse();
-        const game = this.getGame();
+        const course = this.props.game.course;
+        const game = this.props.game;
+        const players = this.props.game.players;
 
-        const players = _.filter(
-            this.props.players,
-            (p) => { return _.some(game.players, (id) => p.id == id) }
-        );
-
-        return _.values(course.holes).map((hole, index) => {
-            const currentHoleScores = players.map((player) => {
-                return game.scores[player.id][index];
+        return _.values(course.holes).map((hole) => {
+            const currentHoleScores = _.values(players).map((player) => {
+                const score = _.find(
+                    _.values(this.props.game.scores),
+                    (score) => { return score.hole.holenumber === hole.holenumber && score.player.id === player.id; }
+                );
+                return score.score;
             });
             return {
-                holeNumber: index + 1,
+                holeNumber: hole.holenumber,
                 scores: currentHoleScores
             };
         });

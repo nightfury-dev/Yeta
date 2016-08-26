@@ -14,6 +14,7 @@ Hole.schema = {
     primaryKey: 'id',
     properties: {
         id: 'int',
+        holenumber: 'int',
         par: 'int'
     }
 };
@@ -56,5 +57,7 @@ Game.schema = {
 };
 
 const realm = new Realm({schema: [Player, Hole, Course, Score, Game]});
+
+// realm.write(() => { realm.deleteAll(); });
 
 export default realm;

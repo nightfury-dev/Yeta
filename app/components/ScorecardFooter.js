@@ -8,7 +8,7 @@ import styles from '../styles/styles';
 class ScorecardFooter extends React.Component {
     render() {
         const coursePar = _.values(this.props.course.holes).reduce(
-            (hole, total) => hole.par + total,
+            (total, hole) => hole.par + total,
             0
         );
         const scores = this.props.scores.map((score) => {

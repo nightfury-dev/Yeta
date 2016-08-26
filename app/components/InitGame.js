@@ -31,18 +31,12 @@ class InitGame extends React.Component {
     courseSelected(selectedCourse) {
         this.props.createGame(
             selectedCourse.id,
-            this.state.selectedPlayers.map((p) => p.id),
-            _.values(selectedCourse.holes).map((hole) => hole.par)
+            _.values(this.state.selectedPlayers).map((player) => player.id),
+            _.values(selectedCourse.holes).map((hole) => hole.par),
+            (game) => {
+                this.props.navigator.replace({name: 'game', game});
+            }
         );
-
-        const newGame = _.difference(
-            this.props.games,
-            this.state.previousGames
-        )[0];
-        this.props.navigator.replace({
-            name: 'game',
-            gameId: newGame.id
-        });
     }
 
     render() {

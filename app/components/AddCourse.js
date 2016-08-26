@@ -39,9 +39,10 @@ class AddCourse extends React.Component {
 
     saveCourse() {
         if (this.state.name) {
-            addCourse(this.state.name, this.state.pars);
-            this.props.addCourse(this.state.name, this.state.pars);
-            this.props.navigator.replace('menu');
+            // addCourse(this.state.name, this.state.pars);
+            this.props.addCourse(this.state.name, this.state.pars, () => {
+                this.props.navigator.replace('menu');
+            });
         }
     }
 
@@ -60,6 +61,7 @@ class AddCourse extends React.Component {
                 <View>
                     <Text>Name:</Text>
                     <TextInput
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                         onChangeText={(name) => this.setState({name})}
                         value={this.state.name} />
                 </View>

@@ -1,12 +1,8 @@
 function courses(state = [], action) {
     switch (action.type) {
-        case 'ADD_COURSE':
-            const newCourse = {
-                id: new Date().getTime(),
-                name: action.name,
-                pars: action.pars
-            };
-            return [...state, newCourse]
+        case 'COURSE_ADDED':
+            action.callback(action.course);
+            return [...state, action.course]
         default:
             return state;
     }
