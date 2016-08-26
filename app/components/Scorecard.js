@@ -24,7 +24,7 @@ class Scorecard extends React.Component {
     }
 
     renderFooter() {
-        const totalScores = _.values(this.props.players).map(player => {
+        const totalScores = _.values(this.props.game.players).map(player => {
             const playerScores = _.filter(
                 _.values(this.props.game.scores),
                 (score) => { return score.player.id === player.id; }
