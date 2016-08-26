@@ -10,7 +10,9 @@ import styles from '../styles/styles';
 
 class ScorecardHeader extends React.Component {
     render() {
-        const playerNames = this.props.players.map(p => <Text>{p.name}</Text>);
+        const playerNames = this.props.players.map(
+            p => <Text key={p.name}>{p.name}</Text>
+        );
         return (
             <View style={styles.scoreCardRow}>
                 <Text># (par)</Text>

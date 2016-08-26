@@ -11,9 +11,9 @@ class ScorecardFooter extends React.Component {
             (total, hole) => hole.par + total,
             0
         );
-        const scores = this.props.scores.map((score) => {
+        const scores = this.props.scores.map((score, index) => {
             const diff = score - coursePar;
-            return <Text>{score} ({diff > 0 ? ('+' + diff) : diff})</Text>;
+            return <Text key={index}>{score} ({diff > 0 ? ('+' + diff) : diff})</Text>;
         });
         return (
             <View style={styles.scoreCardRow}>
