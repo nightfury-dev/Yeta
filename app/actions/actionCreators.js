@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {addGame, updateGameHole} from '../data/games';
+import {addGame, updateGameHole, deleteGame} from '../data/games';
 import {saveCourse} from '../data/courses';
 
 
@@ -53,5 +53,15 @@ export function updateScore(gameId, playerId, hole, score) {
         playerId,
         hole,
         score
+    };
+}
+
+export function removeGame(game) {
+    const gameId = game.id;
+    return (dispatch) => {
+        return deleteGame(game).then(() => dispatch({
+            type: 'GAME_REMOVED',
+            gameId
+        }));
     };
 }

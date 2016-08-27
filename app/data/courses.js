@@ -43,5 +43,4 @@ function saveCourse(name, pars) {
     });
 }
 
-
-export { getCourses, getNextId, getNextCourseId, getNextHoleId, saveCourse };
+export {getCourses, getNextId, getNextCourseId, getNextHoleId, saveCourse};

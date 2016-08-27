@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import {addGame} from '../data/games';
+import {addGame, getGames} from '../data/games';
 import realm from '../data/realm';
 
 
@@ -35,6 +35,8 @@ function games(state = [], action) {
                 },
                 ...state.slice(i + 1)
             ];
+        case 'GAME_REMOVED':
+            return getGames();
         default:
             return state;
     }

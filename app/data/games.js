@@ -72,4 +72,14 @@ function addGame(courseId, playerIds) {
     });
 }
 
-export {addGame, getNextGameId, getGames, updateGameHole}
+function deleteGame(game) {
+    return new Promise((success, error) => {
+        realm.write(() => {
+            const realmGame = realm.objectForPrimaryKey('Game', game.id);
+            realm.delete(realmGame);
+            success();
+        });
+    });
+}
+
+export {addGame, getNextGameId, getGames, updateGameHole, deleteGame}
