@@ -1,8 +1,6 @@
 import * as _ from 'lodash';
 
 import realm from './realm';
-import {getPlayers} from './players';
-
 
 function getGames() {
     return _.values(realm.objects('Game'));

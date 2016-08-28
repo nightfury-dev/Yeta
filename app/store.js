@@ -3,13 +3,15 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/index';
-import { getPlayers } from './data/players';
+import RealmPlayer from './data/players';
 import { getCourses } from './data/courses';
 import { getGames } from './data/games';
 
 
+const realmPlayer = new RealmPlayer();
+
 const defaultState = {
-    players: getPlayers(),
+    players: realmPlayer.getPlayers(),
     courses: getCourses(),
     games: getGames()
 };
