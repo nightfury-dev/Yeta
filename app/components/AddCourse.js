@@ -11,7 +11,6 @@ import {
 import Button from './Button';
 import HoleCountSwitcher from './HoleCountSwitcher';
 import HoleGrid from './HoleGrid';
-import { addCourse } from '../data/courses';
 import styles from '../styles/styles';
 
 
@@ -41,7 +40,6 @@ class AddCourse extends React.Component {
 
     saveCourse() {
         if (this.state.name) {
-            // addCourse(this.state.name, this.state.pars);
             this.props.addCourse(this.state.name, this.state.pars, () => {
                 this.props.navigator.replace('menu');
             });

@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import {addGame, updateGameHole, deleteGame} from '../data/games';
-import {saveCourse} from '../data/courses';
-
+import RealmCourse from '../data/courses';
 
 export function addPlayer(name) {
     return {
@@ -37,8 +36,9 @@ export function updateHole(gameId, hole) {
 }
 
 export function addCourse(name, pars, callback) {
+    const realmCourse = new RealmCourse();
     return (dispatch) => {
-        return saveCourse(name, pars).then((savedCourse) => dispatch({
+        return realmCourse.saveCourse(name, pars).then((savedCourse) => dispatch({
             type: 'COURSE_ADDED',
             course: savedCourse,
             callback
