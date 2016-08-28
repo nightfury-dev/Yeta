@@ -21,7 +21,7 @@ export function removePlayer(id) {
 
 export function createGame(courseId, playerIds, coursePars, callback) {
     return function(dispatch) {
-        return realmGame.addGame(courseId, playerIds).then((savedGame) => dispatch({
+        return realmGame.save(courseId, playerIds).then((savedGame) => dispatch({
             type: 'GAME_CREATED',
             game: savedGame,
             callback
@@ -41,7 +41,7 @@ export function updateHole(gameId, hole) {
 export function addCourse(name, pars, callback) {
     const realmCourse = new RealmCourse();
     return (dispatch) => {
-        return realmCourse.saveCourse(name, pars).then((savedCourse) => dispatch({
+        return realmCourse.save(name, pars).then((savedCourse) => dispatch({
             type: 'COURSE_ADDED',
             course: savedCourse,
             callback
@@ -62,7 +62,7 @@ export function updateScore(gameId, playerId, hole, score) {
 export function removeGame(game) {
     const gameId = game.id;
     return (dispatch) => {
-        return realmGame.deleteGame(game).then(() => dispatch({
+        return realmGame.remove(game).then(() => dispatch({
             type: 'GAME_REMOVED',
             gameId
         }));

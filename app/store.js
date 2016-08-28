@@ -13,9 +13,9 @@ const realmCourse = new RealmCourse();
 const realmGame = new RealmGame();
 
 const defaultState = {
-    players: realmPlayer.getPlayers(),
-    courses: realmCourse.getCourses(),
-    games: realmGame.getGames()
+    players: realmPlayer.getAll(),
+    courses: realmCourse.getAll(),
+    games: realmGame.getAll()
 };
 
 const store = createStore(rootReducer, defaultState, applyMiddleware(thunk));

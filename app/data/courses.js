@@ -4,7 +4,7 @@ import realm from './realm';
 
 
 class RealmCourse {
-    getCourses() {
+    getAll() {
         return _.values(realm.objects('Course'));
     }
 
@@ -26,7 +26,7 @@ class RealmCourse {
         return this.getNextId('Hole');
     }
 
-    saveCourse(name, pars) {
+    save(name, pars) {
         return new Promise((success, error) => {
             realm.write(() => {
                 let course = realm.create('Course', {id: this.getNextCourseId(), name});

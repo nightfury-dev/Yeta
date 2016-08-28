@@ -4,7 +4,7 @@ import realm from './realm';
 
 
 class RealmGame {
-    getGames() {
+    getAll() {
         return _.values(realm.objects('Game'));
     }
 
@@ -36,7 +36,7 @@ class RealmGame {
         });
     }
 
-    addGame(courseId, playerIds) {
+    save(courseId, playerIds) {
         return new Promise((success, failure) => {
             realm.write(() => {
                 let newGame = realm.create('Game', {
@@ -72,7 +72,7 @@ class RealmGame {
         });
     }
 
-    deleteGame(game) {
+    remove(game) {
         return new Promise((success, error) => {
             realm.write(() => {
                 const realmGame = realm.objectForPrimaryKey('Game', game.id);

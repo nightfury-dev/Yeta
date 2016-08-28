@@ -4,7 +4,7 @@ import realm from './realm';
 
 
 class RealmPlayer {
-    getPlayers() {
+    getAll() {
         return _.values(realm.objects('Player'));
     }
 
@@ -18,13 +18,13 @@ class RealmPlayer {
             .value() + 1;
     }
 
-    addPlayer(player) {
+    save(player) {
         realm.write(() => {
             realm.create('Player', player);
         });
     }
 
-    removePlayer(id) {
+    remove(id) {
         realm.write(() => {
             const player = realm.objects('Player').filtered('id = ' + id);
             if (player) {

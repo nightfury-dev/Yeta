@@ -38,7 +38,7 @@ function games(state = [], action) {
                 ...state.slice(i + 1)
             ];
         case 'GAME_REMOVED':
-            return realmGame.getGames();
+            return realmGame.getAll();
         default:
             return state;
     }
