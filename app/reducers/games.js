@@ -1,8 +1,10 @@
 import * as _ from 'lodash';
 
-import {addGame, getGames} from '../data/games';
+import RealmGame from '../data/games';
 import realm from '../data/realm';
 
+
+const realmGame = new RealmGame();
 
 function games(state = [], action) {
     switch (action.type) {
@@ -36,7 +38,7 @@ function games(state = [], action) {
                 ...state.slice(i + 1)
             ];
         case 'GAME_REMOVED':
-            return getGames();
+            return realmGame.getGames();
         default:
             return state;
     }

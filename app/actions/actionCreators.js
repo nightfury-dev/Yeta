@@ -1,6 +1,9 @@
 import * as _ from 'lodash';
-import {addGame, updateGameHole, deleteGame} from '../data/games';
 import RealmCourse from '../data/courses';
+import RealmGame from '../data/games';
+
+
+const realmGame = new RealmGame();
 
 export function addPlayer(name) {
     return {
@@ -18,7 +21,7 @@ export function removePlayer(id) {
 
 export function createGame(courseId, playerIds, coursePars, callback) {
     return function(dispatch) {
-        return addGame(courseId, playerIds).then((savedGame) => dispatch({
+        return realmGame.addGame(courseId, playerIds).then((savedGame) => dispatch({
             type: 'GAME_CREATED',
             game: savedGame,
             callback
@@ -28,7 +31,7 @@ export function createGame(courseId, playerIds, coursePars, callback) {
 
 export function updateHole(gameId, hole) {
     return function(dispatch) {
-        return updateGameHole(gameId, hole).then((game) => dispatch({
+        return realmGame.updateGameHole(gameId, hole).then((game) => dispatch({
             type: 'HOLE_UPDATED',
             game
         }));
@@ -59,7 +62,7 @@ export function updateScore(gameId, playerId, hole, score) {
 export function removeGame(game) {
     const gameId = game.id;
     return (dispatch) => {
-        return deleteGame(game).then(() => dispatch({
+        return realmGame.deleteGame(game).then(() => dispatch({
             type: 'GAME_REMOVED',
             gameId
         }));
