@@ -11,6 +11,7 @@ import HoleSwitcher from './HoleSwitcher';
 import ScoreGrid from './ScoreGrid';
 import Button from './Button';
 import styles from '../styles/styles';
+import SwipeView from './SwipeView';
 
 const horizontalLine = {
     borderStyle: 'solid',
@@ -26,6 +27,14 @@ class Game extends React.Component {
         if (newHole > 0 && newHole <= game.course.holes.length) {
             this.props.updateHole(game.id, newHole);
         }
+    }
+
+    previousHole() {
+        this.changeHole(this.props.game.currentHole - 1);
+    }
+
+    nextHole() {
+        this.changeHole(this.props.game.currentHole + 1);
     }
 
     getCourse() {
@@ -57,10 +66,14 @@ class Game extends React.Component {
         const players = game.players;
 
         return (
-            <View style={styles.background}>
-                <HoleSwitcher
-                    currentHole={game.currentHole}
-                    holeChanged={this.changeHole.bind(this)} />
+            <SwipeView
+                style={styles.background}
+                onRightSwipe={this.nextHole.bind(this)}
+                onLeftSwipe={this.previousHole.bind(this)}>
+
+                <Text style={styles.baseText}>
+                    Hole: {game.currentHole}/{game.course.holes.length}
+                </Text>
 
                 <View style={horizontalLine}></View>
 
@@ -75,7 +88,7 @@ class Game extends React.Component {
                 <Button
                     text={'Show scorecard'}
                     onPress={this.showScorecard.bind(this)} />
-            </View>
+            </SwipeView>
         );
     }
 };
