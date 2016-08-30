@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { Text, View } from 'react-native';
 
+import ScorecardEntry from './ScorecardEntry';
 import styles from '../styles/styles';
 
 
@@ -11,16 +12,15 @@ class ScorecardFooter extends React.Component {
             (total, hole) => hole.par + total,
             0
         );
-        const scores = this.props.scores.map((score, index) => {
+        let getTotalScore = (score) => {
             const diff = score - coursePar;
-            return <Text key={index}>{score} ({diff > 0 ? ('+' + diff) : diff})</Text>;
-        });
-        return (
-            <View style={styles.scoreCardRow}>
-                <Text>({coursePar})</Text>
-                {scores}
-            </View>
-        );
+            const diffStr = (diff > 0 ? ('+' + diff) : diff);
+            return score + '(' + diffStr + ')';
+        };
+        return <ScorecardEntry
+            collection={this.props.scores}
+            getContent={getTotalScore}
+            firstCellContent={'(' + coursePar+ ')'}/>;
     }
 };
 

@@ -25,7 +25,10 @@ const styles = StyleSheet.create({
     scoreCardRow: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        padding: 5,
+        borderBottomWidth: 1,
+        borderColor: '#00ACE9'
     },
     flexRow: {
         flex: 1,
@@ -37,9 +40,28 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#0E5C06'
     },
+    gridCellText: {
+        fontSize: 18,
+        color: '#0E5C06'
+    },
     nameText: {
         textAlign: 'left',
         marginLeft: 10
+    },
+    scoreGridFirstCell: {
+        // backgroundColor: 'yellow',
+        flex: 1,
+        alignItems: 'flex-start'
+    },
+    scoreGridLastCell: {
+        // backgroundColor: 'yellow',
+        flex: 1,
+        alignItems: 'flex-end'
+    },
+    scoreGridCell: {
+        // backgroundColor: 'yellow',
+        flex: 1,
+        alignItems: 'center'
     }
 });
 
