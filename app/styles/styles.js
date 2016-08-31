@@ -1,8 +1,18 @@
 import { StyleSheet } from 'react-native';
 
+const buttonDefault = {
+    borderStyle: 'solid',
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: '#7C7C7C',
+    padding: 5,
+    overflow: 'hidden'
+};
+const buttonSingleChar = {...buttonDefault, width: 40};
+
 const styles = StyleSheet.create({
     menuItemText: {
-        color: '#6A9A1F',
+        color: '#EEE5E9',
         textAlign: 'center',
         fontSize: 40,
         fontWeight: 'bold',
@@ -14,13 +24,12 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        backgroundColor: '#FFEFE0'
+        backgroundColor: '#210F04'
     },
     listItem: {
-        color: '#6A9A1F',
+        color: '#EEE5E9',
         textAlign: 'center',
-        fontSize: 25,
-        fontWeight: 'bold',
+        fontSize: 25
     },
     scoreCardRow: {
         flex: 1,
@@ -28,21 +37,28 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
         borderBottomWidth: 1,
-        borderColor: '#00ACE9'
+        borderColor: '#00ACE9',
+        backgroundColor: '#210F04'
     },
     flexRow: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    input: {
+        color: '#EEE5E9',
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1
+    },
     baseText: {
         textAlign: 'center',
         fontSize: 22,
-        color: '#0E5C06'
+        color: '#EEE5E9'
     },
     gridCellText: {
         fontSize: 18,
-        color: '#0E5C06'
+        color: '#EEE5E9'
     },
     nameText: {
         textAlign: 'left',
@@ -62,7 +78,9 @@ const styles = StyleSheet.create({
         // backgroundColor: 'yellow',
         flex: 1,
         alignItems: 'center'
-    }
+    },
+    button: buttonDefault,
+    buttonSingle: buttonSingleChar
 });
 
 export default styles;

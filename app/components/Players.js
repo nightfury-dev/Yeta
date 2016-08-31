@@ -59,7 +59,7 @@ class Players extends React.Component {
                     renderRow={this.renderRow.bind(this)}
                 />
                 <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={styles.input}
                     onChangeText={(newPlayer) => this.setState({newPlayer})}
                     value={this.state.newPlayer} />
                 <Button

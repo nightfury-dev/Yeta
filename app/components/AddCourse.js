@@ -61,7 +61,7 @@ class AddCourse extends React.Component {
                 <View>
                     <Text>Name:</Text>
                     <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                        style={styles.input}
                         onChangeText={(name) => this.setState({name})}
                         value={this.state.name} />
                 </View>
