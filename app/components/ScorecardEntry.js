@@ -11,12 +11,9 @@ import styles from '../styles/styles';
 class ScorecardEntry extends React.Component {
     render() {
         const rowCells = this.props.collection.map((entry, index) => {
-            const style = (index === this.props.collection.length - 1) ?
-                styles.scoreGridLastCell :
-                styles.scoreGridCell;
             const cellContent = this.props.getContent(entry);
             return (
-                <View style={style}>
+                <View style={styles.scoreGridCell}>
                     <Text
                         numberOfLines={1}
                         style={styles.gridCellText}

@@ -69,11 +69,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start'
     },
-    scoreGridLastCell: {
-        // backgroundColor: 'yellow',
-        flex: 1,
-        alignItems: 'flex-end'
-    },
     scoreGridCell: {
         // backgroundColor: 'yellow',
         flex: 1,
