@@ -6,12 +6,15 @@ import {
   ListView,
   TouchableHighlight
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HoleSwitcher from './HoleSwitcher';
 import ScoreGrid from './ScoreGrid';
 import Button from './Button';
 import styles from '../styles/styles';
 import SwipeView from './SwipeView';
+import GameHeader from './GameHeader';
+
 
 const horizontalLine = {
     borderStyle: 'solid',
@@ -52,14 +55,6 @@ class Game extends React.Component {
         );
     }
 
-    showScorecard() {
-        const game = this.props.game;
-        this.props.navigator.push({
-            name: 'scorecard',
-            game: game
-        });
-    }
-
     render() {
         const game = this.props.game;
         const course = game.course;
@@ -71,9 +66,7 @@ class Game extends React.Component {
                 onRightSwipe={this.nextHole.bind(this)}
                 onLeftSwipe={this.previousHole.bind(this)}>
 
-                <Text style={styles.baseText}>
-                    Hole: {game.currentHole}/{game.course.holes.length}
-                </Text>
+                <GameHeader {...this.props} />
 
                 <View style={horizontalLine}></View>
 
@@ -84,10 +77,6 @@ class Game extends React.Component {
                     players={players}
                     scores={game.scores}
                     hole={game.currentHole}/>
-
-                <Button
-                    text={'Show scorecard'}
-                    onPress={this.showScorecard.bind(this)} />
             </SwipeView>
         );
     }
