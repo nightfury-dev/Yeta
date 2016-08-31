@@ -6,7 +6,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Button from './Button';
+import PlusButton from './PlusButton';
+import MinusButton from './MinusButton';
 import styles from '../styles/styles';
 
 
@@ -19,24 +20,10 @@ const style = {
 
 class NumberPicker extends React.Component {
     render() {
-        const increaseButtonState = {
-            default: {
-              text: '+',
-              onPress: this.props.numberIncreased.bind(this),
-              backgroundColor: '#1155DD'
-            }
-        };
-        const decreaseButtonState = {
-            default: {
-              text: '-',
-              onPress: this.props.numberDecreased.bind(this),
-              backgroundColor: '#1155DD'
-            }
-        };
         const additionalText = this.props.additionalText ?
             this.props.additionalText : '';
-        const increaseButton = <Button onPress={this.props.numberIncreased.bind(this)} text={'+'}/>;
-        const decreaseButton = <Button onPress={this.props.numberDecreased.bind(this)} text={'-'}/>;
+        const increaseButton = <PlusButton onPress={this.props.numberIncreased.bind(this)} />;
+        const decreaseButton = <MinusButton onPress={this.props.numberDecreased.bind(this)} />;
         return (
             <View style={style}>
             {decreaseButton}
