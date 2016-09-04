@@ -50,7 +50,7 @@ class ScoregridEditElement extends React.Component {
                     </Text>
                 </View>
                 <Slider
-                    style={{flex: 5}}
+                    style={{flex: 6}}
                     minimumValue={1}
                     maximumValue={10}
                     step={1}
