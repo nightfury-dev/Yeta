@@ -38,6 +38,9 @@ class ScoreGrid extends React.Component {
         const scoreGridElements = _.values(this.props.players).map((p, index) => {
             const score = this.getScore(p);
             return <ScoreGridElement
+                {...this.props}
+                gameId={this.props.gameId}
+                hole={this.props.hole}
                 player={p}
                 key={index}
                 score={score.score}

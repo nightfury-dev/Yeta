@@ -3,9 +3,12 @@ import React from 'react';
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableWithoutFeedback
 } from 'react-native';
 
+import ScoregridViewElement from './ScoregridViewElement';
+import ScoregridEditElement from './ScoregridEditElement';
 import NumberPicker from './NumberPicker';
 import styles from '../styles/styles';
 
@@ -26,21 +29,27 @@ const nameStyle = {
 };
 
 class ScoreGridElement extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {edit: false};
+    }
+
+    showEditView() {
+        this.setState({edit: true});
+    }
+
+    showDefaultView(e) {
+        this.setState({edit: false});
+    }
+
     render() {
-        const baseText = StyleSheet.flatten([styles.baseText, styles.nameText]);
-        return (
-            <View style={style}>
-                <View style={nameStyle}>
-                    <Text style={baseText}>
-                        {this.props.player.name}
-                    </Text>
-                </View>
-                <NumberPicker
-                    number={this.props.score}
-                    numberIncreased={this.props.scoreIncreased.bind(this)}
-                    numberDecreased={this.props.scoreDecreased.bind(this)}/>
-            </View>
-        );
+        if (this.state.edit) {
+            this.props.stateChanged('edit');
+            return <ScoregridEditElement {...this.props} afterEdit={this.showDefaultView.bind(this)}/>;
+        } else {
+            this.props.stateChanged('view');
+            return <ScoregridViewElement {...this.props} longPress={this.showEditView.bind(this)} />;
+        }
     }
 };
 

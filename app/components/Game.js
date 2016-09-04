@@ -25,7 +25,16 @@ const horizontalLine = {
 
 
 class Game extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {swipesEnabled: true};
+    }
+
     changeHole(newHole) {
+        if (!this.state.swipesEnabled) {
+            return;
+        }
+
         const game = this.props.game;
         if (newHole > 0 && newHole <= game.course.holes.length) {
             this.props.updateHole(game.id, newHole);
@@ -55,6 +64,18 @@ class Game extends React.Component {
         );
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.swipesEnabled === nextState.swipesEnabled;
+    }
+
+    stateChanged(state) {
+        if (this.state.swipesEnabled && state === 'edit') {
+            this.setState({swipesEnabled: false});
+        } else if (!this.state.swipesEnabled && state === 'view') {
+            this.setState({swipesEnabled: true});
+        }
+    }
+
     render() {
         const game = this.props.game;
         const course = game.course;
@@ -76,7 +97,8 @@ class Game extends React.Component {
                     course={course}
                     players={players}
                     scores={game.scores}
-                    hole={game.currentHole}/>
+                    hole={game.currentHole}
+                    stateChanged={this.stateChanged.bind(this)} />
             </SwipeView>
         );
     }
