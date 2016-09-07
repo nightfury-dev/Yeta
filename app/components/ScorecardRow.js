@@ -1,18 +1,21 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 
 import ScorecardEntry from './ScorecardEntry';
-import styles from '../styles/styles';
 
 
-class ScorecardRow extends React.Component {
-    render() {
-        let firstCell = this.props.holeNumber + ' (' + this.props.par + ')';
-        return <ScorecardEntry
-            collection={this.props.scores}
-            getContent={(score) => score}
-            firstCellContent={firstCell}/>;
-    }
+function ScorecardRow(props) {
+    const firstCell = `${props.holeNumber} (${props.par})`;
+    return (<ScorecardEntry
+      collection={props.scores}
+      getContent={(score) => score}
+      firstCellContent={firstCell}
+    />);
+}
+
+ScorecardRow.propTypes = {
+    holeNumber: React.PropTypes.number.isRequired,
+    par: React.PropTypes.number.isRequired,
+    scores: React.PropTypes.array.isRequired
 };
 
 export default ScorecardRow;

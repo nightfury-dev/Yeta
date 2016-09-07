@@ -27,9 +27,11 @@ class RealmCourse {
     }
 
     save(name, pars) {
-        return new Promise((success, error) => {
+        return new Promise((success) => {
             realm.write(() => {
-                let course = realm.create('Course', {id: this.getNextCourseId(), name});
+                const course = realm.create(
+                    'Course', { id: this.getNextCourseId(), name }
+                );
                 pars.forEach((par, index) => {
                     course.holes.push(
                         realm.create('Hole', {

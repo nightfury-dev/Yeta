@@ -1,19 +1,10 @@
-import * as _ from 'lodash';
 import React from 'react';
-import {
-  Text,
-  View,
-  ListView,
-  TouchableHighlight
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View } from 'react-native';
 
-import HoleSwitcher from './HoleSwitcher';
 import ScoreGrid from './ScoreGrid';
-import Button from './Button';
-import styles from '../styles/styles';
 import SwipeView from './SwipeView';
 import GameHeader from './GameHeader';
+import styles from '../styles/styles';
 
 
 const horizontalLine = {
@@ -23,11 +14,26 @@ const horizontalLine = {
     borderColor: '#DF878B'
 };
 
-
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {swipesEnabled: true};
+        this.state = { swipesEnabled: true };
+
+        this.nextHole = this.nextHole.bind(this);
+        this.previousHole = this.previousHole.bind(this);
+        this.stateChanged = this.stateChanged.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.swipesEnabled === nextState.swipesEnabled;
+    }
+
+    nextHole() {
+        this.changeHole(this.props.game.currentHole + 1);
+    }
+
+    previousHole() {
+        this.changeHole(this.props.game.currentHole - 1);
     }
 
     changeHole(newHole) {
@@ -41,38 +47,11 @@ class Game extends React.Component {
         }
     }
 
-    previousHole() {
-        this.changeHole(this.props.game.currentHole - 1);
-    }
-
-    nextHole() {
-        this.changeHole(this.props.game.currentHole + 1);
-    }
-
-    getCourse() {
-        const game = this.props.game;
-        return _.find(
-            this.props.courses,
-            (c) => { return c.id === game.course; }
-        );
-    }
-
-    getGame() {
-        return _.find(
-            this.props.games,
-            (g) => { return g.id === this.props.gameId; }
-        );
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state.swipesEnabled === nextState.swipesEnabled;
-    }
-
     stateChanged(state) {
         if (this.state.swipesEnabled && state === 'edit') {
-            this.setState({swipesEnabled: false});
+            this.setState({ swipesEnabled: false });
         } else if (!this.state.swipesEnabled && state === 'view') {
-            this.setState({swipesEnabled: true});
+            this.setState({ swipesEnabled: true });
         }
     }
 
@@ -81,27 +60,32 @@ class Game extends React.Component {
         const course = game.course;
         const players = game.players;
 
-        return (
-            <SwipeView
-                style={styles.background}
-                onRightSwipe={this.nextHole.bind(this)}
-                onLeftSwipe={this.previousHole.bind(this)}>
-
-                <GameHeader {...this.props} />
-
-                <View style={horizontalLine}></View>
-
-                <ScoreGrid
-                    {...this.props}
-                    gameId={game.id}
-                    course={course}
-                    players={players}
-                    scores={game.scores}
-                    hole={game.currentHole}
-                    stateChanged={this.stateChanged.bind(this)} />
-            </SwipeView>
-        );
+        return (<SwipeView
+          style={styles.background}
+          onRightSwipe={this.nextHole}
+          onLeftSwipe={this.previousHole}
+        >
+          <GameHeader {...this.props} />
+          <View style={horizontalLine} />
+          <ScoreGrid
+            {...this.props}
+            gameId={game.id}
+            course={course}
+            players={players}
+            scores={game.scores}
+            hole={game.currentHole}
+            stateChanged={this.stateChanged}
+          />
+        </SwipeView>);
     }
+}
+
+Game.propTypes = {
+    navigator: React.PropTypes.object.isRequired,
+    game: React.PropTypes.object.isRequired,
+    games: React.PropTypes.array.isRequired,
+    courses: React.PropTypes.array.isRequired,
+    updateHole: React.PropTypes.func.isRequired,
 };
 
 export default Game;

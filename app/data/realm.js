@@ -26,7 +26,7 @@ Course.schema = {
     properties: {
         id: 'int',
         name: 'string',
-        holes: {type: 'list', objectType: 'Hole'}
+        holes: { type: 'list', objectType: 'Hole' }
     }
 };
 
@@ -36,8 +36,8 @@ Score.schema = {
     primaryKey: 'id',
     properties: {
         id: 'int',
-        hole: {type: 'Hole'},
-        player: {type: 'Player'},
+        hole: { type: 'Hole' },
+        player: { type: 'Player' },
         score: 'int'
     }
 };
@@ -48,15 +48,16 @@ Game.schema = {
     primaryKey: 'id',
     properties: {
         id: 'int',
-        timeBegin: {type: 'date', default: new Date()},
-        players: {type: 'list', objectType: 'Player'},
-        course: {type: 'Course'},
-        currentHole: {type: 'int', default: 1},
-        scores: {type: 'list', objectType: 'Score'}
+        timeBegin: { type: 'date', default: new Date() },
+        players: { type: 'list', objectType: 'Player' },
+        course: { type: 'Course' },
+        currentHole: { type: 'int', default: 1 },
+        scores: { type: 'list', objectType: 'Score' }
     }
 };
 
-const realm = new Realm({schema: [Player, Hole, Course, Score, Game]});
+/* global Realm */
+const realm = new Realm({ schema: [Player, Hole, Course, Score, Game] });
 
 // realm.write(() => { realm.deleteAll(); });
 

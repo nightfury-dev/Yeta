@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableHighlight
-} from 'react-native';
+import { View } from 'react-native';
 
 import NumberPicker from './NumberPicker';
 
@@ -14,6 +10,9 @@ class HoleCountSwitcher extends React.Component {
         this.state = {
             holeCount: 9
         };
+
+        this.increaseHoles = this.increaseHoles.bind(this);
+        this.decreaseHoles = this.decreaseHoles.bind(this);
     }
 
     increaseHoles() {
@@ -33,16 +32,20 @@ class HoleCountSwitcher extends React.Component {
     }
 
     render() {
-        return (
-            <View>
-                <NumberPicker
-                    number={this.state.holeCount}
-                    additionalText={'No. of holes:'}
-                    numberIncreased={this.increaseHoles.bind(this)}
-                    numberDecreased={this.decreaseHoles.bind(this)}/>
-            </View>
-        );
+        return (<View>
+          <NumberPicker
+            number={this.state.holeCount}
+            additionalText={'No. of holes:'}
+            numberIncreased={this.increaseHoles}
+            numberDecreased={this.decreaseHoles}
+          />
+        </View>);
     }
+}
+
+HoleCountSwitcher.propTypes = {
+    holeCountIncreased: React.PropTypes.func.isRequired,
+    holeCountDecreased: React.PropTypes.func.isRequired
 };
 
 export default HoleCountSwitcher;

@@ -7,47 +7,23 @@ import ScorecardRow from './ScorecardRow';
 import ScorecardFooter from './ScorecardFooter';
 import styles from '../styles/styles';
 
+
 class Scorecard extends React.Component {
-    renderHeader() {
-        return <ScorecardHeader players={_.values(this.props.game.players)} />
+    constructor(props) {
+        super(props);
+        this.renderHeader = this.renderHeader.bind(this);
+        this.renderRow = this.renderRow.bind(this);
+        this.renderFooter = this.renderFooter.bind(this);
     }
-
-    renderRow(rowData) {
-        const hole = _.find(
-            _.values(this.props.game.course.holes),
-            (hole) => { return hole.holenumber === rowData.holeNumber; }
-        );
-        return <ScorecardRow
-            holeNumber={rowData.holeNumber}
-            par={hole.par}
-            scores={rowData.scores} />
-    }
-
-    renderFooter() {
-        const totalScores = _.values(this.props.game.players).map(player => {
-            const playerScores = _.filter(
-                _.values(this.props.game.scores),
-                (score) => { return score.player.id === player.id; }
-            );
-            return playerScores.reduce(
-                (totalScore, score) => totalScore + score.score,
-                0
-            );
-        });
-
-        return <ScorecardFooter course={this.props.game.course} scores={totalScores} />;
-    }
-
     createRowData() {
         const course = this.props.game.course;
-        const game = this.props.game;
         const players = this.props.game.players;
-
         return _.values(course.holes).map((hole) => {
             const currentHoleScores = _.values(players).map((player) => {
                 const score = _.find(
                     _.values(this.props.game.scores),
-                    (score) => { return score.hole.holenumber === hole.holenumber && score.player.id === player.id; }
+                    (s) => s.hole.holenumber === hole.holenumber &&
+                           s.player.id === player.id
                 );
                 return score.score;
             });
@@ -58,18 +34,56 @@ class Scorecard extends React.Component {
         });
     }
 
-    render() {
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        const dataSource = ds.cloneWithRows(this.createRowData());
-        return (
-            <ListView
-                style={styles.background}
-                dataSource={dataSource}
-                renderHeader={this.renderHeader.bind(this)}
-                renderRow={this.renderRow.bind(this)}
-                renderFooter={this.renderFooter.bind(this)}/>
+    renderRow(rowData) {
+        const hole = _.find(
+            _.values(this.props.game.course.holes),
+            (h) => h.holenumber === rowData.holeNumber
         );
+        return (<ScorecardRow
+          holeNumber={rowData.holeNumber}
+          par={hole.par}
+          scores={rowData.scores}
+        />);
     }
+
+    renderFooter() {
+        const totalScores = _.values(this.props.game.players).map(player => {
+            const playerScores = _.filter(
+                _.values(this.props.game.scores),
+                (score) => score.player.id === player.id
+            );
+            return playerScores.reduce(
+                (totalScore, score) => totalScore + score.score,
+                0
+            );
+        });
+        return (<ScorecardFooter
+          course={this.props.game.course}
+          scores={totalScores}
+        />);
+    }
+
+    renderHeader() {
+        return <ScorecardHeader players={_.values(this.props.game.players)} />;
+    }
+
+    render() {
+        const ds = new ListView.DataSource(
+            { rowHasChanged: (r1, r2) => r1 !== r2 }
+        );
+        const dataSource = ds.cloneWithRows(this.createRowData());
+        return (<ListView
+          style={styles.background}
+          dataSource={dataSource}
+          renderHeader={this.renderHeader}
+          renderRow={this.renderRow}
+          renderFooter={this.renderFooter}
+        />);
+    }
+}
+
+Scorecard.propTypes = {
+    game: React.PropTypes.object.isRequired
 };
 
 export default Scorecard;

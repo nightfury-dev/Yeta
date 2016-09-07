@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import React from 'react';
 import {
   Text,
@@ -7,11 +6,10 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
-import NumberPicker from './NumberPicker';
 import styles from '../styles/styles';
 
 
-const style = {
+const styleNotPressed = {
     flex: 7,
     flexDirection: 'row',
     paddingTop: 10,
@@ -20,9 +18,7 @@ const style = {
     borderColor: '#DF878B',
     alignItems: 'center'
 };
-
-const styleNotPressed = {...style};
-const stylePressed = {...style, backgroundColor: '#313131'};
+const stylePressed = { ...styleNotPressed, backgroundColor: '#313131' };
 
 const nameStyle = {
     flex: 6
@@ -31,36 +27,45 @@ const nameStyle = {
 class ScoregridViewElement extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {pressed: false};
+        this.state = { pressed: false };
+
+        this.pressIn = this.pressIn.bind(this);
+        this.pressOut = this.pressOut.bind(this);
+        this.props.longPress = this.props.longPress.bind(this);
     }
 
     pressIn() {
-        this.setState({pressed: true});
+        this.setState({ pressed: true });
     }
 
     pressOut() {
-        this.setState({pressed: false});
+        this.setState({ pressed: false });
     }
 
     render() {
         const baseText = StyleSheet.flatten([styles.baseText, styles.nameText]);
         const gridStyle = this.state.pressed ? stylePressed : styleNotPressed;
-        return (
-            <TouchableWithoutFeedback
-                onPressIn={this.pressIn.bind(this)}
-                onPressOut={this.pressOut.bind(this)}
-                onLongPress={this.props.longPress.bind(this)}>
-                <View style={gridStyle}>
-                    <View style={nameStyle}>
-                        <Text style={baseText}>
-                            {this.props.player.name}
-                        </Text>
-                    </View>
-                    <Text style={baseText}>{this.props.score}</Text>
-                </View>
-            </TouchableWithoutFeedback>
-        );
+        return (<TouchableWithoutFeedback
+          onPressIn={this.pressIn}
+          onPressOut={this.pressOut}
+          onLongPress={this.props.longPress}
+        >
+          <View style={gridStyle}>
+            <View style={nameStyle}>
+              <Text style={baseText}>
+                {this.props.player.name}
+              </Text>
+            </View>
+            <Text style={baseText}>{this.props.score}</Text>
+          </View>
+        </TouchableWithoutFeedback>);
     }
+}
+
+ScoregridViewElement.propTypes = {
+    longPress: React.PropTypes.func.isRequired,
+    player: React.PropTypes.object.isRequired,
+    score: React.PropTypes.number.isRequired
 };
 
 export default ScoregridViewElement;

@@ -1,21 +1,20 @@
 import React from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import Button from './Button';
 import styles from '../styles/styles';
 
 
-class PlayerListElement extends React.Component {
-    render() {
-        return (
-            <View style={styles.flexRow}>
-                <Text style={styles.baseText}>{this.props.player.name}</Text>
-                <Button
-                    text={'Delete'}
-                    onPress={this.props.onDelete.bind(this, this.props.player)} />
-            </View>
-        );
-    }
+function PlayerListElement(props) {
+    return (<View style={styles.flexRow}>
+      <Text style={styles.baseText}>{props.player.name}</Text>
+      <Button text={'Delete'} onPress={() => props.onDelete(props.player)} />
+    </View>);
+}
+
+PlayerListElement.propTypes = {
+    player: React.PropTypes.object.isRequired,
+    onDelete: React.PropTypes.func.isRequired
 };
 
 export default PlayerListElement;

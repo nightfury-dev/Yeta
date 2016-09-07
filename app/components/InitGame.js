@@ -1,15 +1,9 @@
 import * as _ from 'lodash';
 import React from 'react';
-import {
-  Text,
-  View,
-  ListView,
-} from 'react-native';
+import { View } from 'react-native';
 
 import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
-import Game from './Game';
-import store from '../store';
 import styles from '../styles/styles';
 
 
@@ -19,6 +13,9 @@ class InitGame extends React.Component {
         this.state = {
             currentState: 'selectPlayers'
         };
+
+        this.playersSelected = this.playersSelected.bind(this);
+        this.courseSelected = this.courseSelected.bind(this);
     }
 
     playersSelected(selectedPlayers) {
@@ -34,7 +31,7 @@ class InitGame extends React.Component {
             _.values(this.state.selectedPlayers).map((player) => player.id),
             _.values(selectedCourse.holes).map((hole) => hole.par),
             (game) => {
-                this.props.navigator.replace({name: 'game', game});
+                this.props.navigator.replace({ name: 'game', game });
             }
         );
     }
@@ -42,21 +39,32 @@ class InitGame extends React.Component {
     render() {
         let component;
         switch (this.state.currentState) {
-            case 'selectPlayers':
-                component = (<SelectPlayers {...this.props}
-                    playersSelected={this.playersSelected.bind(this)} />);
-                break;
-            case 'selectCourse':
-                component = (<SelectCourse {...this.props}
-                    courseSelected={this.courseSelected.bind(this)} />);
-                break;
+        case 'selectPlayers':
+            component = (<SelectPlayers
+              {...this.props}
+              playersSelected={this.playersSelected}
+            />);
+            break;
+        case 'selectCourse':
+            component = (<SelectCourse
+              {...this.props}
+              courseSelected={this.courseSelected}
+            />);
+            break;
+        default:
+            throw new Error(`Invalid state '${this.state.currentState}'`);
         }
         return (
-            <View style={styles.background}>
-                {component}
-            </View>
+          <View style={styles.background}>
+            {component}
+          </View>
         );
     }
+}
+
+InitGame.propTypes = {
+    navigator: React.PropTypes.func.isRequired,
+    createGame: React.PropTypes.func.isRequired
 };
 
 export default InitGame;

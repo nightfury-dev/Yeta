@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableHighlight
-} from 'react-native';
+import { View } from 'react-native';
 
 import NumberPicker from './NumberPicker';
 
@@ -14,6 +10,12 @@ const marginStyle = {
 };
 
 class HoleSwitcher extends React.Component {
+    constructor(props) {
+        super(props);
+        this.nextHole = this.nextHole.bind(this);
+        this.previousHole = this.previousHole.bind(this);
+    }
+
     previousHole() {
         this.props.holeChanged(this.props.currentHole - 1);
     }
@@ -23,16 +25,20 @@ class HoleSwitcher extends React.Component {
     }
 
     render() {
-        return (
-            <View style={marginStyle}>
-                <NumberPicker
-                    number={this.props.currentHole}
-                    additionalText={'Hole:'}
-                    numberIncreased={this.nextHole.bind(this)}
-                    numberDecreased={this.previousHole.bind(this)}/>
-            </View>
-        );
+        return (<View style={marginStyle}>
+          <NumberPicker
+            number={this.props.currentHole}
+            additionalText={'Hole:'}
+            numberIncreased={this.nextHole}
+            numberDecreased={this.previousHole}
+          />
+        </View>);
     }
+}
+
+HoleSwitcher.propTypes = {
+    holeChanged: React.PropTypes.func.isRequired,
+    currentHole: React.PropTypes.number.isRequired
 };
 
 export default HoleSwitcher;

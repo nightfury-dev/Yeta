@@ -1,21 +1,22 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { TouchableHighlight } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from '../styles/styles';
 
+function MinusButton(props) {
+    return (
+      <TouchableHighlight onPress={props.onPress}>
+        <Icon
+          name="minus"
+          size={40}
+          color="#98D2EB"
+        />
+      </TouchableHighlight>
+    );
+}
 
-class MinusButton extends React.Component {
-    render() {
-        return (
-            <TouchableHighlight onPress={this.props.onPress}>
-                <Icon
-                    name='minus'
-                    size={40}
-                    color='#98D2EB'/>
-            </TouchableHighlight>
-        );
-    }
+MinusButton.propTypes = {
+    onPress: React.PropTypes.func.isRequired
 };
 
 export default MinusButton;

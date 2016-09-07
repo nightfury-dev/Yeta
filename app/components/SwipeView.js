@@ -1,17 +1,25 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
 
 const MOVE_THRESHOLD_PX = 75;
 
 class SwipeView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onResponderGrant = this.onResponderGrant.bind(this);
+        this.onStartShouldSetResponder = this.onStartShouldSetResponder.bind(
+            this
+        );
+        this.onResponderRelease = this.onResponderRelease.bind(this);
+    }
     onResponderGrant(e) {
         this.setState({
             touchStart: e.nativeEvent
-        })
+        });
     }
 
-    onStartShouldSetResponder(e) {
+    onStartShouldSetResponder() {
         return true;
     }
 
@@ -38,17 +46,22 @@ class SwipeView extends React.Component {
     }
 
     render() {
-        return (
-            <View
-                style={this.props.style}
-                onResponderGrant={this.onResponderGrant.bind(this)}
-                onStartShouldSetResponder={this.onStartShouldSetResponder.bind(this)}
-                onResponderRelease={this.onResponderRelease.bind(this)}>
-                {this.props.children}
-            </View>
-        );
+        return (<View
+          style={this.props.style}
+          onResponderGrant={this.onResponderGrant}
+          onStartShouldSetResponder={this.onStartShouldSetResponder}
+          onResponderRelease={this.onResponderRelease}
+        >
+          {this.props.children}
+        </View>);
     }
-};
+}
 
+SwipeView.propTypes = {
+    onRightSwipe: React.PropTypes.func.isRequired,
+    onLeftSwipe: React.PropTypes.func.isRequired,
+    children: React.PropTypes.any,
+    style: React.PropTypes.any
+};
 
 export default SwipeView;

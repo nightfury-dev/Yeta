@@ -4,8 +4,7 @@ import {
   Text,
   View,
   ScrollView,
-  TextInput,
-  TouchableHighlight
+  TextInput
 } from 'react-native';
 
 import Button from './Button';
@@ -24,6 +23,11 @@ class AddCourse extends React.Component {
             pars: Array(DEFAULT_HOLE_COUNT).fill(DEFAULT_PAR),
             name: ''
         };
+
+        this.addRow = this.addRow.bind(this);
+        this.removeRow = this.removeRow.bind(this);
+        this.parsChanged = this.parsChanged.bind(this);
+        this.saveCourse = this.saveCourse.bind(this);
     }
 
     addRow() {
@@ -53,29 +57,29 @@ class AddCourse extends React.Component {
     }
 
     render() {
-        return (
-            <ScrollView style={styles.background}>
-                <HoleCountSwitcher
-                    holeCountIncreased={this.addRow.bind(this)}
-                    holeCountDecreased={this.removeRow.bind(this)} />
-                <View>
-                    <Text>Name:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(name) => this.setState({name})}
-                        value={this.state.name} />
-                </View>
+        return (<ScrollView style={styles.background}>
+          <HoleCountSwitcher
+            holeCountIncreased={this.addRow}
+            holeCountDecreased={this.removeRow}
+          />
+          <View>
+            <Text>Name:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(name) => this.setState({ name })}
+              value={this.state.name}
+            />
+          </View>
 
-                <HoleGrid
-                    pars={this.state.pars}
-                    onParsChanged={this.parsChanged.bind(this)} />
+          <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
 
-                <Button
-                    onPress={this.saveCourse.bind(this)}
-                    text={'Save course'} />
-            </ScrollView>
-        );
+          <Button onPress={this.saveCourse} text={'Save course'} />
+        </ScrollView>);
     }
+}
+AddCourse.propTypes = {
+    addCourse: React.PropTypes.func.isRequired,
+    navigator: React.PropTypes.object.isRequired
 };
 
 export default AddCourse;

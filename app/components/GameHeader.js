@@ -6,6 +6,11 @@ import styles from '../styles/styles';
 
 
 class GameHeader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.showScorecard = this.showScorecard.bind(this);
+    }
+
     showScorecard() {
         this.props.navigator.push({
             name: 'scorecard',
@@ -15,20 +20,26 @@ class GameHeader extends React.Component {
 
     render() {
         const game = this.props.game;
-        return (
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.baseText}>
-                    Hole: {game.currentHole}/{game.course.holes.length}
-                </Text>
-                <TouchableHighlight onPress={this.showScorecard.bind(this)}>
-                    <Icon
-                        name='table'
-                        size={40}
-                        color='#98D2EB'/>
-                </TouchableHighlight>
-            </View>
-        );
+        return (<View
+          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text style={styles.baseText}>
+              Hole: {game.currentHole}/{game.course.holes.length}
+          </Text>
+          <TouchableHighlight onPress={this.showScorecard}>
+            <Icon
+              name="table"
+              size={40}
+              color="#98D2EB"
+            />
+          </TouchableHighlight>
+        </View>);
     }
+}
+
+GameHeader.propTypes = {
+    navigator: React.PropTypes.object.isRequired,
+    game: React.PropTypes.object.isRequired
 };
 
 export default GameHeader;

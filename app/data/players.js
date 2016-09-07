@@ -26,7 +26,7 @@ class RealmPlayer {
 
     remove(id) {
         realm.write(() => {
-            const player = realm.objects('Player').filtered('id = ' + id);
+            const player = realm.objects('Player').filtered(`id = ${id}`);
             if (player) {
                 realm.delete(player);
             }

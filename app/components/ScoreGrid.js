@@ -1,11 +1,6 @@
 import * as _ from 'lodash';
 import React from 'react';
-import {
-  Text,
-  View,
-  ListView,
-  TouchableHighlight
-} from 'react-native';
+import { View } from 'react-native';
 
 import ScoreGridElement from './ScoreGridElement';
 
@@ -17,43 +12,57 @@ const marginStyle = {
 class ScoreGrid extends React.Component {
     getScore(player) {
         const scoreList = _.values(this.props.scores);
-        return _.find(scoreList, (score) => {
-            return score.player.id === player.id && score.hole.holenumber === this.props.hole;
-        });
+        return _.find(scoreList, (score) =>
+            score.player.id === player.id &&
+            score.hole.holenumber === this.props.hole
+        );
     }
 
     scoreIncreased(player) {
         const score = this.getScore(player);
-        this.props.updateScore(this.props.gameId, player.id, this.props.hole, score.score + 1);
+        this.props.updateScore(
+            this.props.gameId, player.id, this.props.hole, score.score + 1
+        );
     }
 
     scoreDecreased(player) {
         const score = this.getScore(player);
         if (score.score > 1) {
-            this.props.updateScore(this.props.gameId, player.id, this.props.hole, score.score - 1);
+            this.props.updateScore(
+                this.props.gameId, player.id, this.props.hole, score.score - 1
+            );
         }
     }
 
     render() {
-        const scoreGridElements = _.values(this.props.players).map((p, index) => {
-            const score = this.getScore(p);
-            return <ScoreGridElement
-                {...this.props}
-                gameId={this.props.gameId}
-                hole={this.props.hole}
-                player={p}
-                key={index}
-                score={score.score}
-                par={3}
-                scoreIncreased={this.scoreIncreased.bind(this, p)}
-                scoreDecreased={this.scoreDecreased.bind(this, p)}/>;
-        });
-        return (
-            <View style={marginStyle}>
-                {scoreGridElements}
-            </View>
+        const scoreGridElements = _.values(this.props.players).map(
+            (p, index) => {
+                const score = this.getScore(p);
+                return (<ScoreGridElement
+                  {...this.props}
+                  gameId={this.props.gameId}
+                  hole={this.props.hole}
+                  player={p}
+                  key={index}
+                  score={score.score}
+                  par={3}
+                  scoreIncreased={() => this.scoreIncreased(p)}
+                  scoreDecreased={() => this.scoreDecreased(p)}
+                />);
+            }
         );
+        return (<View style={marginStyle}>
+          {scoreGridElements}
+        </View>);
     }
+}
+
+ScoreGrid.propTypes = {
+    scores: React.PropTypes.object.isRequired,
+    players: React.PropTypes.object.isRequired,
+    hole: React.PropTypes.number.isRequired,
+    updateScore: React.PropTypes.func.isRequired,
+    gameId: React.PropTypes.number.isRequired
 };
 
 export default ScoreGrid;

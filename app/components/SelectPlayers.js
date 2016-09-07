@@ -14,34 +14,37 @@ class SelectPlayers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            players: this.props.players.map((p) => {
-                return _.extend({selected: false}, p);
-            })
+            players: this.props.players.map((p) =>
+                _.extend({ selected: false }, p)
+            )
         };
+
+        this.renderRow = this.renderRow.bind(this);
+        this.playersSelected = this.playersSelected.bind(this);
     }
 
     playersSelected() {
         const selectedPlayers = this.state.players.filter((p) => p.selected);
-        this.props.playersSelected(selectedPlayers)
+        this.props.playersSelected(selectedPlayers);
     }
 
     handleSelection(player) {
         const i = _.findIndex(this.state.players, (p) => p.id === player.id);
         const players = [
             ...this.state.players.slice(0, i),
-            {...player, selected: !player.selected},
+            { ...player, selected: !player.selected },
             ...this.state.players.slice(i + 1)
         ];
-        this.setState({players});
+        this.setState({ players });
     }
 
     renderRow(rowData) {
         const text = (rowData.selected ? '* ' : '') + rowData.name;
-        return (
-            <TouchableHighlight onPress={this.handleSelection.bind(this, rowData)}>
-                <Text style={styles.listItem}>{text}</Text>
-            </TouchableHighlight>
-        );
+        return (<TouchableHighlight
+          onPress={() => this.handleSelection(rowData)}
+        >
+          <Text style={styles.listItem}>{text}</Text>
+        </TouchableHighlight>);
     }
 
     render() {
@@ -49,19 +52,21 @@ class SelectPlayers extends React.Component {
             rowHasChanged: (r1, r2) => r1.name !== r2.name
         }).cloneWithRows(this.state.players);
 
-        return (
-            <View style={styles.background}>
-              <ListView
-                  dataSource={dataSource}
-                  renderRow={this.renderRow.bind(this)}
-              />
-              <TouchableHighlight style={styles.menuItem}
-                  onPress={this.playersSelected.bind(this)}>
-                  <Text style={styles.menuItemText}>Continue</Text>
-              </TouchableHighlight>
-            </View>
-        );
+        return (<View style={styles.background}>
+          <ListView dataSource={dataSource} renderRow={this.renderRow} />
+          <TouchableHighlight
+            style={styles.menuItem}
+            onPress={this.playersSelected}
+          >
+            <Text style={styles.menuItemText}>Continue</Text>
+          </TouchableHighlight>
+        </View>);
     }
+}
+
+SelectPlayers.propTypes = {
+    players: React.PropTypes.array.isRequired,
+    playersSelected: React.PropTypes.func.isRequired
 };
 
 export default SelectPlayers;

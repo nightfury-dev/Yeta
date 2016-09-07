@@ -1,21 +1,18 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-} from 'react-native';
 
 import ScorecardEntry from './ScorecardEntry';
-import styles from '../styles/styles';
 
 
-class ScorecardHeader extends React.Component {
-    render() {
-        return <ScorecardEntry
-            collection={this.props.players}
-            getContent={(player) => player.name}
-            firstCellContent={'# (par)'}/>;
-    }
+function ScorecardHeader(props) {
+    return (<ScorecardEntry
+      collection={props.players}
+      getContent={(player) => player.name}
+      firstCellContent={'# (par)'}
+    />);
+}
+
+ScorecardHeader.propTypes = {
+    players: React.PropTypes.array.isRequired
 };
 
 export default ScorecardHeader;

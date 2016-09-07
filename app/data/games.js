@@ -27,8 +27,9 @@ class RealmGame {
     }
 
     updateGameHole(gameId, newHole) {
-        return new Promise((success, error) => {
-            const realmGame = realm.objects('Game').filtered('id = ' + gameId)['0'];
+        return new Promise((success) => {
+            const realmGame = realm.objects('Game')
+                .filtered(`id = ${gameId}`)['0'];
             realm.write(() => {
                 realmGame.currentHole = newHole;
                 success(realmGame);
@@ -37,26 +38,26 @@ class RealmGame {
     }
 
     save(courseId, playerIds) {
-        return new Promise((success, failure) => {
+        return new Promise((success) => {
             realm.write(() => {
-                let newGame = realm.create('Game', {
+                const newGame = realm.create('Game', {
                     id: this.getNextGameId(),
                     timeBegin: new Date()
                 });
 
                 const realmCourse = realm.objects('Course')
-                    .filtered('id = ' + courseId)['0'];
+                    .filtered(`id = ${courseId}`)['0'];
                 newGame.course = realmCourse;
 
                 playerIds.forEach((playerId) => {
                     const realmPlayer = realm.objects('Player')
-                        .filtered('id = ' + playerId)['0'];
+                        .filtered(`id = ${playerId}`)['0'];
                     newGame.players.push(realmPlayer);
                 });
 
                 _.values(newGame.players).forEach((player) => {
                     _.values(newGame.course.holes).forEach((hole) => {
-                        let score = realm.create('Score', {
+                        const score = realm.create('Score', {
                             id: this.getNextScoreId(),
                             score: hole.par,
                             player,
@@ -66,14 +67,15 @@ class RealmGame {
                     });
                 });
 
-                const savedGame = realm.objects('Game').filtered('id = ' + newGame.id)[0];
+                const savedGame = realm.objects('Game')
+                    .filtered(`id = ${newGame.id}`)[0];
                 success(savedGame);
             });
         });
     }
 
     remove(game) {
-        return new Promise((success, error) => {
+        return new Promise((success) => {
             realm.write(() => {
                 const realmGame = realm.objectForPrimaryKey('Game', game.id);
                 realm.delete(realmGame);

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight
-} from 'react-native';
+import { Text, View } from 'react-native';
 
 import PlusButton from './PlusButton';
 import MinusButton from './MinusButton';
@@ -18,24 +13,24 @@ const style = {
     alignItems: 'center'
 };
 
-class NumberPicker extends React.Component {
-    render() {
-        const additionalText = this.props.additionalText ?
-            this.props.additionalText : '';
-        const increaseButton = <PlusButton onPress={this.props.numberIncreased.bind(this)} />;
-        const decreaseButton = <MinusButton onPress={this.props.numberDecreased.bind(this)} />;
-        return (
-            <View style={style}>
-            {decreaseButton}
-                <View style={{flex: 2}}>
-                    <Text style={styles.baseText}>
-                        {additionalText} {this.props.number}
-                    </Text>
-                </View>
-                {increaseButton}
-            </View>
-        );
-    }
+function NumberPicker(props) {
+    const additionalText = props.additionalText ? props.additionalText : '';
+    return (<View style={style}>
+      <MinusButton onPress={() => props.numberDecreased()} />
+      <View style={{ flex: 2 }}>
+        <Text style={styles.baseText}>
+          {additionalText} {props.number}
+        </Text>
+      </View>
+      <PlusButton onPress={() => props.numberIncreased()} />
+    </View>);
+}
+
+NumberPicker.propTypes = {
+    additionalText: React.PropTypes.string,
+    numberIncreased: React.PropTypes.func.isRequired,
+    numberDecreased: React.PropTypes.func.isRequired,
+    number: React.PropTypes.number.isRequired
 };
 
 export default NumberPicker;
