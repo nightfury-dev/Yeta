@@ -9,25 +9,21 @@ import {
 } from 'react-native';
 
 import Button from './Button';
+import ContextMenu from './ContextMenu';
 import styles from '../styles/styles';
-
-const style = {
-    flex: 7,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderColor: '#DF878B',
-    alignItems: 'center'
-};
 
 
 class ResumeGame extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showContextMenu: false
+        };
         this.renderRow = this.renderRow.bind(this);
+        this.confirmDelete = this.confirmDelete.bind(this);
+        this.showModal = this.showModal.bind(this);
     }
+
     getGameString(game) {
         const formattedDate = moment(game.timeBegin).format('DD.MM.YYYY HH:mm');
         return `${game.course.name} (${formattedDate})`;
@@ -42,8 +38,10 @@ class ResumeGame extends React.Component {
         });
     }
 
-    confirmDelete(game) {
+    confirmDelete() {
+        const game = this.state.selectedGame;
         const gameString = this.getGameString(game);
+        this.setState({ showContextMenu: false });
         this.props.navigator.push({
             name: 'confirmation',
             message: `Do you really want to delete game '${gameString}'?`,
@@ -52,17 +50,28 @@ class ResumeGame extends React.Component {
         });
     }
 
+    showModal(game) {
+        this.setState({
+            showContextMenu: true,
+            selectedGame: game
+        });
+    }
+
     renderRow(rowData) {
         return (<View style={styles.listItem}>
-          <TouchableHighlight onPress={() => this.handleSelection(rowData)}>
+          <ContextMenu
+            visible={this.state.showContextMenu}
+            onDelete={this.confirmDelete}
+            onClose={() => this.setState({ showContextMenu: false })}
+          />
+          <TouchableHighlight
+            onPress={() => this.handleSelection(rowData)}
+            onLongPress={() => this.showModal(rowData)}
+          >
             <Text style={styles.baseText}>
               {this.getGameString(rowData)}
             </Text>
           </TouchableHighlight>
-          <Button
-            onPress={() => this.confirmDelete(rowData)}
-            text={'Delete'}
-          />
         </View>);
     }
 
