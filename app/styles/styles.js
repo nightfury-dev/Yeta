@@ -14,13 +14,11 @@ const styles = StyleSheet.create({
     menuItemText: {
         color: '#EEE5E9',
         textAlign: 'center',
-        fontSize: 40,
-        fontWeight: 'bold',
+        fontSize: 24,
     },
     menuItem: {
-        borderWidth: 1,
-        borderColor: '#00ACE9',
-        margin: 10
+        margin: 10,
+        flex: 1,
     },
     background: {
         flex: 1,

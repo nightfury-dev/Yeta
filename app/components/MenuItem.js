@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text } from 'react-native';
+import { Button } from 'native-base';
 
 import styles from '../styles/styles';
 
@@ -15,14 +16,13 @@ class MenuItem extends React.Component {
     }
 
     render() {
-        return (
-          <TouchableHighlight
-            style={styles.menuItem}
-            onPress={() => this.navigate(this.props.name)}
-          >
-            <Text style={styles.menuItemText}>{this.props.label}</Text>
-          </TouchableHighlight>
-        );
+        return (<Button
+          block
+          style={styles.menuItem}
+          onPress={() => this.navigate(this.props.name)}
+        >
+          <Text style={styles.menuItemText}>{this.props.label}</Text>
+        </Button>);
     }
 }
 
