@@ -8,7 +8,7 @@ const buttonDefault = {
     padding: 5,
     overflow: 'hidden'
 };
-const buttonSingleChar = {...buttonDefault, width: 40};
+const buttonSingleChar = { ...buttonDefault, width: 40 };
 
 const styles = StyleSheet.create({
     menuItemText: {
@@ -83,7 +83,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     button: buttonDefault,
-    buttonSingle: buttonSingleChar
+    buttonSingle: buttonSingleChar,
+    modal: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center'
+    },
+    modalInnerContainer: {
+        borderStyle: 'solid',
+        borderRadius: 10,
+        borderWidth: 1,
+        backgroundColor: 'white',
+        padding: 20,
+        overflow: 'hidden'
+    }
 });
 
 export default styles;

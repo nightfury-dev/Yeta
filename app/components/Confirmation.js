@@ -1,41 +1,33 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { Text, View, Modal } from 'react-native';
 
 import Button from './Button';
+import styles from '../styles/styles';
 
 
-class Confirmation extends React.Component {
-    constructor(props) {
-        super(props);
-        this.confirm = this.confirm.bind(this);
-        this.cancel = this.cancel.bind(this);
-    }
-
-    cancel() {
-        this.props.navigator.pop();
-    }
-
-    confirm() {
-        this.props.onConfirm(this.props.payload);
-        this.props.navigator.pop();
-    }
-
-    render() {
-        return (<View>
-          <Text>{this.props.message}</Text>
-          <Button text={'Accept'} onPress={this.confirm} />
-          <Button text={'Cancel'} onPress={this.cancel} />
-        </View>);
-    }
+function Confirmation(props) {
+    return (<Modal
+      animationType={"slide"}
+      transparent
+      visible={props.visible}
+    >
+      <View style={styles.modal}>
+        <View style={styles.modalInnerContainer}>
+          <Text>{props.message}</Text>
+          <Button
+            onPress={() => props.onConfirm()}
+            text={'Confirm'}
+          />
+          <Button onPress={props.onCancel} text={'Cancel'} />
+        </View>
+      </View>
+    </Modal>);
 }
 
 Confirmation.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
+    visible: React.PropTypes.bool.isRequired,
     onConfirm: React.PropTypes.func.isRequired,
-    payload: React.PropTypes.any,
+    onCancel: React.PropTypes.func.isRequired,
     message: React.PropTypes.string.isRequired
 };
 

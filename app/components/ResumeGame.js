@@ -8,8 +8,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Button from './Button';
 import ContextMenu from './ContextMenu';
+import Confirmation from './Confirmation';
 import styles from '../styles/styles';
 
 
@@ -17,16 +17,23 @@ class ResumeGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showContextMenu: false
+            showContextMenu: false,
+            showDeleteConfirmation: false
         };
         this.renderRow = this.renderRow.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.deleteGame = this.deleteGame.bind(this);
     }
 
     getGameString(game) {
-        const formattedDate = moment(game.timeBegin).format('DD.MM.YYYY HH:mm');
-        return `${game.course.name} (${formattedDate})`;
+        try {
+            const formattedDate = moment(game.timeBegin)
+                .format('DD.MM.YYYY HH:mm');
+            return `${game.course.name} (${formattedDate})`;
+        } catch (e) {
+            return '';
+        }
     }
 
     handleSelection(rowData) {
@@ -39,14 +46,9 @@ class ResumeGame extends React.Component {
     }
 
     confirmDelete() {
-        const game = this.state.selectedGame;
-        const gameString = this.getGameString(game);
-        this.setState({ showContextMenu: false });
-        this.props.navigator.push({
-            name: 'confirmation',
-            message: `Do you really want to delete game '${gameString}'?`,
-            onConfirm: this.props.removeGame.bind(this, game),
-            payload: { game }
+        this.setState({
+            showContextMenu: false,
+            showDeleteConfirmation: true
         });
     }
 
@@ -57,13 +59,16 @@ class ResumeGame extends React.Component {
         });
     }
 
+    deleteGame() {
+        this.props.removeGame(this.state.selectedGame);
+        this.setState({
+            showDeleteConfirmation: false,
+            selectedGame: null
+        });
+    }
+
     renderRow(rowData) {
         return (<View style={styles.listItem}>
-          <ContextMenu
-            visible={this.state.showContextMenu}
-            onDelete={this.confirmDelete}
-            onClose={() => this.setState({ showContextMenu: false })}
-          />
           <TouchableHighlight
             onPress={() => this.handleSelection(rowData)}
             onLongPress={() => this.showModal(rowData)}
@@ -79,7 +84,20 @@ class ResumeGame extends React.Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         }).cloneWithRows(this.props.games);
+        const removeGameString = this.state.selectedGame ?
+            this.getGameString(this.state.selectedGame) : '';
         return (<View style={styles.background}>
+          <ContextMenu
+            visible={this.state.showContextMenu}
+            onDelete={this.confirmDelete}
+            onClose={() => this.setState({ showContextMenu: false })}
+          />
+          <Confirmation
+            onConfirm={this.deleteGame}
+            onCancel={() => this.setState({ showDeleteConfirmation: false })}
+            message={`Remove game '${removeGameString}'?`}
+            visible={this.state.showDeleteConfirmation}
+          />
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}

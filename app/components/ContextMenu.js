@@ -1,23 +1,8 @@
 import React from 'react';
-import { Modal, Text, View } from 'react-native';
+import { Modal, View } from 'react-native';
 
 import Button from './Button';
 import styles from '../styles/styles';
-
-const modalStyle = {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center'
-};
-
-const innerContainer = {
-    borderStyle: 'solid',
-    borderRadius: 10,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 20,
-    overflow: 'hidden'
-};
 
 
 function ContextMenu(props) {
@@ -26,8 +11,8 @@ function ContextMenu(props) {
       transparent
       visible={props.visible}
     >
-      <View style={modalStyle}>
-        <View style={innerContainer}>
+      <View style={styles.modal}>
+        <View style={styles.modalInnerContainer}>
           <Button onPress={props.onDelete} text={'Remove'} />
           <Button onPress={props.onClose} text={'Close'} />
         </View>

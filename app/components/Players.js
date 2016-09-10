@@ -3,6 +3,7 @@ import { TextInput, View, ListView } from 'react-native';
 
 import ContextMenu from './ContextMenu';
 import Button from './Button';
+import Confirmation from './Confirmation';
 import PlayerListElement from './PlayerListElement';
 import styles from '../styles/styles';
 
@@ -12,13 +13,15 @@ class Players extends React.Component {
         super(props);
         this.state = {
             newPlayer: '',
-            showContextMenu: false
+            showContextMenu: false,
+            showDeleteConfirmation: false
         };
 
         this.confirmDelete = this.confirmDelete.bind(this);
         this.renderRow = this.renderRow.bind(this);
         this.addPlayer = this.addPlayer.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.deletePlayer = this.deletePlayer.bind(this);
     }
 
     addPlayer() {
@@ -28,18 +31,18 @@ class Players extends React.Component {
         });
     }
 
-    deletePlayer(payload) {
-        this.props.removePlayer(payload.player.id);
+    deletePlayer() {
+        this.props.removePlayer(this.state.selectedPlayer.id);
+        this.setState({
+            showDeleteConfirmation: false,
+            selectedPlayer: null
+        });
     }
 
     confirmDelete() {
-        this.setState({ showContextMenu: false });
-        const player = this.state.selectedPlayer;
-        this.props.navigator.push({
-            name: 'confirmation',
-            message: `Do you really want to delete player '${player.name}'?`,
-            onConfirm: this.deletePlayer.bind(this),
-            payload: { player }
+        this.setState({
+            showContextMenu: false,
+            showDeleteConfirmation: true
         });
     }
 
@@ -61,11 +64,19 @@ class Players extends React.Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.name !== r2.name
         }).cloneWithRows(this.props.players);
+        const removeName = this.state.selectedPlayer ?
+            this.state.selectedPlayer.name : '';
         return (<View style={styles.background}>
           <ContextMenu
             visible={this.state.showContextMenu}
             onDelete={this.confirmDelete}
             onClose={() => this.setState({ showContextMenu: false })}
+          />
+          <Confirmation
+            onConfirm={this.deletePlayer}
+            onCancel={() => this.setState({ showDeleteConfirmation: false })}
+            message={`Remove player '${removeName}'?`}
+            visible={this.state.showDeleteConfirmation}
           />
           <ListView dataSource={dataSource} renderRow={this.renderRow} />
           <TextInput
