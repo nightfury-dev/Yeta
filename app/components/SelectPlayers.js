@@ -1,11 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
-import {
-  Text,
-  ListView,
-  View,
-  TouchableHighlight
-} from 'react-native';
+import { View, Text } from 'react-native';
+import { CheckBox, Button, List, ListItem } from 'native-base';
 
 import styles from '../styles/styles';
 
@@ -39,27 +35,21 @@ class SelectPlayers extends React.Component {
     }
 
     renderRow(rowData) {
-        const text = (rowData.selected ? '* ' : '') + rowData.name;
-        return (<TouchableHighlight
-          onPress={() => this.handleSelection(rowData)}
-        >
-          <Text style={styles.listItem}>{text}</Text>
-        </TouchableHighlight>);
+        return (<ListItem button onPress={() => this.handleSelection(rowData)}>
+          <Text style={styles.baseText}>{rowData.name}</Text>
+          <CheckBox checked={rowData.selected} />
+        </ListItem>);
     }
 
     render() {
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.name !== r2.name
-        }).cloneWithRows(this.state.players);
-
         return (<View style={styles.background}>
-          <ListView dataSource={dataSource} renderRow={this.renderRow} />
-          <TouchableHighlight
-            style={styles.menuItem}
-            onPress={this.playersSelected}
-          >
-            <Text style={styles.menuItemText}>Continue</Text>
-          </TouchableHighlight>
+          <List
+            dataArray={this.state.players}
+            renderRow={this.renderRow}
+          />
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Button onPress={this.playersSelected}>Continue</Button>
+          </View>
         </View>);
     }
 }

@@ -5,6 +5,7 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
+import { CheckBox, Button, List, ListItem } from 'native-base';
 
 import styles from '../styles/styles';
 
@@ -36,31 +37,23 @@ class SelectCourse extends React.Component {
     }
 
     renderRow(rowData) {
-        const selectedCourse = this.getSelectedCourse();
-        const text = (selectedCourse &&
-            selectedCourse.name === rowData.name ? '* ' : '') + rowData.name;
-        return (<TouchableHighlight
-          onPress={() => this.handleSelection(rowData)}
-        >
-          <Text style={styles.listItem}>{text}</Text>
-        </TouchableHighlight>);
+        const checked = this.state && this.state.selectedCourse &&
+            this.state.selectedCourse.name === rowData.name;
+        return (<ListItem button onPress={() => this.handleSelection(rowData)}>
+          <Text style={styles.baseText}>{rowData.name}</Text>
+          <CheckBox checked={checked} />
+        </ListItem>);
     }
 
     render() {
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.name !== r2.name
-        }).cloneWithRows(this.props.courses);
         return (<View style={styles.background}>
-          <ListView
-            dataSource={dataSource}
+          <List
+            dataArray={this.props.courses}
             renderRow={this.renderRow}
           />
-          <TouchableHighlight
-            style={styles.menuItem}
-            onPress={this.courseSelected}
-          >
-            <Text style={styles.menuItemText}>Continue</Text>
-          </TouchableHighlight>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Button onPress={this.courseSelected}>Continue</Button>
+          </View>
         </View>);
     }
 }
