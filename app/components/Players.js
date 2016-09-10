@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, View, ListView } from 'react-native';
 
+import ContextMenu from './ContextMenu';
 import Button from './Button';
 import PlayerListElement from './PlayerListElement';
 import styles from '../styles/styles';
@@ -10,12 +11,14 @@ class Players extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPlayer: ''
+            newPlayer: '',
+            showContextMenu: false
         };
 
         this.confirmDelete = this.confirmDelete.bind(this);
         this.renderRow = this.renderRow.bind(this);
         this.addPlayer = this.addPlayer.bind(this);
+        this.showModal = this.showModal.bind(this);
     }
 
     addPlayer() {
@@ -29,7 +32,9 @@ class Players extends React.Component {
         this.props.removePlayer(payload.player.id);
     }
 
-    confirmDelete(player) {
+    confirmDelete() {
+        this.setState({ showContextMenu: false });
+        const player = this.state.selectedPlayer;
         this.props.navigator.push({
             name: 'confirmation',
             message: `Do you really want to delete player '${player.name}'?`,
@@ -38,10 +43,17 @@ class Players extends React.Component {
         });
     }
 
+    showModal(player) {
+        this.setState({
+            showContextMenu: true,
+            selectedPlayer: player
+        });
+    }
+
     renderRow(rowData) {
         return (<PlayerListElement
           player={rowData}
-          onDelete={this.confirmDelete}
+          onLongPress={() => this.showModal(rowData)}
         />);
     }
 
@@ -50,6 +62,11 @@ class Players extends React.Component {
             rowHasChanged: (r1, r2) => r1.name !== r2.name
         }).cloneWithRows(this.props.players);
         return (<View style={styles.background}>
+          <ContextMenu
+            visible={this.state.showContextMenu}
+            onDelete={this.confirmDelete}
+            onClose={() => this.setState({ showContextMenu: false })}
+          />
           <ListView dataSource={dataSource} renderRow={this.renderRow} />
           <TextInput
             style={styles.input}

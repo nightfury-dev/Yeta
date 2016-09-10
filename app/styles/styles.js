@@ -29,7 +29,15 @@ const styles = StyleSheet.create({
     listItem: {
         color: '#EEE5E9',
         textAlign: 'center',
-        fontSize: 25
+        fontSize: 25,
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 10,
+        paddingBottom: 10,
+        borderBottomWidth: 1,
+        borderColor: '#DF878B',
+        alignItems: 'center'
     },
     scoreCardRow: {
         flex: 1,

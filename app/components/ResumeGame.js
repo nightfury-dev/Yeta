@@ -53,9 +53,9 @@ class ResumeGame extends React.Component {
     }
 
     renderRow(rowData) {
-        return (<View style={style}>
+        return (<View style={styles.listItem}>
           <TouchableHighlight onPress={() => this.handleSelection(rowData)}>
-            <Text style={styles.listItem}>
+            <Text style={styles.baseText}>
               {this.getGameString(rowData)}
             </Text>
           </TouchableHighlight>
