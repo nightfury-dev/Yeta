@@ -94,6 +94,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 20,
         overflow: 'hidden'
+    },
+    modalButton: {
+        margin: 10
     }
 });
 
