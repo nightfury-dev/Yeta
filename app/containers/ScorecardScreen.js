@@ -5,7 +5,7 @@ import { ListView } from 'react-native';
 import ScorecardHeader from '../components/ScorecardHeader';
 import ScorecardRow from '../components/ScorecardRow';
 import ScorecardFooter from '../components/ScorecardFooter';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class ScorecardScreen extends React.Component {

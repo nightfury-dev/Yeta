@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class SelectCourseScreen extends React.Component {

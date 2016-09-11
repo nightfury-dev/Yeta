@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import Colors from './Colors';
+
 
 const buttonDefault = {
     borderStyle: 'solid',
@@ -10,7 +11,7 @@ const buttonDefault = {
 };
 const buttonSingleChar = { ...buttonDefault, width: 40 };
 
-const styles = StyleSheet.create({
+const ApplicationStyles = {
     menuItemText: {
         color: '#EEE5E9',
         textAlign: 'center',
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 10,
         borderWidth: 1,
-        backgroundColor: 'white',
+        backgroundColor: Colors.modalBackground,
         padding: 20,
         overflow: 'hidden',
         margin: 25
@@ -99,6 +100,6 @@ const styles = StyleSheet.create({
     centeredItem: {
         alignSelf: 'center'
     }
-});
+};
 
-export default styles;
+export default ApplicationStyles;

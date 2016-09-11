@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Button } from 'native-base';
 
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class CoursesScreen extends React.Component {

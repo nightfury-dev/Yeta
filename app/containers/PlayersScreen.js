@@ -5,7 +5,7 @@ import { Button, InputGroup, Input } from 'native-base';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
 import PlayerListElement from '../components/PlayerListElement';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class PlayersScreen extends React.Component {

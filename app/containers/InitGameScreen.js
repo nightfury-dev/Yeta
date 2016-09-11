@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import SelectPlayersScreen from './SelectPlayersScreen';
 import SelectCourseScreen from './SelectCourseScreen';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class InitGameScreen extends React.Component {

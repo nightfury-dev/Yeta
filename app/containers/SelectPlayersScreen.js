@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class SelectPlayersScreen extends React.Component {

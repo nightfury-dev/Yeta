@@ -80,7 +80,7 @@ class Navigation extends React.Component {
         return (<Navigator
           initialRoute={{ title: 'Menu', name: 'menu' }}
           renderScene={this.renderScene}
-          style={{ paddingTop: 20 }}
+          style={{ paddingTop: 22 }}
         />);
     }
 }

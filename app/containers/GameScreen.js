@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import ScoreGrid from '../components/ScoreGrid';
 import SwipeView from '../components/SwipeView';
 import GameHeader from '../components/GameHeader';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 const horizontalLine = {

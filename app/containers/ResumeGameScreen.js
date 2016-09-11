@@ -10,7 +10,7 @@ import {
 
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 class ResumeGameScreen extends React.Component {

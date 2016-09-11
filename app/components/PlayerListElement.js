@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableHighlight } from 'react-native';
 
-import styles from '../styles/styles';
+import styles from './styles/ComponentStyles';
 
 
 function PlayerListElement(props) {
