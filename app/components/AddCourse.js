@@ -3,11 +3,10 @@ import React from 'react';
 import {
   Text,
   View,
-  ScrollView,
-  TextInput
+  ScrollView
 } from 'react-native';
+import { Button, InputGroup, Input } from 'native-base';
 
-import Button from './Button';
 import HoleCountSwitcher from './HoleCountSwitcher';
 import HoleGrid from './HoleGrid';
 import styles from '../styles/styles';
@@ -64,16 +63,24 @@ class AddCourse extends React.Component {
           />
           <View>
             <Text>Name:</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(name) => this.setState({ name })}
-              value={this.state.name}
-            />
+            <InputGroup borderType="rounded">
+              <Input
+                placeholder="Course name"
+                style={styles.input}
+                onChangeText={(name) => this.setState({ name })}
+                value={this.state.name}
+              />
+            </InputGroup>
           </View>
 
           <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
 
-          <Button onPress={this.saveCourse} text={'Save course'} />
+          <Button
+            style={styles.centeredItem}
+            onPress={this.saveCourse}
+          >
+            Save course
+          </Button>
         </ScrollView>);
     }
 }

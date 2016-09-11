@@ -53,9 +53,6 @@ const styles = StyleSheet.create({
     },
     input: {
         color: '#EEE5E9',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1
     },
     baseText: {
         textAlign: 'center',
@@ -98,6 +95,9 @@ const styles = StyleSheet.create({
     },
     modalButton: {
         margin: 10
+    },
+    centeredItem: {
+        alignSelf: 'center'
     }
 });
 

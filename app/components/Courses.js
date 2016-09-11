@@ -5,8 +5,8 @@ import {
   View,
   ListView
 } from 'react-native';
+import { Button } from 'native-base';
 
-import Button from './Button';
 import styles from '../styles/styles';
 
 
@@ -34,7 +34,12 @@ class Courses extends React.Component {
             dataSource={dataSource}
             renderRow={this.renderRow}
           />
-          <Button onPress={this.addCourse} text={'Add course'} />
+          <Button
+            style={styles.centeredItem}
+            onPress={this.addCourse}
+          >
+            Add course
+          </Button>
         </View>);
     }
 }
