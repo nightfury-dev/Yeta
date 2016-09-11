@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: 'white',
         padding: 20,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        margin: 25
     },
     modalButton: {
         margin: 10
