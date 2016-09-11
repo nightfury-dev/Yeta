@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextInput, View, ListView } from 'react-native';
+import { Button, InputGroup, Input } from 'native-base';
 
 import ContextMenu from './ContextMenu';
-import Button from './Button';
 import Confirmation from './Confirmation';
 import PlayerListElement from './PlayerListElement';
 import styles from '../styles/styles';
@@ -79,12 +79,20 @@ class Players extends React.Component {
             visible={this.state.showDeleteConfirmation}
           />
           <ListView dataSource={dataSource} renderRow={this.renderRow} />
-          <TextInput
-            style={styles.input}
-            onChangeText={(newPlayer) => this.setState({ newPlayer })}
-            value={this.state.newPlayer}
-          />
-          <Button onPress={this.addPlayer} text={'Add player'} />
+          <InputGroup borderType="rounded">
+            <Input
+              placeholder="Player name"
+              style={styles.input}
+              onChangeText={(newPlayer) => this.setState({ newPlayer })}
+              value={this.state.newPlayer}
+            />
+          </InputGroup>
+          <Button
+            style={styles.centeredItem}
+            onPress={this.addPlayer}
+          >
+            Add player
+          </Button>
         </View>);
     }
 }
