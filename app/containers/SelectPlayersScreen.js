@@ -6,7 +6,7 @@ import { CheckBox, Button, List, ListItem } from 'native-base';
 import styles from '../styles/styles';
 
 
-class SelectPlayers extends React.Component {
+class SelectPlayersScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,9 +54,9 @@ class SelectPlayers extends React.Component {
     }
 }
 
-SelectPlayers.propTypes = {
+SelectPlayersScreen.propTypes = {
     players: React.PropTypes.array.isRequired,
     playersSelected: React.PropTypes.func.isRequired
 };
 
-export default SelectPlayers;
+export default SelectPlayersScreen;

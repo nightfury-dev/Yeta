@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import ScoreGrid from './ScoreGrid';
-import SwipeView from './SwipeView';
-import GameHeader from './GameHeader';
+import ScoreGrid from '../components/ScoreGrid';
+import SwipeView from '../components/SwipeView';
+import GameHeader from '../components/GameHeader';
 import styles from '../styles/styles';
 
 
@@ -14,7 +14,7 @@ const horizontalLine = {
     borderColor: '#DF878B'
 };
 
-class Game extends React.Component {
+class GameScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = { swipesEnabled: true };
@@ -80,7 +80,7 @@ class Game extends React.Component {
     }
 }
 
-Game.propTypes = {
+GameScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
     game: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
@@ -88,4 +88,4 @@ Game.propTypes = {
     updateHole: React.PropTypes.func.isRequired,
 };
 
-export default Game;
+export default GameScreen;

@@ -6,16 +6,15 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../actions/actionCreators';
-import Menu from './Menu';
-import Players from './Players';
-import Courses from './Courses';
-import InitGame from './InitGame';
-import ResumeGame from './ResumeGame';
-import Game from './Game';
-import AddCourse from './AddCourse';
-import Scorecard from './Scorecard';
-import Confirmation from './Confirmation';
+import * as actionCreators from './actions/actionCreators';
+import MenuScreen from './containers/MenuScreen';
+import PlayersScreen from './containers/PlayersScreen';
+import CoursesScreen from './containers/CoursesScreen';
+import InitGameScreen from './containers/InitGameScreen';
+import ResumeGameScreen from './containers/ResumeGameScreen';
+import GameScreen from './containers/GameScreen';
+import AddCourseScreen from './containers/AddCourseScreen';
+import ScorecardScreen from './containers/ScorecardScreen';
 
 
 function mapStateToProps(state) {
@@ -50,38 +49,30 @@ class Navigation extends React.Component {
         _navigator = navigator;
         switch (route.name) {
         case 'players':
-            return (<Players {...this.props} navigator={navigator} />);
+            return (<PlayersScreen {...this.props} navigator={navigator} />);
         case 'courses':
-            return (<Courses {...this.props} navigator={navigator} />);
+            return (<CoursesScreen {...this.props} navigator={navigator} />);
         case 'initGame':
-            return (<InitGame {...this.props} navigator={navigator} />);
+            return (<InitGameScreen {...this.props} navigator={navigator} />);
         case 'resumeGame':
-            return (<ResumeGame {...this.props} navigator={navigator} />);
+            return (<ResumeGameScreen {...this.props} navigator={navigator} />);
         case 'game':
-            return (<Game
+            return (<GameScreen
               {...this.props}
               game={route.game}
               navigator={navigator}
             />);
         case 'addCourse':
-            return (<AddCourse {...this.props} navigator={navigator} />);
+            return (<AddCourseScreen {...this.props} navigator={navigator} />);
         case 'scorecard':
             return (
-              <Scorecard
+              <ScorecardScreen
                 {...this.props}
                 game={route.game}
                 navigator={navigator}
               />);
-        case 'confirmation':
-            return (<Confirmation
-              {...this.props}
-              message={route.message}
-              onConfirm={route.onConfirm}
-              payload={route.payload}
-              navigator={navigator}
-            />);
         default:
-            return (<Menu {...this.props} navigator={navigator} />);
+            return (<MenuScreen {...this.props} navigator={navigator} />);
         }
     }
 

@@ -2,13 +2,13 @@ import * as _ from 'lodash';
 import React from 'react';
 import { ListView } from 'react-native';
 
-import ScorecardHeader from './ScorecardHeader';
-import ScorecardRow from './ScorecardRow';
-import ScorecardFooter from './ScorecardFooter';
+import ScorecardHeader from '../components/ScorecardHeader';
+import ScorecardRow from '../components/ScorecardRow';
+import ScorecardFooter from '../components/ScorecardFooter';
 import styles from '../styles/styles';
 
 
-class Scorecard extends React.Component {
+class ScorecardScreen extends React.Component {
     constructor(props) {
         super(props);
         this.renderHeader = this.renderHeader.bind(this);
@@ -82,8 +82,8 @@ class Scorecard extends React.Component {
     }
 }
 
-Scorecard.propTypes = {
+ScorecardScreen.propTypes = {
     game: React.PropTypes.object.isRequired
 };
 
-export default Scorecard;
+export default ScorecardScreen;

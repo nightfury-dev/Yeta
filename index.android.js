@@ -3,7 +3,7 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 
 import store from './app/store';
-import App from './app/components/App';
+import App from './app/App';
 
 
 function DiscgolfApp() {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import MenuItem from './MenuItem';
+import MenuItem from '../components/MenuItem';
 import styles from '../styles/styles';
 
 
-function Menu(props) {
+function MenuScreen(props) {
     return (<View style={styles.background}>
       <MenuItem label="Game" name="initGame" {...props} />
       <MenuItem label="Resume game" name="resumeGame" {...props} />
@@ -14,4 +14,4 @@ function Menu(props) {
     </View>);
 }
 
-export default Menu;
+export default MenuScreen;

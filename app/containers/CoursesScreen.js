@@ -10,7 +10,7 @@ import { Button } from 'native-base';
 import styles from '../styles/styles';
 
 
-class Courses extends React.Component {
+class CoursesScreen extends React.Component {
     constructor(props) {
         super(props);
         this.addCourse = this.addCourse.bind(this);
@@ -44,10 +44,10 @@ class Courses extends React.Component {
     }
 }
 
-Courses.propTypes = {
+CoursesScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
     courses: React.PropTypes.array.isRequired
 };
 
 
-export default Courses;
+export default CoursesScreen;

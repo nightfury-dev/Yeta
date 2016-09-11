@@ -1,14 +1,14 @@
 import React from 'react';
-import { TextInput, View, ListView } from 'react-native';
+import { View, ListView } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 
-import ContextMenu from './ContextMenu';
-import Confirmation from './Confirmation';
-import PlayerListElement from './PlayerListElement';
+import ContextMenu from '../components/ContextMenu';
+import Confirmation from '../components/Confirmation';
+import PlayerListElement from '../components/PlayerListElement';
 import styles from '../styles/styles';
 
 
-class Players extends React.Component {
+class PlayersScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,11 +97,11 @@ class Players extends React.Component {
     }
 }
 
-Players.propTypes = {
+PlayersScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
     addPlayer: React.PropTypes.func.isRequired,
     removePlayer: React.PropTypes.func.isRequired,
     players: React.PropTypes.array.isRequired
 };
 
-export default Players;
+export default PlayersScreen;

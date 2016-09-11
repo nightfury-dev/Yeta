@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-  Text,
-  ListView,
-  View,
-  TouchableHighlight
-} from 'react-native';
+import { Text, View } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
 import styles from '../styles/styles';
 
 
-class SelectCourse extends React.Component {
+class SelectCourseScreen extends React.Component {
     constructor(props) {
         super(props);
         this.renderRow = this.renderRow.bind(this);
@@ -58,9 +53,9 @@ class SelectCourse extends React.Component {
     }
 }
 
-SelectCourse.propTypes = {
+SelectCourseScreen.propTypes = {
     courseSelected: React.PropTypes.func.isRequired,
     courses: React.PropTypes.array.isRequired
 };
 
-export default SelectCourse;
+export default SelectCourseScreen;

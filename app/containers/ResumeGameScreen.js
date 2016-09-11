@@ -8,12 +8,12 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import ContextMenu from './ContextMenu';
-import Confirmation from './Confirmation';
+import ContextMenu from '../components/ContextMenu';
+import Confirmation from '../components/Confirmation';
 import styles from '../styles/styles';
 
 
-class ResumeGame extends React.Component {
+class ResumeGameScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -106,10 +106,10 @@ class ResumeGame extends React.Component {
     }
 }
 
-ResumeGame.propTypes = {
+ResumeGameScreen.propTypes = {
     navigator: React.PropTypes.func.isRequired,
     games: React.PropTypes.array.isRequired,
     removeGame: React.PropTypes.func.isRequired
 };
 
-export default ResumeGame;
+export default ResumeGameScreen;

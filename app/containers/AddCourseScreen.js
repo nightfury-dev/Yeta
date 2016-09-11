@@ -7,15 +7,15 @@ import {
 } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 
-import HoleCountSwitcher from './HoleCountSwitcher';
-import HoleGrid from './HoleGrid';
+import HoleCountSwitcher from '../components/HoleCountSwitcher';
+import HoleGrid from '../components/HoleGrid';
 import styles from '../styles/styles';
 
 
 const DEFAULT_PAR = 3;
 const DEFAULT_HOLE_COUNT = 9;
 
-class AddCourse extends React.Component {
+class AddCourseScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -84,9 +84,9 @@ class AddCourse extends React.Component {
         </ScrollView>);
     }
 }
-AddCourse.propTypes = {
+AddCourseScreen.propTypes = {
     addCourse: React.PropTypes.func.isRequired,
     navigator: React.PropTypes.object.isRequired
 };
 
-export default AddCourse;
+export default AddCourseScreen;

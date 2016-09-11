@@ -2,12 +2,12 @@ import * as _ from 'lodash';
 import React from 'react';
 import { View } from 'react-native';
 
-import SelectPlayers from './SelectPlayers';
-import SelectCourse from './SelectCourse';
+import SelectPlayersScreen from './SelectPlayersScreen';
+import SelectCourseScreen from './SelectCourseScreen';
 import styles from '../styles/styles';
 
 
-class InitGame extends React.Component {
+class InitGameScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,13 +40,13 @@ class InitGame extends React.Component {
         let component;
         switch (this.state.currentState) {
         case 'selectPlayers':
-            component = (<SelectPlayers
+            component = (<SelectPlayersScreen
               {...this.props}
               playersSelected={this.playersSelected}
             />);
             break;
         case 'selectCourse':
-            component = (<SelectCourse
+            component = (<SelectCourseScreen
               {...this.props}
               courseSelected={this.courseSelected}
             />);
@@ -62,9 +62,9 @@ class InitGame extends React.Component {
     }
 }
 
-InitGame.propTypes = {
+InitGameScreen.propTypes = {
     navigator: React.PropTypes.func.isRequired,
     createGame: React.PropTypes.func.isRequired
 };
 
-export default InitGame;
+export default InitGameScreen;
