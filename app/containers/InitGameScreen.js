@@ -63,7 +63,7 @@ class InitGameScreen extends React.Component {
 }
 
 InitGameScreen.propTypes = {
-    navigator: React.PropTypes.func.isRequired,
+    navigator: React.PropTypes.object.isRequired,
     createGame: React.PropTypes.func.isRequired
 };
 

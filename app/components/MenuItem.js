@@ -27,7 +27,7 @@ class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
-    navigator: React.PropTypes.func.isRequired,
+    navigator: React.PropTypes.object.isRequired,
     name: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired
 };

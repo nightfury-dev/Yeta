@@ -107,7 +107,7 @@ class ResumeGameScreen extends React.Component {
 }
 
 ResumeGameScreen.propTypes = {
-    navigator: React.PropTypes.func.isRequired,
+    navigator: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
     removeGame: React.PropTypes.func.isRequired
 };
