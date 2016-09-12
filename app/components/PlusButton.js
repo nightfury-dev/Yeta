@@ -2,7 +2,6 @@ import React from 'react';
 import { TouchableHighlight } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './styles/ComponentStyles';
 
 
 function PlusButton(props) {

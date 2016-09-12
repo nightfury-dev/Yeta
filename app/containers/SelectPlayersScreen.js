@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
-import styles from './styles/ContainerStyles';
+import styles from './styles/SelectPlayersScreenStyles';
 
 
 class SelectPlayersScreen extends React.Component {
@@ -42,7 +42,7 @@ class SelectPlayersScreen extends React.Component {
     }
 
     render() {
-        return (<View style={styles.background}>
+        return (<View style={styles.mainContainer}>
           <List
             dataArray={this.state.players}
             renderRow={this.renderRow}

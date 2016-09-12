@@ -10,7 +10,7 @@ import {
 
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
-import styles from './styles/ContainerStyles';
+import styles from './styles/ResumeGameScreenStyles';
 
 
 class ResumeGameScreen extends React.Component {
@@ -86,7 +86,7 @@ class ResumeGameScreen extends React.Component {
         }).cloneWithRows(this.props.games);
         const removeGameString = this.state.selectedGame ?
             this.getGameString(this.state.selectedGame) : '';
-        return (<View style={styles.background}>
+        return (<View style={styles.mainContainer}>
           <ContextMenu
             visible={this.state.showContextMenu}
             onDelete={this.confirmDelete}

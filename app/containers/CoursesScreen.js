@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Button } from 'native-base';
 
-import styles from './styles/ContainerStyles';
+import styles from './styles/CoursesScreenStyles';
 
 
 class CoursesScreen extends React.Component {
@@ -29,7 +29,7 @@ class CoursesScreen extends React.Component {
             rowHasChanged: (r1, r2) =>
                 r1.name !== r2.name || !_.isEqual(r1.holes, r2.holes)
         }).cloneWithRows(this.props.courses);
-        return (<View style={styles.background}>
+        return (<View style={styles.mainContainer}>
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}

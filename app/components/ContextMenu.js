@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, View } from 'react-native';
-import { Button } from 'native-base'
+import { Button } from 'native-base';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/ContextMenuStyles';
 
 
 function ContextMenu(props) {

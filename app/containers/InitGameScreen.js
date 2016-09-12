@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import SelectPlayersScreen from './SelectPlayersScreen';
 import SelectCourseScreen from './SelectCourseScreen';
-import styles from './styles/ContainerStyles';
+import styles from './styles/InitGameScreenStyles';
 
 
 class InitGameScreen extends React.Component {
@@ -55,7 +55,7 @@ class InitGameScreen extends React.Component {
             throw new Error(`Invalid state '${this.state.currentState}'`);
         }
         return (
-          <View style={styles.background}>
+          <View style={styles.mainContainer}>
             {component}
           </View>
         );

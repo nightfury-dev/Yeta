@@ -5,7 +5,7 @@ import { ListView } from 'react-native';
 import ScorecardHeader from '../components/ScorecardHeader';
 import ScorecardRow from '../components/ScorecardRow';
 import ScorecardFooter from '../components/ScorecardFooter';
-import styles from './styles/ContainerStyles';
+import styles from './styles/ScorecardScreenStyles';
 
 
 class ScorecardScreen extends React.Component {
@@ -73,7 +73,7 @@ class ScorecardScreen extends React.Component {
         );
         const dataSource = ds.cloneWithRows(this.createRowData());
         return (<ListView
-          style={styles.background}
+          style={styles.mainContainer}
           dataSource={dataSource}
           renderHeader={this.renderHeader}
           renderRow={this.renderRow}

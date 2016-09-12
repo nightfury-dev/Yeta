@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/ScorecardEntryStyles';
 
 
 function ScorecardEntry(props) {

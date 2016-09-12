@@ -5,7 +5,7 @@ import { Button, InputGroup, Input } from 'native-base';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
 import PlayerListElement from '../components/PlayerListElement';
-import styles from './styles/ContainerStyles';
+import styles from './styles/PlayersScreenStyles';
 
 
 class PlayersScreen extends React.Component {
@@ -66,7 +66,7 @@ class PlayersScreen extends React.Component {
         }).cloneWithRows(this.props.players);
         const removeName = this.state.selectedPlayer ?
             this.state.selectedPlayer.name : '';
-        return (<View style={styles.background}>
+        return (<View style={styles.mainContainer}>
           <ContextMenu
             visible={this.state.showContextMenu}
             onDelete={this.confirmDelete}

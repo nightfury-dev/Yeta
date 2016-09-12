@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import ScoreGrid from '../components/ScoreGrid';
 import SwipeView from '../components/SwipeView';
 import GameHeader from '../components/GameHeader';
-import styles from './styles/ContainerStyles';
+import styles from './styles/GameScreenStyles';
 
 
 const horizontalLine = {
@@ -61,7 +61,7 @@ class GameScreen extends React.Component {
         const players = game.players;
 
         return (<SwipeView
-          style={styles.background}
+          style={styles.mainContainer}
           onRightSwipe={this.nextHole}
           onLeftSwipe={this.previousHole}
         >

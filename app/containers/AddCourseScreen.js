@@ -9,7 +9,7 @@ import { Button, InputGroup, Input } from 'native-base';
 
 import HoleCountSwitcher from '../components/HoleCountSwitcher';
 import HoleGrid from '../components/HoleGrid';
-import styles from './styles/ContainerStyles';
+import styles from './styles/AddCourseScreenStyles';
 
 
 const DEFAULT_PAR = 3;
@@ -56,7 +56,7 @@ class AddCourseScreen extends React.Component {
     }
 
     render() {
-        return (<ScrollView style={styles.background}>
+        return (<ScrollView style={styles.mainContainer}>
           <HoleCountSwitcher
             holeCountIncreased={this.addRow}
             holeCountDecreased={this.removeRow}

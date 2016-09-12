@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './styles/ComponentStyles';
+import styles from './styles/GameHeaderStyles';
 
 
 class GameHeader extends React.Component {

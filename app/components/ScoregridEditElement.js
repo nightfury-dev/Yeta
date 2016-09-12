@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { Picker } from 'react-native';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/ScoregridEditElementStyles';
 
 
 class ScoregridEditElement extends React.Component {

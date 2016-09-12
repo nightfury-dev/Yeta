@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Modal } from 'react-native';
 import { Button } from 'native-base';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/ConfirmationStyles';
 
 
 function Confirmation(props) {

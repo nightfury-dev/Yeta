@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Button } from 'native-base';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/MenuItemStyles';
 
 
 class MenuItem extends React.Component {

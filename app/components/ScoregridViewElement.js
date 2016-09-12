@@ -6,7 +6,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import styles from './styles/ComponentStyles';
+import styles from './styles/ScoregridViewElementStyles';
 
 
 const styleNotPressed = {

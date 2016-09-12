@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
-import styles from './styles/ContainerStyles';
+import styles from './styles/SelectCourseScreenStyles';
 
 
 class SelectCourseScreen extends React.Component {
@@ -41,7 +41,7 @@ class SelectCourseScreen extends React.Component {
     }
 
     render() {
-        return (<View style={styles.background}>
+        return (<View style={styles.mainContainer}>
           <List
             dataArray={this.props.courses}
             renderRow={this.renderRow}
