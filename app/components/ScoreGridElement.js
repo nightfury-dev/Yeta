@@ -1,44 +1,44 @@
 import React from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight
+} from 'react-native';
 
-import ScoregridViewElement from './ScoregridViewElement';
-import ScoregridEditElement from './ScoregridEditElement';
+import styles from './styles/ScoregridElementStyles';
 
 
-class ScoreGridElement extends React.Component {
+class ScoregridElement extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { edit: false };
+        this.state = { pressed: false };
 
-        this.showDefaultView = this.showDefaultView.bind(this);
-        this.showEditView = this.showEditView.bind(this);
-    }
-
-    showEditView() {
-        this.setState({ edit: true });
-    }
-
-    showDefaultView() {
-        this.setState({ edit: false });
+        this.props.onPress = this.props.onPress.bind(this);
     }
 
     render() {
-        const newState = this.state.edit ? 'edit' : 'view';
-        const component = this.state.edit ?
-            (<ScoregridEditElement
-              {...this.props}
-              afterEdit={this.showDefaultView}
-            />) :
-            (<ScoregridViewElement
-              {...this.props}
-              longPress={this.showEditView}
-            />);
-        this.props.stateChanged(newState);
-        return component;
+        const baseText = StyleSheet.flatten([styles.baseText, styles.nameText]);
+        const gridStyle = this.props.highlighted ?
+            styles.activeRow : styles.inactiveRow;
+        return (<TouchableHighlight onPress={this.props.onPress}>
+          <View style={gridStyle}>
+            <View style={styles.nameStyle}>
+              <Text style={baseText}>
+                {this.props.player.name}
+              </Text>
+            </View>
+            <Text style={baseText}>{this.props.score}</Text>
+          </View>
+        </TouchableHighlight>);
     }
 }
 
-ScoreGridElement.propTypes = {
-    stateChanged: React.PropTypes.func.isRequired
+ScoregridElement.propTypes = {
+    onPress: React.PropTypes.func.isRequired,
+    player: React.PropTypes.object.isRequired,
+    score: React.PropTypes.number.isRequired,
+    highlighted: React.PropTypes.bool.isRequired
 };
 
-export default ScoreGridElement;
+export default ScoregridElement;
