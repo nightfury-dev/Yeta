@@ -9,7 +9,7 @@ import { Button, InputGroup, Input } from 'native-base';
 
 import HoleCountSwitcher from '../components/HoleCountSwitcher';
 import HoleGrid from '../components/HoleGrid';
-import styles from '../styles/styles';
+import styles from './styles/ContainerStyles';
 
 
 const DEFAULT_PAR = 3;
