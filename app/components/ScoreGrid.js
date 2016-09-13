@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import ScoregridElement from './ScoregridElement';
 import VirtualKeyboard from './VirtualKeyboard';
@@ -121,7 +121,9 @@ class ScoreGrid extends React.Component {
             }
         );
         return (<View style={marginStyle}>
-          {scoreGridElements}
+          <ScrollView>
+            {scoreGridElements}
+          </ScrollView>
           {virtualKeyboard}
         </View>);
     }
