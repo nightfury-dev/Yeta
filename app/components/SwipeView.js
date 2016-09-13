@@ -24,7 +24,7 @@ class SwipeView extends React.Component {
     }
 
     onResponderRelease(e) {
-        const diff = this.state.touchStart.locationX - e.nativeEvent.locationX;
+        const diff = this.state.touchStart.pageX - e.nativeEvent.pageX;
         const move = Math.abs(diff) > MOVE_THRESHOLD_PX;
         if (move && diff < 0) {
             this.onLeftSwipe();
