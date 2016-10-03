@@ -4,7 +4,7 @@ import ScorecardEntry from './ScorecardEntry';
 
 
 function ScorecardRow(props) {
-    const firstCell = `${props.holeNumber} (${props.par})`;
+    const firstCell = `${props.holenumber} (${props.par})`;
     return (<ScorecardEntry
       collection={props.scores}
       getContent={(score) => score}
@@ -13,7 +13,7 @@ function ScorecardRow(props) {
 }
 
 ScorecardRow.propTypes = {
-    holeNumber: React.PropTypes.number.isRequired,
+    holenumber: React.PropTypes.number.isRequired,
     par: React.PropTypes.number.isRequired,
     scores: React.PropTypes.array.isRequired
 };

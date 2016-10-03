@@ -11,52 +11,62 @@ import styles from './styles/ScorecardScreenStyles';
 class ScorecardScreen extends React.Component {
     constructor(props) {
         super(props);
+
         this.renderHeader = this.renderHeader.bind(this);
         this.renderRow = this.renderRow.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
     }
+
+    componentWillMount() {
+        this.players = _.values(this.props.game.players);
+        this.scores = _.values(this.props.game.scores);
+        this.holes = _.values(this.props.game.course.holes);
+
+        this.holeScores = {};
+        this.playerScores = {};
+
+        this.scores.forEach((score) => {
+            const holenumber = score.hole.holenumber;
+            const playerId = score.player.id;
+
+            if (!this.holeScores[holenumber]) {
+                this.holeScores[holenumber] = {};
+            }
+            this.holeScores[holenumber][playerId] = score.score;
+
+            if (!this.playerScores[playerId]) {
+                this.playerScores[playerId] = 0;
+            }
+            this.playerScores[playerId] += score.score;
+        });
+    }
+
     createRowData() {
-        const course = this.props.game.course;
-        const players = this.props.game.players;
-        return _.values(course.holes).map((hole) => {
-            const currentHoleScores = _.values(players).map((player) => {
-                const score = _.find(
-                    _.values(this.props.game.scores),
-                    (s) => s.hole.holenumber === hole.holenumber &&
-                           s.player.id === player.id
-                );
-                return score.score;
+        return this.holes.map((hole) => {
+            const currentHoleScores = this.players.map((player) => {
+                return this.holeScores[hole.holenumber][player.id];
             });
             return {
-                holeNumber: hole.holenumber,
+                holenumber: hole.holenumber,
+                par: hole.par,
                 scores: currentHoleScores
             };
         });
     }
 
     renderRow(rowData) {
-        const hole = _.find(
-            _.values(this.props.game.course.holes),
-            (h) => h.holenumber === rowData.holeNumber
-        );
         return (<ScorecardRow
-          holeNumber={rowData.holeNumber}
-          par={hole.par}
+          holenumber={rowData.holenumber}
+          par={rowData.par}
           scores={rowData.scores}
         />);
     }
 
     renderFooter() {
-        const totalScores = _.values(this.props.game.players).map(player => {
-            const playerScores = _.filter(
-                _.values(this.props.game.scores),
-                (score) => score.player.id === player.id
-            );
-            return playerScores.reduce(
-                (totalScore, score) => totalScore + score.score,
-                0
-            );
+        const totalScores = this.players.map((player) => {
+            return this.playerScores[player.id];
         });
+
         return (<ScorecardFooter
           course={this.props.game.course}
           scores={totalScores}
@@ -64,7 +74,7 @@ class ScorecardScreen extends React.Component {
     }
 
     renderHeader() {
-        return <ScorecardHeader players={_.values(this.props.game.players)} />;
+        return <ScorecardHeader players={this.players} />;
     }
 
     render() {
