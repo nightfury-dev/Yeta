@@ -43,9 +43,9 @@ class ScorecardScreen extends React.Component {
 
     createRowData() {
         return this.holes.map((hole) => {
-            const currentHoleScores = this.players.map((player) => {
-                return this.holeScores[hole.holenumber][player.id];
-            });
+            const currentHoleScores = this.players.map((player) =>
+                this.holeScores[hole.holenumber][player.id]
+            );
             return {
                 holenumber: hole.holenumber,
                 par: hole.par,
@@ -63,9 +63,9 @@ class ScorecardScreen extends React.Component {
     }
 
     renderFooter() {
-        const totalScores = this.players.map((player) => {
-            return this.playerScores[player.id];
-        });
+        const totalScores = this.players.map((player) =>
+          this.playerScores[player.id]
+        );
 
         return (<ScorecardFooter
           course={this.props.game.course}
