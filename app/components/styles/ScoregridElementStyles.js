@@ -19,6 +19,11 @@ export default StyleSheet.create({
         textAlign: 'left',
         marginLeft: 10
     },
+    orderText: {
+        ...ApplicationStyles.baseText,
+        color: 'skyblue',
+        padding: 10
+    },
     nameStyle: { flex: 6 },
     activeRow,
     inactiveRow

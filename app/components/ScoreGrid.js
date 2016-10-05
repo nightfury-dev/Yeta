@@ -20,6 +20,7 @@ class ScoreGrid extends React.Component {
         this.keyPressed = this.keyPressed.bind(this);
         this.setActivePlayer = this.setActivePlayer.bind(this);
         this.setNextPlayerActive = this.setNextPlayerActive.bind(this);
+        this.getPlayingOrders = this.getPlayingOrders.bind(this);
     }
 
     getScore(player) {
@@ -28,6 +29,37 @@ class ScoreGrid extends React.Component {
             score.player.id === player.id &&
             score.hole.holenumber === this.props.hole
         );
+    }
+
+    getPlayingOrders() {
+        const nextOrdering = (holeOrder, holeScores) => {
+            // Map playerId => order
+            const order = {};
+            const sortedScores = _.sortBy(holeScores, 'score');
+            sortedScores.forEach((score, index) => {
+                order[score.player.id] = index + 1;
+            });
+            return order;
+        };
+
+        // First hole order is always default
+        const firstHoleScores = {};
+        _.values(this.props.game.players).forEach((player, index) => {
+            firstHoleScores[player.id] = index + 1;
+        });
+
+        const ordering = { 1: firstHoleScores };
+        const holeCount = _.values(this.props.game.course.holes).length;
+        _.range(2, holeCount).forEach((holeNumber) => {
+            const previousOrdering = ordering[holeNumber - 1];
+            const previousScores = _.values(this.props.game.scores).filter(
+                (score) => score.hole.holenumber === (holeNumber - 1)
+            );
+            const next = nextOrdering(previousOrdering, previousScores);
+            ordering[holeNumber] = next;
+        });
+
+        return ordering;
     }
 
     setNextPlayerActive() {
@@ -103,16 +135,22 @@ class ScoreGrid extends React.Component {
           <VirtualKeyboard keyPressed={this.keyPressed} />
         </View>) :
         null;
+
+        const ordering = this.getPlayingOrders();
         const scoreGridElements = _.values(this.props.players).map(
             (p, index) => {
                 const score = this.getScore(p);
                 const highlighted = this.state.activePlayer &&
                     p.id === this.state.activePlayer.id;
+
+                const order = ordering[this.props.hole][p.id];
+
                 return (<ScoregridElement
                   {...this.props}
                   onPress={() => this.setActivePlayer(p)}
                   highlighted={highlighted}
                   hole={this.props.hole}
+                  order={order}
                   player={p}
                   key={index}
                   score={score.score}
@@ -134,7 +172,8 @@ ScoreGrid.propTypes = {
     players: React.PropTypes.object.isRequired,
     hole: React.PropTypes.number.isRequired,
     updateScore: React.PropTypes.func.isRequired,
-    gameId: React.PropTypes.number.isRequired
+    gameId: React.PropTypes.number.isRequired,
+    game: React.PropTypes.object.isRequired,
 };
 
 export default ScoreGrid;

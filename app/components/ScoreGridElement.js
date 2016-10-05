@@ -23,6 +23,7 @@ class ScoregridElement extends React.Component {
             styles.activeRow : styles.inactiveRow;
         return (<TouchableHighlight onPress={this.props.onPress}>
           <View style={gridStyle}>
+            <Text style={styles.orderText}>{this.props.order}</Text>
             <View style={styles.nameStyle}>
               <Text style={baseText}>
                 {this.props.player.name}
@@ -38,7 +39,8 @@ ScoregridElement.propTypes = {
     onPress: React.PropTypes.func.isRequired,
     player: React.PropTypes.object.isRequired,
     score: React.PropTypes.number.isRequired,
-    highlighted: React.PropTypes.bool.isRequired
+    highlighted: React.PropTypes.bool.isRequired,
+    order: React.PropTypes.number.isRequired
 };
 
 export default ScoregridElement;
