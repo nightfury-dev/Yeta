@@ -33,12 +33,30 @@ class ScoreGrid extends React.Component {
 
     getPlayingOrders() {
         const nextOrdering = (holeOrder, holeScores) => {
-            // Map playerId => order
+            const grouped = _.groupBy(holeScores, 'score');
+            if (Object.keys(grouped).length === 1) {
+                return holeOrder;
+            }
+
+            let currentOrder = 1;
             const order = {};
-            const sortedScores = _.sortBy(holeScores, 'score');
-            sortedScores.forEach((score, index) => {
-                order[score.player.id] = index + 1;
+
+            // Loop through each distinct score group and set the correct
+            // ordering. Keep the order correct among players in the same
+            // score group
+            _.values(grouped).forEach((group) => {
+                const sortedOrdering = _.chain(group)
+                    .map((s) => ({
+                        playerId: s.player.id,
+                        order: holeOrder[s.player.id]
+                    }))
+                    .sortBy('order')
+                    .value();
+                sortedOrdering.forEach((obj) => {
+                    order[obj.playerId] = currentOrder++;
+                });
             });
+
             return order;
         };
 
