@@ -18,9 +18,16 @@ class RealmPlayer {
             .value() + 1;
     }
 
-    save(player) {
-        realm.write(() => {
-            realm.create('Player', player);
+    save(name) {
+        return new Promise((success) => {
+            realm.write(() => {
+                const player = {
+                    id: this.getNextPlayerId(),
+                    name
+                };
+                const savedPlayer = realm.create('Player', player);
+                success(savedPlayer);
+            });
         });
     }
 

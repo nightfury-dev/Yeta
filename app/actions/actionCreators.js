@@ -1,14 +1,18 @@
 import RealmCourse from '../data/courses';
 import RealmGame from '../data/games';
+import RealmPlayer from '../data/players';
 
 
 const realmGame = new RealmGame();
+const realmPlayer = new RealmPlayer();
 
 export function addPlayer(name) {
-    return {
-        type: 'ADD_PLAYER',
-        name
-    };
+    return (dispatch) => realmPlayer.save(name).then(
+        (savedPlayer) => dispatch({
+            type: 'PLAYER_ADDED',
+            player: savedPlayer
+        })
+    );
 }
 
 export function removePlayer(id) {
