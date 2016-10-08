@@ -1,4 +1,4 @@
-import Courses from '../data/courses';
+import Courses from '../data/Courses';
 import RealmGame from '../data/games';
 import Players from '../data/Players';
 
