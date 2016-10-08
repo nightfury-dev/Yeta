@@ -42,11 +42,8 @@ class AddCourseScreen extends React.Component {
     }
 
     saveCourse() {
-        if (this.state.name) {
-            this.props.addCourse(this.state.name, this.state.pars, () => {
-                this.props.navigator.replace('menu');
-            });
-        }
+        this.props.addCourse(this.state.name, this.state.pars);
+        this.props.navigator.replace('menu');
     }
 
     parsChanged(updatedPars) {

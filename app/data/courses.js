@@ -3,48 +3,50 @@ import * as _ from 'lodash';
 import realm from './realm';
 
 
-class RealmCourse {
+const getNextId = (schema) => {
+    if (realm.objects(schema).length === 0) {
+        return 1;
+    }
+    return _.chain(realm.objects(schema))
+        .map((p) => p.id)
+        .max()
+        .value() + 1;
+};
+
+const getNextCourseId = () => getNextId('Course');
+
+const getNextHoleId = () => getNextId('Hole');
+
+const normalize = (course) => {
+    const copy = { ...course };
+    copy.holes = { ...course.holes };
+    return copy;
+};
+
+class Courses {
     getAll() {
-        return _.values(realm.objects('Course'));
-    }
-
-    getNextId(schema) {
-        if (realm.objects(schema).length === 0) {
-            return 1;
-        }
-        return _.chain(realm.objects(schema))
-            .map((p) => p.id)
-            .max()
-            .value() + 1;
-    }
-
-    getNextCourseId() {
-        return this.getNextId('Course');
-    }
-
-    getNextHoleId() {
-        return this.getNextId('Hole');
+        return _.values(realm.objects('Course')).map(normalize);
     }
 
     save(name, pars) {
         return new Promise((success) => {
             realm.write(() => {
                 const course = realm.create(
-                    'Course', { id: this.getNextCourseId(), name }
+                    'Course', { id: getNextCourseId(), name }
                 );
                 pars.forEach((par, index) => {
                     course.holes.push(
                         realm.create('Hole', {
-                            id: this.getNextHoleId(),
+                            id: getNextHoleId(),
                             par,
                             holenumber: index + 1
                         })
                     );
                 });
-                success(course);
+                success(normalize(course));
             });
         });
     }
 }
 
-export default RealmCourse;
+export default Courses;

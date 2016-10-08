@@ -1,9 +1,10 @@
-import RealmCourse from '../data/courses';
+import Courses from '../data/courses';
 import RealmGame from '../data/games';
-import Players from '../data/players';
+import Players from '../data/Players';
 
 const realmGame = new RealmGame();
 const players = new Players();
+const courses = new Courses();
 
 
 export function addPlayer(name) {
@@ -43,13 +44,11 @@ export function updateHole(gameId, hole) {
     );
 }
 
-export function addCourse(name, pars, callback) {
-    const realmCourse = new RealmCourse();
-    return (dispatch) => realmCourse.save(name, pars).then(
+export function addCourse(name, pars) {
+    return (dispatch) => courses.save(name, pars).then(
         (savedCourse) => dispatch({
             type: 'COURSE_ADDED',
-            course: savedCourse,
-            callback
+            course: savedCourse
         })
     );
 }
