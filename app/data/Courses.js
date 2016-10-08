@@ -19,7 +19,7 @@ const getNextHoleId = () => getNextId('Hole');
 
 const normalize = (course) => {
     const copy = { ...course };
-    copy.holes = { ...course.holes };
+    copy.holes = _.values(course.holes).map((hole) => ({ ...hole }));
     return copy;
 };
 
