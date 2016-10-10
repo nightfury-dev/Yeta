@@ -29,11 +29,11 @@ class GameScreen extends React.Component {
     }
 
     nextHole() {
-        this.changeHole(this.props.game.currentHole + 1);
+        this.changeHole(this.props.currentGame.currentHole + 1);
     }
 
     previousHole() {
-        this.changeHole(this.props.game.currentHole - 1);
+        this.changeHole(this.props.currentGame.currentHole - 1);
     }
 
     changeHole(newHole) {
@@ -41,7 +41,7 @@ class GameScreen extends React.Component {
             return;
         }
 
-        const game = this.props.game;
+        const game = this.props.currentGame;
         if (newHole > 0 && newHole <= game.course.holes.length) {
             this.props.updateHole(game.id, newHole);
         }
@@ -56,7 +56,7 @@ class GameScreen extends React.Component {
     }
 
     render() {
-        const game = this.props.game;
+        const game = this.props.currentGame;
         const course = game.course;
         const players = game.players;
 
@@ -65,10 +65,11 @@ class GameScreen extends React.Component {
           onRightSwipe={this.nextHole}
           onLeftSwipe={this.previousHole}
         >
-          <GameHeader {...this.props} />
+          <GameHeader {...this.props} game={this.props.currentGame} />
           <View style={horizontalLine} />
           <ScoreGrid
             {...this.props}
+            game={this.props.currentGame}
             gameId={game.id}
             course={course}
             players={players}
@@ -84,8 +85,8 @@ GameScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
     game: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
-    courses: React.PropTypes.array.isRequired,
     updateHole: React.PropTypes.func.isRequired,
+    currentGame: React.PropTypes.object.isRequired
 };
 
 export default GameScreen;

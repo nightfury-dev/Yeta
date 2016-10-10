@@ -114,17 +114,13 @@ class ScoreGrid extends React.Component {
 
     scoreIncreased(player) {
         const score = this.getScore(player);
-        this.props.updateScore(
-            this.props.gameId, player.id, this.props.hole, score.score + 1
-        );
+        this.props.updateScore(this.props.gameId, score, score.score + 1);
     }
 
     scoreDecreased(player) {
         const score = this.getScore(player);
         if (score.score > 1) {
-            this.props.updateScore(
-                this.props.gameId, player.id, this.props.hole, score.score - 1
-            );
+            this.props.updateScore(this.props.gameId, score, score.score - 1);
         }
     }
 
@@ -136,10 +132,10 @@ class ScoreGrid extends React.Component {
         } else if (value === '-') {
             this.scoreDecreased(this.state.activePlayer);
         } else {
+            const score = this.getScore(this.state.activePlayer);
             this.props.updateScore(
                 this.props.gameId,
-                this.state.activePlayer.id,
-                this.props.hole,
+                score,
                 value
             );
             this.setNextPlayerActive();

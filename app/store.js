@@ -5,20 +5,20 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import Players from './data/Players';
 import Courses from './data/Courses';
-import RealmGame from './data/games';
+import Games from './data/games';
 
 const createReactotronEnhancer = __DEV__ && require('reactotron-redux');
 
 
-const realmGame = new RealmGame();
-
 const players = new Players();
 const courses = new Courses();
+const games = new Games();
 
 const defaultState = {
     players: players.getAll(),
     courses: courses.getAll(),
-    games: realmGame.getAll()
+    games: games.getAll(),
+    currentGame: null
 };
 
 const enhancers = [applyMiddleware(thunk)];

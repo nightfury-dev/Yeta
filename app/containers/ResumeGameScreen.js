@@ -39,10 +39,8 @@ class ResumeGameScreen extends React.Component {
     handleSelection(rowData) {
         const index = _.findIndex(this.props.games, (g) => g.id === rowData.id);
         const game = this.props.games[index];
-        this.props.navigator.push({
-            name: 'game',
-            game
-        });
+        this.props.changeCurrentGame(game);
+        this.props.navigator.push({ name: 'game' });
     }
 
     confirmDelete() {
@@ -109,6 +107,7 @@ class ResumeGameScreen extends React.Component {
 ResumeGameScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
+    changeCurrentGame: React.PropTypes.func.isRequired,
     removeGame: React.PropTypes.func.isRequired
 };
 

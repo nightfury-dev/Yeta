@@ -3,45 +3,53 @@ import * as _ from 'lodash';
 import realm from './realm';
 
 
-class RealmGame {
+const getNextId = (schema) => {
+    if (realm.objects(schema).length === 0) {
+        return 1;
+    }
+    return _.chain(realm.objects(schema))
+        .map((p) => p.id)
+        .max()
+        .value() + 1;
+};
+
+const getNextGameId = () => getNextId('Game');
+
+const getNextScoreId = () => getNextId('Score');
+
+const normalizePlayer = (player) => ({ ...player });
+
+const normalizeHole = (hole) => ({ ...hole });
+
+const normalizeScore = (score) => ({
+    ...score,
+    player: normalizePlayer(score.player),
+    hole: normalizeHole(score.hole)
+});
+
+const normalizeCourse = (course) => ({
+    id: course.id,
+    name: course.name,
+    holes: _.values(course.holes).map(normalizeHole)
+});
+
+const normalize = (game) => ({
+    ...game,
+    players: _.values(game.players).map(normalizePlayer),
+    course: normalizeCourse(game.course),
+    scores: _.values(game.scores).map(normalizeScore)
+});
+
+class Games {
     getAll() {
-        return _.values(realm.objects('Game'));
-    }
-
-    getNextId(schema) {
-        if (realm.objects(schema).length === 0) {
-            return 1;
-        }
-        return _.chain(realm.objects(schema))
-            .map((p) => p.id)
-            .max()
-            .value() + 1;
-    }
-
-    getNextGameId() {
-        return this.getNextId('Game');
-    }
-
-    getNextScoreId() {
-        return this.getNextId('Score');
-    }
-
-    updateGameHole(gameId, newHole) {
-        return new Promise((success) => {
-            const realmGame = realm.objects('Game')
-                .filtered(`id = ${gameId}`)['0'];
-            realm.write(() => {
-                realmGame.currentHole = newHole;
-                success(realmGame);
-            });
-        });
+        return _.values(realm.objects('Game')).map(normalize);
     }
 
     save(courseId, playerIds) {
         return new Promise((success) => {
             realm.write(() => {
                 const newGame = realm.create('Game', {
-                    id: this.getNextGameId(),
+                    id: getNextGameId(),
                     timeBegin: new Date()
                 });
 
@@ -58,7 +66,7 @@ class RealmGame {
                 _.values(newGame.players).forEach((player) => {
                     _.values(newGame.course.holes).forEach((hole) => {
                         const score = realm.create('Score', {
-                            id: this.getNextScoreId(),
+                            id: getNextScoreId(),
                             score: hole.par,
                             player,
                             hole
@@ -69,7 +77,28 @@ class RealmGame {
 
                 const savedGame = realm.objects('Game')
                     .filtered(`id = ${newGame.id}`)[0];
-                success(savedGame);
+                success(normalize(savedGame));
+            });
+        });
+    }
+
+    updateGameHole(gameId, newHole) {
+        return new Promise((success) => {
+            const realmGame = realm.objectForPrimaryKey('Game', gameId);
+            realm.write(() => {
+                realmGame.currentHole = newHole;
+                success(normalize(realmGame));
+            });
+        });
+    }
+
+    updateScore(gameId, score, newScore) {
+        return new Promise((success) => {
+            const scoreObj = realm.objectForPrimaryKey('Score', score.id);
+            const game = realm.objectForPrimaryKey('Game', gameId);
+            realm.write(() => {
+                scoreObj.score = newScore;
+                success(normalize(game));
             });
         });
     }
@@ -85,4 +114,4 @@ class RealmGame {
     }
 }
 
-export default RealmGame;
+export default Games;

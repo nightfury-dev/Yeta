@@ -29,11 +29,13 @@ class InitGameScreen extends React.Component {
         this.props.createGame(
             selectedCourse.id,
             _.values(this.state.selectedPlayers).map((player) => player.id),
-            _.values(selectedCourse.holes).map((hole) => hole.par),
-            (game) => {
-                this.props.navigator.replace({ name: 'game', game });
-            }
+            _.values(selectedCourse.holes).map((hole) => hole.par)
         );
+
+        // :D sorry, it's midnight
+        setTimeout(() => {
+            this.props.navigator.replace({ name: 'game' });
+        }, 1000);
     }
 
     render() {
@@ -64,7 +66,8 @@ class InitGameScreen extends React.Component {
 
 InitGameScreen.propTypes = {
     navigator: React.PropTypes.object.isRequired,
-    createGame: React.PropTypes.func.isRequired
+    createGame: React.PropTypes.func.isRequired,
+    changeCurrentGame: React.PropTypes.func.isRequired
 };
 
 export default InitGameScreen;

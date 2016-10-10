@@ -21,7 +21,8 @@ function mapStateToProps(state) {
     return {
         players: state.players,
         courses: state.courses,
-        games: state.games
+        games: state.games,
+        currentGame: state.currentGame
     };
 }
 
@@ -57,11 +58,7 @@ class Navigation extends React.Component {
         case 'resumeGame':
             return (<ResumeGameScreen {...this.props} navigator={navigator} />);
         case 'game':
-            return (<GameScreen
-              {...this.props}
-              game={route.game}
-              navigator={navigator}
-            />);
+            return (<GameScreen {...this.props} navigator={navigator} />);
         case 'addCourse':
             return (<AddCourseScreen {...this.props} navigator={navigator} />);
         case 'scorecard':

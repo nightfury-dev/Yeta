@@ -1,10 +1,11 @@
 import Courses from '../data/Courses';
-import RealmGame from '../data/games';
+import Games from '../data/games';
 import Players from '../data/Players';
 
-const realmGame = new RealmGame();
+
 const players = new Players();
 const courses = new Courses();
+const games = new Games();
 
 
 export function addPlayer(name) {
@@ -25,18 +26,17 @@ export function removePlayer(id) {
     );
 }
 
-export function createGame(courseId, playerIds, coursePars, callback) {
-    return (dispatch) => realmGame.save(courseId, playerIds).then(
+export function createGame(courseId, playerIds) {
+    return (dispatch) => games.save(courseId, playerIds).then(
         (savedGame) => dispatch({
             type: 'GAME_CREATED',
-            game: savedGame,
-            callback
+            game: savedGame
         })
     );
 }
 
 export function updateHole(gameId, hole) {
-    return (dispatch) => realmGame.updateGameHole(gameId, hole).then(
+    return (dispatch) => games.updateGameHole(gameId, hole).then(
         (game) => dispatch({
             type: 'HOLE_UPDATED',
             game
@@ -53,20 +53,26 @@ export function addCourse(name, pars) {
     );
 }
 
-export function updateScore(gameId, playerId, hole, score) {
-    return {
-        type: 'UPDATE_SCORE',
-        gameId,
-        playerId,
-        hole,
-        score
-    };
+export function updateScore(gameId, score, newScore) {
+    return (dispatch) => games.updateScore(gameId, score, newScore).then(
+        (game) => dispatch({
+            type: 'SCORE_UPDATED',
+            game
+        })
+    );
 }
 
 export function removeGame(game) {
     const gameId = game.id;
-    return (dispatch) => realmGame.remove(game).then(() => dispatch({
+    return (dispatch) => games.remove(game).then(() => dispatch({
         type: 'GAME_REMOVED',
         gameId
     }));
+}
+
+export function changeCurrentGame(game) {
+    return {
+        type: 'CURRENT_GAME_CHANGED',
+        game
+    };
 }
