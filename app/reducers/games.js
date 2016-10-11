@@ -1,16 +1,22 @@
 import * as _ from 'lodash';
 
 import Games from '../data/games';
+import {
+  GAME_CREATED,
+  HOLE_UPDATED,
+  SCORE_UPDATED,
+  GAME_REMOVED
+} from '../actions/actionTypes';
 
 
 const realmGames = new Games();
 
 function games(state = [], action) {
     switch (action.type) {
-    case 'GAME_CREATED':
+    case GAME_CREATED:
         // action.callback(action.game);
         return [...state, action.game];
-    case 'HOLE_UPDATED': {
+    case HOLE_UPDATED: {
         const gameIndex = _.findIndex(state, (g) => g.id === action.game.id);
         return [
             ...state.slice(0, gameIndex),
@@ -18,11 +24,11 @@ function games(state = [], action) {
             ...state.slice(gameIndex + 1)
         ];
     }
-    case 'SCORE_UPDATED': {
+    case SCORE_UPDATED: {
         const i = _.findIndex(state, (g) => g.id === action.game.id);
         return [...state.slice(0, i), action.game, ...state.slice(i + 1)];
     }
-    case 'GAME_REMOVED':
+    case GAME_REMOVED:
         return realmGames.getAll();
     default:
         return state;
