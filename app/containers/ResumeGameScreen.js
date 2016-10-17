@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Text,
   View,
@@ -8,6 +10,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import { changeCurrentGame, removeGame } from '../actions/actionCreators';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
 import styles from './styles/ResumeGameScreenStyles';
@@ -111,4 +114,13 @@ ResumeGameScreen.propTypes = {
     removeGame: React.PropTypes.func.isRequired
 };
 
-export default ResumeGameScreen;
+const mapStateToProps = (state) => ({
+    games: state.games
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    changeCurrentGame: bindActionCreators(changeCurrentGame, dispatch),
+    removeGame: bindActionCreators(removeGame, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResumeGameScreen);

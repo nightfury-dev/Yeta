@@ -1,7 +1,10 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { View } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import { createGame } from '../actions/actionCreators';
 import SelectPlayersScreen from './SelectPlayersScreen';
 import SelectCourseScreen from './SelectCourseScreen';
 import styles from './styles/InitGameScreenStyles';
@@ -43,13 +46,11 @@ class InitGameScreen extends React.Component {
         switch (this.state.currentState) {
         case 'selectPlayers':
             component = (<SelectPlayersScreen
-              {...this.props}
               playersSelected={this.playersSelected}
             />);
             break;
         case 'selectCourse':
             component = (<SelectCourseScreen
-              {...this.props}
               courseSelected={this.courseSelected}
             />);
             break;
@@ -70,4 +71,8 @@ InitGameScreen.propTypes = {
     changeCurrentGame: React.PropTypes.func.isRequired
 };
 
-export default InitGameScreen;
+const mapDispatchToProps = (dispatch) => ({
+    createGame: bindActionCreators(createGame, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(InitGameScreen);

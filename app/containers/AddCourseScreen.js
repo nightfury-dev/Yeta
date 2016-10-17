@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Text,
   View,
@@ -7,6 +9,7 @@ import {
 } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 
+import { addCourse } from '../actions/actionCreators';
 import HoleCountSwitcher from '../components/HoleCountSwitcher';
 import HoleGrid from '../components/HoleGrid';
 import styles from './styles/AddCourseScreenStyles';
@@ -81,9 +84,14 @@ class AddCourseScreen extends React.Component {
         </ScrollView>);
     }
 }
+
 AddCourseScreen.propTypes = {
     addCourse: React.PropTypes.func.isRequired,
     navigator: React.PropTypes.object.isRequired
 };
 
-export default AddCourseScreen;
+const mapDispatchToProps = (dispatch) => ({
+    addCourse: bindActionCreators(addCourse, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(AddCourseScreen);

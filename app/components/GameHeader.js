@@ -12,10 +12,7 @@ class GameHeader extends React.Component {
     }
 
     showScorecard() {
-        this.props.navigator.push({
-            name: 'scorecard',
-            game: this.props.game
-        });
+        this.props.navigator.push({ name: 'scorecard' });
     }
 
     render() {

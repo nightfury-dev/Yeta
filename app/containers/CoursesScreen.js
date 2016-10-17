@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   View,
@@ -49,5 +50,8 @@ CoursesScreen.propTypes = {
     courses: React.PropTypes.array.isRequired
 };
 
+const mapStateToProps = (state) => ({
+    courses: state.courses
+});
 
-export default CoursesScreen;
+export default connect(mapStateToProps)(CoursesScreen);

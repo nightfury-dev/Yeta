@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 
+import { updateHole } from '../actions/actionCreators';
 import ScoreGrid from '../components/ScoreGrid';
 import SwipeView from '../components/SwipeView';
 import GameHeader from '../components/GameHeader';
@@ -21,7 +24,6 @@ class GameScreen extends React.Component {
 
         this.nextHole = this.nextHole.bind(this);
         this.previousHole = this.previousHole.bind(this);
-        this.stateChanged = this.stateChanged.bind(this);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -29,11 +31,11 @@ class GameScreen extends React.Component {
     }
 
     nextHole() {
-        this.changeHole(this.props.currentGame.currentHole + 1);
+        this.changeHole(this.props.game.currentHole + 1);
     }
 
     previousHole() {
-        this.changeHole(this.props.currentGame.currentHole - 1);
+        this.changeHole(this.props.game.currentHole - 1);
     }
 
     changeHole(newHole) {
@@ -41,42 +43,21 @@ class GameScreen extends React.Component {
             return;
         }
 
-        const game = this.props.currentGame;
+        const game = this.props.game;
         if (newHole > 0 && newHole <= game.course.holes.length) {
             this.props.updateHole(game.id, newHole);
         }
     }
 
-    stateChanged(state) {
-        if (this.state.swipesEnabled && state === 'edit') {
-            this.setState({ swipesEnabled: false });
-        } else if (!this.state.swipesEnabled && state === 'view') {
-            this.setState({ swipesEnabled: true });
-        }
-    }
-
     render() {
-        const game = this.props.currentGame;
-        const course = game.course;
-        const players = game.players;
-
         return (<SwipeView
           style={styles.mainContainer}
           onRightSwipe={this.nextHole}
           onLeftSwipe={this.previousHole}
         >
-          <GameHeader {...this.props} game={this.props.currentGame} />
+          <GameHeader game={this.props.game} navigator={this.props.navigator} />
           <View style={horizontalLine} />
-          <ScoreGrid
-            {...this.props}
-            game={this.props.currentGame}
-            gameId={game.id}
-            course={course}
-            players={players}
-            scores={game.scores}
-            hole={game.currentHole}
-            stateChanged={this.stateChanged}
-          />
+          <ScoreGrid game={this.props.game} />
         </SwipeView>);
     }
 }
@@ -89,4 +70,12 @@ GameScreen.propTypes = {
     currentGame: React.PropTypes.object.isRequired
 };
 
-export default GameScreen;
+const mapStateToProps = (state) => ({
+    game: state.currentGame
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    updateHole: bindActionCreators(updateHole, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);

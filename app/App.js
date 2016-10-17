@@ -3,10 +3,8 @@ import {
     Navigator,
     BackAndroid
 } from 'react-native';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from './actions/actionCreators';
 import MenuScreen from './containers/MenuScreen';
 import PlayersScreen from './containers/PlayersScreen';
 import CoursesScreen from './containers/CoursesScreen';
@@ -16,19 +14,6 @@ import GameScreen from './containers/GameScreen';
 import AddCourseScreen from './containers/AddCourseScreen';
 import ScorecardScreen from './containers/ScorecardScreen';
 
-
-function mapStateToProps(state) {
-    return {
-        players: state.players,
-        courses: state.courses,
-        games: state.games,
-        currentGame: state.currentGame
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch);
-}
 
 let _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -50,26 +35,21 @@ class Navigation extends React.Component {
         _navigator = navigator;
         switch (route.name) {
         case 'players':
-            return (<PlayersScreen {...this.props} navigator={navigator} />);
+            return (<PlayersScreen navigator={navigator} />);
         case 'courses':
-            return (<CoursesScreen {...this.props} navigator={navigator} />);
+            return (<CoursesScreen navigator={navigator} />);
         case 'initGame':
-            return (<InitGameScreen {...this.props} navigator={navigator} />);
+            return (<InitGameScreen navigator={navigator} />);
         case 'resumeGame':
-            return (<ResumeGameScreen {...this.props} navigator={navigator} />);
+            return (<ResumeGameScreen navigator={navigator} />);
         case 'game':
-            return (<GameScreen {...this.props} navigator={navigator} />);
+            return (<GameScreen navigator={navigator} />);
         case 'addCourse':
-            return (<AddCourseScreen {...this.props} navigator={navigator} />);
+            return (<AddCourseScreen navigator={navigator} />);
         case 'scorecard':
-            return (
-              <ScorecardScreen
-                {...this.props}
-                game={route.game}
-                navigator={navigator}
-              />);
+            return (<ScorecardScreen navigator={navigator} />);
         default:
-            return (<MenuScreen {...this.props} navigator={navigator} />);
+            return (<MenuScreen navigator={navigator} />);
         }
     }
 
@@ -82,6 +62,6 @@ class Navigation extends React.Component {
     }
 }
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Navigation);
+const App = connect()(Navigation);
 
 export default App;

@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import React from 'react';
+import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 
 import ScorecardHeader from '../components/ScorecardHeader';
@@ -96,4 +97,8 @@ ScorecardScreen.propTypes = {
     game: React.PropTypes.object.isRequired
 };
 
-export default ScorecardScreen;
+const mapStateToProps = (state) => ({
+    game: state.currentGame
+});
+
+export default connect(mapStateToProps)(ScorecardScreen);

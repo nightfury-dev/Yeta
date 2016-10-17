@@ -1,7 +1,10 @@
 import * as _ from 'lodash';
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { ScrollView, View } from 'react-native';
 
+import { updateScore } from '../actions/actionCreators';
 import ScoregridElement from './ScoregridElement';
 import VirtualKeyboard from './VirtualKeyboard';
 import styles from './styles/ScoreGridStyles';
@@ -24,10 +27,10 @@ class ScoreGrid extends React.Component {
     }
 
     getScore(player) {
-        const scoreList = _.values(this.props.scores);
+        const scoreList = _.values(this.props.game.scores);
         return _.find(scoreList, (score) =>
             score.player.id === player.id &&
-            score.hole.holenumber === this.props.hole
+            score.hole.holenumber === this.props.game.currentHole
         );
     }
 
@@ -81,7 +84,7 @@ class ScoreGrid extends React.Component {
     }
 
     setNextPlayerActive() {
-        const players = _.values(this.props.players);
+        const players = _.values(this.props.game.players);
         if (!this.state.activePlayer) {
             this.setState({ activePlayer: _.first(players) });
         } else {
@@ -114,13 +117,13 @@ class ScoreGrid extends React.Component {
 
     scoreIncreased(player) {
         const score = this.getScore(player);
-        this.props.updateScore(this.props.gameId, score, score.score + 1);
+        this.props.updateScore(this.props.game.id, score, score.score + 1);
     }
 
     scoreDecreased(player) {
         const score = this.getScore(player);
         if (score.score > 1) {
-            this.props.updateScore(this.props.gameId, score, score.score - 1);
+            this.props.updateScore(this.props.game.id, score, score.score - 1);
         }
     }
 
@@ -134,7 +137,7 @@ class ScoreGrid extends React.Component {
         } else {
             const score = this.getScore(this.state.activePlayer);
             this.props.updateScore(
-                this.props.gameId,
+                this.props.game.id,
                 score,
                 value
             );
@@ -151,24 +154,21 @@ class ScoreGrid extends React.Component {
         null;
 
         const ordering = this.getPlayingOrders();
-        const scoreGridElements = _.values(this.props.players).map(
+        const scoreGridElements = _.values(this.props.game.players).map(
             (p, index) => {
                 const score = this.getScore(p);
                 const highlighted = this.state.activePlayer &&
                     p.id === this.state.activePlayer.id;
 
-                const order = ordering[this.props.hole][p.id];
+                const order = ordering[this.props.game.currentHole][p.id];
 
                 return (<ScoregridElement
-                  {...this.props}
                   onPress={() => this.setActivePlayer(p)}
                   highlighted={highlighted}
-                  hole={this.props.hole}
                   order={order}
                   player={p}
                   key={index}
                   score={score.score}
-                  par={3}
                 />);
             }
         );
@@ -190,4 +190,8 @@ ScoreGrid.propTypes = {
     game: React.PropTypes.object.isRequired,
 };
 
-export default ScoreGrid;
+const mapDispatchToProps = (dispatch) => ({
+    updateScore: bindActionCreators(updateScore, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(ScoreGrid);

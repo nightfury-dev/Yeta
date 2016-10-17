@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
@@ -46,7 +47,7 @@ class SelectCourseScreen extends React.Component {
             dataArray={this.props.courses}
             renderRow={this.renderRow}
           />
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <Button onPress={this.courseSelected}>Continue</Button>
           </View>
         </View>);
@@ -58,4 +59,8 @@ SelectCourseScreen.propTypes = {
     courses: React.PropTypes.array.isRequired
 };
 
-export default SelectCourseScreen;
+const mapStateToProps = (state) => ({
+    courses: state.courses
+});
+
+export default connect(mapStateToProps)(SelectCourseScreen);

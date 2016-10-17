@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, ListView } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Button, InputGroup, Input } from 'native-base';
 
+import { addPlayer, removePlayer } from '../actions/actionCreators';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
 import PlayerListElement from '../components/PlayerListElement';
@@ -104,4 +107,13 @@ PlayersScreen.propTypes = {
     players: React.PropTypes.array.isRequired
 };
 
-export default PlayersScreen;
+const mapStateToProps = (state) => ({
+    players: state.players
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addPlayer: bindActionCreators(addPlayer, dispatch),
+    removePlayer: bindActionCreators(removePlayer, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayersScreen);

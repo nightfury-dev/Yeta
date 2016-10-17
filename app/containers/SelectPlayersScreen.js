@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { CheckBox, Button, List, ListItem } from 'native-base';
 
+import { connect } from 'react-redux';
 import styles from './styles/SelectPlayersScreenStyles';
 
 
@@ -47,7 +48,7 @@ class SelectPlayersScreen extends React.Component {
             dataArray={this.state.players}
             renderRow={this.renderRow}
           />
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <Button onPress={this.playersSelected}>Continue</Button>
           </View>
         </View>);
@@ -59,4 +60,8 @@ SelectPlayersScreen.propTypes = {
     playersSelected: React.PropTypes.func.isRequired
 };
 
-export default SelectPlayersScreen;
+const mapStateToProps = (state) => ({
+    players: state.players
+});
+
+export default connect(mapStateToProps)(SelectPlayersScreen);
