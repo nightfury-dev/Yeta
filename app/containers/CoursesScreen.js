@@ -7,6 +7,7 @@ import {
   ListView
 } from 'react-native';
 import { Button } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import styles from './styles/CoursesScreenStyles';
 
@@ -18,7 +19,7 @@ class CoursesScreen extends React.Component {
     }
 
     addCourse() {
-        this.props.navigator.push({ name: 'addCourse' });
+        Actions.addcourse();
     }
 
     renderRow(rowData) {
@@ -46,7 +47,6 @@ class CoursesScreen extends React.Component {
 }
 
 CoursesScreen.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     courses: React.PropTypes.array.isRequired
 };
 

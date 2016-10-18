@@ -43,7 +43,7 @@ class SelectPlayersScreen extends React.Component {
     }
 
     render() {
-        return (<View style={styles.mainContainer}>
+        return (<View>
           <List
             dataArray={this.state.players}
             renderRow={this.renderRow}

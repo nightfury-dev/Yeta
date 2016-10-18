@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import { createGame } from '../actions/actionCreators';
 import SelectPlayersScreen from './SelectPlayersScreen';
@@ -37,7 +38,7 @@ class InitGameScreen extends React.Component {
 
         // :D sorry, it's midnight
         setTimeout(() => {
-            this.props.navigator.replace({ name: 'game' });
+            Actions.game({ type: ActionConst.REPLACE });
         }, 1000);
     }
 
@@ -66,7 +67,6 @@ class InitGameScreen extends React.Component {
 }
 
 InitGameScreen.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     createGame: React.PropTypes.func.isRequired,
     changeCurrentGame: React.PropTypes.func.isRequired
 };

@@ -55,7 +55,7 @@ class GameScreen extends React.Component {
           onRightSwipe={this.nextHole}
           onLeftSwipe={this.previousHole}
         >
-          <GameHeader game={this.props.game} navigator={this.props.navigator} />
+          <GameHeader game={this.props.game} />
           <View style={horizontalLine} />
           <ScoreGrid game={this.props.game} />
         </SwipeView>);
@@ -63,7 +63,6 @@ class GameScreen extends React.Component {
 }
 
 GameScreen.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     game: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
     updateHole: React.PropTypes.func.isRequired,

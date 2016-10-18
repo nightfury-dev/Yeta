@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles/GameHeaderStyles';
@@ -12,7 +13,7 @@ class GameHeader extends React.Component {
     }
 
     showScorecard() {
-        this.props.navigator.push({ name: 'scorecard' });
+        Actions.scorecard();
     }
 
     render() {
@@ -21,7 +22,7 @@ class GameHeader extends React.Component {
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
           <Text style={styles.baseText}>
-              Hole: {game.currentHole}/{game.course.holes.length}
+            Hole: {game.currentHole}/{game.course.holes.length}
           </Text>
           <TouchableHighlight onPress={this.showScorecard}>
             <Icon
@@ -35,7 +36,6 @@ class GameHeader extends React.Component {
 }
 
 GameHeader.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     game: React.PropTypes.object.isRequired
 };
 

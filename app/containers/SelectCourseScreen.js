@@ -42,7 +42,7 @@ class SelectCourseScreen extends React.Component {
     }
 
     render() {
-        return (<View style={styles.mainContainer}>
+        return (<View>
           <List
             dataArray={this.props.courses}
             renderRow={this.renderRow}

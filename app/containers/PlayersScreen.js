@@ -101,7 +101,6 @@ class PlayersScreen extends React.Component {
 }
 
 PlayersScreen.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     addPlayer: React.PropTypes.func.isRequired,
     removePlayer: React.PropTypes.func.isRequired,
     players: React.PropTypes.array.isRequired

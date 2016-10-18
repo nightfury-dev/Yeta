@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-    Navigator,
-    BackAndroid
-} from 'react-native';
 import { connect } from 'react-redux';
+import { Router, Scene } from 'react-native-router-flux';
 
 import MenuScreen from './containers/MenuScreen';
 import PlayersScreen from './containers/PlayersScreen';
@@ -15,51 +12,19 @@ import AddCourseScreen from './containers/AddCourseScreen';
 import ScorecardScreen from './containers/ScorecardScreen';
 
 
-let _navigator;
-BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
-
-
-class Navigation extends React.Component {
-    constructor(props) {
-        super(props);
-        this.renderScene = this.renderScene.bind(this);
-    }
-
-    renderScene(route, navigator) {
-        _navigator = navigator;
-        switch (route.name) {
-        case 'players':
-            return (<PlayersScreen navigator={navigator} />);
-        case 'courses':
-            return (<CoursesScreen navigator={navigator} />);
-        case 'initGame':
-            return (<InitGameScreen navigator={navigator} />);
-        case 'resumeGame':
-            return (<ResumeGameScreen navigator={navigator} />);
-        case 'game':
-            return (<GameScreen navigator={navigator} />);
-        case 'addCourse':
-            return (<AddCourseScreen navigator={navigator} />);
-        case 'scorecard':
-            return (<ScorecardScreen navigator={navigator} />);
-        default:
-            return (<MenuScreen navigator={navigator} />);
-        }
-    }
-
-    render() {
-        return (<Navigator
-          initialRoute={{ title: 'Menu', name: 'menu' }}
-          renderScene={this.renderScene}
-          style={{ paddingTop: 22 }}
-        />);
-    }
+function Navigation() {
+    return (<Router>
+      <Scene key={'root'}>
+        <Scene key={'menu'} component={MenuScreen} initial />
+        <Scene key={'players'} component={PlayersScreen} />
+        <Scene key={'initgame'} component={InitGameScreen} />
+        <Scene key={'resumegame'} component={ResumeGameScreen} />
+        <Scene key={'game'} component={GameScreen} />
+        <Scene key={'courses'} component={CoursesScreen} />
+        <Scene key={'addcourse'} component={AddCourseScreen} />
+        <Scene key={'scorecard'} component={ScorecardScreen} />
+      </Scene>
+    </Router>);
 }
 
 const App = connect()(Navigation);

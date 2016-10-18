@@ -5,7 +5,8 @@ const ApplicationStyles = {
     screen: {
         mainContainer: {
             flex: 1,
-            backgroundColor: Colors.background
+            backgroundColor: Colors.background,
+            paddingTop: 64
         }
     },
     input: {

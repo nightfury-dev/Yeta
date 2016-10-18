@@ -9,6 +9,7 @@ import {
   ListView,
   TouchableHighlight
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
 import ContextMenu from '../components/ContextMenu';
@@ -43,7 +44,7 @@ class ResumeGameScreen extends React.Component {
         const index = _.findIndex(this.props.games, (g) => g.id === rowData.id);
         const game = this.props.games[index];
         this.props.changeCurrentGame(game);
-        this.props.navigator.push({ name: 'game' });
+        Actions.game();
     }
 
     confirmDelete() {
@@ -108,7 +109,6 @@ class ResumeGameScreen extends React.Component {
 }
 
 ResumeGameScreen.propTypes = {
-    navigator: React.PropTypes.object.isRequired,
     games: React.PropTypes.array.isRequired,
     changeCurrentGame: React.PropTypes.func.isRequired,
     removeGame: React.PropTypes.func.isRequired

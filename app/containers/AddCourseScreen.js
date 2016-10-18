@@ -8,6 +8,7 @@ import {
   ScrollView
 } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import { addCourse } from '../actions/actionCreators';
 import HoleCountSwitcher from '../components/HoleCountSwitcher';
@@ -46,7 +47,7 @@ class AddCourseScreen extends React.Component {
 
     saveCourse() {
         this.props.addCourse(this.state.name, this.state.pars);
-        this.props.navigator.replace('menu');
+        Actions.menu();
     }
 
     parsChanged(updatedPars) {
@@ -86,8 +87,7 @@ class AddCourseScreen extends React.Component {
 }
 
 AddCourseScreen.propTypes = {
-    addCourse: React.PropTypes.func.isRequired,
-    navigator: React.PropTypes.object.isRequired
+    addCourse: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
