@@ -71,7 +71,7 @@ class ScoreGrid extends React.Component {
 
         const ordering = { 1: firstHoleScores };
         const holeCount = _.values(this.props.game.course.holes).length;
-        _.range(2, holeCount).forEach((holeNumber) => {
+        _.range(2, holeCount + 1).forEach((holeNumber) => {
             const previousOrdering = ordering[holeNumber - 1];
             const previousScores = _.values(this.props.game.scores).filter(
                 (score) => score.hole.holenumber === (holeNumber - 1)
