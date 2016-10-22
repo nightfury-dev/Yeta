@@ -35,10 +35,19 @@ class Players {
     remove(id) {
         return new Promise((success) => {
             realm.write(() => {
-                const player = realm.objects('Player').filtered(`id = ${id}`);
+                const removable = [];
+                const player = realm.objects('Player')
+                    .filtered(`id = ${id}`)[0];
+                _.values(realm.objects('Score')).forEach((score) => {
+                    if (score.player && score.player.id === player.id) {
+                        removable.push(score);
+                    }
+                });
                 if (player) {
-                    realm.delete(player);
+                    removable.push(player);
                 }
+
+                realm.delete(removable);
                 success();
             });
         });
