@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import Players from './data/Players';
 import Courses from './data/Courses';
-import Games from './data/games';
+import Games from './data/Games';
 
 const createReactotronEnhancer = __DEV__ && require('reactotron-redux');
 

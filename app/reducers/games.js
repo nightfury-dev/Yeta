@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import Games from '../data/games';
+import Games from '../data/Games';
 import {
   GAME_CREATED,
   HOLE_UPDATED,

@@ -1,5 +1,5 @@
 import Courses from '../data/Courses';
-import Games from '../data/games';
+import Games from '../data/Games';
 import Players from '../data/Players';
 import {
   PLAYER_ADDED,
