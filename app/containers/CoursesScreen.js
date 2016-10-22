@@ -9,13 +9,21 @@ import {
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
+import CourseListElement from '../components/CourseListElement';
 import styles from './styles/CoursesScreenStyles';
 
 
 class CoursesScreen extends React.Component {
     constructor(props) {
         super(props);
+
+        this.renderRow = this.renderRow.bind(this);
+        this.onLongPress = this.onLongPress.bind(this);
         this.addCourse = this.addCourse.bind(this);
+    }
+
+    onLongPress(course) {
+        Actions.addcourse({ course });
     }
 
     addCourse() {
@@ -23,7 +31,10 @@ class CoursesScreen extends React.Component {
     }
 
     renderRow(rowData) {
-        return <Text style={styles.baseText}>{rowData.name}</Text>;
+        return (<CourseListElement
+          course={rowData}
+          onLongPress={() => this.onLongPress(rowData)}
+        />);
     }
 
     render() {

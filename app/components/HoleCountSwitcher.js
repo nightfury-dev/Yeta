@@ -8,7 +8,7 @@ class HoleCountSwitcher extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            holeCount: 9
+            holeCount: props.holecount
         };
 
         this.increaseHoles = this.increaseHoles.bind(this);
@@ -45,7 +45,8 @@ class HoleCountSwitcher extends React.Component {
 
 HoleCountSwitcher.propTypes = {
     holeCountIncreased: React.PropTypes.func.isRequired,
-    holeCountDecreased: React.PropTypes.func.isRequired
+    holeCountDecreased: React.PropTypes.func.isRequired,
+    holecount: React.PropTypes.number.isRequired
 };
 
 export default HoleCountSwitcher;

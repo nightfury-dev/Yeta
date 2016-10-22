@@ -7,6 +7,7 @@ import {
   GAME_CREATED,
   HOLE_UPDATED,
   COURSE_ADDED,
+  COURSE_UPDATED,
   SCORE_UPDATED,
   GAME_REMOVED,
   CURRENT_GAME_CHANGED
@@ -60,6 +61,15 @@ export function addCourse(name, pars) {
             type: COURSE_ADDED,
             course: savedCourse
         })
+    );
+}
+
+export function updateCourse(course, name, pars) {
+    return (dispatch) => courses.update(course, name, pars).then(
+      (savedCourse) => dispatch({
+          type: COURSE_UPDATED,
+          course: savedCourse
+      })
     );
 }
 

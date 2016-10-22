@@ -5,7 +5,8 @@ import {
   GAME_CREATED,
   HOLE_UPDATED,
   SCORE_UPDATED,
-  GAME_REMOVED
+  GAME_REMOVED,
+  COURSE_UPDATED
 } from '../actions/actionTypes';
 
 
@@ -27,6 +28,9 @@ function games(state = [], action) {
     case SCORE_UPDATED: {
         const i = _.findIndex(state, (g) => g.id === action.game.id);
         return [...state.slice(0, i), action.game, ...state.slice(i + 1)];
+    }
+    case COURSE_UPDATED: {
+        return realmGames.getAll();
     }
     case GAME_REMOVED:
         return realmGames.getAll();

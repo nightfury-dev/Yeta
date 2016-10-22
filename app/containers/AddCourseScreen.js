@@ -10,7 +10,7 @@ import {
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import { addCourse } from '../actions/actionCreators';
+import { addCourse, updateCourse } from '../actions/actionCreators';
 import HoleCountSwitcher from '../components/HoleCountSwitcher';
 import HoleGrid from '../components/HoleGrid';
 import styles from './styles/AddCourseScreenStyles';
@@ -22,10 +22,13 @@ const DEFAULT_HOLE_COUNT = 9;
 class AddCourseScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pars: Array(DEFAULT_HOLE_COUNT).fill(DEFAULT_PAR),
-            name: ''
-        };
+
+        const pars = props.course ?
+          _.values(props.course.holes).map((hole) => hole.par) :
+          Array(DEFAULT_HOLE_COUNT).fill(DEFAULT_PAR);
+        const name = props.course ? props.course.name : '';
+
+        this.state = { pars, name };
 
         this.addRow = this.addRow.bind(this);
         this.removeRow = this.removeRow.bind(this);
@@ -46,7 +49,15 @@ class AddCourseScreen extends React.Component {
     }
 
     saveCourse() {
-        this.props.addCourse(this.state.name, this.state.pars);
+        if (this.props.course) {
+            this.props.updateCourse(
+                this.props.course,
+                this.state.name,
+                this.state.pars
+            );
+        } else {
+            this.props.addCourse(this.state.name, this.state.pars);
+        }
         Actions.menu();
     }
 
@@ -59,6 +70,7 @@ class AddCourseScreen extends React.Component {
     render() {
         return (<ScrollView style={styles.mainContainer}>
           <HoleCountSwitcher
+            holecount={this.state.pars.length}
             holeCountIncreased={this.addRow}
             holeCountDecreased={this.removeRow}
           />
@@ -87,11 +99,14 @@ class AddCourseScreen extends React.Component {
 }
 
 AddCourseScreen.propTypes = {
-    addCourse: React.PropTypes.func.isRequired
+    addCourse: React.PropTypes.func.isRequired,
+    updateCourse: React.PropTypes.func.isRequired,
+    course: React.PropTypes.object
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addCourse: bindActionCreators(addCourse, dispatch)
+    addCourse: bindActionCreators(addCourse, dispatch),
+    updateCourse: bindActionCreators(updateCourse, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(AddCourseScreen);
