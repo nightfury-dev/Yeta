@@ -1,48 +1,17 @@
 import * as _ from 'lodash';
 
+import { normalizeGame as normalize } from './Normalizers';
+import { getNextGameId, getNextScoreId } from './Utils';
 import realm from './realm';
 
 
-const getNextId = (schema) => {
-    if (realm.objects(schema).length === 0) {
-        return 1;
-    }
-    return _.chain(realm.objects(schema))
-        .map((p) => p.id)
-        .max()
-        .value() + 1;
-};
-
-const getNextGameId = () => getNextId('Game');
-
-const getNextScoreId = () => getNextId('Score');
-
-const normalizePlayer = (player) => ({ ...player });
-
-const normalizeHole = (hole) => ({ ...hole });
-
-const normalizeScore = (score) => ({
-    ...score,
-    player: normalizePlayer(score.player),
-    hole: normalizeHole(score.hole)
-});
-
-const normalizeCourse = (course) => ({
-    id: course.id,
-    name: course.name,
-    holes: _.values(course.holes).map(normalizeHole)
-});
-
-const normalize = (game) => ({
-    ...game,
-    players: _.values(game.players).map(normalizePlayer),
-    course: normalizeCourse(game.course),
-    scores: _.values(game.scores).map(normalizeScore)
-});
+const games = realm.objects('Game');
+const courses = realm.objects('Course');
+const players = realm.objects('Player');
 
 class Games {
     getAll() {
-        return _.values(realm.objects('Game')).map(normalize);
+        return _.map(games, normalize);
     }
 
     save(courseId, playerIds) {
@@ -53,18 +22,18 @@ class Games {
                     timeBegin: new Date()
                 });
 
-                const realmCourse = realm.objects('Course')
-                    .filtered(`id = ${courseId}`)['0'];
-                newGame.course = realmCourse;
+                newGame.course = _.first(
+                  courses.filtered('id = $0', courseId)
+                );
 
                 playerIds.forEach((playerId) => {
-                    const realmPlayer = realm.objects('Player')
-                        .filtered(`id = ${playerId}`)['0'];
-                    newGame.players.push(realmPlayer);
+                    newGame.players.push(
+                         _.first(players.filtered('id = $0', playerId))
+                    );
                 });
 
-                _.values(newGame.players).forEach((player) => {
-                    _.values(newGame.course.holes).forEach((hole) => {
+                _.forEach(newGame.players, (player) => {
+                    _.forEach(newGame.course.holes, (hole) => {
                         const score = realm.create('Score', {
                             id: getNextScoreId(),
                             score: hole.par,
@@ -75,29 +44,27 @@ class Games {
                     });
                 });
 
-                const savedGame = realm.objects('Game')
-                    .filtered(`id = ${newGame.id}`)[0];
-                success(normalize(savedGame));
+                success(normalize(newGame));
             });
         });
     }
 
     updateGameHole(gameId, newHole) {
         return new Promise((success) => {
-            const realmGame = realm.objectForPrimaryKey('Game', gameId);
+            const game = realm.objectForPrimaryKey('Game', gameId);
             realm.write(() => {
-                realmGame.currentHole = newHole;
-                success(normalize(realmGame));
+                game.currentHole = newHole;
+                success(normalize(game));
             });
         });
     }
 
     updateScore(gameId, score, newScore) {
         return new Promise((success) => {
-            const scoreObj = realm.objectForPrimaryKey('Score', score.id);
+            const realmScore = realm.objectForPrimaryKey('Score', score.id);
             const game = realm.objectForPrimaryKey('Game', gameId);
             realm.write(() => {
-                scoreObj.score = newScore;
+                realmScore.score = newScore;
                 success(normalize(game));
             });
         });
@@ -105,8 +72,8 @@ class Games {
 
     remove(game) {
         return new Promise((success) => {
+            const realmGame = realm.objectForPrimaryKey('Game', game.id);
             realm.write(() => {
-                const realmGame = realm.objectForPrimaryKey('Game', game.id);
                 realm.delete(realmGame);
                 success();
             });

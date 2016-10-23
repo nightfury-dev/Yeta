@@ -1,22 +1,24 @@
 import * as _ from 'lodash';
 
+import { normalizePlayer as normalize } from './Normalizers';
+import { getNextPlayerId } from './Utils';
 import realm from './realm';
 
-function getNextPlayerId() {
-    if (realm.objects('Player').length === 0) {
-        return 1;
-    }
-    return _.chain(realm.objects('Player'))
-        .map((p) => p.id)
-        .max()
-        .value() + 1;
-}
 
-const normalize = (player) => ({ ...player });
+const players = realm.objects('Player');
+const scores = realm.objects('Score');
 
 class Players {
     getAll() {
-        return _.values(realm.objects('Player')).map(normalize);
+        return _.map(players, normalize);
+    }
+
+    findById(id) {
+        const result = players.filtered(`id = ${id}`);
+        if (!result.length) {
+            throw new Error(`No Player with id "${id}" found.`);
+        }
+        return _.first(result);
     }
 
     save(name) {
@@ -34,20 +36,11 @@ class Players {
 
     remove(id) {
         return new Promise((success) => {
+            const player = this.findById(id);
+            const removableScores = scores.filtered('player.id = $0', id);
             realm.write(() => {
-                const removable = [];
-                const player = realm.objects('Player')
-                    .filtered(`id = ${id}`)[0];
-                _.values(realm.objects('Score')).forEach((score) => {
-                    if (score.player && score.player.id === player.id) {
-                        removable.push(score);
-                    }
-                });
-                if (player) {
-                    removable.push(player);
-                }
-
-                realm.delete(removable);
+                realm.delete(removableScores);
+                realm.delete(player);
                 success();
             });
         });

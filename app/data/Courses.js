@@ -1,56 +1,33 @@
 import * as _ from 'lodash';
 
+import { normalizeCourse as normalize } from './Normalizers';
+import { getNextScoreId, getNextCourseId, getNextHoleId } from './Utils';
 import realm from './realm';
 
 
-const getNextId = (schema) => {
-    if (realm.objects(schema).length === 0) {
-        return 1;
-    }
-    return _.chain(realm.objects(schema))
-        .map((p) => p.id)
-        .max()
-        .value() + 1;
-};
-
-const getNextScoreId = () => getNextId('Score');
-
-const getNextCourseId = () => getNextId('Course');
-
-const getNextHoleId = () => getNextId('Hole');
-
-const normalize = (course) => {
-    const copy = { ...course };
-    copy.holes = _.values(course.holes).map((hole) => ({ ...hole }));
-    return copy;
-};
+const courses = realm.objects('Course');
+const scores = realm.objects('Score');
+const games = realm.objects('Game');
 
 class Courses {
     getAll() {
-        return _.values(realm.objects('Course')).map(normalize);
+        return _.map(courses, normalize);
     }
 
     update(course, name, pars) {
         return new Promise((success) => {
             const savedCourse = realm.objectForPrimaryKey('Course', course.id);
-            const allScores = realm.objects('Score');
             realm.write(() => {
                 savedCourse.name = name;
 
-                const removable = [];
-                _.values(savedCourse.holes).forEach((hole) => {
+                _.forEach(savedCourse.holes, (hole) => {
                     if (hole.holenumber > pars.length) {
-                        _.values(allScores).forEach((score) => {
-                            if (score.hole.id === hole.id) {
-                                removable.push(score);
-                            }
-                        });
-                        removable.push(hole);
+                        realm.delete(scores.filtered('hole.id = $0', hole.id));
+                        realm.delete(hole);
                     } else {
                         hole.par = pars[hole.holenumber - 1];
                     }
                 });
-                realm.delete(removable);
 
                 const holeCount = _.values(course.holes).length;
                 pars.slice(holeCount).forEach((par, index) => {
@@ -62,20 +39,20 @@ class Courses {
                     });
                     savedCourse.holes.push(hole);
 
-                    const games = _.values(realm.objects('Game'));
-                    games.forEach((game) => {
-                        if (game.course.id === course.id) {
-                            const players = _.values(game.players);
-                            players.forEach((player) => {
-                                const score = {
-                                    id: getNextScoreId(),
-                                    hole,
-                                    player,
-                                    score: par
-                                };
-                                game.scores.push(realm.create('Score', score));
-                            });
-                        }
+                    const courseGames = games.filtered(
+                      'course.id = $0',
+                      course.id
+                    );
+                    _.forEach(courseGames, (game) => {
+                        _.forEach(game.players, (player) => {
+                            const score = {
+                                id: getNextScoreId(),
+                                hole,
+                                player,
+                                score: par
+                            };
+                            game.scores.push(realm.create('Score', score));
+                        });
                     });
                 });
 
