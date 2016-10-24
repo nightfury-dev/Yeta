@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors, Fonts } from '../../themes';
+
 
 export default StyleSheet.create({
     scoreGridCell: {
@@ -7,8 +9,8 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     gridCellText: {
-        fontSize: 18,
-        color: '#EEE5E9'
+        fontSize: Fonts.size.small,
+        color: Colors.text
     },
     scoreGridFirstCell: {
         flex: 1,
@@ -20,7 +22,6 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
         borderBottomWidth: 1,
-        borderColor: '#00ACE9',
-        backgroundColor: '#210F04'
+        borderColor: Colors.orange,
     }
 });

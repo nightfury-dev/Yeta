@@ -1,13 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+import Logo from '../components/Logo';
 import MenuItem from '../components/MenuItem';
 import styles from './styles/MenuScreenStyles';
 
 
 function MenuScreen() {
     return (<View style={styles.mainContainer}>
+      <Logo />
       <MenuItem
         label="Game"
         name="initGame"

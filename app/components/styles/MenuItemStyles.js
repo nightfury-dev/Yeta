@@ -1,14 +1,18 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors, Fonts } from '../../themes';
+
 
 export default StyleSheet.create({
     menuItemText: {
-        color: '#EEE5E9',
+        color: Colors.text,
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: Fonts.size.normal,
+        fontFamily: Fonts.defaultFontFamily
     },
     menuItem: {
         margin: 10,
-        flex: 1,
+        backgroundColor: Colors.orange,
+        flex: 1
     }
 });

@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { Colors } from '../themes';
 import styles from './styles/GameHeaderStyles';
 
 
@@ -28,7 +29,7 @@ class GameHeader extends React.Component {
             <Icon
               name="table"
               size={40}
-              color="#98D2EB"
+              color={Colors.orange}
             />
           </TouchableHighlight>
         </View>);

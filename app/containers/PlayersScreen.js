@@ -63,6 +63,10 @@ class PlayersScreen extends React.Component {
         />);
     }
 
+    renderSeparator() {
+        return (<View style={styles.listSeparator} />);
+    }
+
     render() {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.name !== r2.name
@@ -81,7 +85,11 @@ class PlayersScreen extends React.Component {
             message={`Remove player '${removeName}'?`}
             visible={this.state.showDeleteConfirmation}
           />
-          <ListView dataSource={dataSource} renderRow={this.renderRow} />
+          <ListView
+            dataSource={dataSource}
+            renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
+          />
           <InputGroup borderType="rounded">
             <Input
               placeholder="Player name"
@@ -91,7 +99,7 @@ class PlayersScreen extends React.Component {
             />
           </InputGroup>
           <Button
-            style={styles.centeredItem}
+            style={[styles.button, styles.centeredItem]}
             onPress={this.addPlayer}
           >
             Add player

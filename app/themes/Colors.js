@@ -1,7 +1,11 @@
 const colors = {
     modalBackground: 'white',
-    background: '#210F04',
-    keyboardBackground: '#262B30'
+    background: '#3E2723',
+    text: '#EEE5E9',
+    keyboardBackground: '#6200EA',
+    lightBrown: '#795548',
+    orange: '#E65100',
+    selectedListItem: '#212121'
 };
 
 export default colors;

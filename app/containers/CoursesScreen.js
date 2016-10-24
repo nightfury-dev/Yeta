@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Text,
   View,
   ListView
 } from 'react-native';
@@ -37,6 +36,10 @@ class CoursesScreen extends React.Component {
         />);
     }
 
+    renderSeparator() {
+        return (<View style={styles.listSeparator} />);
+    }
+
     render() {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) =>
@@ -46,9 +49,10 @@ class CoursesScreen extends React.Component {
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
           />
           <Button
-            style={styles.centeredItem}
+            style={[styles.button, styles.centeredItem]}
             onPress={this.addCourse}
           >
             Add course

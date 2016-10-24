@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
-import { CheckBox, Button, List, ListItem } from 'native-base';
+import { ScrollView, ListView, View } from 'react-native';
+import { Button } from 'native-base';
 
+import CourseListElement from '../components/CourseListElement';
 import styles from './styles/SelectCourseScreenStyles';
 
 
@@ -33,24 +34,38 @@ class SelectCourseScreen extends React.Component {
     }
 
     renderRow(rowData) {
-        const checked = this.state && this.state.selectedCourse &&
-            this.state.selectedCourse.name === rowData.name;
-        return (<ListItem button onPress={() => this.handleSelection(rowData)}>
-          <Text style={styles.baseText}>{rowData.name}</Text>
-          <CheckBox checked={checked} />
-        </ListItem>);
+        const selected = this.state && this.state.selectedCourse &&
+            this.state.selectedCourse.id === rowData.id;
+        return (<CourseListElement
+          course={rowData}
+          selected={selected}
+          onPress={() => this.handleSelection(rowData)}
+        />);
+    }
+
+    renderSeparator() {
+        return (<View style={styles.listSeparator} />);
     }
 
     render() {
-        return (<View>
-          <List
-            dataArray={this.props.courses}
+        const dataSource = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        }).cloneWithRows(this.props.courses);
+        return (<ScrollView>
+          <ListView
+            dataSource={dataSource}
             renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
           />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Button onPress={this.courseSelected}>Continue</Button>
+            <Button
+              style={styles.button}
+              onPress={this.courseSelected}
+            >
+              Continue
+            </Button>
           </View>
-        </View>);
+        </ScrollView>);
     }
 }
 

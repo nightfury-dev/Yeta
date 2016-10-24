@@ -1,4 +1,6 @@
 import Colors from './Colors';
+import Fonts from './Fonts';
+import Metrics from './Metrics';
 
 
 const ApplicationStyles = {
@@ -6,7 +8,8 @@ const ApplicationStyles = {
         mainContainer: {
             flex: 1,
             backgroundColor: Colors.background,
-            paddingTop: 64
+            paddingTop: Metrics.navBarHeight,
+            padding: Metrics.defaultPadding
         }
     },
     input: {
@@ -17,8 +20,9 @@ const ApplicationStyles = {
     },
     baseText: {
         textAlign: 'center',
-        fontSize: 22,
-        color: '#EEE5E9'
+        fontSize: Fonts.size.normal,
+        color: '#EEE5E9',
+        fontFamily: Fonts.defaultFontFamily
     },
     modal: {
         flex: 1,
@@ -35,20 +39,19 @@ const ApplicationStyles = {
         margin: 25
     },
     modalButton: {
-        margin: 10
+        margin: 10,
+        backgroundColor: Colors.orange
     },
     listItem: {
-        color: '#EEE5E9',
-        textAlign: 'center',
-        fontSize: 25,
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 10,
-        paddingBottom: 10,
-        borderBottomWidth: 1,
-        borderColor: '#DF878B',
-        alignItems: 'center'
+        padding: 20
+    },
+    selectedListItem: {
+        padding: 20,
+        backgroundColor: Colors.selectedListItem
+    },
+    listSeparator: {
+        height: 1,
+        backgroundColor: Colors.lightBrown
     }
 };
 

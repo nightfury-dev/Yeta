@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View, Text } from 'react-native';
-import { CheckBox, Button, List, ListItem } from 'native-base';
-
 import { connect } from 'react-redux';
+import { ScrollView, View, ListView } from 'react-native';
+import { Button } from 'native-base';
+
+import PlayerListElement from '../components/PlayerListElement';
 import styles from './styles/SelectPlayersScreenStyles';
 
 
@@ -36,22 +37,37 @@ class SelectPlayersScreen extends React.Component {
     }
 
     renderRow(rowData) {
-        return (<ListItem button onPress={() => this.handleSelection(rowData)}>
-          <Text style={styles.baseText}>{rowData.name}</Text>
-          <CheckBox checked={rowData.selected} />
-        </ListItem>);
+        return (<PlayerListElement
+          player={rowData}
+          selected={rowData.selected}
+          onPress={() => this.handleSelection(rowData)}
+        />);
+    }
+
+    renderSeparator() {
+        return (<View style={styles.listSeparator} />);
     }
 
     render() {
-        return (<View>
-          <List
-            dataArray={this.state.players}
+        const dataSource = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1.name !== r2.name
+        }).cloneWithRows(this.state.players);
+
+        return (<ScrollView>
+          <ListView
+            dataSource={dataSource}
             renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
           />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Button onPress={this.playersSelected}>Continue</Button>
+            <Button
+              style={styles.button}
+              onPress={this.playersSelected}
+            >
+              Continue
+            </Button>
           </View>
-        </View>);
+        </ScrollView>);
     }
 }
 

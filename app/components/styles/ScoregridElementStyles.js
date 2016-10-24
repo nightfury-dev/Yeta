@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles } from '../../themes';
+import { ApplicationStyles, Colors } from '../../themes';
 
 const inactiveRow = {
     flex: 7,
@@ -11,7 +11,7 @@ const inactiveRow = {
     borderColor: '#DF878B',
     alignItems: 'center'
 };
-const activeRow = { ...inactiveRow, backgroundColor: '#313131' };
+const activeRow = { ...inactiveRow, backgroundColor: Colors.selectedListItem };
 
 export default StyleSheet.create({
     baseText: ApplicationStyles.baseText,

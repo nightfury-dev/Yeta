@@ -70,16 +70,20 @@ class ResumeGameScreen extends React.Component {
     }
 
     renderRow(rowData) {
-        return (<View style={styles.listItem}>
-          <TouchableHighlight
-            onPress={() => this.handleSelection(rowData)}
-            onLongPress={() => this.showModal(rowData)}
-          >
+        return (<TouchableHighlight
+          onPress={() => this.handleSelection(rowData)}
+          onLongPress={() => this.showModal(rowData)}
+        >
+          <View style={styles.listItem}>
             <Text style={styles.baseText}>
               {this.getGameString(rowData)}
             </Text>
-          </TouchableHighlight>
-        </View>);
+          </View>
+        </TouchableHighlight>);
+    }
+
+    renderSeparator() {
+        return (<View style={styles.listSeparator}/>);
     }
 
     render() {
@@ -103,6 +107,7 @@ class ResumeGameScreen extends React.Component {
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
           />
         </View>);
     }

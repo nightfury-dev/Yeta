@@ -1,5 +1,6 @@
 const metrics = {
-    navBarHeight: 22
+    navBarHeight: 64,
+    defaultPadding: 5
 };
 
 export default metrics;

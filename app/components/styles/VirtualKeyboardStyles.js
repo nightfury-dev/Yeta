@@ -9,7 +9,8 @@ export default StyleSheet.create({
         height: 50,
         margin: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: Colors.orange
     },
     row: {
         flex: 1,
@@ -20,6 +21,6 @@ export default StyleSheet.create({
         backgroundColor: 'blue'
     },
     container: {
-        backgroundColor: Colors.keyboardBackground
+        backgroundColor: '#4E342E'
     }
 });
