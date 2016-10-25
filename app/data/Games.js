@@ -9,6 +9,7 @@ const games = realm.objects('Game');
 const courses = realm.objects('Course');
 const players = realm.objects('Player');
 
+
 class Games {
     getAll() {
         return _.map(games, normalize);
@@ -74,6 +75,7 @@ class Games {
         return new Promise((success) => {
             const realmGame = realm.objectForPrimaryKey('Game', game.id);
             realm.write(() => {
+                realm.delete(realmGame.scores);
                 realm.delete(realmGame);
                 success();
             });
