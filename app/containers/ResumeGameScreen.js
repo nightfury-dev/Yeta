@@ -83,13 +83,13 @@ class ResumeGameScreen extends React.Component {
     }
 
     renderSeparator() {
-        return (<View style={styles.listSeparator}/>);
+        return (<View style={styles.listSeparator} />);
     }
 
     render() {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
-        }).cloneWithRows(this.props.games);
+        }).cloneWithRows(_.sortBy(this.props.games, 'timeBegin').reverse());
         const removeGameString = this.state.selectedGame ?
             this.getGameString(this.state.selectedGame) : '';
         return (<View style={styles.mainContainer}>
