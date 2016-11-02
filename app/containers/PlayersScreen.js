@@ -2,9 +2,10 @@ import React from 'react';
 import { View, ListView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, InputGroup, Input } from 'native-base';
+import { Button } from 'native-base';
 
 import { addPlayer, removePlayer } from '../actions/actionCreators';
+import AddPlayerInput from '../components/AddPlayerInput';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
 import PlayerListElement from '../components/PlayerListElement';
@@ -15,23 +16,17 @@ class PlayersScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPlayer: '',
             showContextMenu: false,
-            showDeleteConfirmation: false
+            showDeleteConfirmation: false,
+            showAddPlayerDialog: false
         };
 
         this.confirmDelete = this.confirmDelete.bind(this);
         this.renderRow = this.renderRow.bind(this);
-        this.addPlayer = this.addPlayer.bind(this);
         this.showModal = this.showModal.bind(this);
         this.deletePlayer = this.deletePlayer.bind(this);
-    }
-
-    addPlayer() {
-        this.props.addPlayer(this.state.newPlayer);
-        this.setState({
-            newPlayer: ''
-        });
+        this.showAddPlayerDialog = this.showAddPlayerDialog.bind(this);
+        this.addPlayer = this.addPlayer.bind(this);
     }
 
     deletePlayer() {
@@ -56,6 +51,19 @@ class PlayersScreen extends React.Component {
         });
     }
 
+    addPlayer(name) {
+        this.props.addPlayer(name);
+        this.setState({
+            showAddPlayerDialog: false
+        });
+    }
+
+    showAddPlayerDialog() {
+        this.setState({
+            showAddPlayerDialog: !this.state.showAddPlayerDialog
+        });
+    }
+
     renderRow(rowData) {
         return (<PlayerListElement
           player={rowData}
@@ -73,6 +81,13 @@ class PlayersScreen extends React.Component {
         }).cloneWithRows(this.props.players);
         const removeName = this.state.selectedPlayer ?
             this.state.selectedPlayer.name : '';
+
+        const input = this.state.showAddPlayerDialog ?
+          <AddPlayerInput
+            onSave={this.addPlayer}
+            onCancel={() => this.setState({ showAddPlayerDialog: false })}
+          /> : null;
+
         return (<View style={styles.mainContainer}>
           <ContextMenu
             visible={this.state.showContextMenu}
@@ -85,22 +100,15 @@ class PlayersScreen extends React.Component {
             message={`Remove player '${removeName}'?`}
             visible={this.state.showDeleteConfirmation}
           />
+          {input}
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}
             renderSeparator={this.renderSeparator}
           />
-          <InputGroup borderType="rounded">
-            <Input
-              placeholder="Player name"
-              style={styles.input}
-              onChangeText={(newPlayer) => this.setState({ newPlayer })}
-              value={this.state.newPlayer}
-            />
-          </InputGroup>
           <Button
             style={[styles.button, styles.centeredItem]}
-            onPress={this.addPlayer}
+            onPress={this.showAddPlayerDialog}
           >
             Add player
           </Button>
