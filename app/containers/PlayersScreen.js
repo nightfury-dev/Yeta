@@ -25,8 +25,6 @@ class PlayersScreen extends React.Component {
         this.renderRow = this.renderRow.bind(this);
         this.showModal = this.showModal.bind(this);
         this.deletePlayer = this.deletePlayer.bind(this);
-        this.showAddPlayerDialog = this.showAddPlayerDialog.bind(this);
-        this.addPlayer = this.addPlayer.bind(this);
     }
 
     deletePlayer() {
@@ -51,19 +49,6 @@ class PlayersScreen extends React.Component {
         });
     }
 
-    addPlayer(name) {
-        this.props.addPlayer(name);
-        this.setState({
-            showAddPlayerDialog: false
-        });
-    }
-
-    showAddPlayerDialog() {
-        this.setState({
-            showAddPlayerDialog: !this.state.showAddPlayerDialog
-        });
-    }
-
     renderRow(rowData) {
         return (<PlayerListElement
           player={rowData}
@@ -82,7 +67,7 @@ class PlayersScreen extends React.Component {
         const removeName = this.state.selectedPlayer ?
             this.state.selectedPlayer.name : '';
 
-        const input = this.state.showAddPlayerDialog ?
+        const input = this.props.showAddPlayerDialog ?
           <AddPlayerInput
             onSave={this.addPlayer}
             onCancel={() => this.setState({ showAddPlayerDialog: false })}
@@ -106,28 +91,22 @@ class PlayersScreen extends React.Component {
             renderRow={this.renderRow}
             renderSeparator={this.renderSeparator}
           />
-          <Button
-            style={[styles.button, styles.centeredItem]}
-            onPress={this.showAddPlayerDialog}
-          >
-            Add player
-          </Button>
         </View>);
     }
 }
 
 PlayersScreen.propTypes = {
-    addPlayer: React.PropTypes.func.isRequired,
     removePlayer: React.PropTypes.func.isRequired,
-    players: React.PropTypes.array.isRequired
+    players: React.PropTypes.array.isRequired,
+    showAddPlayerDialog: React.PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    players: state.players
+    players: state.players,
+    showAddPlayerDialog: state.UI.showAddPlayerDialog
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addPlayer: bindActionCreators(addPlayer, dispatch),
     removePlayer: bindActionCreators(removePlayer, dispatch)
 });
 

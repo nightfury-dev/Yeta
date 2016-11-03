@@ -18,7 +18,10 @@ const defaultState = {
     players: players.getAll(),
     courses: courses.getAll(),
     games: games.getAll(),
-    currentGame: null
+    currentGame: null,
+    UI: {
+        showAddPlayerDialog: false
+    }
 };
 
 const enhancers = [applyMiddleware(thunk)];
