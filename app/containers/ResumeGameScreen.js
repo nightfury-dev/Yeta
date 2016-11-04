@@ -2,12 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  Text,
-  View,
-  ListView,
-  TouchableHighlight
-} from 'react-native';
+import { View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
@@ -75,8 +70,9 @@ class ResumeGameScreen extends React.Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         }).cloneWithRows(_.sortBy(this.props.games, 'timeBegin').reverse());
-        const removeGameString = this.state.selectedGame ?
-            this.getGameString(this.state.selectedGame) : '';
+        const removeGameString = this.state.selectedGame
+            ? 'Do you really want to remove game?'
+            : '';
         return (<View style={styles.mainContainer}>
           <ContextMenu
             visible={this.state.showContextMenu}
@@ -86,7 +82,7 @@ class ResumeGameScreen extends React.Component {
           <Confirmation
             onConfirm={this.deleteGame}
             onCancel={() => this.setState({ showDeleteConfirmation: false })}
-            message={`Remove game '${removeGameString}'?`}
+            message={removeGameString}
             visible={this.state.showDeleteConfirmation}
           />
           <ListView
