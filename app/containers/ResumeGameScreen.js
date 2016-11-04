@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import moment from 'moment';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
 import ContextMenu from '../components/ContextMenu';
 import Confirmation from '../components/Confirmation';
+import GameListElement from '../components/GameListElement';
 import styles from './styles/ResumeGameScreenStyles';
 
 
@@ -28,16 +28,6 @@ class ResumeGameScreen extends React.Component {
         this.confirmDelete = this.confirmDelete.bind(this);
         this.showModal = this.showModal.bind(this);
         this.deleteGame = this.deleteGame.bind(this);
-    }
-
-    getGameString(game) {
-        try {
-            const formattedDate = moment(game.timeBegin)
-                .format('DD.MM.YYYY HH:mm');
-            return `${game.course.name} (${formattedDate})`;
-        } catch (e) {
-            return '';
-        }
     }
 
     handleSelection(rowData) {
@@ -70,16 +60,11 @@ class ResumeGameScreen extends React.Component {
     }
 
     renderRow(rowData) {
-        return (<TouchableHighlight
+        return (<GameListElement
+          game={rowData}
           onPress={() => this.handleSelection(rowData)}
           onLongPress={() => this.showModal(rowData)}
-        >
-          <View style={styles.listItem}>
-            <Text style={styles.baseText}>
-              {this.getGameString(rowData)}
-            </Text>
-          </View>
-        </TouchableHighlight>);
+        />);
     }
 
     renderSeparator() {
