@@ -13,15 +13,56 @@ const formatDate = (date) => {
     }
 };
 
+const getTotalScores = (game) => {
+    const scores = {};
+    const coursePar = game.course.holes.reduce(
+      (acc, hole) => acc + hole.par,
+      0
+    );
+    game.scores.forEach((score) => {
+        if (!scores[score.player.id]) {
+            scores[score.player.id] = 0;
+        }
+        scores[score.player.id] += score.score;
+    });
+
+    Object.keys(scores).forEach((playerId) => {
+        const score = coursePar - scores[playerId];
+        if (score < 0) {
+            scores[playerId] = `-${score}`;
+        } else if (score > 0) {
+            scores[playerId] = `+${score}`;
+        } else {
+            scores[playerId] = 0;
+        }
+    });
+
+    return scores;
+};
+
 function GameListElement(props) {
+    const totalScores = getTotalScores(props.game);
     const formattedDate = formatDate(props.game.timeBegin);
+    const players = props.game.players.map(
+      (player) => {
+          const score = totalScores[player.id];
+          return <Text style={styles.nameText}>{player.name} ({score})</Text>;
+      }
+    );
     return (<TouchableHighlight
       onPress={props.onPress}
       onLongPress={props.onLongPress}
     >
       <View style={styles.listItem}>
-        <Text style={styles.baseText}>{props.game.course.name}</Text>
-        <Text style={styles.tinyText}>{formattedDate}</Text>
+        <View>
+          <Text style={styles.bigText}>{props.game.course.name}</Text>
+          <Text style={styles.tinyText}>{formattedDate}</Text>
+        </View>
+        <View style={styles.rightOuterContainer}>
+          <View style={styles.rightContainer}>
+            {players}
+          </View>
+        </View>
       </View>
     </TouchableHighlight>);
 }
