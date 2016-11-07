@@ -4,94 +4,35 @@ import { Button } from 'native-base';
 
 import styles from './styles/VirtualKeyboardStyles';
 
+const createButton = (text, onPress) => (
+  <Button style={styles.button} onPress={onPress}>
+    {text}
+  </Button>
+);
 
 function VirtualKeyboard(props) {
     return (<View style={styles.container}>
       <View style={styles.row}>
-        <Button
-          onPress={() => props.keyPressed(1)}
-          style={styles.button}
-        >
-          1
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(2)}
-          style={styles.button}
-        >
-          2
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(3)}
-          style={styles.button}
-        >
-          3
-        </Button>
+        {createButton('Prev. hole', props.onPreviousHole)}
+        {createButton('Next hole', props.onNextHole)}
       </View>
       <View style={styles.row}>
-        <Button
-          onPress={() => props.keyPressed(4)}
-          style={styles.button}
-        >
-          4
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(5)}
-          style={styles.button}
-        >
-          5
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(6)}
-          style={styles.button}
-        >
-          6
-        </Button>
-      </View>
-      <View style={styles.row}>
-        <Button
-          onPress={() => props.keyPressed(7)}
-          style={styles.button}
-        >
-          7
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(8)}
-          style={styles.button}
-        >
-          8
-        </Button>
-        <Button
-          onPress={() => props.keyPressed(9)}
-          style={styles.button}
-        >
-          9
-        </Button>
-      </View>
-      <View style={styles.row}>
-        <Button
-          onPress={() => props.keyPressed('-')}
-          style={styles.button}
-        >
-          -
-        </Button>
-        <Button
-          onPress={() => props.keyPressed('next')}
-          style={styles.button}
-        >
-          Next
-        </Button>
-        <Button
-          onPress={() => props.keyPressed('+')}
-          style={styles.button}
-        >
-          +
-        </Button>
+        {createButton('-', props.onScoreDecreased)}
+        {createButton('Prev. plr.', props.onPreviousPlayer)}
+        {createButton('Next plr.', props.onNextPlayer)}
+        {createButton('+', props.onScoreIncreased)}
       </View>
     </View>);
 }
 
 VirtualKeyboard.propTypes = {
-    keyPressed: React.PropTypes.func.isRequired
+    keyPressed: React.PropTypes.func.isRequired,
+    onPreviousHole: React.PropTypes.func.isRequired,
+    onNextHole: React.PropTypes.func.isRequired,
+    onPreviousPlayer: React.PropTypes.func.isRequired,
+    onNextPlayer: React.PropTypes.func.isRequired,
+    onScoreDecreased: React.PropTypes.func.isRequired,
+    onScoreIncreased: React.PropTypes.func.isRequired,
 };
 
 export default VirtualKeyboard;

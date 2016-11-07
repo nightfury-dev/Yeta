@@ -6,9 +6,6 @@ import { ScrollView, View } from 'react-native';
 
 import { updateScore } from '../actions/actionCreators';
 import ScoregridElement from './ScoregridElement';
-import VirtualKeyboard from './VirtualKeyboard';
-import styles from './styles/ScoreGridStyles';
-
 
 const marginStyle = {
     marginTop: 10,
@@ -18,11 +15,6 @@ const marginStyle = {
 class ScoreGrid extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showKeyboard: false };
-
-        this.keyPressed = this.keyPressed.bind(this);
-        this.setActivePlayer = this.setActivePlayer.bind(this);
-        this.setNextPlayerActive = this.setNextPlayerActive.bind(this);
         this.getPlayingOrders = this.getPlayingOrders.bind(this);
     }
 
@@ -83,87 +75,18 @@ class ScoreGrid extends React.Component {
         return ordering;
     }
 
-    setNextPlayerActive() {
-        const players = _.values(this.props.game.players);
-        if (!this.state.activePlayer) {
-            this.setState({ activePlayer: _.first(players) });
-        } else {
-            const index = _.findIndex(
-                players,
-                (p) => p.id === this.state.activePlayer.id
-            );
-            this.setState({
-                activePlayer: (index === players.length - 1) ?
-                    players[0] :
-                    players[index + 1]
-            });
-        }
-    }
-
-    setActivePlayer(player) {
-        if (this.state.activePlayer &&
-            this.state.activePlayer.id === player.id) {
-            this.setState({
-                showKeyboard: false,
-                activePlayer: null
-            });
-        } else {
-            this.setState({
-                showKeyboard: this.state.showKeyboard || true,
-                activePlayer: player
-            });
-        }
-    }
-
-    scoreIncreased(player) {
-        const score = this.getScore(player);
-        this.props.updateScore(this.props.game.id, score, score.score + 1);
-    }
-
-    scoreDecreased(player) {
-        const score = this.getScore(player);
-        if (score.score > 1) {
-            this.props.updateScore(this.props.game.id, score, score.score - 1);
-        }
-    }
-
-    keyPressed(value) {
-        if (value === 'next') {
-            this.setNextPlayerActive();
-        } else if (value === '+') {
-            this.scoreIncreased(this.state.activePlayer);
-        } else if (value === '-') {
-            this.scoreDecreased(this.state.activePlayer);
-        } else {
-            const score = this.getScore(this.state.activePlayer);
-            this.props.updateScore(
-                this.props.game.id,
-                score,
-                value
-            );
-            this.setNextPlayerActive();
-        }
-    }
-
     render() {
-        const virtualKeyboard = this.state.showKeyboard ? (<View
-          style={styles.keyboardContainer}
-        >
-          <VirtualKeyboard keyPressed={this.keyPressed} />
-        </View>) :
-        null;
-
         const ordering = this.getPlayingOrders();
         const scoreGridElements = _.values(this.props.game.players).map(
             (p, index) => {
                 const score = this.getScore(p);
-                const highlighted = this.state.activePlayer &&
-                    p.id === this.state.activePlayer.id;
+                const highlighted = this.props.activePlayer &&
+                    p.id === this.props.activePlayer.id;
 
                 const order = ordering[this.props.game.currentHole][p.id];
 
                 return (<ScoregridElement
-                  onPress={() => this.setActivePlayer(p)}
+                  onPress={() => this.props.activePlayerSelected(p)}
                   highlighted={highlighted}
                   order={order}
                   player={p}
@@ -176,7 +99,6 @@ class ScoreGrid extends React.Component {
           <ScrollView>
             {scoreGridElements}
           </ScrollView>
-          {virtualKeyboard}
         </View>);
     }
 }
@@ -188,6 +110,8 @@ ScoreGrid.propTypes = {
     updateScore: React.PropTypes.func.isRequired,
     gameId: React.PropTypes.number.isRequired,
     game: React.PropTypes.object.isRequired,
+    activePlayerSelected: React.PropTypes.func.isRequired,
+    activePlayer: React.PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
