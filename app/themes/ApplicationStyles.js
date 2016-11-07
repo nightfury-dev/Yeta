@@ -8,8 +8,7 @@ const ApplicationStyles = {
         mainContainer: {
             flex: 1,
             backgroundColor: Colors.background,
-            paddingTop: Metrics.navBarHeight,
-            padding: Metrics.defaultPadding
+            paddingTop: Metrics.navBarHeight
         }
     },
     input: {
