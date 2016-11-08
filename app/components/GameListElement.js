@@ -27,13 +27,11 @@ const getTotalScores = (game) => {
     });
 
     Object.keys(scores).forEach((playerId) => {
-        const score = coursePar - scores[playerId];
-        if (score < 0) {
-            scores[playerId] = `-${score}`;
-        } else if (score > 0) {
+        const score = scores[playerId] - coursePar;
+        if (score > 0) {
             scores[playerId] = `+${score}`;
         } else {
-            scores[playerId] = 0;
+            scores[playerId] = score;
         }
     });
 
