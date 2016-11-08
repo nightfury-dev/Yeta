@@ -1,26 +1,32 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { Colors } from '../themes';
 import styles from './styles/VirtualKeyboardStyles';
 
-const createButton = (text, onPress) => (
+
+const createIconButton = (icon, onPress) => (
   <Button style={styles.button} onPress={onPress}>
-    {text}
+    <Icon name={icon} color={Colors.text} size={22} />
   </Button>
 );
+
 
 function VirtualKeyboard(props) {
     return (<View style={styles.container}>
       <View style={styles.row}>
-        {createButton('Prev. hole', props.onPreviousHole)}
-        {createButton('Next hole', props.onNextHole)}
+        {createIconButton('angle-double-left', props.onPreviousHole)}
+        {createIconButton('angle-double-right', props.onNextHole)}
       </View>
       <View style={styles.row}>
-        {createButton('-', props.onScoreDecreased)}
-        {createButton('Prev. plr.', props.onPreviousPlayer)}
-        {createButton('Next plr.', props.onNextPlayer)}
-        {createButton('+', props.onScoreIncreased)}
+        {createIconButton('angle-double-up', props.onPreviousPlayer)}
+        {createIconButton('angle-double-down', props.onNextPlayer)}
+      </View>
+      <View style={styles.row}>
+        {createIconButton('minus', props.onScoreDecreased)}
+        {createIconButton('plus', props.onScoreIncreased)}
       </View>
     </View>);
 }

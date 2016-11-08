@@ -5,7 +5,7 @@ import { Colors } from '../../themes';
 
 export default StyleSheet.create({
     button: {
-        minWidth: 70,
+        minWidth: 80,
         height: 50,
         margin: 10,
         justifyContent: 'center',
@@ -16,9 +16,6 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    firstRow: {
-        backgroundColor: 'blue'
     },
     container: {
         backgroundColor: '#4E342E'
