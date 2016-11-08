@@ -2,19 +2,16 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, ListView } from 'react-native';
 
 import { updateScore } from '../actions/actionCreators';
 import ScoregridElement from './ScoregridElement';
 
-const marginStyle = {
-    marginTop: 10,
-    flex: 1
-};
 
 class ScoreGrid extends React.Component {
     constructor(props) {
         super(props);
+        this.renderRow = this.renderRow.bind(this);
         this.getPlayingOrders = this.getPlayingOrders.bind(this);
     }
 
@@ -75,31 +72,33 @@ class ScoreGrid extends React.Component {
         return ordering;
     }
 
+    renderRow(player, sectionId, rowId) {
+        const score = this.getScore(player);
+        const highlighted = this.props.activePlayer &&
+            player.id === this.props.activePlayer.id;
+
+        const order = this.ordering[this.props.game.currentHole][player.id];
+        return (<ScoregridElement
+          onPress={() => this.props.activePlayerSelected(player)}
+          highlighted={highlighted}
+          order={order}
+          player={player}
+          key={rowId}
+          score={score.score}
+        />);
+    }
+
     render() {
-        const ordering = this.getPlayingOrders();
-        const scoreGridElements = _.values(this.props.game.players).map(
-            (p, index) => {
-                const score = this.getScore(p);
-                const highlighted = this.props.activePlayer &&
-                    p.id === this.props.activePlayer.id;
-
-                const order = ordering[this.props.game.currentHole][p.id];
-
-                return (<ScoregridElement
-                  onPress={() => this.props.activePlayerSelected(p)}
-                  highlighted={highlighted}
-                  order={order}
-                  player={p}
-                  key={index}
-                  score={score.score}
-                />);
-            }
-        );
-        return (<View style={marginStyle}>
-          <ScrollView>
-            {scoreGridElements}
-          </ScrollView>
-        </View>);
+        this.ordering = this.getPlayingOrders();
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
+        return (<ScrollView>
+          <ListView
+            dataSource={ds.cloneWithRows(this.props.game.players)}
+            renderRow={this.renderRow}
+          />
+        </ScrollView>);
     }
 }
 
