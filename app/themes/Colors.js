@@ -5,6 +5,7 @@ const colors = {
     keyboardBackground: '#6200EA',
     lightBrown: '#795548',
     orange: '#E65100',
+    lightOrange: '#FF9800',
     selectedListItem: '#212121'
 };
 

@@ -12,6 +12,9 @@ export default StyleSheet.create({
     button: {
         backgroundColor: Colors.orange
     },
+    disabledButton: {
+        backgroundColor: Colors.lightOrange
+    },
     container: {
         flexDirection: 'row',
         // marginBottom: 15,

@@ -24,6 +24,9 @@ class AddPlayerInput extends Component {
     }
 
     render() {
+        const addButtonStyle = this.state.name.length > 0
+            ? styles.button
+            : styles.disabledButton;
         return (<View style={styles.container}>
           <Input
             placeholder="Player name"
@@ -33,7 +36,8 @@ class AddPlayerInput extends Component {
           />
           <Button
             onPress={this.addPlayer}
-            style={styles.button}
+            disabled={this.state.name.length === 0}
+            style={addButtonStyle}
           >
             Save
           </Button>
