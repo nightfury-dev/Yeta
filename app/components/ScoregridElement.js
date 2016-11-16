@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import styles from './styles/ScoregridElementStyles';
-
+import AnimatedText from './AnimatedText';
 
 class ScoregridElement extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class ScoregridElement extends React.Component {
                 {this.props.player.name}
               </Text>
             </View>
-            <Text style={baseText}>{this.props.score}</Text>
+            <AnimatedText style={styles.baseText}>{this.props.score}</AnimatedText>
           </View>
         </TouchableHighlight>);
     }
