@@ -4,17 +4,17 @@ import { PLAYER_ADDED, PLAYER_REMOVED } from '../actions/actionTypes';
 
 
 function players(state = [], action) {
-    switch (action.type) {
+  switch (action.type) {
     case PLAYER_ADDED: {
-        return [...state, action.player];
+      return [...state, action.player];
     }
     case PLAYER_REMOVED: {
-        const index = _.findIndex(state, (p) => p.id === action.id);
-        return [...state.slice(0, index), ...state.slice(index + 1)];
+      const index = _.findIndex(state, (p) => p.id === action.id);
+      return [...state.slice(0, index), ...state.slice(index + 1)];
     }
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export default players;

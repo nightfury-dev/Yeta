@@ -9,75 +9,75 @@ import styles from './styles/SelectPlayersScreenStyles';
 
 
 class SelectPlayersScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            players: this.props.players.map((p) =>
+  constructor(props) {
+    super(props);
+    this.state = {
+      players: this.props.players.map((p) =>
                 _.extend({ selected: false }, p)
             )
-        };
+    };
 
-        this.renderRow = this.renderRow.bind(this);
-        this.playersSelected = this.playersSelected.bind(this);
-    }
+    this.renderRow = this.renderRow.bind(this);
+    this.playersSelected = this.playersSelected.bind(this);
+  }
 
-    playersSelected() {
-        const selectedPlayers = this.state.players.filter((p) => p.selected);
-        this.props.playersSelected(selectedPlayers);
-    }
+  playersSelected() {
+    const selectedPlayers = this.state.players.filter((p) => p.selected);
+    this.props.playersSelected(selectedPlayers);
+  }
 
-    handleSelection(player) {
-        const i = _.findIndex(this.state.players, (p) => p.id === player.id);
-        const players = [
-            ...this.state.players.slice(0, i),
+  handleSelection(player) {
+    const i = _.findIndex(this.state.players, (p) => p.id === player.id);
+    const players = [
+      ...this.state.players.slice(0, i),
             { ...player, selected: !player.selected },
-            ...this.state.players.slice(i + 1)
-        ];
-        this.setState({ players });
-    }
+      ...this.state.players.slice(i + 1)
+    ];
+    this.setState({ players });
+  }
 
-    renderRow(rowData) {
-        return (<PlayerListElement
-          player={rowData}
-          selected={rowData.selected}
-          onPress={() => this.handleSelection(rowData)}
-        />);
-    }
+  renderRow(rowData) {
+    return (<PlayerListElement
+      player={rowData}
+      selected={rowData.selected}
+      onPress={() => this.handleSelection(rowData)}
+    />);
+  }
 
-    renderSeparator() {
-        return (<View style={styles.listSeparator} />);
-    }
+  renderSeparator() {
+    return (<View style={styles.listSeparator} />);
+  }
 
-    render() {
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.name !== r2.name
-        }).cloneWithRows(this.state.players);
+  render() {
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1.name !== r2.name
+    }).cloneWithRows(this.state.players);
 
-        return (<ScrollView>
-          <ListView
-            dataSource={dataSource}
-            renderRow={this.renderRow}
-            renderSeparator={this.renderSeparator}
-          />
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Button
-              style={styles.button}
-              onPress={this.playersSelected}
-            >
+    return (<ScrollView>
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow}
+        renderSeparator={this.renderSeparator}
+      />
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <Button
+          style={styles.button}
+          onPress={this.playersSelected}
+        >
               Continue
-            </Button>
-          </View>
-        </ScrollView>);
-    }
+        </Button>
+      </View>
+    </ScrollView>);
+  }
 }
 
 SelectPlayersScreen.propTypes = {
-    players: React.PropTypes.array.isRequired,
-    playersSelected: React.PropTypes.func.isRequired
+  players: React.PropTypes.array.isRequired,
+  playersSelected: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    players: state.players
+  players: state.players
 });
 
 export default connect(mapStateToProps)(SelectPlayersScreen);

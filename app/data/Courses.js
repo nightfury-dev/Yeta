@@ -10,76 +10,76 @@ const scores = realm.objects('Score');
 const games = realm.objects('Game');
 
 class Courses {
-    getAll() {
-        return _.map(courses, normalize);
-    }
+  getAll() {
+    return _.map(courses, normalize);
+  }
 
-    update(course, name, pars) {
-        return new Promise((success) => {
-            const savedCourse = realm.objectForPrimaryKey('Course', course.id);
-            realm.write(() => {
-                savedCourse.name = name;
+  update(course, name, pars) {
+    return new Promise((success) => {
+      const savedCourse = realm.objectForPrimaryKey('Course', course.id);
+      realm.write(() => {
+        savedCourse.name = name;
 
-                _.forEach(savedCourse.holes, (hole) => {
-                    if (hole.holenumber > pars.length) {
-                        realm.delete(scores.filtered('hole.id = $0', hole.id));
-                        realm.delete(hole);
-                    } else {
-                        hole.par = pars[hole.holenumber - 1];
-                    }
-                });
+        _.forEach(savedCourse.holes, (hole) => {
+          if (hole.holenumber > pars.length) {
+            realm.delete(scores.filtered('hole.id = $0', hole.id));
+            realm.delete(hole);
+          } else {
+            hole.par = pars[hole.holenumber - 1];
+          }
+        });
 
-                const holeCount = _.values(course.holes).length;
-                pars.slice(holeCount).forEach((par, index) => {
-                    const holenumber = holeCount + index + 1;
-                    const hole = realm.create('Hole', {
-                        id: getNextHoleId(),
-                        par,
-                        holenumber
-                    });
-                    savedCourse.holes.push(hole);
+        const holeCount = _.values(course.holes).length;
+        pars.slice(holeCount).forEach((par, index) => {
+          const holenumber = holeCount + index + 1;
+          const hole = realm.create('Hole', {
+            id: getNextHoleId(),
+            par,
+            holenumber
+          });
+          savedCourse.holes.push(hole);
 
-                    const courseGames = games.filtered(
+          const courseGames = games.filtered(
                       'course.id = $0',
                       course.id
                     );
-                    _.forEach(courseGames, (game) => {
-                        _.forEach(game.players, (player) => {
-                            const score = {
-                                id: getNextScoreId(),
-                                hole,
-                                player,
-                                score: par
-                            };
-                            game.scores.push(realm.create('Score', score));
-                        });
-                    });
-                });
-
-                success(normalize(savedCourse));
+          _.forEach(courseGames, (game) => {
+            _.forEach(game.players, (player) => {
+              const score = {
+                id: getNextScoreId(),
+                hole,
+                player,
+                score: par
+              };
+              game.scores.push(realm.create('Score', score));
             });
+          });
         });
-    }
 
-    save(name, pars) {
-        return new Promise((success) => {
-            realm.write(() => {
-                const course = realm.create(
+        success(normalize(savedCourse));
+      });
+    });
+  }
+
+  save(name, pars) {
+    return new Promise((success) => {
+      realm.write(() => {
+        const course = realm.create(
                     'Course', { id: getNextCourseId(), name }
                 );
-                pars.forEach((par, index) => {
-                    course.holes.push(
+        pars.forEach((par, index) => {
+          course.holes.push(
                         realm.create('Hole', {
-                            id: getNextHoleId(),
-                            par,
-                            holenumber: index + 1
+                          id: getNextHoleId(),
+                          par,
+                          holenumber: index + 1
                         })
                     );
-                });
-                success(normalize(course));
-            });
         });
-    }
+        success(normalize(course));
+      });
+    });
+  }
 }
 
 export default Courses;

@@ -4,21 +4,21 @@ import { ApplicationStyles, Colors } from '../../themes';
 
 
 export default StyleSheet.create({
-    input: {
-        ...ApplicationStyles.input,
-        borderBottomWidth: 1,
-        borderBottomColor: 'red'
-    },
-    button: {
-        backgroundColor: Colors.orange
-    },
-    disabledButton: {
-        backgroundColor: Colors.lightOrange
-    },
-    container: {
-        flexDirection: 'row',
+  input: {
+    ...ApplicationStyles.input,
+    borderBottomWidth: 1,
+    borderBottomColor: 'red'
+  },
+  button: {
+    backgroundColor: Colors.orange
+  },
+  disabledButton: {
+    backgroundColor: Colors.lightOrange
+  },
+  container: {
+    flexDirection: 'row',
         // marginBottom: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.lightBrown
-    }
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lightBrown
+  }
 });

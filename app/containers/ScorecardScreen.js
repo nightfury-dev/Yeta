@@ -10,95 +10,95 @@ import styles from './styles/ScorecardScreenStyles';
 
 
 class ScorecardScreen extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.renderHeader = this.renderHeader.bind(this);
-        this.renderRow = this.renderRow.bind(this);
-        this.renderFooter = this.renderFooter.bind(this);
-    }
+    this.renderHeader = this.renderHeader.bind(this);
+    this.renderRow = this.renderRow.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
+  }
 
-    componentWillMount() {
-        this.players = _.values(this.props.game.players);
-        this.scores = _.values(this.props.game.scores);
-        this.holes = _.values(this.props.game.course.holes);
+  componentWillMount() {
+    this.players = _.values(this.props.game.players);
+    this.scores = _.values(this.props.game.scores);
+    this.holes = _.values(this.props.game.course.holes);
 
-        this.holeScores = {};
-        this.playerScores = {};
+    this.holeScores = {};
+    this.playerScores = {};
 
-        this.scores.forEach((score) => {
-            const holenumber = score.hole.holenumber;
-            const playerId = score.player.id;
+    this.scores.forEach((score) => {
+      const holenumber = score.hole.holenumber;
+      const playerId = score.player.id;
 
-            if (!this.holeScores[holenumber]) {
-                this.holeScores[holenumber] = {};
-            }
-            this.holeScores[holenumber][playerId] = score.score;
+      if (!this.holeScores[holenumber]) {
+        this.holeScores[holenumber] = {};
+      }
+      this.holeScores[holenumber][playerId] = score.score;
 
-            if (!this.playerScores[playerId]) {
-                this.playerScores[playerId] = 0;
-            }
-            this.playerScores[playerId] += score.score;
-        });
-    }
+      if (!this.playerScores[playerId]) {
+        this.playerScores[playerId] = 0;
+      }
+      this.playerScores[playerId] += score.score;
+    });
+  }
 
-    createRowData() {
-        return this.holes.map((hole) => {
-            const currentHoleScores = this.players.map((player) =>
+  createRowData() {
+    return this.holes.map((hole) => {
+      const currentHoleScores = this.players.map((player) =>
                 this.holeScores[hole.holenumber][player.id]
             );
-            return {
-                holenumber: hole.holenumber,
-                par: hole.par,
-                scores: currentHoleScores
-            };
-        });
-    }
+      return {
+        holenumber: hole.holenumber,
+        par: hole.par,
+        scores: currentHoleScores
+      };
+    });
+  }
 
-    renderRow(rowData) {
-        return (<ScorecardRow
-          holenumber={rowData.holenumber}
-          par={rowData.par}
-          scores={rowData.scores}
-        />);
-    }
+  renderRow(rowData) {
+    return (<ScorecardRow
+      holenumber={rowData.holenumber}
+      par={rowData.par}
+      scores={rowData.scores}
+    />);
+  }
 
-    renderFooter() {
-        const totalScores = this.players.map((player) =>
+  renderFooter() {
+    const totalScores = this.players.map((player) =>
           this.playerScores[player.id]
         );
 
-        return (<ScorecardFooter
-          course={this.props.game.course}
-          scores={totalScores}
-        />);
-    }
+    return (<ScorecardFooter
+      course={this.props.game.course}
+      scores={totalScores}
+    />);
+  }
 
-    renderHeader() {
-        return <ScorecardHeader players={this.players} />;
-    }
+  renderHeader() {
+    return <ScorecardHeader players={this.players} />;
+  }
 
-    render() {
-        const ds = new ListView.DataSource(
+  render() {
+    const ds = new ListView.DataSource(
             { rowHasChanged: (r1, r2) => r1 !== r2 }
         );
-        const dataSource = ds.cloneWithRows(this.createRowData());
-        return (<ListView
-          style={styles.mainContainer}
-          dataSource={dataSource}
-          renderHeader={this.renderHeader}
-          renderRow={this.renderRow}
-          renderFooter={this.renderFooter}
-        />);
-    }
+    const dataSource = ds.cloneWithRows(this.createRowData());
+    return (<ListView
+      style={styles.mainContainer}
+      dataSource={dataSource}
+      renderHeader={this.renderHeader}
+      renderRow={this.renderRow}
+      renderFooter={this.renderFooter}
+    />);
+  }
 }
 
 ScorecardScreen.propTypes = {
-    game: React.PropTypes.object.isRequired
+  game: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    game: state.currentGame
+  game: state.currentGame
 });
 
 export default connect(mapStateToProps)(ScorecardScreen);

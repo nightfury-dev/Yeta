@@ -4,14 +4,14 @@ import {
 } from '../actions/actionTypes';
 
 function UI(state = {}, action) {
-    switch (action.type) {
+  switch (action.type) {
     case SHOW_ADD_PLAYER_DIALOG:
-        return { ...state, showAddPlayerDialog: true };
+      return { ...state, showAddPlayerDialog: true };
     case HIDE_ADD_PLAYER_DIALOG:
-        return { ...state, showAddPlayerDialog: false };
+      return { ...state, showAddPlayerDialog: false };
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export default UI;

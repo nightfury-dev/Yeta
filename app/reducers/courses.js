@@ -4,20 +4,20 @@ import { COURSE_ADDED, COURSE_UPDATED } from '../actions/actionTypes';
 
 
 function courses(state = [], action) {
-    switch (action.type) {
+  switch (action.type) {
     case COURSE_ADDED:
-        return [...state, action.course];
+      return [...state, action.course];
     case COURSE_UPDATED: {
-        const i = _.findIndex(state, (c) => c.id === action.course.id);
-        return [
-            ...state.slice(0, i),
-            action.course,
-            ...state.slice(i + 1)
-        ];
+      const i = _.findIndex(state, (c) => c.id === action.course.id);
+      return [
+        ...state.slice(0, i),
+        action.course,
+        ...state.slice(i + 1)
+      ];
     }
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export default courses;

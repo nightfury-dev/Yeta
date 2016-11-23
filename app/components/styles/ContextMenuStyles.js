@@ -4,7 +4,7 @@ import { ApplicationStyles } from '../../themes';
 
 
 export default StyleSheet.create({
-    modal: ApplicationStyles.modal,
-    modalInnerContainer: ApplicationStyles.modalInnerContainer,
-    modalButton: ApplicationStyles.modalButton
+  modal: ApplicationStyles.modal,
+  modalInnerContainer: ApplicationStyles.modalInnerContainer,
+  modalButton: ApplicationStyles.modalButton
 });

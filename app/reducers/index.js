@@ -8,11 +8,11 @@ import UI from './UI';
 
 
 const rootReducer = combineReducers({
-    players,
-    courses,
-    games,
-    currentGame,
-    UI
+  players,
+  courses,
+  games,
+  currentGame,
+  UI
 });
 
 export default rootReducer;

@@ -6,28 +6,28 @@ import styles from './styles/ContextMenuStyles';
 
 
 function ContextMenu(props) {
-    return (<Modal
-      animationType={"slide"}
-      transparent
-      visible={props.visible}
-    >
-      <View style={styles.modal}>
-        <View style={styles.modalInnerContainer}>
-          <Button block style={styles.modalButton} onPress={props.onDelete}>
+  return (<Modal
+    animationType={'slide'}
+    transparent
+    visible={props.visible}
+  >
+    <View style={styles.modal}>
+      <View style={styles.modalInnerContainer}>
+        <Button block style={styles.modalButton} onPress={props.onDelete}>
             Remove
-          </Button>
-          <Button block style={styles.modalButton} onPress={props.onClose}>
+        </Button>
+        <Button block style={styles.modalButton} onPress={props.onClose}>
             Close
-          </Button>
-        </View>
+        </Button>
       </View>
-    </Modal>);
+    </View>
+  </Modal>);
 }
 
 ContextMenu.propTypes = {
-    visible: React.PropTypes.bool.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-    onClose: React.PropTypes.func.isRequired
+  visible: React.PropTypes.bool.isRequired,
+  onDelete: React.PropTypes.func.isRequired,
+  onClose: React.PropTypes.func.isRequired
 };
 
 export default ContextMenu;

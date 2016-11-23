@@ -4,10 +4,10 @@ import realm from './realm';
 
 
 const getNextId = (schema) => {
-    if (realm.objects(schema).length === 0) {
-        return 1;
-    }
-    return _.chain(realm.objects(schema))
+  if (realm.objects(schema).length === 0) {
+    return 1;
+  }
+  return _.chain(realm.objects(schema))
         .map((p) => p.id)
         .max()
         .value() + 1;

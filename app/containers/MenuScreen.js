@@ -8,29 +8,29 @@ import styles from './styles/MenuScreenStyles';
 
 
 function MenuScreen() {
-    return (<View style={styles.mainContainer}>
-      <Logo />
-      <MenuItem
-        label="Game"
-        name="initGame"
-        onPress={() => Actions.initgame()}
-      />
-      <MenuItem
-        label="Resume game"
-        name="resumeGame"
-        onPress={() => Actions.resumegame()}
-      />
-      <MenuItem
-        label="Players"
-        name="players"
-        onPress={() => Actions.players()}
-      />
-      <MenuItem
-        label="Courses"
-        name="courses"
-        onPress={() => Actions.courses()}
-      />
-    </View>);
+  return (<View style={styles.mainContainer}>
+    <Logo />
+    <MenuItem
+      label="Game"
+      name="initGame"
+      onPress={() => Actions.initgame()}
+    />
+    <MenuItem
+      label="Resume game"
+      name="resumeGame"
+      onPress={() => Actions.resumegame()}
+    />
+    <MenuItem
+      label="Players"
+      name="players"
+      onPress={() => Actions.players()}
+    />
+    <MenuItem
+      label="Courses"
+      name="courses"
+      onPress={() => Actions.courses()}
+    />
+  </View>);
 }
 
 export default MenuScreen;

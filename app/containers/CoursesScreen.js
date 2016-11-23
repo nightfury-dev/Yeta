@@ -13,60 +13,60 @@ import styles from './styles/CoursesScreenStyles';
 
 
 class CoursesScreen extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.renderRow = this.renderRow.bind(this);
-        this.onLongPress = this.onLongPress.bind(this);
-        this.addCourse = this.addCourse.bind(this);
-    }
+    this.renderRow = this.renderRow.bind(this);
+    this.onLongPress = this.onLongPress.bind(this);
+    this.addCourse = this.addCourse.bind(this);
+  }
 
-    onLongPress(course) {
-        Actions.addcourse({ course });
-    }
+  onLongPress(course) {
+    Actions.addcourse({ course });
+  }
 
-    addCourse() {
-        Actions.addcourse();
-    }
+  addCourse() {
+    Actions.addcourse();
+  }
 
-    renderRow(rowData) {
-        return (<CourseListElement
-          course={rowData}
-          onLongPress={() => this.onLongPress(rowData)}
-        />);
-    }
+  renderRow(rowData) {
+    return (<CourseListElement
+      course={rowData}
+      onLongPress={() => this.onLongPress(rowData)}
+    />);
+  }
 
-    renderSeparator() {
-        return (<View style={styles.listSeparator} />);
-    }
+  renderSeparator() {
+    return (<View style={styles.listSeparator} />);
+  }
 
-    render() {
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) =>
+  render() {
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) =>
                 r1.name !== r2.name || !_.isEqual(r1.holes, r2.holes)
-        }).cloneWithRows(this.props.courses);
-        return (<View style={styles.mainContainer}>
-          <ListView
-            dataSource={dataSource}
-            renderRow={this.renderRow}
-            renderSeparator={this.renderSeparator}
-          />
-          <Button
-            style={[styles.button, styles.centeredItem]}
-            onPress={this.addCourse}
-          >
+    }).cloneWithRows(this.props.courses);
+    return (<View style={styles.mainContainer}>
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow}
+        renderSeparator={this.renderSeparator}
+      />
+      <Button
+        style={[styles.button, styles.centeredItem]}
+        onPress={this.addCourse}
+      >
             Add course
-          </Button>
-        </View>);
-    }
+      </Button>
+    </View>);
+  }
 }
 
 CoursesScreen.propTypes = {
-    courses: React.PropTypes.array.isRequired
+  courses: React.PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    courses: state.courses
+  courses: state.courses
 });
 
 export default connect(mapStateToProps)(CoursesScreen);

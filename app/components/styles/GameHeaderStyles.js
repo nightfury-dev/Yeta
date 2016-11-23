@@ -4,5 +4,5 @@ import { ApplicationStyles } from '../../themes';
 
 
 export default StyleSheet.create({
-    baseText: ApplicationStyles.baseText
+  baseText: ApplicationStyles.baseText
 });

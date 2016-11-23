@@ -22,87 +22,87 @@ const games = new Games();
 
 
 export function addPlayer(name) {
-    return (dispatch) => players.save(name).then(
+  return (dispatch) => players.save(name).then(
         (savedPlayer) => dispatch({
-            type: PLAYER_ADDED,
-            player: savedPlayer
+          type: PLAYER_ADDED,
+          player: savedPlayer
         })
     );
 }
 
 export function removePlayer(id) {
-    return (dispatch) => players.remove(id).then(
+  return (dispatch) => players.remove(id).then(
         () => dispatch({
-            type: PLAYER_REMOVED,
-            id
+          type: PLAYER_REMOVED,
+          id
         })
     );
 }
 
 export function createGame(courseId, playerIds) {
-    return (dispatch) => games.save(courseId, playerIds).then(
+  return (dispatch) => games.save(courseId, playerIds).then(
         (savedGame) => dispatch({
-            type: GAME_CREATED,
-            game: savedGame
+          type: GAME_CREATED,
+          game: savedGame
         })
     );
 }
 
 export function updateHole(gameId, hole) {
-    return (dispatch) => games.updateGameHole(gameId, hole).then(
+  return (dispatch) => games.updateGameHole(gameId, hole).then(
         (game) => dispatch({
-            type: HOLE_UPDATED,
-            game
+          type: HOLE_UPDATED,
+          game
         })
     );
 }
 
 export function addCourse(name, pars) {
-    return (dispatch) => courses.save(name, pars).then(
+  return (dispatch) => courses.save(name, pars).then(
         (savedCourse) => dispatch({
-            type: COURSE_ADDED,
-            course: savedCourse
+          type: COURSE_ADDED,
+          course: savedCourse
         })
     );
 }
 
 export function updateCourse(course, name, pars) {
-    return (dispatch) => courses.update(course, name, pars).then(
+  return (dispatch) => courses.update(course, name, pars).then(
       (savedCourse) => dispatch({
-          type: COURSE_UPDATED,
-          course: savedCourse
+        type: COURSE_UPDATED,
+        course: savedCourse
       })
     );
 }
 
 export function updateScore(gameId, score, newScore) {
-    return (dispatch) => games.updateScore(gameId, score, newScore).then(
+  return (dispatch) => games.updateScore(gameId, score, newScore).then(
         (game) => dispatch({
-            type: SCORE_UPDATED,
-            game
+          type: SCORE_UPDATED,
+          game
         })
     );
 }
 
 export function removeGame(game) {
-    const gameId = game.id;
-    return (dispatch) => games.remove(game).then(() => dispatch({
-        type: GAME_REMOVED,
-        gameId
-    }));
+  const gameId = game.id;
+  return (dispatch) => games.remove(game).then(() => dispatch({
+    type: GAME_REMOVED,
+    gameId
+  }));
 }
 
 export function changeCurrentGame(game) {
-    return {
-        type: CURRENT_GAME_CHANGED,
-        game
-    };
+  return {
+    type: CURRENT_GAME_CHANGED,
+    game
+  };
 }
 
 export function showAddPlayerDialog() {
-    return { type: SHOW_ADD_PLAYER_DIALOG };
+  return { type: SHOW_ADD_PLAYER_DIALOG };
 }
 
 export function hideAddPlayerDialog() {
-    return { type: HIDE_ADD_PLAYER_DIALOG };
+  return { type: HIDE_ADD_PLAYER_DIALOG };
 }
