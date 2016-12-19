@@ -18,6 +18,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   container: {
-    backgroundColor: '#4E342E'
+    backgroundColor: '#4E342E',
+    height: 200
   }
 });

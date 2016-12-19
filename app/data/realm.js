@@ -1,3 +1,5 @@
+const Realm = require('realm');
+
 class Player {}
 Player.schema = {
   name: 'Player',
