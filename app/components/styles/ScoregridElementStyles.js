@@ -2,17 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import { ApplicationStyles, Colors } from '../../themes';
 
-const inactiveRow = {
-  flex: 7,
-  flexDirection: 'row',
-  paddingTop: 10,
-  paddingBottom: 10,
-  borderBottomWidth: 1,
-  borderColor: '#DF878B',
-  alignItems: 'center'
-};
-const activeRow = { ...inactiveRow, backgroundColor: Colors.selectedListItem };
-
 export default StyleSheet.create({
   baseText: ApplicationStyles.baseText,
   nameText: {
@@ -25,6 +14,21 @@ export default StyleSheet.create({
     padding: 10
   },
   nameStyle: { flex: 6 },
-  activeRow,
-  inactiveRow
+  row: {
+    flex: 7,
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderColor: '#DF878B',
+    alignItems: 'center'
+  },
+  button: {
+    width: 50,
+    height: 50,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.orange
+  },
 });

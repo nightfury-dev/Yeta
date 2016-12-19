@@ -8,7 +8,6 @@ import { updateHole, updateScore } from '../actions/actionCreators';
 import ScoreGrid from '../components/ScoreGrid';
 import SwipeView from '../components/SwipeView';
 import GameHeader from '../components/GameHeader';
-import VirtualKeyboard from '../components/VirtualKeyboard';
 import styles from './styles/GameScreenStyles';
 
 
@@ -24,51 +23,13 @@ class GameScreen extends React.Component {
     super(props);
     this.state = {
       swipesEnabled: true,
-      activePlayer: _.first(props.game.players)
     };
 
-    this.setActivePlayer = this.setActivePlayer.bind(this);
-    this.setNextPlayerActive = this.setNextPlayerActive.bind(this);
-    this.setActivePlayer = this.setActivePlayer.bind(this);
-    this.scoreIncreased = this.scoreIncreased.bind(this);
-    this.scoreDecreased = this.scoreDecreased.bind(this);
     this.getScore = this.getScore.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.swipesEnabled === nextState.swipesEnabled;
-  }
-
-  setNextPlayerActive() {
-    const players = this.props.game.players;
-    const index = _.findIndex(
-            players,
-            (p) => p.id === this.state.activePlayer.id
-        );
-    this.setState({
-      activePlayer: (index === players.length - 1) ?
-                players[0] :
-                players[index + 1]
-    });
-  }
-
-  setPreviousPlayerActive() {
-    const players = this.props.game.players;
-    const index = _.findIndex(
-            players,
-            (p) => p.id === this.state.activePlayer.id
-        );
-    this.setState({
-      activePlayer: (index === 0) ?
-                players[players.length - 1] :
-                players[index - 1]
-    });
-  }
-
-  setActivePlayer(player) {
-    this.setState({
-      activePlayer: player
-    });
   }
 
   getScore(player) {
@@ -89,18 +50,6 @@ class GameScreen extends React.Component {
     }
   }
 
-  scoreIncreased() {
-    const score = this.getScore(this.state.activePlayer);
-    this.props.updateScore(this.props.game.id, score, score.score + 1);
-  }
-
-  scoreDecreased() {
-    const score = this.getScore(this.state.activePlayer);
-    if (score.score > 1) {
-      this.props.updateScore(this.props.game.id, score, score.score - 1);
-    }
-  }
-
   render() {
     const currentHole = this.props.game.currentHole;
 
@@ -111,19 +60,7 @@ class GameScreen extends React.Component {
     >
       <GameHeader game={this.props.game} />
       <View style={horizontalLine} />
-      <ScoreGrid
-        activePlayer={this.state.activePlayer}
-        activePlayerSelected={this.setActivePlayer}
-        game={this.props.game}
-      />
-      <VirtualKeyboard
-        onPreviousHole={() => { this.changeHole(currentHole - 1); }}
-        onNextHole={() => { this.changeHole(currentHole + 1); }}
-        onPreviousPlayer={() => { this.setPreviousPlayerActive(); }}
-        onNextPlayer={() => { this.setNextPlayerActive(); }}
-        onScoreIncreased={() => { this.scoreIncreased(); }}
-        onScoreDecreased={() => { this.scoreDecreased(); }}
-      />
+      <ScoreGrid game={this.props.game} />
     </SwipeView>);
   }
 }

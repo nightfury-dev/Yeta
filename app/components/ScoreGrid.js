@@ -74,17 +74,15 @@ class ScoreGrid extends React.Component {
 
   renderRow(player, sectionId, rowId) {
     const score = this.getScore(player);
-    const highlighted = this.props.activePlayer &&
-            player.id === this.props.activePlayer.id;
 
     const order = this.ordering[this.props.game.currentHole][player.id];
     return (<ScoregridElement
-      onPress={() => this.props.activePlayerSelected(player)}
-      highlighted={highlighted}
       order={order}
       player={player}
       key={rowId}
       score={score.score}
+      onScoreDecreased={() => this.props.updateScore(this.props.game.id, score, score.score - 1)}
+      onScoreIncreased={() => this.props.updateScore(this.props.game.id, score, score.score + 1)}
     />);
   }
 
@@ -109,8 +107,6 @@ ScoreGrid.propTypes = {
   updateScore: React.PropTypes.func.isRequired,
   gameId: React.PropTypes.number.isRequired,
   game: React.PropTypes.object.isRequired,
-  activePlayerSelected: React.PropTypes.func.isRequired,
-  activePlayer: React.PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

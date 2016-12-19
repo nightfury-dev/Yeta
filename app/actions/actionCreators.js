@@ -76,7 +76,8 @@ export function updateCourse(course, name, pars) {
 }
 
 export function updateScore(gameId, score, newScore) {
-  return (dispatch) => games.updateScore(gameId, score, newScore).then(
+  const realNewScore = newScore <= 1 ? 1 : newScore;
+  return (dispatch) => games.updateScore(gameId, score, realNewScore).then(
         (game) => dispatch({
           type: SCORE_UPDATED,
           game
