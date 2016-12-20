@@ -11,15 +11,15 @@ import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { addCourse, updateCourse } from '../actions/actionCreators';
-import HoleCountSwitcher from '../components/HoleCountSwitcher';
-import HoleGrid from '../components/HoleGrid';
-import styles from './styles/AddCourseScreenStyles';
+import HoleCountSwitcher from './HoleCountSwitcher';
+import HoleGrid from './HoleGrid';
+import styles from './styles/AddCourseStyles';
 
 
 const DEFAULT_PAR = 3;
 const DEFAULT_HOLE_COUNT = 9;
 
-class AddCourseScreen extends React.Component {
+class AddCourse extends React.Component {
   constructor(props) {
     super(props);
 
@@ -98,7 +98,7 @@ class AddCourseScreen extends React.Component {
   }
 }
 
-AddCourseScreen.propTypes = {
+AddCourse.propTypes = {
   addCourse: React.PropTypes.func.isRequired,
   updateCourse: React.PropTypes.func.isRequired,
   course: React.PropTypes.object
@@ -109,4 +109,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateCourse: bindActionCreators(updateCourse, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(AddCourseScreen);
+export default connect(null, mapDispatchToProps)(AddCourse);

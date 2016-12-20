@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { ScrollView, View, ListView } from 'react-native';
 import { Button } from 'native-base';
 
-import PlayerListElement from '../components/PlayerListElement';
-import styles from './styles/SelectPlayersScreenStyles';
+import PlayerListElement from '../shared/components/PlayerListElement';
+import styles from './styles/SelectPlayersStyles';
 
 
-class SelectPlayersScreen extends React.Component {
+class SelectPlayers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,7 +71,7 @@ class SelectPlayersScreen extends React.Component {
   }
 }
 
-SelectPlayersScreen.propTypes = {
+SelectPlayers.propTypes = {
   players: React.PropTypes.array.isRequired,
   playersSelected: React.PropTypes.func.isRequired
 };
@@ -80,4 +80,4 @@ const mapStateToProps = (state) => ({
   players: state.players
 });
 
-export default connect(mapStateToProps)(SelectPlayersScreen);
+export default connect(mapStateToProps)(SelectPlayers);

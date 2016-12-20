@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import Logo from '../components/Logo';
-import MenuItem from '../components/MenuItem';
-import styles from './styles/MenuScreenStyles';
+import Logo from './Logo';
+import MenuItem from './MenuItem';
+import styles from './styles/MenuStyles';
 
 
-function MenuScreen() {
+function Menu() {
   return (<View style={styles.mainContainer}>
     <Logo />
     <MenuItem
@@ -33,4 +33,4 @@ function MenuScreen() {
   </View>);
 }
 
-export default MenuScreen;
+export default Menu;

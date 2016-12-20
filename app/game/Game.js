@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 
 import { updateHole, updateScore } from '../actions/actionCreators';
-import ScoreGrid from '../components/ScoreGrid';
-import SwipeView from '../components/SwipeView';
-import GameHeader from '../components/GameHeader';
-import styles from './styles/GameScreenStyles';
+import ScoreGrid from './ScoreGrid';
+import SwipeView from './SwipeView';
+import GameHeader from './GameHeader';
+import styles from './styles/GameStyles';
 
 
 const horizontalLine = {
@@ -18,7 +18,7 @@ const horizontalLine = {
   borderColor: '#DF878B'
 };
 
-class GameScreen extends React.Component {
+class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,7 +65,7 @@ class GameScreen extends React.Component {
   }
 }
 
-GameScreen.propTypes = {
+Game.propTypes = {
   game: React.PropTypes.object.isRequired,
   games: React.PropTypes.array.isRequired,
   updateHole: React.PropTypes.func.isRequired,
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateScore: bindActionCreators(updateScore, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

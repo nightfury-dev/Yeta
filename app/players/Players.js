@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { Button } from 'native-base';
 
 import { addPlayer, removePlayer } from '../actions/actionCreators';
-import AddPlayerInput from '../components/AddPlayerInput';
-import ContextMenu from '../components/ContextMenu';
-import Confirmation from '../components/Confirmation';
-import PlayerListElement from '../components/PlayerListElement';
-import styles from './styles/PlayersScreenStyles';
+import AddPlayerInput from './AddPlayerInput';
+import ContextMenu from '../shared/components/ContextMenu';
+import Confirmation from '../shared/components/Confirmation';
+import PlayerListElement from '../shared/components/PlayerListElement';
+import styles from './styles/PlayersStyles';
 
 
-class PlayersScreen extends React.Component {
+class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,7 +95,7 @@ class PlayersScreen extends React.Component {
   }
 }
 
-PlayersScreen.propTypes = {
+Players.propTypes = {
   removePlayer: React.PropTypes.func.isRequired,
   players: React.PropTypes.array.isRequired,
   showAddPlayerDialog: React.PropTypes.bool.isRequired
@@ -110,4 +110,4 @@ const mapDispatchToProps = (dispatch) => ({
   removePlayer: bindActionCreators(removePlayer, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayersScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Players);

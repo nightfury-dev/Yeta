@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { ScrollView, ListView, View } from 'react-native';
 import { Button } from 'native-base';
 
-import CourseListElement from '../components/CourseListElement';
-import styles from './styles/SelectCourseScreenStyles';
+import CourseListElement from '../shared/components/CourseListElement';
+import styles from './styles/SelectCourseStyles';
 
 
-class SelectCourseScreen extends React.Component {
+class SelectCourse extends React.Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
@@ -69,7 +69,7 @@ class SelectCourseScreen extends React.Component {
   }
 }
 
-SelectCourseScreen.propTypes = {
+SelectCourse.propTypes = {
   courseSelected: React.PropTypes.func.isRequired,
   courses: React.PropTypes.array.isRequired
 };
@@ -78,4 +78,4 @@ const mapStateToProps = (state) => ({
   courses: state.courses
 });
 
-export default connect(mapStateToProps)(SelectCourseScreen);
+export default connect(mapStateToProps)(SelectCourse);

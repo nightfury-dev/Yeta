@@ -6,13 +6,13 @@ import { View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
-import ContextMenu from '../components/ContextMenu';
-import Confirmation from '../components/Confirmation';
-import GameListElement from '../components/GameListElement';
-import styles from './styles/ResumeGameScreenStyles';
+import ContextMenu from '../shared/components/ContextMenu';
+import Confirmation from '../shared/components/Confirmation';
+import GameListElement from './GameListElement';
+import styles from './styles/ResumeGameStyles';
 
 
-class ResumeGameScreen extends React.Component {
+class ResumeGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,7 +94,7 @@ class ResumeGameScreen extends React.Component {
   }
 }
 
-ResumeGameScreen.propTypes = {
+ResumeGame.propTypes = {
   games: React.PropTypes.array.isRequired,
   changeCurrentGame: React.PropTypes.func.isRequired,
   removeGame: React.PropTypes.func.isRequired
@@ -109,4 +109,4 @@ const mapDispatchToProps = (dispatch) => ({
   removeGame: bindActionCreators(removeGame, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResumeGameScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ResumeGame);

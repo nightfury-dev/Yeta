@@ -8,11 +8,11 @@ import {
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import CourseListElement from '../components/CourseListElement';
-import styles from './styles/CoursesScreenStyles';
+import CourseListElement from '../shared/components/CourseListElement';
+import styles from './styles/CoursesStyles';
 
 
-class CoursesScreen extends React.Component {
+class Courses extends React.Component {
   constructor(props) {
     super(props);
 
@@ -61,7 +61,7 @@ class CoursesScreen extends React.Component {
   }
 }
 
-CoursesScreen.propTypes = {
+Courses.propTypes = {
   courses: React.PropTypes.array.isRequired
 };
 
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => ({
   courses: state.courses
 });
 
-export default connect(mapStateToProps)(CoursesScreen);
+export default connect(mapStateToProps)(Courses);

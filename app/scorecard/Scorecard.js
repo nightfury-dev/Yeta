@@ -3,13 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 
-import ScorecardHeader from '../components/ScorecardHeader';
-import ScorecardRow from '../components/ScorecardRow';
-import ScorecardFooter from '../components/ScorecardFooter';
-import styles from './styles/ScorecardScreenStyles';
+import ScorecardHeader from './ScorecardHeader';
+import ScorecardRow from './ScorecardRow';
+import ScorecardFooter from './ScorecardFooter';
+import styles from './styles/ScorecardStyles';
 
 
-class ScorecardScreen extends React.Component {
+class Scorecard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -93,7 +93,7 @@ class ScorecardScreen extends React.Component {
   }
 }
 
-ScorecardScreen.propTypes = {
+Scorecard.propTypes = {
   game: React.PropTypes.object.isRequired
 };
 
@@ -101,4 +101,4 @@ const mapStateToProps = (state) => ({
   game: state.currentGame
 });
 
-export default connect(mapStateToProps)(ScorecardScreen);
+export default connect(mapStateToProps)(Scorecard);

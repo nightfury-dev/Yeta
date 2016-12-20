@@ -4,32 +4,32 @@ import { Router, Scene } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 
 import { showAddPlayerDialog } from './actions/actionCreators';
-import MenuScreen from './containers/MenuScreen';
-import PlayersScreen from './containers/PlayersScreen';
-import CoursesScreen from './containers/CoursesScreen';
-import InitGameScreen from './containers/InitGameScreen';
-import ResumeGameScreen from './containers/ResumeGameScreen';
-import GameScreen from './containers/GameScreen';
-import AddCourseScreen from './containers/AddCourseScreen';
-import ScorecardScreen from './containers/ScorecardScreen';
+import Menu from './menu';
+import Players from './players';
+import Courses from './courses';
+import InitGame from './create-game';
+import ResumeGame from './resume-game';
+import Game from './game';
+import AddCourse from './course-form';
+import Scorecard from './scorecard';
 
 
 function Navigation(props) {
     return (<Router>
       <Scene key={'root'}>
-        <Scene key={'menu'} component={MenuScreen} initial />
+        <Scene key={'menu'} component={Menu} initial />
         <Scene
           key={'players'}
-          component={PlayersScreen}
+          component={Players}
           rightTitle={'Add player'}
           onRight={() => props.showAddPlayerDialog()}
         />
-        <Scene key={'initgame'} component={InitGameScreen} />
-        <Scene key={'resumegame'} component={ResumeGameScreen} />
-        <Scene key={'game'} component={GameScreen} />
-        <Scene key={'courses'} component={CoursesScreen} />
-        <Scene key={'addcourse'} component={AddCourseScreen} />
-        <Scene key={'scorecard'} component={ScorecardScreen} />
+        <Scene key={'initgame'} component={InitGame} />
+        <Scene key={'resumegame'} component={ResumeGame} />
+        <Scene key={'game'} component={Game} />
+        <Scene key={'courses'} component={Courses} />
+        <Scene key={'addcourse'} component={AddCourse} />
+        <Scene key={'scorecard'} component={Scorecard} />
       </Scene>
     </Router>);
 }
