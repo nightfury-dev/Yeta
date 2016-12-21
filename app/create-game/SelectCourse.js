@@ -51,21 +51,25 @@ class SelectCourse extends React.Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     }).cloneWithRows(this.props.courses);
-    return (<ScrollView>
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderSeparator={this.renderSeparator}
-      />
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <Button
-          style={styles.button}
-          onPress={this.courseSelected}
-        >
-              Continue
-        </Button>
-      </View>
-    </ScrollView>);
+    const isCourseSelected = this.state && this.state.courseSelected !== null;
+    return (
+      <ScrollView>
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          renderSeparator={this.renderSeparator}
+        />
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Button
+            disabled={!isCourseSelected}
+            style={styles.button}
+            onPress={this.courseSelected}
+          >
+            Continue
+          </Button>
+        </View>
+      </ScrollView>
+    );
   }
 }
 

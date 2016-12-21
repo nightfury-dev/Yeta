@@ -52,22 +52,25 @@ class SelectPlayers extends React.Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.name !== r2.name
     }).cloneWithRows(this.state.players);
-
-    return (<ScrollView>
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderSeparator={this.renderSeparator}
-      />
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <Button
-          style={styles.button}
-          onPress={this.playersSelected}
-        >
-              Continue
-        </Button>
-      </View>
-    </ScrollView>);
+    const isPlayersSelected = _.some(this.state.players, (p) => p.selected);
+    return (
+      <ScrollView>
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          renderSeparator={this.renderSeparator}
+        />
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Button
+            disabled={!isPlayersSelected}
+            style={styles.button}
+            onPress={this.playersSelected}
+          >
+            Continue
+          </Button>
+        </View>
+      </ScrollView>
+    );
   }
 }
 
