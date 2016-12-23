@@ -7,7 +7,7 @@ import styles from './styles/ScorecardEntryStyles';
 function ScorecardEntry(props) {
   const rowCells = props.collection.map((entry, index) => {
     const cellContent = props.getContent(entry);
-    return (<View style={styles.scoreGridCell}>
+    return (<View key={index} style={styles.scoreGridCell}>
       <Text
         numberOfLines={1}
         style={styles.gridCellText}

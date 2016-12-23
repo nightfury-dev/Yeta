@@ -102,3 +102,8 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Scorecard);
+
+export {
+  Scorecard
+};
+
