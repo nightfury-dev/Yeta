@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import Games from '../data/Games';
+import games from '../data/Games';
 import {
   GAME_CREATED,
   HOLE_UPDATED,
@@ -10,9 +10,7 @@ import {
 } from '../actions/actionTypes';
 
 
-const realmGames = new Games();
-
-function games(state = [], action) {
+function gamesReducer(state = [], action) {
   switch (action.type) {
     case GAME_CREATED:
         // action.callback(action.game);
@@ -30,13 +28,13 @@ function games(state = [], action) {
       return [...state.slice(0, i), action.game, ...state.slice(i + 1)];
     }
     case COURSE_UPDATED: {
-      return realmGames.getAll();
+      return games.getAll();
     }
     case GAME_REMOVED:
-      return realmGames.getAll();
+      return games.getAll();
     default:
       return state;
   }
 }
 
-export default games;
+export default gamesReducer;

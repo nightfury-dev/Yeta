@@ -1,6 +1,6 @@
-import Courses from '../data/Courses';
-import Games from '../data/Games';
-import Players from '../data/Players';
+import courses from '../data/Courses';
+import games from '../data/Games';
+import players from '../data/Players';
 import {
   PLAYER_ADDED,
   PLAYER_REMOVED,
@@ -14,11 +14,6 @@ import {
   SHOW_ADD_PLAYER_DIALOG,
   HIDE_ADD_PLAYER_DIALOG
 } from './actionTypes';
-
-
-const players = new Players();
-const courses = new Courses();
-const games = new Games();
 
 
 export function addPlayer(name) {
