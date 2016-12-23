@@ -203,30 +203,31 @@ const scoresOverPar = [
 ];
 
 
+describe('Scorecard renders correctly', () => {
+  test('Even par', () => {
+    const gameEvenScores = _.cloneDeep(gameWithoutScores);
+    gameEvenScores['scores'] = scoresEvenPar;
+    const tree = renderer.create(
+      <Scorecard game={gameEvenScores} />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-test('Scorecard renders correctly when even par', () => {
-  const gameEvenScores = _.cloneDeep(gameWithoutScores);
-  gameEvenScores['scores'] = scoresEvenPar;
-  const tree = renderer.create(
-    <Scorecard game={gameEvenScores} />
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  test('Under par', () => {
+    const gameUnderPar = _.cloneDeep(gameWithoutScores);
+    gameUnderPar['scores'] = scoresUnderPar;
+    const tree = renderer.create(
+      <Scorecard game={gameUnderPar} />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-test('Scorecard renders correctly when under par', () => {
-  const gameUnderPar = _.cloneDeep(gameWithoutScores);
-  gameUnderPar['scores'] = scoresUnderPar;
-  const tree = renderer.create(
-    <Scorecard game={gameUnderPar} />
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-test('Scorecard renders correctly when over par', () => {
-  const gameOverPar = _.cloneDeep(gameWithoutScores);
-  gameOverPar['scores'] = scoresOverPar;
-  const tree = renderer.create(
-    <Scorecard game={gameOverPar} />
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
+  test('Over par', () => {
+    const gameOverPar = _.cloneDeep(gameWithoutScores);
+    gameOverPar['scores'] = scoresOverPar;
+    const tree = renderer.create(
+      <Scorecard game={gameOverPar} />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -1,4 +1,4 @@
-exports[`test Scorecard renders correctly when even par 1`] = `
+exports[`Scorecard renders correctly Even par 1`] = `
 <ScrollView
   dataSource={
     ListViewDataSource {
@@ -332,7 +332,7 @@ exports[`test Scorecard renders correctly when even par 1`] = `
 </ScrollView>
 `;
 
-exports[`test Scorecard renders correctly when over par 1`] = `
+exports[`Scorecard renders correctly Over par 1`] = `
 <ScrollView
   dataSource={
     ListViewDataSource {
@@ -666,7 +666,7 @@ exports[`test Scorecard renders correctly when over par 1`] = `
 </ScrollView>
 `;
 
-exports[`test Scorecard renders correctly when under par 1`] = `
+exports[`Scorecard renders correctly Under par 1`] = `
 <ScrollView
   dataSource={
     ListViewDataSource {
