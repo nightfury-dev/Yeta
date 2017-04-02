@@ -6,6 +6,6 @@ Discgolf scorecard app
 
 - Install React Native CLI (https://facebook.github.io/react-native/docs/getting-started.html)
 - Clone the repo
-- Install dependencies by running ``npm install``
+- Install dependencies by running ``yarn install``
 - Start the app by running ``react-native [run-ios|run-android]``
 
