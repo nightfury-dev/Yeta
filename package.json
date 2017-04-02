@@ -16,7 +16,7 @@
     "react-native-router-flux": "^3.36.0",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^4.4.5",
-    "realm": "^0.15.0",
+    "realm": "^1.2.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0"
   },
