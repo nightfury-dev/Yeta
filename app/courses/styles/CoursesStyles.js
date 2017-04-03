@@ -1,13 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles, Colors } from '../../themes';
+import { ApplicationStyles } from '../../themes';
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   centeredItem: ApplicationStyles.centeredItem,
   baseText: ApplicationStyles.baseText,
   listSeparator: ApplicationStyles.listSeparator,
-  button: {
-    backgroundColor: Colors.orange
-  }
+  button: { ...ApplicationStyles.button }
 });

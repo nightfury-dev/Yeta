@@ -13,7 +13,7 @@ import AnimatedText from './AnimatedText';
 
 
 const createIconButton = (icon, onPress) => (
-  <Button style={styles.button} onPress={onPress}>
+  <Button style={StyleSheet.flatten(styles.button)} onPress={onPress}>
     <Icon name={icon} color={Colors.text} size={14} />
   </Button>
 );

@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import {
   Text,
   View,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -89,10 +90,10 @@ class AddCourse extends React.Component {
       <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
 
       <Button
-        style={styles.centeredItem}
+        style={StyleSheet.flatten([styles.button, styles.centeredItem])}
         onPress={this.saveCourse}
       >
-            Save course
+        <Text style={styles.baseText}>Save course</Text>
       </Button>
     </ScrollView>);
   }

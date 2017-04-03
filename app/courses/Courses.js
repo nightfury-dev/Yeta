@@ -3,7 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   View,
-  ListView
+  ListView,
+  Text,
+  StyleSheet
 } from 'react-native';
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -52,10 +54,10 @@ class Courses extends React.Component {
         renderSeparator={this.renderSeparator}
       />
       <Button
-        style={[styles.button, styles.centeredItem]}
+        style={StyleSheet.flatten([styles.button, styles.centeredItem])}
         onPress={this.addCourse}
       >
-            Add course
+        <Text style={styles.baseText}>Add course</Text>
       </Button>
     </View>);
   }

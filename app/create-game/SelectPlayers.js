@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View, ListView } from 'react-native';
+import { ScrollView, View, ListView, Text, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 
 import PlayerListElement from '../shared/components/PlayerListElement';
@@ -63,10 +63,10 @@ class SelectPlayers extends React.Component {
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Button
             disabled={!isPlayersSelected}
-            style={styles.button}
+            style={StyleSheet.flatten(styles.button)}
             onPress={this.playersSelected}
           >
-            Continue
+            <Text style={styles.baseText}>Continue</Text>
           </Button>
         </View>
       </ScrollView>

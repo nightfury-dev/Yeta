@@ -37,6 +37,9 @@ const ApplicationStyles = {
     overflow: 'hidden',
     margin: 25
   },
+  button: {
+    backgroundColor: Colors.orange
+  },
   modalButton: {
     margin: 10,
     backgroundColor: Colors.orange

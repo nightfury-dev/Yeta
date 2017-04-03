@@ -1,15 +1,14 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 
 import styles from './styles/MenuItemStyles';
-
 
 function MenuItem(props) {
   return (<Button
     block
     large
-    style={styles.menuItem}
+    style={StyleSheet.flatten(styles.menuItem)}
     onPress={props.onPress}
   >
     <Text style={styles.menuItemText}>{props.label}</Text>

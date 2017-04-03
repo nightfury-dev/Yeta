@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View } from 'react-native';
+import { Modal, View, Text, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 
 import styles from './styles/ContextMenuStyles';
@@ -13,11 +13,11 @@ function ContextMenu(props) {
   >
     <View style={styles.modal}>
       <View style={styles.modalInnerContainer}>
-        <Button block style={styles.modalButton} onPress={props.onDelete}>
-            Remove
+        <Button block style={StyleSheet.flatten(styles.modalButton)} onPress={props.onDelete}>
+          <Text style={styles.baseText}>Remove</Text>
         </Button>
-        <Button block style={styles.modalButton} onPress={props.onClose}>
-            Close
+        <Button block style={StyleSheet.flatten(styles.modalButton)} onPress={props.onClose}>
+          <Text style={styles.baseText}>Close</Text>
         </Button>
       </View>
     </View>

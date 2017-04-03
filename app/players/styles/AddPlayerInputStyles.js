@@ -7,16 +7,15 @@ export default StyleSheet.create({
   input: {
     ...ApplicationStyles.input,
     borderBottomWidth: 1,
-    borderBottomColor: 'red'
+    borderBottomColor: 'red',
   },
-  button: {
-    backgroundColor: Colors.orange
-  },
+  button: { ...ApplicationStyles.button },
   disabledButton: {
     backgroundColor: Colors.lightOrange
   },
+  baseText: { ...ApplicationStyles.baseText },
   container: {
-    flexDirection: 'row',
+    // flexDirection: asdfas'row',
         // marginBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: Colors.lightBrown

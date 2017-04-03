@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Modal } from 'react-native';
+import { Text, View, Modal, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 
 import styles from './styles/ConfirmationStyles';
@@ -16,13 +16,13 @@ function Confirmation(props) {
         <Text>{props.message}</Text>
         <Button
           block
-          style={styles.modalButton}
+          style={StyleSheet.flatten(styles.modalButton)}
           onPress={() => props.onConfirm()}
         >
-            Confirm
+          <Text style={styles.baseText}>Confirm</Text>
         </Button>
-        <Button block style={styles.modalButton} onPress={props.onCancel}>
-            Cancel
+        <Button block style={StyleSheet.flatten(styles.modalButton)} onPress={props.onCancel}>
+          <Text style={styles.baseText}>Cancel</Text>
         </Button>
       </View>
     </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, ListView, View } from 'react-native';
+import { ScrollView, ListView, View, Text, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 
 import CourseListElement from '../shared/components/CourseListElement';
@@ -62,10 +62,10 @@ class SelectCourse extends React.Component {
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Button
             disabled={!isCourseSelected}
-            style={styles.button}
+            style={StyleSheet.flatten(styles.button)}
             onPress={this.courseSelected}
           >
-            Continue
+            <Text style={styles.baseText}>Continue</Text>
           </Button>
         </View>
       </ScrollView>

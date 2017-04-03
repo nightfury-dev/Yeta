@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { Button, Input } from 'native-base';
+import { Button, Input, InputGroup } from 'native-base';
 
 import { addPlayer, hideAddPlayerDialog } from '../actions/actionCreators';
 import styles from './styles/AddPlayerInputStyles';
@@ -28,24 +28,26 @@ class AddPlayerInput extends Component {
             ? styles.button
             : styles.disabledButton;
     return (<View style={styles.container}>
-      <Input
-        placeholder="Player name"
-        autoFocus
-        style={styles.input}
-        onChangeText={(text) => this.setState({ name: text })}
-      />
+      <InputGroup regular style={StyleSheet.flatten(styles.input)}>
+        <Input
+          placeholder="Player name"
+          autoFocus
+          style={{color: 'white'}}
+          onChangeText={(text) => this.setState({ name: text })}
+        />
+      </InputGroup>
       <Button
         onPress={this.addPlayer}
         disabled={this.state.name.length === 0}
-        style={addButtonStyle}
+        style={StyleSheet.flatten(addButtonStyle)}
       >
-            Save
+        <Text style={styles.baseText}>Save</Text>
       </Button>
       <Button
         onPress={() => this.props.hideAddPlayerDialog()}
-        style={styles.button}
+        style={StyleSheet.flatten(styles.button)}
       >
-            Cancel
+        <Text style={styles.baseText}>Cancel</Text>
       </Button>
     </View>);
   }
