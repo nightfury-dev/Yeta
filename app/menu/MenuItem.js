@@ -8,6 +8,7 @@ import styles from './styles/MenuItemStyles';
 function MenuItem(props) {
   return (<Button
     block
+    large
     style={styles.menuItem}
     onPress={props.onPress}
   >

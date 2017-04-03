@@ -1,9 +1,9 @@
 const fonts = {
   size: {
-    tiny: 16,
-    small: 20,
-    normal: 24,
-    huge: 34
+    tiny: 14,
+    small: 16,
+    normal: 18,
+    huge: 20
   },
   defaultFontFamily: 'Roboto'
 };

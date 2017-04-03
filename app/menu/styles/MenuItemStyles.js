@@ -11,8 +11,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.defaultFontFamily
   },
   menuItem: {
-    margin: 10,
+    margin: 5,
     backgroundColor: Colors.orange,
-    flex: 1
   }
 });
