@@ -203,7 +203,7 @@ const scoresOverPar = [
 ];
 
 
-describe('Scorecard renders correctly', () => {
+xdescribe('Scorecard renders correctly', () => {
   test('Even par', () => {
     const gameEvenScores = _.cloneDeep(gameWithoutScores);
     gameEvenScores['scores'] = scoresEvenPar;
