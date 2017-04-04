@@ -2,14 +2,12 @@ import * as _ from 'lodash';
 import React from 'react';
 
 import ScorecardEntry from './ScorecardEntry';
+import { calculatePar } from '../helpers/course';
 
 
 class ScorecardFooter extends React.Component {
   render() {
-    const coursePar = _.values(this.props.course.holes).reduce(
-            (total, hole) => hole.par + total,
-            0
-        );
+    const coursePar = calculatePar(this.props.course);
     const getTotalScore = (score) => {
       const diff = score - coursePar;
       const diffStr = (diff > 0 ? (`+${diff}`) : diff);

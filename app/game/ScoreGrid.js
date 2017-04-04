@@ -6,13 +6,13 @@ import { ScrollView, ListView } from 'react-native';
 
 import { updateScore } from '../actions/actionCreators';
 import ScoregridElement from './ScoregridElement';
+import { getPlayingOrders } from '../helpers/game';
 
 
 class ScoreGrid extends React.Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
-    this.getPlayingOrders = this.getPlayingOrders.bind(this);
   }
 
   getScore(player) {
@@ -23,58 +23,8 @@ class ScoreGrid extends React.Component {
         );
   }
 
-  getPlayingOrders() {
-    const nextOrdering = (holeOrder, holeScores) => {
-      const grouped = _.groupBy(holeScores, 'score');
-      if (Object.keys(grouped).length === 1) {
-        return holeOrder;
-      }
-
-      let currentOrder = 1;
-      const order = {};
-
-            // Loop through each distinct score group and set the correct
-            // ordering. Keep the order correct among players in the same
-            // score group
-      _.values(grouped).forEach((group) => {
-        const sortedOrdering = _.chain(group)
-                    .map((s) => ({
-                      playerId: s.player.id,
-                      order: holeOrder[s.player.id]
-                    }))
-                    .sortBy('order')
-                    .value();
-        sortedOrdering.forEach((obj) => {
-          order[obj.playerId] = currentOrder++;
-        });
-      });
-
-      return order;
-    };
-
-        // First hole order is always default
-    const firstHoleScores = {};
-    _.values(this.props.game.players).forEach((player, index) => {
-      firstHoleScores[player.id] = index + 1;
-    });
-
-    const ordering = { 1: firstHoleScores };
-    const holeCount = _.values(this.props.game.course.holes).length;
-    _.range(2, holeCount + 1).forEach((holeNumber) => {
-      const previousOrdering = ordering[holeNumber - 1];
-      const previousScores = _.values(this.props.game.scores).filter(
-                (score) => score.hole.holenumber === (holeNumber - 1)
-            );
-      const next = nextOrdering(previousOrdering, previousScores);
-      ordering[holeNumber] = next;
-    });
-
-    return ordering;
-  }
-
   renderRow(player, sectionId, rowId) {
     const score = this.getScore(player);
-
     const order = this.ordering[this.props.game.currentHole][player.id];
     return (<ScoregridElement
       order={order}
@@ -87,7 +37,7 @@ class ScoreGrid extends React.Component {
   }
 
   render() {
-    this.ordering = this.getPlayingOrders();
+    this.ordering = getPlayingOrders(this.props.game);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
