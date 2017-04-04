@@ -1,5 +1,6 @@
+import './ReactotronConfig';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { Router, Scene } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 
@@ -12,7 +13,10 @@ import ResumeGame from './resume-game';
 import Game from './game';
 import AddCourse from './course-form';
 import Scorecard from './scorecard';
+import store from './store';
 
+
+console.disableYellowBox = true;
 
 function Navigation(props) {
     return (<Router>
@@ -46,6 +50,12 @@ const mapDispatchToProps = (dispatch) => ({
     showAddPlayerDialog: bindActionCreators(showAddPlayerDialog, dispatch)
 });
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Navigation);
+const MyApp = connect(mapStateToProps, mapDispatchToProps)(Navigation);
+
+const App = () => (
+  <Provider store={store}>
+    <MyApp />
+  </Provider>
+);
 
 export default App;
