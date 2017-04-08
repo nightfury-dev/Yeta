@@ -12,9 +12,9 @@ import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { addCourse, updateCourse } from '../actions/actionCreators';
-import HoleCountSwitcher from './HoleCountSwitcher';
 import HoleGrid from './HoleGrid';
 import styles from './styles/AddCourseStyles';
+import NumberSwitcher from '../shared/components/NumberSwitcher';
 
 
 const DEFAULT_PAR = 3;
@@ -69,33 +69,39 @@ class AddCourse extends React.Component {
   }
 
   render() {
-    return (<ScrollView style={styles.mainContainer}>
-      <HoleCountSwitcher
-        holecount={this.state.pars.length}
-        holeCountIncreased={this.addRow}
-        holeCountDecreased={this.removeRow}
-      />
-      <View>
-        <Text>Name:</Text>
-        <InputGroup borderType="rounded">
-          <Input
-            placeholder="Course name"
-            style={styles.input}
-            onChangeText={(name) => this.setState({ name })}
-            value={this.state.name}
-          />
-        </InputGroup>
-      </View>
-
-      <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
-
-      <Button
-        style={StyleSheet.flatten([styles.button, styles.centeredItem])}
-        onPress={this.saveCourse}
-      >
-        <Text style={styles.baseText}>Save course</Text>
-      </Button>
-    </ScrollView>);
+    return (
+      <ScrollView style={styles.mainContainer}>
+        <View style={styles.row}>
+          <View style={{ flex: 3 }}>
+            <Text style={styles.baseText}>Number of holes</Text>
+          </View>
+          <View style={{ flex: 2 }}>
+            <NumberSwitcher
+              number={this.state.pars.length}
+              onDecrease={this.removeRow}
+              onIncrease={this.addRow}
+            />
+          </View>
+        </View>
+        <View>
+          <InputGroup borderType="rounded">
+            <Input
+              placeholder="Course name"
+              style={StyleSheet.flatten(styles.input)}
+              onChangeText={(name) => this.setState({ name })}
+              value={this.state.name}
+            />
+          </InputGroup>
+        </View>
+        <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
+        <Button
+          style={StyleSheet.flatten([styles.button, styles.centeredItem])}
+          onPress={this.saveCourse}
+        >
+          <Text style={styles.baseText}>Save course</Text>
+        </Button>
+      </ScrollView>
+    );
   }
 }
 

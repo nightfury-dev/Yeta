@@ -1,40 +1,34 @@
 import React from 'react';
 import {
   Text,
-  View,
-  StyleSheet,
+  View
 } from 'react-native';
-import { Button } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Colors from '../themes/Colors';
 import styles from './styles/ScoregridElementStyles';
-import AnimatedText from './AnimatedText';
+import NumberSwitcher from '../shared/components/NumberSwitcher';
 
 
-const createIconButton = (icon, onPress) => (
-  <Button style={StyleSheet.flatten(styles.button)} onPress={onPress}>
-    <Icon name={icon} color={Colors.text} size={14} />
-  </Button>
-);
-
-const baseText = StyleSheet.flatten([styles.baseText, styles.nameText]);
-
-function ScoregridElement(props) {
-  return (
-    <View style={styles.row}>
-      <Text style={styles.orderText}>{props.order}</Text>
-      <View style={styles.nameStyle}>
-        <Text style={baseText}>
-          {props.player.name}
-        </Text>
-      </View>
-      {createIconButton('minus', () => { props.onScoreDecreased(); })}
-      <AnimatedText style={styles.baseText}>{props.score}</AnimatedText>
-      {createIconButton('plus', () => { props.onScoreIncreased(); })}
+const ScoregridElement = (props) => (
+  <View style={styles.row}>
+    <View style={{ flex: 1 }}>
+      <Text style={styles.orderText}>
+        {props.order}
+      </Text>
     </View>
-  );
-}
+    <View style={{ flex: 5 }}>
+      <Text style={styles.nameText}>
+        {props.player.name}
+      </Text>
+    </View>
+    <View style={{ flex: 4 }}>
+      <NumberSwitcher
+        number={props.score}
+        onDecrease={props.onScoreDecreased}
+        onIncrease={props.onScoreIncreased}
+      />
+    </View>
+  </View>
+);
 
 ScoregridElement.propTypes = {
   player: React.PropTypes.object.isRequired,

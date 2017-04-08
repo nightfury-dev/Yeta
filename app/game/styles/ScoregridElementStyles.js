@@ -4,18 +4,18 @@ import { ApplicationStyles, Colors } from '../../themes';
 
 export default StyleSheet.create({
   baseText: ApplicationStyles.baseText,
-  nameText: {
-    textAlign: 'left',
-    marginLeft: 10
-  },
   orderText: {
     ...ApplicationStyles.baseText,
     color: 'skyblue',
-    padding: 10
+    padding: 10,
+    textAlign: 'left'
   },
-  nameStyle: { flex: 6 },
+  nameText: {
+    ...ApplicationStyles.baseText,
+    textAlign: 'left'
+  },
   row: {
-    flex: 7,
+    flex: 10,
     flexDirection: 'row',
     paddingTop: 10,
     paddingBottom: 10,
