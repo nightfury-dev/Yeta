@@ -2,14 +2,14 @@ import React from 'react';
 import { View, ListView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from 'native-base';
 
-import { addPlayer, removePlayer } from '../actions/actionCreators';
+import { removePlayer, showAddPlayerDialog } from '../actions/actionCreators';
 import AddPlayerInput from './AddPlayerInput';
 import ContextMenu from '../shared/components/ContextMenu';
 import Confirmation from '../shared/components/Confirmation';
 import PlayerListElement from '../shared/components/PlayerListElement';
 import styles from './styles/PlayersStyles';
+import AddActionButton from '../shared/components/AddActionButton';
 
 
 class Players extends React.Component {
@@ -73,32 +73,36 @@ class Players extends React.Component {
         onCancel={() => this.setState({ showAddPlayerDialog: false })}
       /> : null;
 
-    return (<View style={styles.mainContainer}>
-      <ContextMenu
-        visible={this.state.showContextMenu}
-        onDelete={this.confirmDelete}
-        onClose={() => this.setState({ showContextMenu: false })}
-      />
-      <Confirmation
-        onConfirm={this.deletePlayer}
-        onCancel={() => this.setState({ showDeleteConfirmation: false })}
-        message={`Remove player '${removeName}'?`}
-        visible={this.state.showDeleteConfirmation}
-      />
-      {input}
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderSeparator={this.renderSeparator}
-      />
-    </View>);
+    return (
+      <View style={styles.mainContainer}>
+        <ContextMenu
+          visible={this.state.showContextMenu}
+          onDelete={this.confirmDelete}
+          onClose={() => this.setState({ showContextMenu: false })}
+        />
+        <Confirmation
+          onConfirm={this.deletePlayer}
+          onCancel={() => this.setState({ showDeleteConfirmation: false })}
+          message={`Remove player '${removeName}'?`}
+          visible={this.state.showDeleteConfirmation}
+        />
+        {input}
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          renderSeparator={this.renderSeparator}
+        />
+        <AddActionButton onPress={this.props.toggleAddPlayerDialog} />
+      </View>
+    );
   }
 }
 
 Players.propTypes = {
   removePlayer: React.PropTypes.func.isRequired,
   players: React.PropTypes.array.isRequired,
-  showAddPlayerDialog: React.PropTypes.bool.isRequired
+  showAddPlayerDialog: React.PropTypes.bool.isRequired,
+  toggleAddPlayerDialog: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -107,7 +111,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  removePlayer: bindActionCreators(removePlayer, dispatch)
+  removePlayer: bindActionCreators(removePlayer, dispatch),
+  toggleAddPlayerDialog: bindActionCreators(showAddPlayerDialog, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Players);

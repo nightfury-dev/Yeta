@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 
 import CourseListElement from '../shared/components/CourseListElement';
 import styles from './styles/CoursesStyles';
+import AddActionButton from '../shared/components/AddActionButton';
 
 
 class Courses extends React.Component {
@@ -47,19 +48,16 @@ class Courses extends React.Component {
       rowHasChanged: (r1, r2) =>
                 r1.name !== r2.name || !_.isEqual(r1.holes, r2.holes)
     }).cloneWithRows(this.props.courses);
-    return (<View style={styles.mainContainer}>
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderSeparator={this.renderSeparator}
-      />
-      <Button
-        style={StyleSheet.flatten([styles.button, styles.centeredItem])}
-        onPress={this.addCourse}
-      >
-        <Text style={styles.baseText}>Add course</Text>
-      </Button>
-    </View>);
+    return (
+      <View style={styles.mainContainer}>
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          renderSeparator={this.renderSeparator}
+        />
+        <AddActionButton onPress={this.addCourse} />
+      </View>
+    );
   }
 }
 
