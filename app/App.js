@@ -14,8 +14,6 @@ import Scorecard from './scorecard';
 import store from './store';
 
 
-console.disableYellowBox = true;
-
 const Navigation = () => (
   <Router>
     <Scene key={'root'}>

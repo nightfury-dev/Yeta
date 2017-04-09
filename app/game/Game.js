@@ -67,9 +67,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   game: React.PropTypes.object.isRequired,
-  games: React.PropTypes.array.isRequired,
   updateHole: React.PropTypes.func.isRequired,
-  currentGame: React.PropTypes.object.isRequired,
   updateScore: React.PropTypes.func.isRequired
 };
 

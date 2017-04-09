@@ -51,11 +51,7 @@ class ScoreGrid extends React.Component {
 }
 
 ScoreGrid.propTypes = {
-  scores: React.PropTypes.object.isRequired,
-  players: React.PropTypes.object.isRequired,
-  hole: React.PropTypes.number.isRequired,
   updateScore: React.PropTypes.func.isRequired,
-  gameId: React.PropTypes.number.isRequired,
   game: React.PropTypes.object.isRequired,
 };
 

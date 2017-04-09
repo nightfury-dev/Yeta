@@ -28,11 +28,11 @@ class AddPlayerInput extends Component {
             ? styles.button
             : styles.disabledButton;
     return (<View style={styles.container}>
-      <InputGroup regular style={StyleSheet.flatten(styles.input)}>
+      <InputGroup regular>
         <Input
           placeholder="Player name"
           autoFocus
-          style={{color: 'white'}}
+          style={{ color: 'white' }}
           onChangeText={(text) => this.setState({ name: text })}
         />
       </InputGroup>
@@ -54,7 +54,6 @@ class AddPlayerInput extends Component {
 }
 
 AddPlayerInput.propTypes = {
-  onSave: React.PropTypes.func.isRequired,
   onCancel: React.PropTypes.func.isRequired,
   addPlayer: React.PropTypes.func.isRequired,
   hideAddPlayerDialog: React.PropTypes.func.isRequired

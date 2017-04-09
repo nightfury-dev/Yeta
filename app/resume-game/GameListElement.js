@@ -42,11 +42,17 @@ function GameListElement(props) {
   const totalScores = getTotalScores(props.game);
   const formattedDate = formatDate(props.game.timeBegin);
   const players = props.game.players.map(
-      (player) => {
-        const score = totalScores[player.id];
-        return <Text style={styles.nameText}>{player.name} ({score})</Text>;
-      }
-    );
+    (player) => {
+      const score = totalScores[player.id];
+      return (
+        <Text
+          key={player.id}
+          style={styles.nameText}>
+          {player.name} ({score})
+        </Text>
+      );
+    }
+  );
   return (<TouchableHighlight
     onPress={props.onPress}
     onLongPress={props.onLongPress}

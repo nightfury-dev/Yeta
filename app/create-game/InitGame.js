@@ -68,7 +68,6 @@ class InitGame extends React.Component {
 
 InitGame.propTypes = {
   createGame: React.PropTypes.func.isRequired,
-  changeCurrentGame: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

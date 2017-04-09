@@ -55,15 +55,21 @@ class ResumeGame extends React.Component {
   }
 
   renderRow(rowData) {
-    return (<GameListElement
-      game={rowData}
-      onPress={() => this.handleSelection(rowData)}
-      onLongPress={() => this.showModal(rowData)}
-    />);
+    return (
+      <GameListElement
+        game={rowData}
+        onPress={() => this.handleSelection(rowData)}
+        onLongPress={() => this.showModal(rowData)}
+    />
+    );
   }
 
-  renderSeparator() {
-    return (<View style={styles.listSeparator} />);
+  renderSeparator(sectionID, rowID) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={styles.listSeparator} />
+    );
   }
 
   render() {

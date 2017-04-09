@@ -56,8 +56,13 @@ class Players extends React.Component {
     />);
   }
 
-  renderSeparator() {
-    return (<View style={styles.listSeparator} />);
+  renderSeparator(sectionID, rowID) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={styles.listSeparator}
+      />
+    );
   }
 
   render() {

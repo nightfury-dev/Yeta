@@ -1,13 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  View,
-  ListView,
-  Text,
-  StyleSheet
-} from 'react-native';
-import { Button } from 'native-base';
+import { View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import CourseListElement from '../shared/components/CourseListElement';
@@ -39,8 +33,13 @@ class Courses extends React.Component {
     />);
   }
 
-  renderSeparator() {
-    return (<View style={styles.listSeparator} />);
+  renderSeparator(sectionID, rowID) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={styles.listSeparator}
+      />
+    );
   }
 
   render() {
