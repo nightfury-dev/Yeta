@@ -1,33 +1,17 @@
 import React from 'react';
-import { Text, View, Modal, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
+import { Text } from 'react-native';
 
-import styles from './styles/ConfirmationStyles';
+import Modal from './Modal';
+import ModalButton from './ModalButton';
 
 
-function Confirmation(props) {
-  return (<Modal
-    animationType={'slide'}
-    transparent
-    visible={props.visible}
-  >
-    <View style={styles.modal}>
-      <View style={styles.modalInnerContainer}>
-        <Text>{props.message}</Text>
-        <Button
-          block
-          style={StyleSheet.flatten(styles.modalButton)}
-          onPress={() => props.onConfirm()}
-        >
-          <Text style={styles.baseText}>Confirm</Text>
-        </Button>
-        <Button block style={StyleSheet.flatten(styles.modalButton)} onPress={props.onCancel}>
-          <Text style={styles.baseText}>Cancel</Text>
-        </Button>
-      </View>
-    </View>
-  </Modal>);
-}
+const Confirmation = (props) => (
+  <Modal visible={props.visible}>
+    <Text>{props.message}</Text>
+    <ModalButton onPress={props.onConfirm} text="Confirm" />
+    <ModalButton onPress={props.onCancel} text="Cancel" />
+  </Modal>
+);
 
 Confirmation.propTypes = {
   visible: React.PropTypes.bool.isRequired,
