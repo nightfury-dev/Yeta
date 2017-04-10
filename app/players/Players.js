@@ -3,13 +3,13 @@ import { View, ListView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { removePlayer, showAddPlayerDialog } from '../actions/actionCreators';
-import AddPlayerInput from './AddPlayerInput';
+import { addPlayer, removePlayer } from '../actions/actionCreators';
 import ContextMenu from '../shared/components/ContextMenu';
 import Confirmation from '../shared/components/Confirmation';
 import PlayerListElement from '../shared/components/PlayerListElement';
 import styles from './styles/PlayersStyles';
 import AddActionButton from '../shared/components/AddActionButton';
+import AddPlayerModal from '../shared/components/AddPlayerModal';
 
 
 class Players extends React.Component {
@@ -21,10 +21,23 @@ class Players extends React.Component {
       showAddPlayerDialog: false
     };
 
+    this.addPlayer = this.addPlayer.bind(this);
+    this.hideAddPlayerDialog = this.hideAddPlayerDialog.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.showModal = this.showModal.bind(this);
     this.deletePlayer = this.deletePlayer.bind(this);
+  }
+
+  addPlayer(name) {
+    this.props.addPlayer(name);
+    this.hideAddPlayerDialog();
+  }
+
+  hideAddPlayerDialog() {
+    this.setState({
+      showAddPlayerDialog: false
+    });
   }
 
   deletePlayer() {
@@ -71,13 +84,6 @@ class Players extends React.Component {
     }).cloneWithRows(this.props.players);
     const removeName = this.state.selectedPlayer ?
             this.state.selectedPlayer.name : '';
-
-    const input = this.props.showAddPlayerDialog ?
-      <AddPlayerInput
-        onSave={this.addPlayer}
-        onCancel={() => this.setState({ showAddPlayerDialog: false })}
-      /> : null;
-
     return (
       <View style={styles.mainContainer}>
         <ContextMenu
@@ -91,33 +97,37 @@ class Players extends React.Component {
           message={`Remove player '${removeName}'?`}
           visible={this.state.showDeleteConfirmation}
         />
-        {input}
+        <AddPlayerModal
+          onSave={this.addPlayer}
+          onCancel={this.hideAddPlayerDialog}
+          visible={this.state.showAddPlayerDialog}
+        />
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}
         />
-        <AddActionButton onPress={this.props.toggleAddPlayerDialog} />
+        <AddActionButton
+          onPress={() => this.setState({ showAddPlayerDialog: true })}
+        />
       </View>
     );
   }
 }
 
 Players.propTypes = {
+  addPlayer: React.PropTypes.func.isRequired,
   removePlayer: React.PropTypes.func.isRequired,
-  players: React.PropTypes.array.isRequired,
-  showAddPlayerDialog: React.PropTypes.bool.isRequired,
-  toggleAddPlayerDialog: React.PropTypes.func.isRequired
+  players: React.PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  players: state.players,
-  showAddPlayerDialog: state.UI.showAddPlayerDialog
+  players: state.players
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  removePlayer: bindActionCreators(removePlayer, dispatch),
-  toggleAddPlayerDialog: bindActionCreators(showAddPlayerDialog, dispatch)
+  addPlayer: bindActionCreators(addPlayer, dispatch),
+  removePlayer: bindActionCreators(removePlayer, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Players);

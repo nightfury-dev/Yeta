@@ -11,8 +11,6 @@ import {
   SCORE_UPDATED,
   GAME_REMOVED,
   CURRENT_GAME_CHANGED,
-  SHOW_ADD_PLAYER_DIALOG,
-  HIDE_ADD_PLAYER_DIALOG
 } from './actionTypes';
 
 
@@ -93,12 +91,4 @@ export function changeCurrentGame(game) {
     type: CURRENT_GAME_CHANGED,
     game
   };
-}
-
-export function showAddPlayerDialog() {
-  return { type: SHOW_ADD_PLAYER_DIALOG };
-}
-
-export function hideAddPlayerDialog() {
-  return { type: HIDE_ADD_PLAYER_DIALOG };
 }
