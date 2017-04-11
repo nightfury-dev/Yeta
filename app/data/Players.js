@@ -30,7 +30,7 @@ const save = (name) => new Promise((success) => {
 });
 
 const remove = (id) => new Promise((success) => {
-  const player = this.findById(id);
+  const player = findById(id);
   const removableScores = scores.filtered('player.id = $0', id);
   realm.write(() => {
     realm.delete(removableScores);
