@@ -72,7 +72,7 @@ class SelectPlayers extends React.Component {
     }).cloneWithRows(this.props.players);
     const isPlayersSelected = _.some(this.state.selectedPlayers, p => p);
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <AddPlayerModal
           onSave={this.addPlayer}
           onCancel={this.hideAddPlayerDialog}
@@ -84,16 +84,16 @@ class SelectPlayers extends React.Component {
             renderRow={this.renderRow}
             renderSeparator={this.renderSeparator}
           />
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Button
-              disabled={!isPlayersSelected}
-              style={StyleSheet.flatten(styles.button)}
-              onPress={this.playersSelected}
-            >
-              <Text style={styles.baseText}>Continue</Text>
-            </Button>
-          </View>
         </ScrollView>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Button
+            disabled={!isPlayersSelected}
+            style={StyleSheet.flatten(styles.button)}
+            onPress={this.playersSelected}
+          >
+            <Text style={styles.baseText}>Continue</Text>
+          </Button>
+        </View>
         <AddActionButton
           onPress={() => this.setState({ showAddPlayerDialog: true })}
         />

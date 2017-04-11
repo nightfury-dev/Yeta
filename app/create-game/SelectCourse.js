@@ -58,12 +58,14 @@ class SelectCourse extends React.Component {
     }).cloneWithRows(this.props.courses);
     const isCourseSelected = this.state && this.state.courseSelected !== null;
     return (
-      <ScrollView>
-        <ListView
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-          renderSeparator={this.renderSeparator}
-        />
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <ListView
+            dataSource={dataSource}
+            renderRow={this.renderRow}
+            renderSeparator={this.renderSeparator}
+          />
+        </ScrollView>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Button
             disabled={!isCourseSelected}
@@ -73,7 +75,7 @@ class SelectCourse extends React.Component {
             <Text style={styles.baseText}>Continue</Text>
           </Button>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
