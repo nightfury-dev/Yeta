@@ -7,6 +7,7 @@ import realm from './realm';
 
 const players = realm.objects('Player');
 const scores = realm.objects('Score');
+const games = realm.objects('Game');
 
 const getAll = () => _.map(players, normalize);
 
@@ -33,6 +34,17 @@ const remove = (id) => new Promise((success) => {
   const player = findById(id);
   const removableScores = scores.filtered('player.id = $0', id);
   realm.write(() => {
+    _.forEach(games, (game) => {
+      const newPlayers = _.filter(game.players, (p) => p.id !== id);
+      if (newPlayers.length !== game.players.length) {
+        game.players = newPlayers;
+      }
+
+      if (game.players.length === 0) {
+        realm.delete(game);
+      }
+    });
+
     realm.delete(removableScores);
     realm.delete(player);
     success();

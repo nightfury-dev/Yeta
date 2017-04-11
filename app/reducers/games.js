@@ -6,7 +6,8 @@ import {
   HOLE_UPDATED,
   SCORE_UPDATED,
   GAME_REMOVED,
-  COURSE_UPDATED
+  COURSE_UPDATED,
+  PLAYER_REMOVED
 } from '../actions/actionTypes';
 
 
@@ -30,8 +31,12 @@ function gamesReducer(state = [], action) {
     case COURSE_UPDATED: {
       return games.getAll();
     }
-    case GAME_REMOVED:
+    case GAME_REMOVED: {
       return games.getAll();
+    }
+    case PLAYER_REMOVED: {
+      return games.getAll();
+    }
     default:
       return state;
   }
