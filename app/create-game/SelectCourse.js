@@ -64,6 +64,7 @@ class SelectCourse extends React.Component {
             dataSource={dataSource}
             renderRow={this.renderRow}
             renderSeparator={this.renderSeparator}
+            enableEmptySections
           />
         </ScrollView>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>

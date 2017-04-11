@@ -45,6 +45,7 @@ class ScoreGrid extends React.Component {
       <ListView
         dataSource={ds.cloneWithRows(this.props.game.players)}
         renderRow={this.renderRow}
+        enableEmptySections
       />
     </ScrollView>);
   }

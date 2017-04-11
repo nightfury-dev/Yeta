@@ -95,6 +95,7 @@ class ResumeGame extends React.Component {
         dataSource={dataSource}
         renderRow={this.renderRow}
         renderSeparator={this.renderSeparator}
+        enableEmptySections
       />
     </View>);
   }

@@ -106,6 +106,7 @@ class Players extends React.Component {
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}
+          enableEmptySections
         />
         <AddActionButton
           onPress={() => this.setState({ showAddPlayerDialog: true })}

@@ -89,6 +89,7 @@ class Scorecard extends React.Component {
       renderHeader={this.renderHeader}
       renderRow={this.renderRow}
       renderFooter={this.renderFooter}
+      enableEmptySections
     />);
   }
 }
