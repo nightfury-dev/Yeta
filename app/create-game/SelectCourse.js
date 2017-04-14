@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, ListView, View, Text, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
+import { Button, ListItem, Radio, Right } from 'native-base';
 
-import CourseListElement from '../shared/components/CourseListElement';
 import styles from './styles/SelectCourseStyles';
 
 
@@ -36,19 +35,13 @@ class SelectCourse extends React.Component {
   renderRow(rowData) {
     const selected = this.state && this.state.selectedCourse &&
             this.state.selectedCourse.id === rowData.id;
-    return (<CourseListElement
-      course={rowData}
-      selected={selected}
-      onPress={() => this.handleSelection(rowData)}
-    />);
-  }
-
-  renderSeparator(sectionID, rowID) {
     return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={styles.listSeparator}
-      />
+      <ListItem onPress={() => this.handleSelection(rowData)}>
+        <Text style={styles.baseText}>{rowData.name}</Text>
+        <Right>
+          <Radio selected={selected} />
+        </Right>
+      </ListItem>
     );
   }
 
@@ -63,7 +56,6 @@ class SelectCourse extends React.Component {
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}
-            renderSeparator={this.renderSeparator}
             enableEmptySections
           />
         </ScrollView>

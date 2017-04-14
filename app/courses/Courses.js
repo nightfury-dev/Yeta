@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, ListView } from 'react-native';
+import { View, ListView, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { ListItem } from 'native-base';
 
-import CourseListElement from '../shared/components/CourseListElement';
 import styles from './styles/CoursesStyles';
 import AddActionButton from '../shared/components/AddActionButton';
 
@@ -27,18 +27,10 @@ class Courses extends React.Component {
   }
 
   renderRow(rowData) {
-    return (<CourseListElement
-      course={rowData}
-      onLongPress={() => this.onLongPress(rowData)}
-    />);
-  }
-
-  renderSeparator(sectionID, rowID) {
     return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={styles.listSeparator}
-      />
+      <ListItem onLongPress={() => this.onLongPress(rowData)}>
+        <Text style={styles.baseText}>{rowData.name}</Text>
+      </ListItem>
     );
   }
 
@@ -52,7 +44,6 @@ class Courses extends React.Component {
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow}
-          renderSeparator={this.renderSeparator}
           enableEmptySections
         />
         <AddActionButton onPress={this.addCourse} />
