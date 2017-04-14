@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, ListView } from 'react-native';
+import { View, ListView, Text } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { ListItem } from 'native-base';
 
 import { addPlayer, removePlayer } from '../actions/actionCreators';
 import ContextMenu from '../shared/components/ContextMenu';
 import Confirmation from '../shared/components/Confirmation';
-import PlayerListElement from '../shared/components/PlayerListElement';
 import styles from './styles/PlayersStyles';
 import AddActionButton from '../shared/components/AddActionButton';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
@@ -63,18 +63,10 @@ class Players extends React.Component {
   }
 
   renderRow(rowData) {
-    return (<PlayerListElement
-      player={rowData}
-      onLongPress={() => this.showModal(rowData)}
-    />);
-  }
-
-  renderSeparator(sectionID, rowID) {
     return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={styles.listSeparator}
-      />
+      <ListItem onLongPress={() => this.showModal(rowData)}>
+        <Text style={styles.baseText}>{rowData.name}</Text>
+      </ListItem>
     );
   }
 
@@ -105,7 +97,6 @@ class Players extends React.Component {
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow}
-          renderSeparator={this.renderSeparator}
           enableEmptySections
         />
         <AddActionButton

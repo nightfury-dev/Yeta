@@ -3,12 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ScrollView, View, ListView, Text, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
+import { Button, CheckBox, ListItem, Right } from 'native-base';
 
 import { addPlayer } from '../actions/actionCreators';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
 import AddActionButton from '../shared/components/AddActionButton';
-import PlayerListElement from '../shared/components/PlayerListElement';
 import styles from './styles/SelectPlayersStyles';
 
 
@@ -53,16 +52,13 @@ class SelectPlayers extends React.Component {
   }
 
   renderRow(rowData) {
-    return (<PlayerListElement
-      player={rowData}
-      selected={this.state.selectedPlayers[rowData.id]}
-      onPress={() => this.handleSelection(rowData)}
-    />);
-  }
-
-  renderSeparator(sectionID, rowID) {
     return (
-      <View key={`${sectionID}-${rowID}`} style={styles.listSeparator} />
+      <ListItem onPress={() => this.handleSelection(rowData)}>
+        <Text style={styles.baseText}>{rowData.name}</Text>
+        <Right>
+          <CheckBox checked={this.state.selectedPlayers[rowData.id]} />
+        </Right>
+      </ListItem>
     );
   }
 
@@ -82,7 +78,6 @@ class SelectPlayers extends React.Component {
           <ListView
             dataSource={dataSource}
             renderRow={this.renderRow}
-            renderSeparator={this.renderSeparator}
             enableEmptySections
           />
         </ScrollView>
