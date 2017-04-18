@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook start -p 7007"
   },
   "dependencies": {
     "lodash": "^4.13.1",
@@ -34,7 +35,8 @@
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^15.4.1",
     "reactotron-react-native": "^1.1.4",
-    "reactotron-redux": "^1.1.4"
+    "reactotron-redux": "^1.1.4",
+    "@kadira/react-native-storybook": "^2.0.0"
   },
   "jest": {
     "preset": "jest-react-native"
