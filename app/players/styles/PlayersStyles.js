@@ -8,5 +8,8 @@ export default StyleSheet.create({
   input: ApplicationStyles.input,
   centeredItem: ApplicationStyles.centeredItem,
   listSeparator: ApplicationStyles.listSeparator,
-  button: { backgroundColor: Colors.orange }
+  button: { backgroundColor: Colors.orange },
+  row: {
+    backgroundColor: Colors.background
+  }
 });

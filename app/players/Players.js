@@ -1,22 +1,20 @@
 import React from 'react';
-import { View, ListView, Text } from 'react-native';
+import { View, ListView, Text, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ListItem } from 'native-base';
 
 import { addPlayer, removePlayer } from '../actions/actionCreators';
-import ContextMenu from '../shared/components/ContextMenu';
 import Confirmation from '../shared/components/Confirmation';
 import styles from './styles/PlayersStyles';
 import AddActionButton from '../shared/components/AddActionButton';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
+import SwipableListItem from '../shared/components/SwipableListItem';
 
 
 class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showContextMenu: false,
       showDeleteConfirmation: false,
       showAddPlayerDialog: false
     };
@@ -25,7 +23,6 @@ class Players extends React.Component {
     this.hideAddPlayerDialog = this.hideAddPlayerDialog.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
     this.renderRow = this.renderRow.bind(this);
-    this.showModal = this.showModal.bind(this);
     this.deletePlayer = this.deletePlayer.bind(this);
   }
 
@@ -48,25 +45,22 @@ class Players extends React.Component {
     });
   }
 
-  confirmDelete() {
+  confirmDelete(player) {
     this.setState({
-      showContextMenu: false,
-      showDeleteConfirmation: true
-    });
-  }
-
-  showModal(player) {
-    this.setState({
-      showContextMenu: true,
+      showDeleteConfirmation: true,
       selectedPlayer: player
     });
   }
 
   renderRow(rowData) {
+    const buttons = [{
+      icon: 'trash',
+      onPress: () => this.confirmDelete(rowData)
+    }];
     return (
-      <ListItem onLongPress={() => this.showModal(rowData)}>
+      <SwipableListItem style={StyleSheet.flatten(styles.row)} buttons={buttons}>
         <Text style={styles.baseText}>{rowData.name}</Text>
-      </ListItem>
+      </SwipableListItem>
     );
   }
 
@@ -78,11 +72,6 @@ class Players extends React.Component {
             this.state.selectedPlayer.name : '';
     return (
       <View style={styles.mainContainer}>
-        <ContextMenu
-          visible={this.state.showContextMenu}
-          onDelete={this.confirmDelete}
-          onClose={() => this.setState({ showContextMenu: false })}
-        />
         <Confirmation
           onConfirm={this.deletePlayer}
           onCancel={() => this.setState({ showDeleteConfirmation: false })}

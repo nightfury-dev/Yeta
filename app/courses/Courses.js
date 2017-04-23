@@ -1,12 +1,13 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, ListView, Text } from 'react-native';
+import { View, ListView, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { ListItem } from 'native-base';
 
 import styles from './styles/CoursesStyles';
 import AddActionButton from '../shared/components/AddActionButton';
+import SwipableListItem from '../shared/components/SwipableListItem';
+
 
 
 class Courses extends React.Component {
@@ -14,23 +15,20 @@ class Courses extends React.Component {
     super(props);
 
     this.renderRow = this.renderRow.bind(this);
-    this.onLongPress = this.onLongPress.bind(this);
-    this.addCourse = this.addCourse.bind(this);
-  }
-
-  onLongPress(course) {
-    Actions.addcourse({ course });
-  }
-
-  addCourse() {
-    Actions.addcourse();
   }
 
   renderRow(rowData) {
+    const buttons = [{
+      icon: 'pencil',
+      onPress: () => Actions.addcourse({ course: rowData })
+    }];
     return (
-      <ListItem onLongPress={() => this.onLongPress(rowData)}>
+      <SwipableListItem
+        style={StyleSheet.flatten(styles.row)}
+        buttons={buttons}
+      >
         <Text style={styles.baseText}>{rowData.name}</Text>
-      </ListItem>
+      </SwipableListItem>
     );
   }
 
@@ -46,7 +44,7 @@ class Courses extends React.Component {
           renderRow={this.renderRow}
           enableEmptySections
         />
-        <AddActionButton onPress={this.addCourse} />
+        <AddActionButton onPress={() => Actions.addcourse()} />
       </View>
     );
   }

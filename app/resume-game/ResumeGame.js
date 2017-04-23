@@ -6,7 +6,6 @@ import { View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
-import ContextMenu from '../shared/components/ContextMenu';
 import Confirmation from '../shared/components/Confirmation';
 import GameListElement from './GameListElement';
 import styles from './styles/ResumeGameStyles';
@@ -16,12 +15,10 @@ class ResumeGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showContextMenu: false,
       showDeleteConfirmation: false
     };
     this.renderRow = this.renderRow.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
-    this.showModal = this.showModal.bind(this);
     this.deleteGame = this.deleteGame.bind(this);
   }
 
@@ -32,16 +29,9 @@ class ResumeGame extends React.Component {
     Actions.game();
   }
 
-  confirmDelete() {
+  confirmDelete(game) {
     this.setState({
-      showContextMenu: false,
-      showDeleteConfirmation: true
-    });
-  }
-
-  showModal(game) {
-    this.setState({
-      showContextMenu: true,
+      showDeleteConfirmation: true,
       selectedGame: game
     });
   }
@@ -59,7 +49,7 @@ class ResumeGame extends React.Component {
       <GameListElement
         game={rowData}
         onPress={() => this.handleSelection(rowData)}
-        onLongPress={() => this.showModal(rowData)}
+        onDelete={() => this.confirmDelete(rowData)}
     />
     );
   }
@@ -80,11 +70,6 @@ class ResumeGame extends React.Component {
             ? 'Do you really want to remove game?'
             : '';
     return (<View style={styles.mainContainer}>
-      <ContextMenu
-        visible={this.state.showContextMenu}
-        onDelete={this.confirmDelete}
-        onClose={() => this.setState({ showContextMenu: false })}
-      />
       <Confirmation
         onConfirm={this.deleteGame}
         onCancel={() => this.setState({ showDeleteConfirmation: false })}

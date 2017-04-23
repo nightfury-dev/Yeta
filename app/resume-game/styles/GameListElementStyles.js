@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles, Fonts } from '../../themes';
+import { ApplicationStyles, Fonts, Colors } from '../../themes';
 
 const bigText = { ...ApplicationStyles.baseText, textAlign: 'left' };
 
@@ -32,5 +32,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
-  nameText
+  nameText,
+  row: {
+    backgroundColor: Colors.background
+  }
 });

@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
+import SwipableListItem from '../shared/components/SwipableListItem';
 import styles from './styles/GameListElementStyles';
 
 
@@ -53,11 +54,18 @@ function GameListElement(props) {
       );
     }
   );
-  return (<TouchableHighlight
-    onPress={props.onPress}
-    onLongPress={props.onLongPress}
-  >
-    <View style={styles.listItem}>
+
+  const buttons = [{
+    icon: 'trash',
+    onPress: () => props.onDelete()
+  }];
+
+  return (
+    <SwipableListItem
+      style={StyleSheet.flatten(styles.row)}
+      onPress={props.onPress}
+      buttons={buttons}
+    >
       <View>
         <Text style={styles.bigText}>{props.game.course.name}</Text>
         <Text style={styles.tinyText}>{formattedDate}</Text>
@@ -67,13 +75,13 @@ function GameListElement(props) {
           {players}
         </View>
       </View>
-    </View>
-  </TouchableHighlight>);
+    </SwipableListItem>
+  );
 }
 
 GameListElement.propTypes = {
   game: React.PropTypes.object.isRequired,
-  onLongPress: React.PropTypes.func,
+  onDelete: React.PropTypes.func,
   onPress: React.PropTypes.func
 };
 
