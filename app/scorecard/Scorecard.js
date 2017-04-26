@@ -84,7 +84,6 @@ class Scorecard extends React.Component {
         );
     const dataSource = ds.cloneWithRows(this.createRowData());
     return (<ListView
-      style={styles.mainContainer}
       dataSource={dataSource}
       renderHeader={this.renderHeader}
       renderRow={this.renderRow}

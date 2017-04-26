@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, PanResponder } from 'react-native';
 
 
 const MOVE_THRESHOLD_PX = 75;
@@ -7,23 +7,28 @@ const MOVE_THRESHOLD_PX = 75;
 class SwipeView extends React.Component {
   constructor(props) {
     super(props);
-    this.onResponderGrant = this.onResponderGrant.bind(this);
-    this.onStartShouldSetResponder = this.onStartShouldSetResponder.bind(
-            this
-        );
-    this.onResponderRelease = this.onResponderRelease.bind(this);
+    this.onPanResponderGrant = this.onPanResponderGrant.bind(this);
+    this.onPanResponderRelease = this.onPanResponderRelease.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
-  onResponderGrant(e) {
+
+  componentWillMount() {
+    this.panResponder = PanResponder.create({
+      onPanResponderGrant: this.onPanResponderGrant,
+      onPanResponderRelease: this.onPanResponderRelease,
+      onMoveShouldSetPanResponder: (e, gestureState) => {
+        return gestureState.dx > 0 || gestureState.dx < 0;
+      }
+    });
+  }
+
+  onPanResponderGrant(e, gestureState) {
     this.setState({
       touchStart: e.nativeEvent
     });
   }
 
-  onStartShouldSetResponder() {
-    return true;
-  }
-
-  onResponderRelease(e) {
+  onPanResponderRelease(e) {
     const diff = this.state.touchStart.pageX - e.nativeEvent.pageX;
     const move = Math.abs(diff) > MOVE_THRESHOLD_PX;
     if (move && diff < 0) {
@@ -48,9 +53,7 @@ class SwipeView extends React.Component {
   render() {
     return (<View
       style={this.props.style}
-      onResponderGrant={this.onResponderGrant}
-      onStartShouldSetResponder={this.onStartShouldSetResponder}
-      onResponderRelease={this.onResponderRelease}
+      {...this.panResponder.panHandlers}
     >
       {this.props.children}
     </View>);

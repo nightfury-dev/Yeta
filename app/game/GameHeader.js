@@ -1,10 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text } from 'react-native';
 
-import { Colors } from '../themes';
 import styles from './styles/GameHeaderStyles';
 
 
@@ -21,13 +18,6 @@ function GameHeader({ game }) {
       <Text style={styles.baseText}>
         Par: {par}
       </Text>
-      <TouchableHighlight onPress={() => { Actions.scorecard(); }}>
-        <Icon
-          name="table"
-          size={40}
-          color={Colors.orange}
-        />
-      </TouchableHighlight>
     </View>
   );
 }

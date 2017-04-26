@@ -1,7 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles } from '../../themes';
+import { ApplicationStyles, Colors } from '../../themes';
 
 export default StyleSheet.create({
-  ...ApplicationStyles.screen
+  ...ApplicationStyles.screen,
+  footer: {
+    flex: 1,
+    backgroundColor: Colors.background
+  }
 });
