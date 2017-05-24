@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, ListView, Text, StyleSheet } from 'react-native';
+import { ListView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { addPlayer, removePlayer } from '../actions/actionCreators';
 import Confirmation from '../shared/components/Confirmation';
-import styles from './styles/PlayersStyles';
+import Screen from '../shared/components/Screen';
 import AddActionButton from '../shared/components/AddActionButton';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
-import SwipableListItem from '../shared/components/SwipableListItem';
+import ListRow from './ListRow';
 
 
 class Players extends React.Component {
@@ -53,14 +53,11 @@ class Players extends React.Component {
   }
 
   renderRow(rowData) {
-    const buttons = [{
-      icon: 'trash',
-      onPress: () => this.confirmDelete(rowData)
-    }];
     return (
-      <SwipableListItem style={StyleSheet.flatten(styles.row)} buttons={buttons}>
-        <Text style={styles.baseText}>{rowData.name}</Text>
-      </SwipableListItem>
+      <ListRow
+        text={rowData.name}
+        onDelete={() => this.confirmDelete(rowData)}
+      />
     );
   }
 
@@ -71,7 +68,7 @@ class Players extends React.Component {
     const removeName = this.state.selectedPlayer ?
             this.state.selectedPlayer.name : '';
     return (
-      <View style={styles.mainContainer}>
+      <Screen>
         <Confirmation
           onConfirm={this.deletePlayer}
           onCancel={() => this.setState({ showDeleteConfirmation: false })}
@@ -91,7 +88,7 @@ class Players extends React.Component {
         <AddActionButton
           onPress={() => this.setState({ showAddPlayerDialog: true })}
         />
-      </View>
+      </Screen>
     );
   }
 }

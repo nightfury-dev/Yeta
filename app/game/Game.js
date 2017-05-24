@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, StyleSheet } from 'react-native';
-import { Button, Footer, FooterTab } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View } from 'react-native';
 
 import { updateHole, updateScore } from '../actions/actionCreators';
 import GameInput from './GameInput';
 import Scorecard from '../scorecard';
-import styles from './styles/GameStyles';
+import Footer from './Footer';
+import Screen from '../shared/components/Screen';
 
 
 class Game extends React.Component {
@@ -37,21 +36,15 @@ class Game extends React.Component {
       />)
       : <Scorecard />;
     return (
-      <View style={styles.mainContainer}>
+      <Screen>
         <View style={{ flex: 11 }}>
           {component}
         </View>
-        <Footer style={StyleSheet.flatten(styles.footer)}>
-          <FooterTab>
-            <Button onPress={() => this.setState({ component: 'game' })}>
-              <Icon style={{ color: 'red' }} name="pencil" size={28} />
-            </Button>
-            <Button onPress={() => this.setState({ component: 'scorecard' })}>
-              <Icon style={{ color: 'green' }} name="trophy" size={28} />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </View>
+        <Footer
+          onShowGame={() => this.setState({ component: 'game' })}
+          onShowScorecard={() => this.setState({ component: 'scorecard' })}
+        />
+      </Screen>
     );
   }
 }

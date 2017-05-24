@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
@@ -8,7 +7,7 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import { createGame } from '../actions/actionCreators';
 import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
-import styles from './styles/InitGameStyles';
+import Screen from '../shared/components/Screen';
 
 
 class InitGame extends React.Component {
@@ -59,10 +58,10 @@ class InitGame extends React.Component {
         throw new Error(`Invalid state '${this.state.currentState}'`);
     }
     return (
-      <View style={styles.mainContainer}>
+      <Screen>
         {component}
-      </View>
-        );
+      </Screen>
+    );
   }
 }
 

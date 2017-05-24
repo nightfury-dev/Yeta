@@ -2,13 +2,13 @@ import * as _ from 'lodash';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, ListView } from 'react-native';
+import { ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { changeCurrentGame, removeGame } from '../actions/actionCreators';
 import Confirmation from '../shared/components/Confirmation';
+import Screen from '../shared/components/Screen';
 import GameListElement from './GameListElement';
-import styles from './styles/ResumeGameStyles';
 
 
 class ResumeGame extends React.Component {
@@ -54,14 +54,6 @@ class ResumeGame extends React.Component {
     );
   }
 
-  renderSeparator(sectionID, rowID) {
-    return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={styles.listSeparator} />
-    );
-  }
-
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -69,20 +61,21 @@ class ResumeGame extends React.Component {
     const removeGameString = this.state.selectedGame
             ? 'Do you really want to remove game?'
             : '';
-    return (<View style={styles.mainContainer}>
-      <Confirmation
-        onConfirm={this.deleteGame}
-        onCancel={() => this.setState({ showDeleteConfirmation: false })}
-        message={removeGameString}
-        visible={this.state.showDeleteConfirmation}
-      />
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderSeparator={this.renderSeparator}
-        enableEmptySections
-      />
-    </View>);
+    return (
+      <Screen>
+        <Confirmation
+          onConfirm={this.deleteGame}
+          onCancel={() => this.setState({ showDeleteConfirmation: false })}
+          message={removeGameString}
+          visible={this.state.showDeleteConfirmation}
+        />
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          enableEmptySections
+        />
+      </Screen>
+    );
   }
 }
 
