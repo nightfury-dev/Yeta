@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 
+import Row from './Row';
+import TextWrapper from './TextWrapper';
+import ButtonsWrapper from './ButtonsWrapper';
+import RowText from './RowText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
-import styles from './styles/HoleGridElementStyles';
 
 
 class HoleGridElement extends React.Component {
@@ -19,18 +21,18 @@ class HoleGridElement extends React.Component {
 
   render() {
     return (
-      <View style={styles.row}>
-        <View style={{ flex: 3 }}>
-          <Text style={styles.baseText}>#{this.props.holeNumber}</Text>
-        </View>
-        <View style={{ flex: 2 }}>
+      <Row>
+        <TextWrapper>
+          <RowText>#{this.props.holeNumber}</RowText>
+        </TextWrapper>
+        <ButtonsWrapper>
           <NumberSwitcher
             number={this.props.par}
             onDecrease={this.decreasePar}
             onIncrease={this.props.onParIncreased}
           />
-        </View>
-      </View>
+        </ButtonsWrapper>
+      </Row>
     );
   }
 }

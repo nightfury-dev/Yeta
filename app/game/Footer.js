@@ -10,13 +10,13 @@ const style = {
   backgroundColor: Colors.background
 };
 
-const Footer = (props) => (
+const Footer = ({ onShowGame, onShowScorecard }) => (
   <NativeBaseFooter style={style}>
     <FooterTab>
-      <Button onPress={props.onShowGame}>
+      <Button onPress={onShowGame}>
         <Icon style={{ color: 'red' }} name="pencil" size={28} />
       </Button>
-      <Button onPress={props.onShowScorecard}>
+      <Button onPress={onShowScorecard}>
         <Icon style={{ color: 'green' }} name="trophy" size={28} />
       </Button>
     </FooterTab>

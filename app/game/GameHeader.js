@@ -1,24 +1,29 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View, Text } from 'react-native';
+import styled from 'styled-components/native';
 
-import styles from './styles/GameHeaderStyles';
+import BaseText from '../shared/components/BaseText';
 
 
-function GameHeader({ game }) {
+const Container = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const GameHeader = ({ game }) => {
   const par = _.find(
     game.course.holes,
     (h) => h.holenumber === game.currentHole
   ).par;
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-      <Text style={styles.baseText}>
+    <Container>
+      <BaseText>
         Hole: {game.currentHole}/{game.course.holes.length}
-      </Text>
-      <Text style={styles.baseText}>
+      </BaseText>
+      <BaseText>
         Par: {par}
-      </Text>
-    </View>
+      </BaseText>
+    </Container>
   );
 }
 

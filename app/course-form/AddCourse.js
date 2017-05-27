@@ -2,15 +2,15 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-  Text,
-  View,
-  ScrollView,
-  StyleSheet
-} from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import styled from 'styled-components/native';
 
+import Row from './Row';
+import TextWrapper from './TextWrapper';
+import ButtonsWrapper from './ButtonsWrapper';
+import RowText from './RowText';
 import Screen from '../shared/components/Screen';
 import { addCourse, updateCourse } from '../actions/actionCreators';
 import HoleGrid from './HoleGrid';
@@ -20,6 +20,7 @@ import NumberSwitcher from '../shared/components/NumberSwitcher';
 
 const DEFAULT_PAR = 3;
 const DEFAULT_HOLE_COUNT = 9;
+
 
 class AddCourse extends React.Component {
   constructor(props) {
@@ -73,18 +74,18 @@ class AddCourse extends React.Component {
     return (
       <Screen>
         <ScrollView>
-          <View style={styles.row}>
-            <View style={{ flex: 3 }}>
-              <Text style={styles.baseText}>Number of holes</Text>
-            </View>
-            <View style={{ flex: 2 }}>
+          <Row>
+            <TextWrapper>
+              <RowText>Number of holes</RowText>
+            </TextWrapper>
+            <ButtonsWrapper>
               <NumberSwitcher
                 number={this.state.pars.length}
                 onDecrease={this.removeRow}
                 onIncrease={this.addRow}
               />
-            </View>
-          </View>
+            </ButtonsWrapper>
+          </Row>
           <View>
             <InputGroup borderType="rounded">
               <Input
@@ -100,7 +101,7 @@ class AddCourse extends React.Component {
             style={StyleSheet.flatten([styles.button, styles.centeredItem])}
             onPress={this.saveCourse}
           >
-            <Text style={styles.baseText}>Save course</Text>
+            <RowText>Save course</RowText>
           </Button>
         </ScrollView>
       </Screen>

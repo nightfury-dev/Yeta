@@ -1,16 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import styled from 'styled-components/native';
 
 import { Colors, Metrics } from '../../themes';
 
-const style = {
-  flex: 1,
-  backgroundColor: Colors.background,
-  paddingTop: Metrics.navBarHeight
-}
+
+const View = styled.View`
+  flex: 1;
+  background-color: ${Colors.background};
+  padding-top: ${Metrics.navBarHeight}
+`;
 
 const Screen = ({ children }) => (
-  <View style={style}>
+  <View>
     {children}
   </View>
 );

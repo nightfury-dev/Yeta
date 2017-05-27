@@ -20,4 +20,9 @@ class AnimatedText extends React.Component {
   }
 }
 
+AnimatedText.propTypes = {
+  children: React.PropTypes.any.isRequired
+};
+
+
 export default AnimatedText;

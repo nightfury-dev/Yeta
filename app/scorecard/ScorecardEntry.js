@@ -1,35 +1,52 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import styled from 'styled-components/native';
 
-import styles from './styles/ScorecardEntryStyles';
+import { Colors, Fonts } from '../themes';
 
 
-function ScorecardEntry(props) {
-  const rowCells = props.collection.map((entry, index) => {
-    const cellContent = props.getContent(entry);
-    return (<View key={index} style={styles.scoreGridCell}>
-      <Text
-        numberOfLines={1}
-        style={styles.gridCellText}
-        key={index}
-      >
-        {cellContent}
-      </Text>
-    </View>);
+const Cell = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
+const FirstCell = styled.View`
+  flex: 1;
+  align-items: flex-start;
+`;
+
+const CellText = styled.Text`
+  font-size: ${Fonts.size.small};
+  color: ${Colors.text};
+`;
+
+const Row = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5;
+  border-bottom-width: 1;
+  border-color: ${Colors.orange};
+`;
+
+const ScorecardEntry = (props) => {
+  const cells = props.collection.map((entry, index) => {
+    const content = props.getContent(entry);
+    return (
+      <Cell key={index}>
+        <CellText numberOfLines={1}>{content}</CellText>
+      </Cell>
+    );
   });
-  const firstCell = (<View style={styles.scoreGridFirstCell}>
-    <Text
-      numberOfLines={1}
-      style={styles.gridCellText}
-    >
-      {props.firstCellContent}
-    </Text>
-  </View>);
-  return (<View style={styles.scoreCardRow}>
-    {firstCell}
-    {rowCells}
-  </View>);
-}
+
+  return (
+    <Row>
+      <FirstCell>
+        <CellText numberOfLines={1}>{props.firstCellContent}</CellText>
+      </FirstCell>
+      {cells}
+    </Row>
+  );
+};
 
 ScorecardEntry.propTypes = {
   collection: React.PropTypes.array.isRequired,

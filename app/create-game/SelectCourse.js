@@ -1,10 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, ListView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, ListView, StyleSheet } from 'react-native';
 import { Button, ListItem, Radio, Right } from 'native-base';
+import styled from 'styled-components/native';
 
+import BaseText from '../shared/components/BaseText';
 import styles from './styles/SelectCourseStyles';
 
+
+const Container = styled.View`
+  flex: 1;
+`;
+
+const HorizontallyCentered = styled.View`
+  flex-direction: row;
+  justify-content: center;
+`;
 
 class SelectCourse extends React.Component {
   constructor(props) {
@@ -37,7 +48,7 @@ class SelectCourse extends React.Component {
             this.state.selectedCourse.id === rowData.id;
     return (
       <ListItem onPress={() => this.handleSelection(rowData)}>
-        <Text style={styles.baseText}>{rowData.name}</Text>
+        <BaseText>{rowData.name}</BaseText>
         <Right>
           <Radio selected={selected} />
         </Right>
@@ -51,7 +62,7 @@ class SelectCourse extends React.Component {
     }).cloneWithRows(this.props.courses);
     const isCourseSelected = this.state && this.state.courseSelected !== null;
     return (
-      <View style={{ flex: 1 }}>
+      <Container>
         <ScrollView>
           <ListView
             dataSource={dataSource}
@@ -59,16 +70,16 @@ class SelectCourse extends React.Component {
             enableEmptySections
           />
         </ScrollView>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <HorizontallyCentered>
           <Button
             disabled={!isCourseSelected}
             style={StyleSheet.flatten(styles.button)}
             onPress={this.courseSelected}
           >
-            <Text style={styles.baseText}>Continue</Text>
+            <BaseText>Continue</BaseText>
           </Button>
-        </View>
-      </View>
+        </HorizontallyCentered>
+      </Container>
     );
   }
 }

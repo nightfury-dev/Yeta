@@ -1,8 +1,18 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'native-base';
+import styled from 'styled-components/native';
 
 import styles from './styles/MenuItemStyles';
+import { Colors, Fonts } from '../themes';
+
+
+const Text = styled.Text`
+  text-align: center;
+  color: ${Colors.text};
+  font-size: ${Fonts.size.normal};
+  font-family: ${Fonts.defaultFontFamily};
+`;
 
 function MenuItem(props) {
   return (<Button
@@ -11,7 +21,7 @@ function MenuItem(props) {
     style={StyleSheet.flatten(styles.menuItem)}
     onPress={props.onPress}
   >
-    <Text style={styles.menuItemText}>{props.label}</Text>
+    <Text>{props.label}</Text>
   </Button>);
 }
 

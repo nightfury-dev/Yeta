@@ -1,9 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
+import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
 import styles from './styles/GameListElementStyles';
+import { Fonts } from '../themes';
 
 
 const formatDate = (date) => {
@@ -14,6 +17,7 @@ const formatDate = (date) => {
   }
 };
 
+// TODO: use same functionality for this and for scorecard
 const getTotalScores = (game) => {
   const scores = {};
   const coursePar = game.course.holes.reduce(
@@ -39,42 +43,61 @@ const getTotalScores = (game) => {
   return scores;
 };
 
-function GameListElement(props) {
-  const totalScores = getTotalScores(props.game);
-  const formattedDate = formatDate(props.game.timeBegin);
-  const players = props.game.players.map(
+
+const TinyText = styled(BaseText)`
+  font-size: ${Fonts.size.tiny};
+  text-align: left;
+`;
+
+const BigText = styled(BaseText)`
+  text-align: left;
+`;
+
+const NameText = styled(TinyText)`
+  text-align: right;
+`;
+
+const RightWrapper = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const RightContainer = styled.View`
+  margin-left: 20;
+  align-self: flex-start;
+`;
+
+const GameListElement = ({ game, onDelete, onPress }) => {
+  const totalScores = getTotalScores(game);
+  const formattedDate = formatDate(game.timeBegin);
+  const players = game.players.map(
     (player) => {
       const score = totalScores[player.id];
-      return (
-        <Text
-          key={player.id}
-          style={styles.nameText}>
-          {player.name} ({score})
-        </Text>
-      );
+      return <NameText key={player.id}>{player.name} ({score})</NameText>;
     }
   );
 
   const buttons = [{
     icon: 'trash',
-    onPress: () => props.onDelete()
+    onPress: () => onDelete()
   }];
 
   return (
     <SwipableListItem
       style={StyleSheet.flatten(styles.row)}
-      onPress={props.onPress}
+      onPress={onPress}
       buttons={buttons}
     >
       <View>
-        <Text style={styles.bigText}>{props.game.course.name}</Text>
-        <Text style={styles.tinyText}>{formattedDate}</Text>
+        <BigText>{game.course.name}</BigText>
+        <TinyText>{formattedDate}</TinyText>
       </View>
-      <View style={styles.rightOuterContainer}>
-        <View style={styles.rightContainer}>
+      <RightWrapper>
+        <RightContainer>
           {players}
-        </View>
-      </View>
+        </RightContainer>
+      </RightWrapper>
     </SwipableListItem>
   );
 }

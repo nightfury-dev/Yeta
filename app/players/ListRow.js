@@ -1,16 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
 
+import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
-import { ApplicationStyles, Colors } from '../themes';
+import { Colors } from '../themes';
 
 const rowStyle = {
   backgroundColor: Colors.background
 };
-
-const textStyle = {
-  ...ApplicationStyles.baseText
-}
 
 const ListRow = (props) => {
   const buttons = [{
@@ -20,7 +16,7 @@ const ListRow = (props) => {
 
   return (
     <SwipableListItem style={rowStyle} buttons={buttons}>
-      <Text style={textStyle}>{props.text}</Text>
+      <BaseText>{props.text}</BaseText>
     </SwipableListItem>
   );
 };

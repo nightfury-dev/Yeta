@@ -2,14 +2,26 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ScrollView, View, ListView, Text, StyleSheet } from 'react-native';
+import { ScrollView, ListView, StyleSheet } from 'react-native';
 import { Button, CheckBox, ListItem, Right } from 'native-base';
+import styled from 'styled-components/native';
 
 import { addPlayer } from '../actions/actionCreators';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
 import AddActionButton from '../shared/components/AddActionButton';
+import BaseText from '../shared/components/BaseText';
+
 import styles from './styles/SelectPlayersStyles';
 
+
+const Container = styled.View`
+  flex: 1;
+`;
+
+const HorizontallyCentered = styled.View`
+  flex-direction: row;
+  justify-content: center;
+`;
 
 class SelectPlayers extends React.Component {
   constructor(props) {
@@ -54,7 +66,7 @@ class SelectPlayers extends React.Component {
   renderRow(rowData) {
     return (
       <ListItem onPress={() => this.handleSelection(rowData)}>
-        <Text style={styles.baseText}>{rowData.name}</Text>
+        <BaseText>{rowData.name}</BaseText>
         <Right>
           <CheckBox checked={this.state.selectedPlayers[rowData.id]} />
         </Right>
@@ -68,7 +80,7 @@ class SelectPlayers extends React.Component {
     }).cloneWithRows(this.props.players);
     const isPlayersSelected = _.some(this.state.selectedPlayers, p => p);
     return (
-      <View style={{ flex: 1 }}>
+      <Container>
         <AddPlayerModal
           onSave={this.addPlayer}
           onCancel={this.hideAddPlayerDialog}
@@ -81,19 +93,19 @@ class SelectPlayers extends React.Component {
             enableEmptySections
           />
         </ScrollView>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <HorizontallyCentered>
           <Button
             disabled={!isPlayersSelected}
             style={StyleSheet.flatten(styles.button)}
             onPress={this.playersSelected}
           >
-            <Text style={styles.baseText}>Continue</Text>
+            <BaseText>Continue</BaseText>
           </Button>
-        </View>
+        </HorizontallyCentered>
         <AddActionButton
           onPress={() => this.setState({ showAddPlayerDialog: true })}
         />
-      </View>
+      </Container>
     );
   }
 }

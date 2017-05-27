@@ -1,15 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import styled from 'styled-components/native';
 
 
-const style = {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center'
-};
+const View = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 const CenteredView = (props) => (
-  <View style={style}>
+  <View>
     {props.children}
   </View>
 );

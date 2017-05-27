@@ -1,22 +1,35 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import styled from 'styled-components/native';
 
 import PlusButton from './PlusButton';
 import MinusButton from './MinusButton';
-import styles from './styles/NumberPickerStyles';
+import BaseText from '../shared/components/BaseText';
 
 
-function NumberPicker(props) {
+const Row = styled.View`
+  flex: 4;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TextContainer = styled.View`
+  flex: 2;
+`;
+
+const NumberPicker = (props) => {
   const additionalText = props.additionalText ? props.additionalText : '';
-  return (<View style={styles.row}>
-    <MinusButton onPress={() => props.numberDecreased()} />
-    <View style={{ flex: 2 }}>
-      <Text style={styles.baseText}>
-        {additionalText} {props.number}
-      </Text>
-    </View>
-    <PlusButton onPress={() => props.numberIncreased()} />
-  </View>);
+  return (
+    <Row>
+      <MinusButton onPress={() => props.numberDecreased()} />
+      <TextContainer>
+        <BaseText>
+          {additionalText} {props.number}
+        </BaseText>
+      </TextContainer>
+      <PlusButton onPress={() => props.numberIncreased()} />
+    </Row>
+  );
 }
 
 NumberPicker.propTypes = {

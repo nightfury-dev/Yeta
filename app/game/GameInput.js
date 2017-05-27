@@ -1,18 +1,18 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { View } from 'react-native';
+import styled from 'styled-components/native';
 
 import ScoreGrid from './ScoreGrid';
 import SwipeView from './SwipeView';
 import GameHeader from './GameHeader';
 
 
-const horizontalLine = {
-  borderStyle: 'solid',
-  borderRadius: 1,
-  borderWidth: 1,
-  borderColor: '#DF878B'
-};
+const HorizontalLine = styled.View`
+  border-style: solid;
+  border-radius: 1;
+  border-width: 1;
+  border-color: #DF878B;
+`;
 
 class GameInput extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class GameInput extends React.Component {
         onLeftSwipe={previousHole}
       >
         <GameHeader game={game} />
-        <View style={horizontalLine} />
+        <HorizontalLine />
         <ScoreGrid game={game} />
       </SwipeView>
     );
