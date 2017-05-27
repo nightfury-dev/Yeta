@@ -7,6 +7,8 @@ import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
 import styles from './styles/GameListElementStyles';
 import { Fonts } from '../themes';
+import { calculateScores } from '../helpers/score';
+import { calculatePar } from '../helpers/course';
 
 
 const formatDate = (date) => {
@@ -16,33 +18,6 @@ const formatDate = (date) => {
     return '';
   }
 };
-
-// TODO: use same functionality for this and for scorecard
-const getTotalScores = (game) => {
-  const scores = {};
-  const coursePar = game.course.holes.reduce(
-      (acc, hole) => acc + hole.par,
-      0
-    );
-  game.scores.forEach((score) => {
-    if (!scores[score.player.id]) {
-      scores[score.player.id] = 0;
-    }
-    scores[score.player.id] += score.score;
-  });
-
-  Object.keys(scores).forEach((playerId) => {
-    const score = scores[playerId] - coursePar;
-    if (score > 0) {
-      scores[playerId] = `+${score}`;
-    } else {
-      scores[playerId] = score;
-    }
-  });
-
-  return scores;
-};
-
 
 const TinyText = styled(BaseText)`
   font-size: ${Fonts.size.tiny};
@@ -69,7 +44,7 @@ const RightContainer = styled.View`
 `;
 
 const GameListElement = ({ game, onDelete, onPress }) => {
-  const totalScores = getTotalScores(game);
+  const totalScores = calculateScores(game.scores, calculatePar(game.course));
   const formattedDate = formatDate(game.timeBegin);
   const players = game.players.map(
     (player) => {
