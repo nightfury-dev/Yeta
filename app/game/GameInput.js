@@ -4,15 +4,7 @@ import styled from 'styled-components/native';
 
 import ScoreGrid from './ScoreGrid';
 import SwipeView from './SwipeView';
-import GameHeader from './GameHeader';
 
-
-const HorizontalLine = styled.View`
-  border-style: solid;
-  border-radius: 1;
-  border-width: 1;
-  border-color: #DF878B;
-`;
 
 class GameInput extends React.Component {
   constructor(props) {
@@ -30,12 +22,10 @@ class GameInput extends React.Component {
     const { nextHole, previousHole, game } = this.props;
     return (
       <SwipeView
-        style={{ flex: 1 }}
+        style={{ flex: 1, marginTop: 55 }}
         onRightSwipe={nextHole}
         onLeftSwipe={previousHole}
       >
-        <GameHeader game={game} />
-        <HorizontalLine />
         <ScoreGrid game={game} />
       </SwipeView>
     );

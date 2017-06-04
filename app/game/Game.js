@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
+import Interactable from 'react-native-interactable';
 
 import { updateHole, updateScore } from '../actions/actionCreators';
 import GameInput from './GameInput';
 import Scorecard from '../scorecard';
 import Footer from './Footer';
 import Screen from '../shared/components/Screen';
+import HoleInfo from './HoleInfo';
 
 
 class Game extends React.Component {
@@ -37,6 +39,7 @@ class Game extends React.Component {
       : <Scorecard />;
     return (
       <Screen>
+        {this.state.component === 'game' && <HoleInfo />}
         <View style={{ flex: 11 }}>
           {component}
         </View>
@@ -49,6 +52,15 @@ class Game extends React.Component {
   }
 }
 
+
+/*
+        <View style={{ flex: 11 }}>
+        </View>
+        <Footer
+          onShowGame={() => this.setState({ component: 'game' })}
+          onShowScorecard={() => this.setState({ component: 'scorecard' })}
+        />
+*/
 Game.propTypes = {
   game: React.PropTypes.object.isRequired,
   updateHole: React.PropTypes.func.isRequired,
