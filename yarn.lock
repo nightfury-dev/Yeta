@@ -5748,6 +5748,14 @@ react@^15.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+reactotron-core-client@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/reactotron-core-client/-/reactotron-core-client-1.11.1.tgz#5e3ccdcb0a96a65916916e63418756c0074f1e18"
+  dependencies:
+    json-stringify-safe "^5.0.1"
+    ramda "^0.23.0"
+    ramdasauce "^1.2.0"
+
 reactotron-core-client@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/reactotron-core-client/-/reactotron-core-client-1.9.1.tgz#44f0817dcd85b363421c8ac255c35e7d285f756e"
@@ -5766,6 +5774,16 @@ reactotron-react-native@^1.1.4:
     reactotron-core-client "^1.9.1"
     rn-host-detect "^1.0.1"
     socket.io-client "~1.7.1"
+
+reactotron-redux-saga@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/reactotron-redux-saga/-/reactotron-redux-saga-1.11.1.tgz#bbfbc5c084c2f301040ab9fb6d6976602b56edc6"
+  dependencies:
+    ramda "^0.23.0"
+    ramdasauce "^1.2.0"
+    reactotron-core-client "^1.11.1"
+    redux "^3.6.0"
+    redux-saga "^0.15.3"
 
 reactotron-redux@^1.1.4:
   version "1.9.1"

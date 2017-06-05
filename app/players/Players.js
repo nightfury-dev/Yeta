@@ -1,14 +1,13 @@
 import React from 'react';
 import { ListView } from 'react-native';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addPlayer, removePlayer } from '../actions/actionCreators';
 import Confirmation from '../shared/components/Confirmation';
 import Screen from '../shared/components/Screen';
 import AddActionButton from '../shared/components/AddActionButton';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
 import ListRow from './ListRow';
+import PlayersActions from '../redux/PlayersRedux';
 
 
 class Players extends React.Component {
@@ -104,8 +103,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPlayer: bindActionCreators(addPlayer, dispatch),
-  removePlayer: bindActionCreators(removePlayer, dispatch)
+  addPlayer: (name) => dispatch(PlayersActions.addPlayer(name)),
+  removePlayer: (id) => dispatch(PlayersActions.removePlayer(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Players);

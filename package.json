@@ -41,7 +41,8 @@
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "^15.4.1",
     "reactotron-react-native": "^1.1.4",
-    "reactotron-redux": "^1.1.4"
+    "reactotron-redux": "^1.1.4",
+    "reactotron-redux-saga": "^1.11.1"
   },
   "jest": {
     "preset": "jest-react-native"

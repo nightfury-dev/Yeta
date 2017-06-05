@@ -1,5 +1,6 @@
 /* global __DEV__, require */
 import Reactotron, { trackGlobalErrors } from 'reactotron-react-native';
+import sagaPlugin from 'reactotron-redux-saga'
 
 // const Reactotron = __DEV__ && require('reactotron-react-native').default;
 // const trackGlobalErrors = __DEV__ &&
@@ -15,6 +16,7 @@ if (__DEV__) {
         veto: (frame) =>
             frame.fileName.indexOf('/node_modules/react-native/') >= 0
     }))
+    .use(sagaPlugin())
     // let's connect!
     .connect();
 

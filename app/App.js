@@ -1,6 +1,6 @@
 import './ReactotronConfig';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { Router, Scene } from 'react-native-router-flux';
 
 import Menu from './menu';
@@ -11,8 +11,11 @@ import ResumeGame from './resume-game';
 import Game from './game';
 import AddCourse from './course-form';
 import Scorecard from './scorecard';
-import store from './store';
+//import store from './store';
+import createStore from './redux';
+import StartupActions from './redux/StartupRedux';
 
+const store = createStore();
 
 const Navigation = () => (
   <Router>
@@ -29,9 +32,26 @@ const Navigation = () => (
   </Router>
 );
 
+class RootComponent extends React.Component {
+  componentWillMount() {
+    this.props.startup();
+  }
+
+  render() {
+    return <Navigation />;
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  startup: () => dispatch(StartupActions.startup())
+});
+
+const ConnectedRootComponent = connect(null, mapDispatchToProps)(RootComponent);
+
+
 const App = () => (
   <Provider store={store}>
-    <Navigation />
+    <ConnectedRootComponent />
   </Provider>
 );
 
