@@ -1,21 +1,19 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import styled from 'styled-components/native';
 
 import Row from './Row';
 import TextWrapper from './TextWrapper';
 import ButtonsWrapper from './ButtonsWrapper';
 import RowText from './RowText';
 import Screen from '../shared/components/Screen';
-import { addCourse, updateCourse } from '../actions/actionCreators';
 import HoleGrid from './HoleGrid';
 import styles from './styles/AddCourseStyles';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
+import CoursesActions from '../redux/CoursesRedux';
 
 
 const DEFAULT_PAR = 3;
@@ -116,8 +114,9 @@ AddCourse.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addCourse: bindActionCreators(addCourse, dispatch),
-  updateCourse: bindActionCreators(updateCourse, dispatch)
+  addCourse: (name, pars) => dispatch(CoursesActions.addCourse(name, pars)),
+  updateCourse: (course, name, pars) =>
+    dispatch(CoursesActions.updateCourse(course, name, pars))
 });
 
 export default connect(null, mapDispatchToProps)(AddCourse);
