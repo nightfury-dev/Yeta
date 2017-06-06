@@ -27,6 +27,11 @@ class Game extends React.Component {
   }
 
   render() {
+    if (this.props.creating) {
+      // TODO: show a loader
+      return null;
+    }
+
     const currentHole = this.props.game.currentHole;
     const component = this.state.component === 'game'
       ? (<GameInput
@@ -51,12 +56,14 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  game: React.PropTypes.object.isRequired,
-  updateHole: React.PropTypes.func.isRequired
+  game: React.PropTypes.object,
+  updateHole: React.PropTypes.func.isRequired,
+  creating: React.PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  game: state.currentGame.game
+  game: state.games.current,
+  creating: state.games.creating
 });
 
 const mapDispatchToProps = (dispatch) => ({

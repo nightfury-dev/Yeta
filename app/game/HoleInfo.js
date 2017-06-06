@@ -94,7 +94,7 @@ HoleInfo.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  game: state.currentGame.game
+  game: state.games.current
 });
 
 export default connect(mapStateToProps)(HoleInfo);

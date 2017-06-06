@@ -7,7 +7,6 @@ import { Actions } from 'react-native-router-flux';
 import Confirmation from '../shared/components/Confirmation';
 import Screen from '../shared/components/Screen';
 import GameListElement from './GameListElement';
-import CurrentGameActions from '../redux/CurrentGameRedux';
 import GamesActions from '../redux/GamesRedux';
 
 class ResumeGame extends React.Component {
@@ -85,12 +84,11 @@ ResumeGame.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  games: state.games
+  games: state.games.list
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentGame: (game) =>
-    dispatch(CurrentGameActions.changeCurrentGame(game)),
+  changeCurrentGame: (game) => dispatch(GamesActions.changeCurrentGame(game)),
   removeGame: (game) => dispatch(GamesActions.removeGame(game))
 });
 

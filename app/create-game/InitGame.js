@@ -29,15 +29,11 @@ class InitGame extends React.Component {
 
   courseSelected(selectedCourse) {
     this.props.createGame(
-            selectedCourse.id,
-            _.values(this.state.selectedPlayers).map((player) => player.id),
-            _.values(selectedCourse.holes).map((hole) => hole.par)
-        );
+      selectedCourse.id,
+      _.values(this.state.selectedPlayers).map((player) => player.id)
+    );
 
-        // :D sorry, it's midnight
-    setTimeout(() => {
-      Actions.game({ type: ActionConst.REPLACE });
-    }, 1000);
+    Actions.game({ type: ActionConst.REPLACE });
   }
 
   render() {
