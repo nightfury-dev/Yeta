@@ -1,15 +1,14 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { ScrollView, ListView, StyleSheet } from 'react-native';
 import { Button, CheckBox, ListItem, Right } from 'native-base';
 import styled from 'styled-components/native';
 
-import { addPlayer } from '../actions/actionCreators';
 import AddPlayerModal from '../shared/components/AddPlayerModal';
 import AddActionButton from '../shared/components/AddActionButton';
 import BaseText from '../shared/components/BaseText';
+import PlayersActions from '../redux/PlayersRedux';
 
 import styles from './styles/SelectPlayersStyles';
 
@@ -121,7 +120,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPlayer: bindActionCreators(addPlayer, dispatch)
+  addPlayer: (name) => dispatch(PlayersActions.addPlayer(name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectPlayers);

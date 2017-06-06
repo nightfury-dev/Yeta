@@ -97,7 +97,7 @@ Scorecard.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  game: state.currentGame
+  game: state.currentGame.game
 });
 
 export default connect(mapStateToProps)(Scorecard);
