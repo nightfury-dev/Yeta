@@ -1,13 +1,12 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-import { createGame } from '../actions/actionCreators';
 import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
 import Screen from '../shared/components/Screen';
+import GamesActions from '../redux/GamesRedux';
 
 
 class InitGame extends React.Component {
@@ -70,7 +69,8 @@ InitGame.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  createGame: bindActionCreators(createGame, dispatch)
+  createGame: (courseId, playerIds) =>
+    dispatch(GamesActions.addGame(courseId, playerIds))
 });
 
 export default connect(null, mapDispatchToProps)(InitGame);

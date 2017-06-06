@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { View, Text } from 'react-native';
-import Interactable from 'react-native-interactable';
+import { View } from 'react-native';
 
-import { updateHole, updateScore } from '../actions/actionCreators';
 import GameInput from './GameInput';
 import Scorecard from '../scorecard';
 import Footer from './Footer';
 import Screen from '../shared/components/Screen';
 import HoleInfo from './HoleInfo';
+import GamesActions from '../redux/GamesRedux';
 
 
 class Game extends React.Component {
@@ -52,28 +50,18 @@ class Game extends React.Component {
   }
 }
 
-
-/*
-        <View style={{ flex: 11 }}>
-        </View>
-        <Footer
-          onShowGame={() => this.setState({ component: 'game' })}
-          onShowScorecard={() => this.setState({ component: 'scorecard' })}
-        />
-*/
 Game.propTypes = {
   game: React.PropTypes.object.isRequired,
-  updateHole: React.PropTypes.func.isRequired,
-  updateScore: React.PropTypes.func.isRequired
+  updateHole: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  game: state.currentGame
+  game: state.currentGame.game
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateHole: bindActionCreators(updateHole, dispatch),
-  updateScore: bindActionCreators(updateScore, dispatch)
+  updateHole: (gameId, newHole) =>
+    dispatch(GamesActions.updateHole(gameId, newHole))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

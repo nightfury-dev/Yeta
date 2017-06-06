@@ -1,12 +1,11 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { ScrollView, ListView } from 'react-native';
 
-import { updateScore } from '../actions/actionCreators';
 import ScoregridElement from './ScoregridElement';
 import { getPlayingOrders } from '../helpers/game';
+import GamesActions from '../redux/GamesRedux';
 
 
 class ScoreGrid extends React.Component {
@@ -57,7 +56,8 @@ ScoreGrid.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateScore: bindActionCreators(updateScore, dispatch)
+  updateScore: (gameId, score, newScore) =>
+    dispatch(GamesActions.updateScore(gameId, score, newScore))
 });
 
 export default connect(null, mapDispatchToProps)(ScoreGrid);

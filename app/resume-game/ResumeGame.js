@@ -1,15 +1,14 @@
 import * as _ from 'lodash';
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import { changeCurrentGame, removeGame } from '../actions/actionCreators';
 import Confirmation from '../shared/components/Confirmation';
 import Screen from '../shared/components/Screen';
 import GameListElement from './GameListElement';
-
+import CurrentGameActions from '../redux/CurrentGameRedux';
+import GamesActions from '../redux/GamesRedux';
 
 class ResumeGame extends React.Component {
   constructor(props) {
@@ -90,8 +89,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentGame: bindActionCreators(changeCurrentGame, dispatch),
-  removeGame: bindActionCreators(removeGame, dispatch)
+  changeCurrentGame: (game) =>
+    dispatch(CurrentGameActions.changeCurrentGame(game)),
+  removeGame: (game) => dispatch(GamesActions.removeGame(game))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResumeGame);
