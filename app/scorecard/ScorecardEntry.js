@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-import { Colors, Fonts } from '../themes';
+import { ColorPalette, Fonts } from '../themes';
 
 
 const Cell = styled.View`
@@ -16,7 +16,7 @@ const FirstCell = styled.View`
 
 const CellText = styled.Text`
   font-size: ${Fonts.size.small};
-  color: ${Colors.text};
+  color: ${ColorPalette.text};
 `;
 
 const Row = styled.View`
@@ -25,7 +25,7 @@ const Row = styled.View`
   justify-content: space-between;
   padding: 5;
   border-bottom-width: 1;
-  border-color: ${Colors.orange};
+  border-color: ${ColorPalette.divider};
 `;
 
 const ScorecardEntry = (props) => {

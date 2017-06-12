@@ -1,4 +1,4 @@
-import Colors from './Colors';
+import { ColorPalette } from './Colors';
 import Fonts from './Fonts';
 import Metrics from './Metrics';
 
@@ -7,7 +7,7 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.background,
+      backgroundColor: ColorPalette.background,
       paddingTop: Metrics.navBarHeight
     }
   },
@@ -20,22 +20,18 @@ const ApplicationStyles = {
   baseText: {
     textAlign: 'center',
     fontSize: Fonts.size.normal,
-    color: '#EEE5E9',
+    color: '#455a64',
     fontFamily: Fonts.defaultFontFamily
   },
   button: {
-    backgroundColor: Colors.orange
+    backgroundColor: ColorPalette.primary.default
   },
   listItem: {
     padding: 20
   },
-  selectedListItem: {
-    padding: 20,
-    backgroundColor: Colors.selectedListItem
-  },
   listSeparator: {
     height: 1,
-    backgroundColor: Colors.lightBrown
+    backgroundColor: ColorPalette.divider
   }
 };
 

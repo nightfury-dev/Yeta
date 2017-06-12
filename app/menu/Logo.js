@@ -1,13 +1,26 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import styled from 'styled-components/native';
 
-import styles from './styles/LogoStyles';
+import { ColorPalette, Fonts } from '../themes';
 
+const Container = styled.View`
+  flex: 1;
+  height: 175;
+  justify-content: center;
+`;
+
+const LogoText = styled.Text`
+  font-size: ${Fonts.size.huge};
+  color: ${ColorPalette.text};
+  align-self: center;
+`;
 
 function Logo() {
-  return (<View style={styles.container}>
-    <Text style={styles.text}>Yet Another Discgolf App</Text>
-  </View>);
+  return (
+    <Container>
+      <LogoText>Yet Another Discgolf App</LogoText>
+    </Container>
+  );
 }
 
 export default Logo;

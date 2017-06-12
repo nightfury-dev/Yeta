@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 
 import BaseText from '../shared/components/BaseText';
 import styles from './styles/SelectCourseStyles';
+import { ColorPalette } from '../themes';
 
 
 const Container = styled.View`
@@ -15,6 +16,14 @@ const Container = styled.View`
 const HorizontallyCentered = styled.View`
   flex-direction: row;
   justify-content: center;
+`;
+
+const Text = styled(BaseText)`
+  color: ${ColorPalette.text}
+`;
+
+const ButtonText = styled(BaseText)`
+  color: ${ColorPalette.primary.text}
 `;
 
 class SelectCourse extends React.Component {
@@ -48,7 +57,7 @@ class SelectCourse extends React.Component {
             this.state.selectedCourse.id === rowData.id;
     return (
       <ListItem onPress={() => this.handleSelection(rowData)}>
-        <BaseText>{rowData.name}</BaseText>
+        <Text>{rowData.name}</Text>
         <Right>
           <Radio selected={selected} />
         </Right>
@@ -76,7 +85,7 @@ class SelectCourse extends React.Component {
             style={StyleSheet.flatten(styles.button)}
             onPress={this.courseSelected}
           >
-            <BaseText>Continue</BaseText>
+            <ButtonText>Continue</ButtonText>
           </Button>
         </HorizontallyCentered>
       </Container>

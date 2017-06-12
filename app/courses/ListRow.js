@@ -2,10 +2,10 @@ import React from 'react';
 
 import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
-import { Colors } from '../themes';
+import { ColorPalette } from '../themes';
 
 const rowStyle = {
-  backgroundColor: Colors.background
+  backgroundColor: ColorPalette.background
 };
 
 const ListRow = ({ text, onEdit }) => {

@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-import { Colors } from '../../themes';
+import { ColorPalette } from '../../themes';
 
 export default StyleSheet.create({
   button: {
-    backgroundColor: Colors.orange
+    backgroundColor: ColorPalette.primary.default
   }
 });

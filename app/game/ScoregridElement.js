@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
+import { ColorPalette } from '../themes';
 
 
 const Row = styled.View`
@@ -11,7 +12,7 @@ const Row = styled.View`
   padding-top: 10;
   padding-bottom: 10;
   border-bottom-width: 1;
-  border-color: #DF878B;
+  border-color: ${ColorPalette.divider};
   align-items: center;
 `;
 
@@ -29,11 +30,10 @@ const InputContainer = styled.View`
 
 const NameText = styled(BaseText)`
   text-align: left;
+  color: ${ColorPalette.text}
 `;
 
-const OrderText = styled(BaseText)`
-  color: skyblue;
-  text-align: left;
+const OrderText = styled(NameText)`
   padding: 10;
 `;
 

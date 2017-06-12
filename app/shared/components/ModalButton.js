@@ -1,9 +1,15 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'native-base';
+import styled from 'styled-components/native';
 
+import { ColorPalette } from '../../themes';
+import BaseText from './BaseText';
 import styles from './styles/ModalButtonStyles';
 
+const MyText = styled(BaseText)`
+  color: ${ColorPalette.primary.text}
+`;
 
 const ModalButton = (props) => (
   <Button
@@ -11,7 +17,7 @@ const ModalButton = (props) => (
     style={StyleSheet.flatten(styles.modalButton)}
     onPress={props.onPress}
   >
-    <Text style={styles.baseText}>{props.text}</Text>
+    <MyText>{props.text}</MyText>
   </Button>
 );
 

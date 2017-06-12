@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles, Colors } from '../../../themes';
+import { ColorPalette } from '../../../themes';
 
 
 export default StyleSheet.create({
   modalButton: {
     margin: 10,
-    backgroundColor: Colors.orange
-  },
-  baseText: ApplicationStyles.baseText
+    backgroundColor: ColorPalette.primary.default
+  }
 });

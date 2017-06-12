@@ -2,12 +2,13 @@ import React from 'react';
 import { Button, Footer as NativeBaseFooter, FooterTab } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Colors } from '../themes';
+import { ColorPalette } from '../themes';
 
 
 const style = {
   flex: 1,
-  backgroundColor: Colors.background
+  backgroundColor: ColorPalette.background,
+  borderColor: ColorPalette.divider
 };
 
 const Footer = ({ onShowGame, onShowScorecard }) => (

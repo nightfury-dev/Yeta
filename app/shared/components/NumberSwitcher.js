@@ -4,13 +4,13 @@ import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import AnimatedText from '../../game/AnimatedText';
-import { Colors } from '../../themes';
+import { ColorPalette } from '../../themes';
 import styles from './styles/NumberSwitcherStyles';
 
 
 const createIconButton = (icon, onPress) => (
   <Button style={StyleSheet.flatten(styles.button)} onPress={onPress}>
-    <Icon name={icon} color={Colors.text} size={14} />
+    <Icon name={icon} color={ColorPalette.secondary.text} size={14} />
   </Button>
 );
 

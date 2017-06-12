@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
-import { Fonts, Colors } from '../themes';
+import { Fonts, ColorPalette } from '../themes';
 
 
 const DrawerContainer = styled.View`
@@ -20,10 +20,12 @@ const DrawerContainer = styled.View`
 
 const Wrapper = styled.View`
   height: 200;
-  background-color: ${Colors.lighterBackground};
+  background-color: ${ColorPalette.primary.light};
   border-bottom-left-radius: 15;
   border-bottom-right-radius: 15;
   padding: 10;
+  border: 1;
+  border-color: ${ColorPalette.primary.dark}
 `;
 
 const Row = styled.View`
@@ -45,10 +47,12 @@ const HiddenContent = styled.View`
 
 const InfoText = styled(BaseText)`
   font-size: ${Fonts.size.huge};
+  color: ${ColorPalette.primary.text}
 `;
 
 const Text = styled(BaseText)`
   text-align: left;
+  color: ${ColorPalette.primary.text}
 `;
 
 class HoleInfo extends React.Component {
@@ -80,7 +84,7 @@ class HoleInfo extends React.Component {
               <InfoText>{ game.currentHole }/{ game.course.holes.length }</InfoText>
             </Row>
             <CenteredRow>
-              <Icon style={{ color: Colors.text }} name="minus" size={26} />
+              <Icon style={{ color: ColorPalette.primary.text }} name="minus" size={26} />
             </CenteredRow>
           </Wrapper>
         </Interactable.View>

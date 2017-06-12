@@ -1,13 +1,23 @@
-const colors = {
-  modalBackground: 'white',
-  background: '#3E2723',
-  lighterBackground: '#9e9391',
-  text: '#EEE5E9',
-  keyboardBackground: '#6200EA',
-  lightBrown: '#795548',
-  orange: '#E65100',
-  lightOrange: '#FF9800',
-  selectedListItem: '#212121'
+// Buttons:
+//   - background: primary.default
+//   - text:       primary.text
+
+const Palette = {
+  primary: {
+    default: '#1565c0',
+    light: '#5e92f3',
+    dark: '#003c8f',
+    text: '#ffffff'
+  },
+  secondary: {
+    default: '#dd2c00',
+    light: '#5e92f3',
+    dark: '#003c8f',
+    text: '#ffffff'
+  },
+  background: 'white',
+  text: '#000000',
+  divider: '#bdbdbd'
 };
 
-export default colors;
+export const ColorPalette = Palette;

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { ApplicationStyles, Colors } from '../../themes';
+import { ApplicationStyles, ColorPalette } from '../../themes';
 
 export default StyleSheet.create({
   listItem: {
@@ -9,6 +9,6 @@ export default StyleSheet.create({
   },
   selectedListItem: ApplicationStyles.selectedListItem,
   row: {
-    backgroundColor: Colors.background
+    backgroundColor: ColorPalette.background
   }
 });

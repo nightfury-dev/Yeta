@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal as RNModal } from 'react-native';
 import styled from 'styled-components/native';
 
-import { Colors } from '../../themes';
+import { ColorPalette } from '../../themes';
 
 
 const Wrapper = styled.View`
@@ -15,7 +15,7 @@ const Container = styled.View`
   border-style: solid;
   border-radius: 10;
   border-width: 1;
-  background-color: ${Colors.modalBackground};
+  background-color: ${ColorPalette.background};
   padding: 20;
   overflow: hidden;
   margin: 25;

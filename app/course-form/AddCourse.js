@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import styled from 'styled-components/native';
 
 import Row from './Row';
 import TextWrapper from './TextWrapper';
@@ -14,11 +15,15 @@ import HoleGrid from './HoleGrid';
 import styles from './styles/AddCourseStyles';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
 import CoursesActions from '../redux/CoursesRedux';
-
+import CenteredView from '../shared/components/CenteredView';
+import { ColorPalette } from '../themes';
 
 const DEFAULT_PAR = 3;
 const DEFAULT_HOLE_COUNT = 9;
 
+const ButtonText = styled(RowText)`
+  color: ${ColorPalette.secondary.text}
+`;
 
 class AddCourse extends React.Component {
   constructor(props) {
@@ -95,12 +100,14 @@ class AddCourse extends React.Component {
             </InputGroup>
           </View>
           <HoleGrid pars={this.state.pars} onParsChanged={this.parsChanged} />
-          <Button
-            style={StyleSheet.flatten([styles.button, styles.centeredItem])}
-            onPress={this.saveCourse}
-          >
-            <RowText>Save course</RowText>
-          </Button>
+          <CenteredView>
+            <Button
+              style={StyleSheet.flatten([styles.button])}
+              onPress={this.saveCourse}
+            >
+              <ButtonText>Save course</ButtonText>
+            </Button>
+          </CenteredView>
         </ScrollView>
       </Screen>
     );

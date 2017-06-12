@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-import { Colors, Metrics } from '../../themes';
+import { ColorPalette, Metrics } from '../../themes';
 
 
 const View = styled.View`
   flex: 1;
-  background-color: ${Colors.background};
+  background-color: ${ColorPalette.background};
   padding-top: ${Metrics.navBarHeight}
 `;
 

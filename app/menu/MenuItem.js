@@ -4,12 +4,12 @@ import { Button } from 'native-base';
 import styled from 'styled-components/native';
 
 import styles from './styles/MenuItemStyles';
-import { Colors, Fonts } from '../themes';
+import { ColorPalette, Fonts } from '../themes';
 
 
 const Text = styled.Text`
   text-align: center;
-  color: ${Colors.text};
+  color: ${ColorPalette.primary.text};
   font-size: ${Fonts.size.normal};
   font-family: ${Fonts.defaultFontFamily};
 `;

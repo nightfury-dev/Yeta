@@ -9,6 +9,7 @@ import AddPlayerModal from '../shared/components/AddPlayerModal';
 import AddActionButton from '../shared/components/AddActionButton';
 import BaseText from '../shared/components/BaseText';
 import PlayersActions from '../redux/PlayersRedux';
+import { ColorPalette } from '../themes';
 
 import styles from './styles/SelectPlayersStyles';
 
@@ -20,6 +21,14 @@ const Container = styled.View`
 const HorizontallyCentered = styled.View`
   flex-direction: row;
   justify-content: center;
+`;
+
+const Text = styled(BaseText)`
+  color: ${ColorPalette.text}
+`;
+
+const ButtonText = styled(BaseText)`
+  color: ${ColorPalette.primary.text}
 `;
 
 class SelectPlayers extends React.Component {
@@ -65,7 +74,7 @@ class SelectPlayers extends React.Component {
   renderRow(rowData) {
     return (
       <ListItem onPress={() => this.handleSelection(rowData)}>
-        <BaseText>{rowData.name}</BaseText>
+        <Text>{rowData.name}</Text>
         <Right>
           <CheckBox checked={this.state.selectedPlayers[rowData.id]} />
         </Right>
@@ -98,7 +107,7 @@ class SelectPlayers extends React.Component {
             style={StyleSheet.flatten(styles.button)}
             onPress={this.playersSelected}
           >
-            <BaseText>Continue</BaseText>
+            <ButtonText>Continue</ButtonText>
           </Button>
         </HorizontallyCentered>
         <AddActionButton
