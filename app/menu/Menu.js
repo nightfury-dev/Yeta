@@ -13,21 +13,25 @@ function Menu() {
       <MenuItem
         label="Game"
         name="initGame"
+        icon="play-circle"
         onPress={() => Actions.initgame()}
       />
       <MenuItem
         label="Resume game"
         name="resumeGame"
+        icon="pause-circle"
         onPress={() => Actions.resumegame()}
       />
       <MenuItem
         label="Players"
         name="players"
+        icon="users"
         onPress={() => Actions.players()}
       />
       <MenuItem
         label="Courses"
         name="courses"
+        icon="map"
         onPress={() => Actions.courses()}
       />
     </Screen>
