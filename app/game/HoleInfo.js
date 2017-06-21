@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
 import { Fonts, ColorPalette } from '../themes';
+import CoursesActions from '../redux/CoursesRedux';
 
 
 const DrawerContainer = styled.View`
@@ -56,13 +57,50 @@ const Text = styled(BaseText)`
 `;
 
 class HoleInfo extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.increasePar = this.increasePar.bind(this);
+    this.decreasePar = this.decreasePar.bind(this);
+    this.getCurrentPar = this.getCurrentPar.bind(this);
+    this.updatePar = this.updatePar.bind(this);
+  }
+
+  getCurrentPar() {
     const { game } = this.props;
 
     const par = _.find(
       game.course.holes,
       (h) => h.holenumber === game.currentHole
     ).par;
+
+    return par;
+  }
+
+  increasePar() {
+    this.updatePar(this.getCurrentPar() + 1);
+  }
+
+  decreasePar() {
+    this.updatePar(this.getCurrentPar() - 1);
+  }
+
+  updatePar(newPar) {
+    const { game } = this.props;
+    const pars = _.values(game.course.holes).map((hole) => hole.par);
+    const index = game.currentHole - 1;
+
+    const newPars = [
+      ...pars.slice(0, index),
+      newPar,
+      ...pars.slice(index + 1)
+    ];
+
+    this.props.updateCourse(game.course, game.course.name, newPars);
+  }
+
+  render() {
+    const { game } = this.props;
+    const par = this.getCurrentPar();
     return (
       <DrawerContainer pointerEvents="box-none">
         <Interactable.View
@@ -72,12 +110,14 @@ class HoleInfo extends React.Component {
         >
           <Wrapper>
             <HiddenContent>
-              <Text>Change hole par (not yet implemented...)</Text>
-              <NumberSwitcher
-                number={par}
-                onIncrease={() => {}}
-                onDecrease={() => {}}
-              />
+              <Text>Change hole par</Text>
+              <CenteredRow>
+                <NumberSwitcher
+                  number={par}
+                  onIncrease={this.increasePar}
+                  onDecrease={this.decreasePar}
+                />
+              </CenteredRow>
             </HiddenContent>
             <Row>
               <InfoText>Par { par }</InfoText>
@@ -94,11 +134,17 @@ class HoleInfo extends React.Component {
 }
 
 HoleInfo.propTypes = {
-  game: React.PropTypes.object.isRequired
+  game: React.PropTypes.object.isRequired,
+  updateCourse: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   game: state.games.current
 });
 
-export default connect(mapStateToProps)(HoleInfo);
+const mapDispatchToProps = (dispatch) => ({
+  updateCourse: (course, name, pars) =>
+    dispatch(CoursesActions.updateCourse(course, name, pars))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HoleInfo);

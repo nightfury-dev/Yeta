@@ -13,7 +13,8 @@ const { Types, Creators } = createActions({
   gameRemoved: ['gameId'],
   fetchGames: null,
   gamesFetched: ['games'],
-  changeCurrentGame: ['game']
+  changeCurrentGame: ['game'],
+  gamesUpdated: ['games']
 });
 
 export const GamesTypes = Types;
@@ -69,6 +70,20 @@ const changeCurrentGame = (state = INITIAL_STATE, { game }) => ({
   current: game
 });
 
+const updateGames = (state = INITIAL_STATE, { games }) => {
+  let current = null;
+
+  if (state.current) {
+    current = _.values(games).find((game) => game.id === state.current.id);
+  }
+
+  return {
+    ...state,
+    games,
+    current
+  };
+}
+
 // -- tie up the reducers to action types
 
 const HANDLERS = {
@@ -78,7 +93,8 @@ const HANDLERS = {
   [Types.SCORE_UPDATED]: update,
   [Types.GAME_REMOVED]: remove,
   [Types.GAMES_FETCHED]: fetchSuccess,
-  [Types.CHANGE_CURRENT_GAME]: changeCurrentGame
+  [Types.CHANGE_CURRENT_GAME]: changeCurrentGame,
+  [Types.GAMES_UPDATED]: updateGames
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
