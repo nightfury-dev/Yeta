@@ -79,7 +79,7 @@ const updateGames = (state = INITIAL_STATE, { games }) => {
 
   return {
     ...state,
-    games,
+    list: games,
     current
   };
 }
