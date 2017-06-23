@@ -8,7 +8,9 @@ const { Types, Creators } = createActions({
   playerAdded: ['player'],
   playerRemoved: ['id'],
   playersFetched: ['players'],
-  fetchPlayers: null
+  fetchPlayers: null,
+  changeName: ['player', 'name'],
+  nameChanged: ['player']
 });
 
 export const PlayersTypes = Types;
@@ -32,12 +34,18 @@ const remove = (state = INITIAL_STATE, action) => {
 const fetchSuccess = (state = INITIAL_STATE, { players }) =>
   [...state, ...players];
 
+const nameChanged = (state = INITIAL_STATE, { player }) => {
+  const index = _.findIndex(state, (p) => p.id === player.id);
+  return [...state.slice(0, index), player, ...state.slice(index + 1)];
+};
+
 // -- tie up the reducers to action types
 
 const HANDLERS = {
   [Types.PLAYER_ADDED]: add,
   [Types.PLAYER_REMOVED]: remove,
-  [Types.PLAYERS_FETCHED]: fetchSuccess
+  [Types.PLAYERS_FETCHED]: fetchSuccess,
+  [Types.NAME_CHANGED]: nameChanged
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);

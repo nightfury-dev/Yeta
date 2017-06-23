@@ -18,7 +18,12 @@ import {
   updateScore,
   removeGame
 } from './GamesSagas';
-import { addPlayer, fetchPlayers, removePlayer } from './PlayersSagas';
+import {
+  addPlayer,
+  fetchPlayers,
+  removePlayer,
+  changeName
+} from './PlayersSagas';
 import { startup } from './StartupSagas';
 
 
@@ -27,6 +32,7 @@ export default function* root() {
     takeLatest(PlayersTypes.ADD_PLAYER, addPlayer),
     takeLatest(PlayersTypes.REMOVE_PLAYER, removePlayer),
     takeLatest(PlayersTypes.FETCH_PLAYERS, fetchPlayers),
+    takeLatest(PlayersTypes.CHANGE_NAME, changeName),
 
     takeLatest(CoursesTypes.ADD_COURSE, addCourse),
     takeLatest(CoursesTypes.UPDATE_COURSE, updateCourse),

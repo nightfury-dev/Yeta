@@ -51,9 +51,18 @@ const remove = (id) => new Promise((success) => {
   });
 });
 
+const changeName = (player, name) => new Promise((success) => {
+  const p = findById(player.id);
+  realm.write(() => {
+    p.name = name;
+    success(normalize(p));
+  });
+});
+
 export default {
   getAll,
   findById,
   save,
-  remove
+  remove,
+  changeName
 };

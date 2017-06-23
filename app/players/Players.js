@@ -15,7 +15,8 @@ class Players extends React.Component {
     super(props);
     this.state = {
       showDeleteConfirmation: false,
-      showAddPlayerDialog: false
+      showAddPlayerDialog: false,
+      editPlayer: null
     };
 
     this.addPlayer = this.addPlayer.bind(this);
@@ -23,6 +24,8 @@ class Players extends React.Component {
     this.confirmDelete = this.confirmDelete.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.deletePlayer = this.deletePlayer.bind(this);
+    this.openEditModal = this.openEditModal.bind(this);
+    this.changePlayerName = this.changePlayerName.bind(this);
   }
 
   addPlayer(name) {
@@ -30,9 +33,22 @@ class Players extends React.Component {
     this.hideAddPlayerDialog();
   }
 
+  openEditModal(player) {
+    this.setState({
+      showAddPlayerDialog: true,
+      editPlayer: player
+    });
+  }
+
+  changePlayerName(name) {
+    this.props.changeName(this.state.editPlayer, name);
+    this.hideAddPlayerDialog();
+  }
+
   hideAddPlayerDialog() {
     this.setState({
-      showAddPlayerDialog: false
+      showAddPlayerDialog: false,
+      editPlayer: null
     });
   }
 
@@ -56,6 +72,7 @@ class Players extends React.Component {
       <ListRow
         text={rowData.name}
         onDelete={() => this.confirmDelete(rowData)}
+        onEdit={() => this.openEditModal(rowData)}
       />
     );
   }
@@ -75,7 +92,7 @@ class Players extends React.Component {
           visible={this.state.showDeleteConfirmation}
         />
         <AddPlayerModal
-          onSave={this.addPlayer}
+          onSave={this.state.editPlayer ? this.changePlayerName : this.addPlayer}
           onCancel={this.hideAddPlayerDialog}
           visible={this.state.showAddPlayerDialog}
         />
@@ -104,7 +121,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addPlayer: (name) => dispatch(PlayersActions.addPlayer(name)),
-  removePlayer: (id) => dispatch(PlayersActions.removePlayer(id))
+  removePlayer: (id) => dispatch(PlayersActions.removePlayer(id)),
+  changeName: (player, name) =>
+    dispatch(PlayersActions.changeName(player, name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Players);

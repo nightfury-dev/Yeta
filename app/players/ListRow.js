@@ -8,21 +8,28 @@ const rowStyle = {
   backgroundColor: ColorPalette.background
 };
 
-const ListRow = (props) => {
-  const buttons = [{
-    icon: 'trash',
-    onPress: props.onDelete
-  }];
+const ListRow = ({ text, onDelete, onEdit }) => {
+  const buttons = [
+    {
+      icon: 'pencil',
+      onPress: onEdit
+    },
+    {
+      icon: 'trash',
+      onPress: onDelete
+    }
+  ];
 
   return (
     <SwipableListItem style={rowStyle} buttons={buttons}>
-      <BaseText>{props.text}</BaseText>
+      <BaseText>{text}</BaseText>
     </SwipableListItem>
   );
 };
 
 ListRow.propTypes = {
   text: React.PropTypes.string.isRequired,
+  onEdit: React.PropTypes.func.isRequired,
   onDelete: React.PropTypes.func.isRequired
 };
 
