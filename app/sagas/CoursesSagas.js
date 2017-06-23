@@ -24,3 +24,12 @@ export function* fetchCourses() {
   const courses = yield call(Courses.getAll);
   yield put(CoursesActions.coursesFetched(courses));
 }
+
+export function* removeCourse(action) {
+  const { courseId } = action;
+  yield call(Courses.remove, courseId);
+  yield put(CoursesActions.courseRemoved(courseId));
+
+  const games = yield call(Games.getAll);
+  yield put(GamesActions.gamesUpdated(games));
+}

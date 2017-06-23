@@ -5,7 +5,12 @@ import { GamesTypes } from '../redux/GamesRedux';
 import { PlayersTypes } from '../redux/PlayersRedux';
 import { StartupTypes } from '../redux/StartupRedux';
 
-import { addCourse, fetchCourses, updateCourse } from './CoursesSagas';
+import {
+  addCourse,
+  fetchCourses,
+  updateCourse,
+  removeCourse
+} from './CoursesSagas';
 import {
   addGame,
   fetchGames,
@@ -26,6 +31,7 @@ export default function* root() {
     takeLatest(CoursesTypes.ADD_COURSE, addCourse),
     takeLatest(CoursesTypes.UPDATE_COURSE, updateCourse),
     takeLatest(CoursesTypes.FETCH_COURSES, fetchCourses),
+    takeLatest(CoursesTypes.REMOVE_COURSE, removeCourse),
 
     takeLatest(GamesTypes.ADD_GAME, addGame),
     takeLatest(GamesTypes.UPDATE_HOLE, updateHole),

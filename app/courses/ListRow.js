@@ -8,11 +8,17 @@ const rowStyle = {
   backgroundColor: ColorPalette.background
 };
 
-const ListRow = ({ text, onEdit }) => {
-  const buttons = [{
-    icon: 'pencil',
-    onPress: onEdit
-  }];
+const ListRow = ({ text, onDelete, onEdit }) => {
+  const buttons = [
+    {
+      icon: 'pencil',
+      onPress: onEdit
+    },
+    {
+      icon: 'trash',
+      onPress: onDelete
+    }
+  ];
 
   return (
     <SwipableListItem style={rowStyle} buttons={buttons}>
@@ -23,7 +29,8 @@ const ListRow = ({ text, onEdit }) => {
 
 ListRow.propTypes = {
   text: React.PropTypes.string.isRequired,
-  onEdit: React.PropTypes.func.isRequired
+  onEdit: React.PropTypes.func.isRequired,
+  onDelete: React.PropTypes.func.isRequired
 };
 
 export default ListRow;

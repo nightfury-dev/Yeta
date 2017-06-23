@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { normalizeCourse as normalize } from './Normalizers';
 import { getNextScoreId, getNextCourseId, getNextHoleId } from './Utils';
 import realm from './realm';
-
+import Games from './Games';
 
 const courses = realm.objects('Course');
 const scores = realm.objects('Score');
@@ -74,8 +74,22 @@ const save = (name, pars) => new Promise((success) => {
   });
 });
 
+const remove = (id) => new Promise((success) => {
+  const course = realm.objectForPrimaryKey('Course', id);
+  const removableGames = games.filtered('course.id = $0', id);
+  const promises = _.values(removableGames).map(Games.remove);
+  Promise.all(promises).then(() => {
+    realm.write(() => {
+      realm.delete(course.holes);
+      realm.delete(course);
+      success();
+    });
+  });
+});
+
 export default {
   getAll,
   update,
-  save
+  save,
+  remove
 };

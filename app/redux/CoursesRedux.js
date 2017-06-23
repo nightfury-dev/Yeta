@@ -8,7 +8,9 @@ const { Types, Creators } = createActions({
   updateCourse: ['course', 'name', 'pars'],
   courseUpdated: ['course'],
   fetchCourses: null,
-  coursesFetched: ['courses']
+  coursesFetched: ['courses'],
+  removeCourse: ['courseId'],
+  courseRemoved: ['courseId']
 });
 
 export const CoursesTypes = Types;
@@ -30,12 +32,18 @@ const update = (state = INITIAL_STATE, { course }) => {
 const fetchSuccess = (state = INITIAL_STATE, { courses }) =>
   [...state, ...courses];
 
+const remove = (state = INITIAL_STATE, { courseId }) => {
+  const index = _.findIndex(state, (course) => course.id === courseId);
+  return [...state.slice(0, index), ...state.slice(index + 1)];
+};
+
 // -- tie up the reducers to action types
 
 const HANDLERS = {
   [Types.COURSE_ADDED]: add,
   [Types.COURSE_UPDATED]: update,
-  [Types.COURSES_FETCHED]: fetchSuccess
+  [Types.COURSES_FETCHED]: fetchSuccess,
+  [Types.COURSE_REMOVED]: remove
 };
 
 export const reducer = createReducer(INITIAL_STATE, HANDLERS);
