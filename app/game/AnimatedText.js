@@ -5,7 +5,7 @@ import styles from './styles/AnimatedTextStyles';
 
 
 class AnimatedText extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return this.props.children !== nextProps.children;
   }
 

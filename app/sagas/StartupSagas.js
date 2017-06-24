@@ -4,8 +4,8 @@ import CoursesActions from '../redux/CoursesRedux';
 import GamesActions from '../redux/GamesRedux';
 import PlayersActions from '../redux/PlayersRedux';
 
-
-export function* startup (action) {
+/* eslint import/prefer-default-export: 0 */
+export function* startup() {
   yield all([
     put(PlayersActions.fetchPlayers()),
     put(GamesActions.fetchGames()),

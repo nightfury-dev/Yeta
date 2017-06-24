@@ -16,13 +16,12 @@ class SwipeView extends React.Component {
     this.panResponder = PanResponder.create({
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderRelease: this.onPanResponderRelease,
-      onMoveShouldSetPanResponder: (e, gestureState) => {
-        return gestureState.dx > 0 || gestureState.dx < 0;
-      }
+      onMoveShouldSetPanResponder: (e, gestureState) =>
+        gestureState.dx > 0 || gestureState.dx < 0
     });
   }
 
-  onPanResponderGrant(e, gestureState) {
+  onPanResponderGrant(e) {
     this.setState({
       touchStart: e.nativeEvent
     });

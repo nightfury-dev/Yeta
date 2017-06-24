@@ -41,7 +41,7 @@ class HoleGrid extends React.Component {
       <View>
         {gridElements}
       </View>
-        );
+    );
   }
 }
 

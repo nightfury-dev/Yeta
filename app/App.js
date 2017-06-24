@@ -1,4 +1,6 @@
 import './ReactotronConfig';
+
+/* eslint import/imports-first: 0 */
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 import { Router, Scene } from 'react-native-router-flux';
@@ -11,7 +13,6 @@ import ResumeGame from './resume-game';
 import Game from './game';
 import AddCourse from './course-form';
 import Scorecard from './scorecard';
-//import store from './store';
 import createStore from './redux';
 import StartupActions from './redux/StartupRedux';
 
@@ -41,6 +42,10 @@ class RootComponent extends React.Component {
     return <Navigation />;
   }
 }
+
+RootComponent.propTypes = {
+  startup: React.PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup())

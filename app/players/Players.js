@@ -78,6 +78,12 @@ class Players extends React.Component {
   }
 
   render() {
+    const {
+      showDeleteConfirmation,
+      editPlayer,
+      showAddPlayerDialog
+    } = this.state;
+
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.name !== r2.name
     }).cloneWithRows(this.props.players);
@@ -89,12 +95,12 @@ class Players extends React.Component {
           onConfirm={this.deletePlayer}
           onCancel={() => this.setState({ showDeleteConfirmation: false })}
           message={`Remove player '${removeName}'?`}
-          visible={this.state.showDeleteConfirmation}
+          visible={showDeleteConfirmation}
         />
         <AddPlayerModal
-          onSave={this.state.editPlayer ? this.changePlayerName : this.addPlayer}
+          onSave={editPlayer ? this.changePlayerName : this.addPlayer}
           onCancel={this.hideAddPlayerDialog}
-          visible={this.state.showAddPlayerDialog}
+          visible={showAddPlayerDialog}
         />
         <ListView
           dataSource={dataSource}
@@ -112,7 +118,8 @@ class Players extends React.Component {
 Players.propTypes = {
   addPlayer: React.PropTypes.func.isRequired,
   removePlayer: React.PropTypes.func.isRequired,
-  players: React.PropTypes.array.isRequired
+  players: React.PropTypes.array.isRequired,
+  changeName: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

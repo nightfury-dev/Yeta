@@ -22,9 +22,7 @@ const INITIAL_STATE = [];
 
 // -- reducers
 
-const add = (state = INITIAL_STATE, { player }) => {
-  return [...state, player];
-};
+const add = (state = INITIAL_STATE, { player }) => [...state, player];
 
 const remove = (state = INITIAL_STATE, action) => {
   const index = _.findIndex(state, (p) => p.id === action.id);

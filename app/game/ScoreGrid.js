@@ -23,6 +23,7 @@ class ScoreGrid extends React.Component {
   }
 
   renderRow(player, sectionId, rowId) {
+    const { updateScore, game } = this.props;
     const score = this.getScore(player);
     const order = this.ordering[this.props.game.currentHole][player.id];
     return (<ScoregridElement
@@ -30,8 +31,8 @@ class ScoreGrid extends React.Component {
       player={player}
       key={rowId}
       score={score.score}
-      onScoreDecreased={() => this.props.updateScore(this.props.game.id, score, score.score - 1)}
-      onScoreIncreased={() => this.props.updateScore(this.props.game.id, score, score.score + 1)}
+      onScoreDecreased={() => updateScore(game.id, score, score.score - 1)}
+      onScoreIncreased={() => updateScore(game.id, score, score.score + 1)}
     />);
   }
 

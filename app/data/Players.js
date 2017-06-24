@@ -37,6 +37,7 @@ const remove = (id) => new Promise((success) => {
     _.forEach(games, (game) => {
       const newPlayers = _.filter(game.players, (p) => p.id !== id);
       if (newPlayers.length !== game.players.length) {
+        /* eslint no-param-reassign: 0 */
         game.players = newPlayers;
       }
 

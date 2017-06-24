@@ -82,7 +82,7 @@ const updateGames = (state = INITIAL_STATE, { games }) => {
     list: games,
     current
   };
-}
+};
 
 // -- tie up the reducers to action types
 

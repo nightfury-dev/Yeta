@@ -1,10 +1,11 @@
 import React from 'react';
 import { ListItem } from 'native-base';
+
+/* eslint import/no-named-as-default: 0, import/no-named-as-default-member: 0 */
 import Swipeout from 'react-native-swipeout';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CenteredView from './CenteredView';
-import styles from './styles/SwipableListItemStyles';
 
 const CenteredIcon = ({ icon }) => (
   <CenteredView>
@@ -35,7 +36,8 @@ const SwipableListItem = ({ children, buttons, onPress, style }) => {
 SwipableListItem.propTypes = {
   children: React.PropTypes.any.isRequired,
   buttons: React.PropTypes.array.isRequired,
-  onPress: React.PropTypes.func
+  onPress: React.PropTypes.func,
+  style: React.PropTypes.any
 };
 
 export default SwipableListItem;

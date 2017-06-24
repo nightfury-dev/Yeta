@@ -48,7 +48,7 @@ class ResumeGame extends React.Component {
         game={rowData}
         onPress={() => this.handleSelection(rowData)}
         onDelete={() => this.confirmDelete(rowData)}
-    />
+      />
     );
   }
 

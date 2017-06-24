@@ -7,12 +7,13 @@ import ModalButton from './ModalButton';
 class AddPlayerModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {name: ''};
+    this.state = { name: '' };
   }
 
   render() {
+    const { visible, onSave, onCancel } = this.props;
     return (
-      <Modal visible={this.props.visible}>
+      <Modal visible={visible}>
         <InputGroup>
           <Input
             autoFocus
@@ -20,8 +21,8 @@ class AddPlayerModal extends React.Component {
             onChangeText={(name) => this.setState({ name })}
           />
         </InputGroup>
-        <ModalButton onPress={() => this.props.onSave(this.state.name)} text="Save" />
-        <ModalButton onPress={this.props.onCancel} text="Cancel" />
+        <ModalButton onPress={() => onSave(this.state.name)} text="Save" />
+        <ModalButton onPress={onCancel} text="Cancel" />
       </Modal>
     );
   }

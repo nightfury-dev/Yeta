@@ -75,7 +75,7 @@ const GameListElement = ({ game, onDelete, onPress }) => {
       </RightWrapper>
     </SwipableListItem>
   );
-}
+};
 
 GameListElement.propTypes = {
   game: React.PropTypes.object.isRequired,

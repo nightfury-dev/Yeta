@@ -14,17 +14,17 @@ const createIconButton = (icon, onPress) => (
   </Button>
 );
 
-const NumberSwitcher = (props) => (
+const NumberSwitcher = ({ onDecrease, onIncrease, number }) => (
   <View style={styles.row}>
-    {createIconButton('minus', props.onDecrease)}
+    {createIconButton('minus', onDecrease)}
     <AnimatedText style={styles.baseText}>
-      {props.number}
+      {number}
     </AnimatedText>
-    {createIconButton('plus', props.onIncrease)}
+    {createIconButton('plus', onIncrease)}
   </View>
 );
 
-NumberSwitcher.PropTypes = {
+NumberSwitcher.propTypes = {
   onDecrease: React.PropTypes.func.isRequired,
   onIncrease: React.PropTypes.func.isRequired,
   number: React.PropTypes.number.isRequired

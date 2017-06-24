@@ -2,7 +2,7 @@
 //   - background: primary.default
 //   - text:       primary.text
 
-const Palette = {
+const ColorPalette = {
   primary: {
     default: '#1565c0',
     light: '#5e92f3',
@@ -20,4 +20,4 @@ const Palette = {
   divider: '#bdbdbd'
 };
 
-export const ColorPalette = Palette;
+export default ColorPalette;

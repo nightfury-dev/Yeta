@@ -1,7 +1,6 @@
 import R from 'ramda';
 
 
-
 /**
  * Returns the ordering for the next hole using order and scores of
  * current hole.
@@ -54,6 +53,7 @@ const getPlayingOrders = (game) => {
   });
 
   return ordering;
-}
+};
 
+/* eslint import/prefer-default-export: 0 */
 export { getPlayingOrders };

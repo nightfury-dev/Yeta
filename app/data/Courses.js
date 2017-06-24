@@ -21,6 +21,7 @@ const update = (course, name, pars) => new Promise((success) => {
         realm.delete(scores.filtered('hole.id = $0', hole.id));
         realm.delete(hole);
       } else {
+        /* eslint no-param-reassign: 0 */
         hole.par = pars[hole.holenumber - 1];
       }
     });

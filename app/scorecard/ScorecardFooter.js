@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import React from 'react';
 
 import ScorecardEntry from './ScorecardEntry';

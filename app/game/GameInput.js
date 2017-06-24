@@ -1,6 +1,4 @@
-import * as _ from 'lodash';
 import React from 'react';
-import styled from 'styled-components/native';
 
 import ScoreGrid from './ScoreGrid';
 import SwipeView from './SwipeView';

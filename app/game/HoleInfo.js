@@ -121,10 +121,15 @@ class HoleInfo extends React.Component {
             </HiddenContent>
             <Row>
               <InfoText>Par { par }</InfoText>
-              <InfoText>{ game.currentHole }/{ game.course.holes.length }</InfoText>
+              <InfoText>
+                { game.currentHole }/{ game.course.holes.length }
+              </InfoText>
             </Row>
             <CenteredRow>
-              <Icon style={{ color: ColorPalette.primary.text }} name="minus" size={26} />
+              <Icon
+                style={{ color: ColorPalette.primary.text }}
+                name="minus" size={26}
+              />
             </CenteredRow>
           </Wrapper>
         </Interactable.View>

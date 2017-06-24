@@ -1,5 +1,5 @@
 import ApplicationStyles from './ApplicationStyles';
-import { ColorPalette } from './Colors';
+import ColorPalette from './ColorPalette';
 import Metrics from './Metrics';
 import Fonts from './Fonts';
 

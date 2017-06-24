@@ -1,4 +1,4 @@
-import { ColorPalette } from './Colors';
+import ColorPalette from './ColorPalette';
 import Fonts from './Fonts';
 import Metrics from './Metrics';
 
