@@ -1,4 +1,4 @@
-package com.discgolfapp;
+package com.joninevalainen.yada;
 
 import android.app.Application;
 

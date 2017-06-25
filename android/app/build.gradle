@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.discgolfapp"
+        applicationId "com.joninevalainen.yada"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1

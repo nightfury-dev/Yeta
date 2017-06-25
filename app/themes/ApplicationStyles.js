@@ -1,16 +1,8 @@
 import ColorPalette from './ColorPalette';
 import Fonts from './Fonts';
-import Metrics from './Metrics';
 
 
 const ApplicationStyles = {
-  screen: {
-    mainContainer: {
-      flex: 1,
-      backgroundColor: ColorPalette.background,
-      paddingTop: Metrics.navBarHeight
-    }
-  },
   input: {
     color: '#EEE5E9'
   },
