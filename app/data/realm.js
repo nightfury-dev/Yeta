@@ -58,7 +58,6 @@ Game.schema = {
   }
 };
 
-/* global Realm */
 const realm = new Realm({ schema: [Player, Hole, Course, Score, Game] });
 
 // realm.write(() => { realm.deleteAll(); });
