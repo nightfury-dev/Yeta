@@ -16,7 +16,7 @@ const { Types, Creators } = createActions({
 export const CoursesTypes = Types;
 export default Creators;
 
-// -- initial state for players
+// -- initial state for courses
 
 const INITIAL_STATE = [];
 

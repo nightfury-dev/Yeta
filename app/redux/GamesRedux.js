@@ -20,7 +20,7 @@ const { Types, Creators } = createActions({
 export const GamesTypes = Types;
 export default Creators;
 
-// -- initial state for players
+// -- initial state for games
 
 const INITIAL_STATE = {
   list: [],
