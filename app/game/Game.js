@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 
-import GameInput from './GameInput';
+import ScoreInputContainer from './ScoreInputContainer';
 import Scorecard from '../scorecard';
 import Footer from './Footer';
 import Screen from '../shared/components/Screen';
@@ -91,7 +91,7 @@ class Game extends React.Component {
 
     const currentHole = this.props.game.currentHole;
     const component = this.state.component === 'game'
-      ? (<GameInput
+      ? (<ScoreInputContainer
         game={this.props.game}
         nextHole={() => this.changeHole(currentHole + 1)}
         previousHole={() => this.changeHole(currentHole - 1)}

@@ -4,7 +4,7 @@ import ScoreGrid from './ScoreGrid';
 import SwipeView from './SwipeView';
 
 
-class GameInput extends React.Component {
+class ScoreInputContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,10 +30,10 @@ class GameInput extends React.Component {
   }
 }
 
-GameInput.propTypes = {
+ScoreInputContainer.propTypes = {
   game: React.PropTypes.object.isRequired,
   nextHole: React.PropTypes.func.isRequired,
   previousHole: React.PropTypes.func.isRequired
 };
 
-export default GameInput;
+export default ScoreInputContainer;
