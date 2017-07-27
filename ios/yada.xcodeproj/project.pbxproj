@@ -788,6 +788,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = HY2X6Q5ZV4;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1317,9 +1318,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HY2X6Q5ZV4;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-interactable/ios/Interactable",
@@ -1335,7 +1337,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nevalainen.joni.yada;
 				PRODUCT_NAME = yada;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "57d7c7fa-8b27-4969-b74c-623bbcf5d24f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.nevalainen.joni.yada";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1345,8 +1348,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = HY2X6Q5ZV4;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-interactable/ios/Interactable",
@@ -1362,7 +1365,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nevalainen.joni.yada;
 				PRODUCT_NAME = yada;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "57d7c7fa-8b27-4969-b74c-623bbcf5d24f";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.nevalainen.joni.yada";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
