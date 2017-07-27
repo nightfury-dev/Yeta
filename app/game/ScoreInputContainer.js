@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScoreGrid from './ScoreGrid';
+import ScoreInputCollection from './ScoreInputCollection';
 import SwipeView from './SwipeView';
 
 
@@ -24,7 +24,7 @@ class ScoreInputContainer extends React.Component {
         onRightSwipe={nextHole}
         onLeftSwipe={previousHole}
       >
-        <ScoreGrid game={game} />
+        <ScoreInputCollection game={game} />
       </SwipeView>
     );
   }

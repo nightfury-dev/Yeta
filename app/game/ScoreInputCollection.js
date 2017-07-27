@@ -8,7 +8,7 @@ import { getPlayingOrders } from '../helpers/game';
 import GamesActions from '../redux/GamesRedux';
 
 
-class ScoreGrid extends React.Component {
+class ScoreInputCollection extends React.Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
@@ -51,7 +51,7 @@ class ScoreGrid extends React.Component {
   }
 }
 
-ScoreGrid.propTypes = {
+ScoreInputCollection.propTypes = {
   updateScore: React.PropTypes.func.isRequired,
   game: React.PropTypes.object.isRequired,
 };
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(GamesActions.updateScore(gameId, score, newScore))
 });
 
-export default connect(null, mapDispatchToProps)(ScoreGrid);
+export default connect(null, mapDispatchToProps)(ScoreInputCollection);
