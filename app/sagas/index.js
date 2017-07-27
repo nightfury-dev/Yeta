@@ -9,7 +9,8 @@ import {
   addCourse,
   fetchCourses,
   updateCourse,
-  removeCourse
+  removeCourse,
+  updateNote
 } from './CoursesSagas';
 import {
   addGame,
@@ -38,6 +39,7 @@ export default function* root() {
     takeLatest(CoursesTypes.UPDATE_COURSE, updateCourse),
     takeLatest(CoursesTypes.FETCH_COURSES, fetchCourses),
     takeLatest(CoursesTypes.REMOVE_COURSE, removeCourse),
+    takeLatest(CoursesTypes.UPDATE_NOTE, updateNote),
 
     takeLatest(GamesTypes.ADD_GAME, addGame),
     takeLatest(GamesTypes.UPDATE_HOLE, updateHole),

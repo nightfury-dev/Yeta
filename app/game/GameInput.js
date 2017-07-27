@@ -20,7 +20,7 @@ class GameInput extends React.Component {
     const { nextHole, previousHole, game } = this.props;
     return (
       <SwipeView
-        style={{ flex: 1, marginTop: 55 }}
+        style={{ flex: 1, marginTop: 45 }}
         onRightSwipe={nextHole}
         onLeftSwipe={previousHole}
       >

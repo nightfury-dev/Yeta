@@ -88,9 +88,19 @@ const remove = (id) => new Promise((success) => {
   });
 });
 
+const updateNote = (course, hole, note) => new Promise((success) => {
+  const savedHole = realm.objectForPrimaryKey('Hole', hole.id);
+
+  realm.write(() => {
+    savedHole.note = note;
+    success(normalize(realm.objectForPrimaryKey('Course', course.id)));
+  });
+});
+
 export default {
   getAll,
   update,
   save,
-  remove
+  remove,
+  updateNote
 };

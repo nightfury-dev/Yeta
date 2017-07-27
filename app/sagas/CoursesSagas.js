@@ -33,3 +33,13 @@ export function* removeCourse(action) {
   const games = yield call(Games.getAll);
   yield put(GamesActions.gamesUpdated(games));
 }
+
+export function* updateNote(action) {
+  const { course, hole, note } = action;
+
+  const updatedCourse = yield call(Courses.updateNote, course, hole, note);
+  const games = yield call(Games.getAll);
+
+  yield put(CoursesActions.courseUpdated(updatedCourse));
+  yield put(GamesActions.gamesUpdated(games));
+}

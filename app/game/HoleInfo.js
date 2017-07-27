@@ -4,6 +4,7 @@ import Interactable from 'react-native-interactable';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
+import { TextInput as TextInputRN } from 'react-native';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
@@ -20,7 +21,7 @@ const DrawerContainer = styled.View`
 `;
 
 const Wrapper = styled.View`
-  height: 200;
+  height: 300;
   background-color: ${ColorPalette.primary.light};
   border-bottom-left-radius: 15;
   border-bottom-right-radius: 15;
@@ -40,8 +41,13 @@ const CenteredRow = styled(Row)`
   align-items: flex-start;
 `;
 
+const AlignBottom = styled(Row)`
+  justify-content: space-between;
+  align-self: flex-end;
+`;
+
 const HiddenContent = styled.View`
-  flex: 6;
+  flex: 4;
   flex-direction: column;
   justify-content: space-between;
 `;
@@ -56,6 +62,12 @@ const Text = styled(BaseText)`
   color: ${ColorPalette.primary.text}
 `;
 
+const TextInput = styled(TextInputRN)`
+  background-color: white;
+  height: 120;
+  padding: 5;
+`;
+
 class HoleInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -63,6 +75,19 @@ class HoleInfo extends React.Component {
     this.decreasePar = this.decreasePar.bind(this);
     this.getCurrentPar = this.getCurrentPar.bind(this);
     this.updatePar = this.updatePar.bind(this);
+    this.onNoteChanged = this.onNoteChanged.bind(this);
+    this.getCurrentNote = this.getCurrentNote.bind(this);
+  }
+
+  onNoteChanged(note) {
+    const { game } = this.props;
+
+    const hole = _.find(
+      game.course.holes,
+      (h) => h.holenumber === game.currentHole
+    );
+
+    this.props.updateNote(game.course, hole, note);
   }
 
   getCurrentPar() {
@@ -74,6 +99,17 @@ class HoleInfo extends React.Component {
     ).par;
 
     return par;
+  }
+
+  getCurrentNote() {
+    const { game } = this.props;
+
+    const note = _.find(
+      game.course.holes,
+      (h) => h.holenumber === game.currentHole
+    ).note;
+
+    return note;
   }
 
   increasePar() {
@@ -105,8 +141,8 @@ class HoleInfo extends React.Component {
       <DrawerContainer pointerEvents="box-none">
         <Interactable.View
           verticalOnly
-          snapPoints={[{ y: -70, id: 'closed' }, { y: 60, id: 'open' }]}
-          initialPosition={{ y: -70 }}
+          snapPoints={[{ y: -180, id: 'closed' }, { y: 60, id: 'open' }]}
+          initialPosition={{ y: -180 }}
         >
           <Wrapper>
             <HiddenContent>
@@ -118,19 +154,25 @@ class HoleInfo extends React.Component {
                   onDecrease={this.decreasePar}
                 />
               </CenteredRow>
+              <TextInput
+                multiline
+                placeholder="Hole notes..."
+                value={this.getCurrentNote()}
+                onChangeText={this.onNoteChanged}
+              />
             </HiddenContent>
             <Row>
+              <AlignBottom>
               <InfoText>Par { par }</InfoText>
+                <Icon
+                  style={{ color: ColorPalette.primary.text }}
+                  name="minus" size={26}
+                />
               <InfoText>
                 { game.currentHole }/{ game.course.holes.length }
               </InfoText>
+              </AlignBottom>
             </Row>
-            <CenteredRow>
-              <Icon
-                style={{ color: ColorPalette.primary.text }}
-                name="minus" size={26}
-              />
-            </CenteredRow>
           </Wrapper>
         </Interactable.View>
       </DrawerContainer>
@@ -140,7 +182,8 @@ class HoleInfo extends React.Component {
 
 HoleInfo.propTypes = {
   game: React.PropTypes.object.isRequired,
-  updateCourse: React.PropTypes.func.isRequired
+  updateCourse: React.PropTypes.func.isRequired,
+  updateNote: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -149,7 +192,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateCourse: (course, name, pars) =>
-    dispatch(CoursesActions.updateCourse(course, name, pars))
+    dispatch(CoursesActions.updateCourse(course, name, pars)),
+  updateNote: (course, hole, note) =>
+    dispatch(CoursesActions.updateNote(course, hole, note))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HoleInfo);

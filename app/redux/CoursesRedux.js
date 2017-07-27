@@ -10,7 +10,8 @@ const { Types, Creators } = createActions({
   fetchCourses: null,
   coursesFetched: ['courses'],
   removeCourse: ['courseId'],
-  courseRemoved: ['courseId']
+  courseRemoved: ['courseId'],
+  updateNote: ['course', 'hole', 'note']
 });
 
 export const CoursesTypes = Types;
