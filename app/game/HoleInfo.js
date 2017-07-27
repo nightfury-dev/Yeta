@@ -1,15 +1,12 @@
-import * as _ from 'lodash';
 import React from 'react';
 import Interactable from 'react-native-interactable';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { connect } from 'react-redux';
 import { TextInput as TextInputRN } from 'react-native';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
 import { Fonts, ColorPalette } from '../themes';
-import CoursesActions from '../redux/CoursesRedux';
 
 
 const DrawerContainer = styled.View`
@@ -68,133 +65,63 @@ const TextInput = styled(TextInputRN)`
   padding: 5;
 `;
 
-class HoleInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.increasePar = this.increasePar.bind(this);
-    this.decreasePar = this.decreasePar.bind(this);
-    this.getCurrentPar = this.getCurrentPar.bind(this);
-    this.updatePar = this.updatePar.bind(this);
-    this.onNoteChanged = this.onNoteChanged.bind(this);
-    this.getCurrentNote = this.getCurrentNote.bind(this);
-  }
+const HoleInfo = (props) => {
+  const {
+    hole,
+    onParIncreased,
+    onParDecreased,
+    onNoteUpdated,
+    totalHoleCount
+  } = props;
 
-  onNoteChanged(note) {
-    const { game } = this.props;
-
-    const hole = _.find(
-      game.course.holes,
-      (h) => h.holenumber === game.currentHole
-    );
-
-    this.props.updateNote(game.course, hole, note);
-  }
-
-  getCurrentPar() {
-    const { game } = this.props;
-
-    const par = _.find(
-      game.course.holes,
-      (h) => h.holenumber === game.currentHole
-    ).par;
-
-    return par;
-  }
-
-  getCurrentNote() {
-    const { game } = this.props;
-
-    const note = _.find(
-      game.course.holes,
-      (h) => h.holenumber === game.currentHole
-    ).note;
-
-    return note;
-  }
-
-  increasePar() {
-    this.updatePar(this.getCurrentPar() + 1);
-  }
-
-  decreasePar() {
-    this.updatePar(this.getCurrentPar() - 1);
-  }
-
-  updatePar(newPar) {
-    const { game } = this.props;
-    const pars = _.values(game.course.holes).map((hole) => hole.par);
-    const index = game.currentHole - 1;
-
-    const newPars = [
-      ...pars.slice(0, index),
-      newPar,
-      ...pars.slice(index + 1)
-    ];
-
-    this.props.updateCourse(game.course, game.course.name, newPars);
-  }
-
-  render() {
-    const { game } = this.props;
-    const par = this.getCurrentPar();
-    return (
-      <DrawerContainer pointerEvents="box-none">
-        <Interactable.View
-          verticalOnly
-          snapPoints={[{ y: -180, id: 'closed' }, { y: 60, id: 'open' }]}
-          initialPosition={{ y: -180 }}
-        >
-          <Wrapper>
-            <HiddenContent>
-              <Text>Change hole par</Text>
-              <CenteredRow>
-                <NumberSwitcher
-                  number={par}
-                  onIncrease={this.increasePar}
-                  onDecrease={this.decreasePar}
-                />
-              </CenteredRow>
-              <TextInput
-                multiline
-                placeholder="Hole notes..."
-                value={this.getCurrentNote()}
-                onChangeText={this.onNoteChanged}
+  return (
+    <DrawerContainer pointerEvents="box-none">
+      <Interactable.View
+        verticalOnly
+        snapPoints={[{ y: -180, id: 'closed' }, { y: 60, id: 'open' }]}
+        initialPosition={{ y: -180 }}
+      >
+        <Wrapper>
+          <HiddenContent>
+            <Text>Change hole par</Text>
+            <CenteredRow>
+              <NumberSwitcher
+                number={hole.par}
+                onIncrease={onParIncreased}
+                onDecrease={onParDecreased}
               />
-            </HiddenContent>
-            <Row>
-              <AlignBottom>
-                <InfoText>Par { par }</InfoText>
-                  <Icon
-                    style={{ color: ColorPalette.primary.text }}
-                    name="minus" size={26}
-                  />
-                <InfoText>
-                  { game.currentHole }/{ game.course.holes.length }
-                </InfoText>
-              </AlignBottom>
-            </Row>
-          </Wrapper>
-        </Interactable.View>
-      </DrawerContainer>
-    );
-  }
-}
-
-HoleInfo.propTypes = {
-  game: React.PropTypes.object.isRequired,
-  updateCourse: React.PropTypes.func.isRequired,
-  updateNote: React.PropTypes.func.isRequired
+            </CenteredRow>
+            <TextInput
+              multiline
+              placeholder="Hole notes..."
+              value={hole.note}
+              onChangeText={onNoteUpdated}
+            />
+          </HiddenContent>
+          <Row>
+            <AlignBottom>
+              <InfoText>Par { hole.par }</InfoText>
+              <Icon
+                style={{ color: ColorPalette.primary.text }}
+                name="minus" size={26}
+              />
+              <InfoText>
+                { hole.holenumber }/{ totalHoleCount }
+              </InfoText>
+            </AlignBottom>
+          </Row>
+        </Wrapper>
+      </Interactable.View>
+    </DrawerContainer>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  game: state.games.current
-});
+HoleInfo.propTypes = {
+  hole: React.PropTypes.object.isRequired,
+  onParIncreased: React.PropTypes.func.isRequired,
+  onParDecreased: React.PropTypes.func.isRequired,
+  onNoteUpdated: React.PropTypes.func.isRequired,
+  totalHoleCount: React.PropTypes.number.isRequired
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  updateCourse: (course, name, pars) =>
-    dispatch(CoursesActions.updateCourse(course, name, pars)),
-  updateNote: (course, hole, note) =>
-    dispatch(CoursesActions.updateNote(course, hole, note))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HoleInfo);
+export default HoleInfo;
