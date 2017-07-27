@@ -37,7 +37,7 @@ const OrderText = styled(NameText)`
   padding: 10;
 `;
 
-const ScoregridElement = (props) => (
+const ScoreInput = (props) => (
   <Row>
     <OrderContainer>
       <OrderText>
@@ -59,7 +59,7 @@ const ScoregridElement = (props) => (
   </Row>
 );
 
-ScoregridElement.propTypes = {
+ScoreInput.propTypes = {
   player: React.PropTypes.object.isRequired,
   score: React.PropTypes.number.isRequired,
   order: React.PropTypes.number.isRequired,
@@ -67,4 +67,4 @@ ScoregridElement.propTypes = {
   onScoreIncreased: React.PropTypes.func.isRequired
 };
 
-export default ScoregridElement;
+export default ScoreInput;

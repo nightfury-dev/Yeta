@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, ListView } from 'react-native';
 
-import ScoregridElement from './ScoregridElement';
+import ScoreInput from './ScoreInput';
 import { getPlayingOrders } from '../helpers/game';
 import GamesActions from '../redux/GamesRedux';
 
@@ -26,7 +26,7 @@ class ScoreInputCollection extends React.Component {
     const { updateScore, game } = this.props;
     const score = this.getScore(player);
     const order = this.ordering[this.props.game.currentHole][player.id];
-    return (<ScoregridElement
+    return (<ScoreInput
       order={order}
       player={player}
       key={rowId}
