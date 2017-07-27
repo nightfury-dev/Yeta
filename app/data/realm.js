@@ -17,7 +17,8 @@ Hole.schema = {
   properties: {
     id: 'int',
     holenumber: 'int',
-    par: 'int'
+    par: 'int',
+    note: { type: 'string', default: '' }
   }
 };
 
@@ -59,7 +60,7 @@ Game.schema = {
 };
 
 const realm = new Realm({
-  schemaVersion: 1,
+  schemaVersion: 3,
   schema: [Player, Hole, Course, Score, Game]
 });
 
