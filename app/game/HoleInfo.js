@@ -163,14 +163,14 @@ class HoleInfo extends React.Component {
             </HiddenContent>
             <Row>
               <AlignBottom>
-              <InfoText>Par { par }</InfoText>
-                <Icon
-                  style={{ color: ColorPalette.primary.text }}
-                  name="minus" size={26}
-                />
-              <InfoText>
-                { game.currentHole }/{ game.course.holes.length }
-              </InfoText>
+                <InfoText>Par { par }</InfoText>
+                  <Icon
+                    style={{ color: ColorPalette.primary.text }}
+                    name="minus" size={26}
+                  />
+                <InfoText>
+                  { game.currentHole }/{ game.course.holes.length }
+                </InfoText>
               </AlignBottom>
             </Row>
           </Wrapper>
