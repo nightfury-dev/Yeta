@@ -2,11 +2,18 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
+import styled from 'styled-components/native';
 
 import Header from './Header';
 import Footer from './Footer';
 import Row from './Row';
+import { ColorPalette, Fonts } from '../themes';
 
+
+const CellText = styled.Text`
+  font-size: ${Fonts.size.small};
+  color: ${ColorPalette.text};
+`;
 
 class Scorecard extends React.Component {
   constructor(props) {
@@ -55,10 +62,15 @@ class Scorecard extends React.Component {
   }
 
   renderRow(rowData) {
-    const firstCell = `${rowData.holenumber} (${rowData.par})`;
+    const firstCell = (
+      <CellText numberOfLines={1}>
+        {`${rowData.holenumber} (${rowData.par})`}
+      </CellText>
+    );
+
     return (<Row
       collection={rowData.scores}
-      getContent={(score) => score}
+      getContent={(score) => <CellText numberOfLines={1}>{score}</CellText>}
       firstCellContent={firstCell}
     />);
   }

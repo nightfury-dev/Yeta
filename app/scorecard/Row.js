@@ -30,10 +30,9 @@ const Container = styled.View`
 
 const Row = (props) => {
   const cells = props.collection.map((entry, index) => {
-    const content = props.getContent(entry);
     return (
       <Cell key={index}>
-        <CellText numberOfLines={1}>{content}</CellText>
+        {props.getContent(entry)}
       </Cell>
     );
   });
@@ -41,7 +40,7 @@ const Row = (props) => {
   return (
     <Container>
       <FirstCell>
-        <CellText numberOfLines={1}>{props.firstCellContent}</CellText>
+        {props.firstCellContent}
       </FirstCell>
       {cells}
     </Container>
@@ -51,7 +50,7 @@ const Row = (props) => {
 Row.propTypes = {
   collection: React.PropTypes.array.isRequired,
   getContent: React.PropTypes.func.isRequired,
-  firstCellContent: React.PropTypes.string.isRequired
+  firstCellContent: React.PropTypes.object.isRequired
 };
 
 export default Row;
