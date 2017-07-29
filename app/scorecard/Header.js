@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ScorecardEntry from './ScorecardEntry';
+import Row from './Row';
 
 
 function Header(props) {
-  return (<ScorecardEntry
+  return (<Row
     collection={props.players}
     getContent={(player) => player.name}
     firstCellContent={'# (par)'}

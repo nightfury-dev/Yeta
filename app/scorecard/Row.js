@@ -19,7 +19,7 @@ const CellText = styled.Text`
   color: ${ColorPalette.text};
 `;
 
-const Row = styled.View`
+const Container = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -28,7 +28,7 @@ const Row = styled.View`
   border-color: ${ColorPalette.divider};
 `;
 
-const ScorecardEntry = (props) => {
+const Row = (props) => {
   const cells = props.collection.map((entry, index) => {
     const content = props.getContent(entry);
     return (
@@ -39,19 +39,19 @@ const ScorecardEntry = (props) => {
   });
 
   return (
-    <Row>
+    <Container>
       <FirstCell>
         <CellText numberOfLines={1}>{props.firstCellContent}</CellText>
       </FirstCell>
       {cells}
-    </Row>
+    </Container>
   );
 };
 
-ScorecardEntry.propTypes = {
+Row.propTypes = {
   collection: React.PropTypes.array.isRequired,
   getContent: React.PropTypes.func.isRequired,
   firstCellContent: React.PropTypes.string.isRequired
 };
 
-export default ScorecardEntry;
+export default Row;

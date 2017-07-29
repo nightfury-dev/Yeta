@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 
 import Header from './Header';
-import ScorecardRow from './ScorecardRow';
 import Footer from './Footer';
+import Row from './Row';
 
 
 class Scorecard extends React.Component {
@@ -55,10 +55,11 @@ class Scorecard extends React.Component {
   }
 
   renderRow(rowData) {
-    return (<ScorecardRow
-      holenumber={rowData.holenumber}
-      par={rowData.par}
-      scores={rowData.scores}
+    const firstCell = `${rowData.holenumber} (${rowData.par})`;
+    return (<Row
+      collection={rowData.scores}
+      getContent={(score) => score}
+      firstCellContent={firstCell}
     />);
   }
 

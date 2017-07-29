@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScorecardEntry from './ScorecardEntry';
+import Row from './Row';
 import { calculatePar } from '../helpers/course';
 
 
@@ -12,7 +12,7 @@ class Footer extends React.Component {
       const diffStr = (diff > 0 ? (`+${diff}`) : diff);
       return `${score} (${diffStr})`;
     };
-    return (<ScorecardEntry
+    return (<Row
       collection={this.props.scores}
       getContent={getTotalScore}
       firstCellContent={`(${coursePar})`}
