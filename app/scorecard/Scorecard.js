@@ -13,7 +13,30 @@ import { ColorPalette, Fonts } from '../themes';
 const CellText = styled.Text`
   font-size: ${Fonts.size.small};
   color: ${ColorPalette.text};
+  font-weight: 400;
 `;
+
+const UnderParCellText = styled(CellText)`
+  color: blue;
+  font-weight: 600;
+`;
+
+const OverParCellText = styled(CellText)`
+  color: red;
+  font-weight: 600;
+`;
+
+const getScoreCellContent = (score, par) => {
+  const diff = score - par;
+
+  if (diff < 0) {
+    return <UnderParCellText numberOfLines={1}>{score}</UnderParCellText>;
+  } else if (diff > 0) {
+    return <OverParCellText numberOfLines={1}>{score}</OverParCellText>;
+  } else {
+    return <CellText numberOfLines={1}>{score}</CellText>;
+  }
+};
 
 class Scorecard extends React.Component {
   constructor(props) {
@@ -71,7 +94,7 @@ class Scorecard extends React.Component {
     return (
       <Row
         collection={rowData.scores}
-        getContent={(score) => <CellText numberOfLines={1}>{score}</CellText>}
+        getContent={(score) => getScoreCellContent(score, rowData.par)}
         firstCellContent={firstCell}
       />
     );
