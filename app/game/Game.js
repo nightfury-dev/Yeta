@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 
 import ScoreInputContainer from './ScoreInputContainer';
-import Scorecard from '../scorecard';
-import Footer from './Footer';
 import Screen from '../shared/components/Screen';
 import HoleInfo from './HoleInfo';
 import GamesActions from '../redux/GamesRedux';
@@ -15,9 +13,6 @@ import CoursesActions from '../redux/CoursesRedux';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      component: 'game'
-    };
 
     this.changeHole = this.changeHole.bind(this);
     this.increasePar = this.increasePar.bind(this);
@@ -90,32 +85,23 @@ class Game extends React.Component {
     );
 
     const currentHole = this.props.game.currentHole;
-    const component = this.state.component === 'game'
-      ? (<ScoreInputContainer
-        game={this.props.game}
-        nextHole={() => this.changeHole(currentHole + 1)}
-        previousHole={() => this.changeHole(currentHole - 1)}
-      />)
-      : <Scorecard />;
+
     return (
       <Screen>
-        {
-          this.state.component === 'game' &&
-          <HoleInfo
-            hole={hole}
-            totalHoleCount={this.props.game.course.holes.length}
-            onParIncreased={this.increasePar}
-            onParDecreased={this.decreasePar}
-            onNoteUpdated={this.updateNote}
-          />
-        }
-        <View style={{ flex: 11 }}>
-          {component}
-        </View>
-        <Footer
-          onShowGame={() => this.setState({ component: 'game' })}
-          onShowScorecard={() => this.setState({ component: 'scorecard' })}
+        <HoleInfo
+          hole={hole}
+          totalHoleCount={this.props.game.course.holes.length}
+          onParIncreased={this.increasePar}
+          onParDecreased={this.decreasePar}
+          onNoteUpdated={this.updateNote}
         />
+        <View style={{ flex: 11 }}>
+          <ScoreInputContainer
+            game={this.props.game}
+            nextHole={() => this.changeHole(currentHole + 1)}
+            previousHole={() => this.changeHole(currentHole - 1)}
+          />
+        </View>
       </Screen>
     );
   }

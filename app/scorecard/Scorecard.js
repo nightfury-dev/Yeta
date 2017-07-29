@@ -7,6 +7,7 @@ import styled from 'styled-components/native';
 import Header from './Header';
 import Footer from './Footer';
 import Row from './Row';
+import Screen from '../shared/components/Screen';
 import { ColorPalette, Fonts } from '../themes';
 
 
@@ -33,9 +34,9 @@ const getScoreCellContent = (score, par) => {
     return <UnderParCellText numberOfLines={1}>{score}</UnderParCellText>;
   } else if (diff > 0) {
     return <OverParCellText numberOfLines={1}>{score}</OverParCellText>;
-  } else {
-    return <CellText numberOfLines={1}>{score}</CellText>;
   }
+
+  return <CellText numberOfLines={1}>{score}</CellText>;
 };
 
 class Scorecard extends React.Component {
@@ -123,13 +124,15 @@ class Scorecard extends React.Component {
         );
     const dataSource = ds.cloneWithRows(this.createRowData());
     return (
-      <ListView
-        dataSource={dataSource}
-        renderHeader={this.renderHeader}
-        renderRow={this.renderRow}
-        renderFooter={this.renderFooter}
-        enableEmptySections
-      />
+      <Screen>
+        <ListView
+          dataSource={dataSource}
+          renderHeader={this.renderHeader}
+          renderRow={this.renderRow}
+          renderFooter={this.renderFooter}
+          enableEmptySections
+        />
+      </Screen>
     );
   }
 }

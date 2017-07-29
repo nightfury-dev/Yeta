@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Scene } from 'react-native-router-flux';
+import { Actions, Router, Scene } from 'react-native-router-flux';
 
 import Menu from '../menu';
 import Players from '../players';
@@ -10,6 +10,7 @@ import Game from '../game';
 import AddCourse from '../course-form';
 import Scorecard from '../scorecard';
 
+
 const Navigation = () => (
   <Router>
     <Scene key={'root'}>
@@ -17,7 +18,12 @@ const Navigation = () => (
       <Scene key={'players'} component={Players} />
       <Scene key={'initgame'} component={InitGame} />
       <Scene key={'resumegame'} component={ResumeGame} />
-      <Scene key={'game'} component={Game} />
+      <Scene
+        key={'game'}
+        component={Game}
+        onRight={() => Actions.scorecard()}
+        rightTitle="Scorecard"
+      />
       <Scene key={'courses'} component={Courses} />
       <Scene key={'addcourse'} component={AddCourse} />
       <Scene key={'scorecard'} component={Scorecard} />
