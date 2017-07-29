@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListView } from 'react-native';
+import { ListView, View } from 'react-native';
 import styled from 'styled-components/native';
+import { takeSnapshot } from 'react-native-view-shot';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -72,6 +73,18 @@ class Scorecard extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.takeScreenshot && this.scorecard) {
+      takeSnapshot(this.scorecard)
+        .then((uri) => {
+          console.tron.log(`Took a snapshot to file ${uri}`);
+        })
+        .catch((err) => {
+          console.tron.log(`Failed to take a snapshot, ${err}`);
+        });
+    }
+  }
+
   createRowData() {
     return this.holes.map((hole) => {
       const currentHoleScores = this.players.map((player) =>
@@ -125,20 +138,23 @@ class Scorecard extends React.Component {
     const dataSource = ds.cloneWithRows(this.createRowData());
     return (
       <Screen>
-        <ListView
-          dataSource={dataSource}
-          renderHeader={this.renderHeader}
-          renderRow={this.renderRow}
-          renderFooter={this.renderFooter}
-          enableEmptySections
-        />
+        <View ref={(component) => { this.scorecard = component; }}>
+          <ListView
+            dataSource={dataSource}
+            renderHeader={this.renderHeader}
+            renderRow={this.renderRow}
+            renderFooter={this.renderFooter}
+            enableEmptySections
+          />
+        </View>
       </Screen>
     );
   }
 }
 
 Scorecard.propTypes = {
-  game: React.PropTypes.object.isRequired
+  game: React.PropTypes.object.isRequired,
+  takeScreenshot: React.PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({

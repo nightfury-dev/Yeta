@@ -11,6 +11,12 @@ import AddCourse from '../course-form';
 import Scorecard from '../scorecard';
 
 
+const takeScreenshot = () => {
+  Actions.refresh({
+    takeScreenshot: true
+  });
+};
+
 const Navigation = () => (
   <Router>
     <Scene key={'root'}>
@@ -26,7 +32,12 @@ const Navigation = () => (
       />
       <Scene key={'courses'} component={Courses} />
       <Scene key={'addcourse'} component={AddCourse} />
-      <Scene key={'scorecard'} component={Scorecard} />
+      <Scene
+        key={'scorecard'}
+        component={Scorecard}
+        onRight={takeScreenshot}
+        rightTitle="Share"
+      />
     </Scene>
   </Router>
 );

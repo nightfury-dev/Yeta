@@ -10,11 +10,18 @@ const View = styled.View`
   padding-top: ${Metrics.navBarHeight}
 `;
 
-const Screen = ({ children }) => (
-  <View>
-    {children}
-  </View>
-);
+/* eslint react/prefer-stateless-function: 0 */
+class Screen extends React.Component {
+  render() {
+    const { children } = this.props;
+
+    return (
+      <View>
+        {children}
+      </View>
+    );
+  }
+}
 
 Screen.propTypes = {
   children: React.PropTypes.any.isRequired
