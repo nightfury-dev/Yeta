@@ -5602,6 +5602,10 @@ react-native-vector-icons@^4.0.0, react-native-vector-icons@~4.0.0:
     lodash "^4.0.0"
     yargs "^6.3.0"
 
+react-native-view-shot@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-1.10.1.tgz#68fd82478b2c0fb1f6a2a57abd8908c5da9531d6"
+
 react-native@^0.42.3:
   version "0.42.3"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.42.3.tgz#450c8a03a5e3e991a08a426f22776dd8feb80b26"
@@ -5904,10 +5908,6 @@ reduce-function-call@^1.0.1:
 redux-saga@^0.15.3:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.15.3.tgz#be2b86b4ad46bf0d84fcfcb0ca96cfc33db91acb"
-
-redux-thunk@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.5.2, redux@^3.6.0:
   version "3.6.0"
