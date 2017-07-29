@@ -51,8 +51,8 @@ class Scorecard extends React.Component {
   createRowData() {
     return this.holes.map((hole) => {
       const currentHoleScores = this.players.map((player) =>
-                this.holeScores[hole.holenumber][player.id]
-            );
+        this.holeScores[hole.holenumber][player.id]
+      );
       return {
         holenumber: hole.holenumber,
         par: hole.par,
@@ -68,11 +68,13 @@ class Scorecard extends React.Component {
       </CellText>
     );
 
-    return (<Row
-      collection={rowData.scores}
-      getContent={(score) => <CellText numberOfLines={1}>{score}</CellText>}
-      firstCellContent={firstCell}
-    />);
+    return (
+      <Row
+        collection={rowData.scores}
+        getContent={(score) => <CellText numberOfLines={1}>{score}</CellText>}
+        firstCellContent={firstCell}
+      />
+    );
   }
 
   renderFooter() {
@@ -80,10 +82,12 @@ class Scorecard extends React.Component {
           this.playerScores[player.id]
         );
 
-    return (<Footer
-      course={this.props.game.course}
-      scores={totalScores}
-    />);
+    return (
+      <Footer
+        course={this.props.game.course}
+        scores={totalScores}
+      />
+    );
   }
 
   renderHeader() {
@@ -95,13 +99,15 @@ class Scorecard extends React.Component {
             { rowHasChanged: (r1, r2) => r1 !== r2 }
         );
     const dataSource = ds.cloneWithRows(this.createRowData());
-    return (<ListView
-      dataSource={dataSource}
-      renderHeader={this.renderHeader}
-      renderRow={this.renderRow}
-      renderFooter={this.renderFooter}
-      enableEmptySections
-    />);
+    return (
+      <ListView
+        dataSource={dataSource}
+        renderHeader={this.renderHeader}
+        renderRow={this.renderRow}
+        renderFooter={this.renderFooter}
+        enableEmptySections
+      />
+    );
   }
 }
 

@@ -10,16 +10,15 @@ const CellText = styled.Text`
   color: ${ColorPalette.text};
 `;
 
-function Header(props) {
-  const firstCell = <CellText numberOfLines={1}>{'# (par)'}</CellText>;
-  return (<Row
-    collection={props.players}
+const Header = ({ players }) => (
+  <Row
+    collection={players}
     getContent={(player) =>
       <CellText numberOfLines={1}>{player.name}</CellText>
     }
-    firstCellContent={firstCell}
-  />);
-}
+    firstCellContent={<CellText numberOfLines={1}>{'# (par)'}</CellText>}
+  />
+);
 
 Header.propTypes = {
   players: React.PropTypes.array.isRequired

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-import { ColorPalette, Fonts } from '../themes';
+import { ColorPalette } from '../themes';
 
 
 const Cell = styled.View`
@@ -14,11 +14,6 @@ const FirstCell = styled.View`
   align-items: flex-start;
 `;
 
-const CellText = styled.Text`
-  font-size: ${Fonts.size.small};
-  color: ${ColorPalette.text};
-`;
-
 const Container = styled.View`
   flex: 1;
   flex-direction: row;
@@ -28,19 +23,17 @@ const Container = styled.View`
   border-color: ${ColorPalette.divider};
 `;
 
-const Row = (props) => {
-  const cells = props.collection.map((entry, index) => {
-    return (
-      <Cell key={index}>
-        {props.getContent(entry)}
-      </Cell>
-    );
-  });
+const Row = ({ collection, getContent, firstCellContent }) => {
+  const cells = collection.map((entry, index) => (
+    <Cell key={index}>
+      {getContent(entry)}
+    </Cell>
+  ));
 
   return (
     <Container>
       <FirstCell>
-        {props.firstCellContent}
+        {firstCellContent}
       </FirstCell>
       {cells}
     </Container>
