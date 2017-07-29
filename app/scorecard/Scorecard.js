@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListView, View } from 'react-native';
+import { ListView, View, Share } from 'react-native';
 import styled from 'styled-components/native';
 import { takeSnapshot } from 'react-native-view-shot';
 
@@ -75,12 +75,14 @@ class Scorecard extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.takeScreenshot && this.scorecard) {
-      takeSnapshot(this.scorecard)
+      takeSnapshot(this.scorecard, {
+        result: 'data-uri'
+      })
         .then((uri) => {
-          console.tron.log(`Took a snapshot to file ${uri}`);
-        })
-        .catch((err) => {
-          console.tron.log(`Failed to take a snapshot, ${err}`);
+          Share.share({
+            title: 'Yet Another Discgolf App - Scorecard',
+            url: uri
+          });
         });
     }
   }
