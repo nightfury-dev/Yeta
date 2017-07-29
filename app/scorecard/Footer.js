@@ -4,7 +4,7 @@ import ScorecardEntry from './ScorecardEntry';
 import { calculatePar } from '../helpers/course';
 
 
-class ScorecardFooter extends React.Component {
+class Footer extends React.Component {
   render() {
     const coursePar = calculatePar(this.props.course);
     const getTotalScore = (score) => {
@@ -20,9 +20,9 @@ class ScorecardFooter extends React.Component {
   }
 }
 
-ScorecardFooter.propTypes = {
+Footer.propTypes = {
   course: React.PropTypes.object.isRequired,
   scores: React.PropTypes.array.isRequired
 };
 
-export default ScorecardFooter;
+export default Footer;

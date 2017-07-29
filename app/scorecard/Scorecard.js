@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 
-import ScorecardHeader from './ScorecardHeader';
+import Header from './Header';
 import ScorecardRow from './ScorecardRow';
-import ScorecardFooter from './ScorecardFooter';
+import Footer from './Footer';
 
 
 class Scorecard extends React.Component {
@@ -67,14 +67,14 @@ class Scorecard extends React.Component {
           this.playerScores[player.id]
         );
 
-    return (<ScorecardFooter
+    return (<Footer
       course={this.props.game.course}
       scores={totalScores}
     />);
   }
 
   renderHeader() {
-    return <ScorecardHeader players={this.players} />;
+    return <Header players={this.players} />;
   }
 
   render() {

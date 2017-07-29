@@ -3,7 +3,7 @@ import React from 'react';
 import ScorecardEntry from './ScorecardEntry';
 
 
-function ScorecardHeader(props) {
+function Header(props) {
   return (<ScorecardEntry
     collection={props.players}
     getContent={(player) => player.name}
@@ -11,8 +11,8 @@ function ScorecardHeader(props) {
   />);
 }
 
-ScorecardHeader.propTypes = {
+Header.propTypes = {
   players: React.PropTypes.array.isRequired
 };
 
-export default ScorecardHeader;
+export default Header;
