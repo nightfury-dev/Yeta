@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, Share } from 'react-native';
+import { ListView, View, Share, ScrollView, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { takeSnapshot } from 'react-native-view-shot';
 
@@ -9,7 +9,9 @@ import Header from './Header';
 import Footer from './Footer';
 import Row from './Row';
 import Screen from '../shared/components/Screen';
+import CenteredView from '../shared/components/CenteredView';
 import { ColorPalette, Fonts } from '../themes';
+import { formatDate } from '../helpers/date';
 
 
 const CellText = styled.Text`
@@ -26,6 +28,16 @@ const UnderParCellText = styled(CellText)`
 const OverParCellText = styled(CellText)`
   color: red;
   font-weight: 600;
+`;
+
+const ScreenshotTitleText = styled.Text`
+  font-size: ${Fonts.size.normal};
+  color: ${ColorPalette.text};
+  font-weight: 600;
+`;
+
+const ScreenshotView = styled(View)`
+  background-color: ${ColorPalette.background}
 `;
 
 const getScoreCellContent = (score, par) => {
@@ -75,15 +87,13 @@ class Scorecard extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.takeScreenshot && this.scorecard) {
-      takeSnapshot(this.scorecard, {
-        result: 'data-uri'
-      })
-        .then((uri) => {
-          Share.share({
-            title: 'Yet Another Discgolf App - Scorecard',
-            url: uri
-          });
+      takeSnapshot(this.scorecard)
+      .then((uri) => {
+        Share.share({
+          title: 'Yet Another Discgolf App - Scorecard',
+          url: `${uri}`
         });
+      });
     }
   }
 
@@ -138,18 +148,47 @@ class Scorecard extends React.Component {
             { rowHasChanged: (r1, r2) => r1 !== r2 }
         );
     const dataSource = ds.cloneWithRows(this.createRowData());
+    const list = (
+      <ListView
+        dataSource={dataSource}
+        renderHeader={this.renderHeader}
+        renderRow={this.renderRow}
+        renderFooter={this.renderFooter}
+        enableEmptySections
+      />
+    );
+
+    const { width } = Dimensions.get('window');
+    const { game } = this.props;
+
+    // ScrollView wraps the scorecard ListView that is rendered outside the view
+    // port full height so that the screenshot will be correct height.
     return (
-      <Screen>
-        <View ref={(component) => { this.scorecard = component; }}>
-          <ListView
-            dataSource={dataSource}
-            renderHeader={this.renderHeader}
-            renderRow={this.renderRow}
-            renderFooter={this.renderFooter}
-            enableEmptySections
-          />
-        </View>
-      </Screen>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          style={{
+            height: 9999,
+            width,
+            flex: 1,
+            position: 'absolute',
+            left: width
+          }}
+        >
+          <ScreenshotView
+            ref={(component) => { this.scorecard = component; }}
+          >
+            <CenteredView>
+              <ScreenshotTitleText>
+                {game.course.name} - {formatDate(game.timeBegin)}
+              </ScreenshotTitleText>
+            </CenteredView>
+            {list}
+          </ScreenshotView>
+        </ScrollView>
+        <Screen>
+          {list}
+        </Screen>
+      </View>
     );
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { View, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -9,15 +8,8 @@ import styles from './styles/GameListElementStyles';
 import { Fonts } from '../themes';
 import { calculateScores } from '../helpers/score';
 import { calculatePar } from '../helpers/course';
+import { formatDate } from '../helpers/date';
 
-
-const formatDate = (date) => {
-  try {
-    return moment(date).format('DD.MM.YYYY HH:mm');
-  } catch (e) {
-    return '';
-  }
-};
 
 const TinyText = styled(BaseText)`
   font-size: ${Fonts.size.tiny};
