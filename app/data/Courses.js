@@ -16,15 +16,21 @@ const update = (course, name, pars) => new Promise((success) => {
   realm.write(() => {
     savedCourse.name = name;
 
+    const holesToDelete = [];
+
     _.forEach(savedCourse.holes, (hole) => {
       if (hole.holenumber > pars.length) {
         realm.delete(scores.filtered('hole.id = $0', hole.id));
-        realm.delete(hole);
+        holesToDelete.push(hole);
       } else {
         /* eslint no-param-reassign: 0 */
         hole.par = pars[hole.holenumber - 1];
       }
     });
+
+    if (holesToDelete.length > 0) {
+      realm.delete(holesToDelete);
+    }
 
     const holeCount = _.values(course.holes).length;
     pars.slice(holeCount).forEach((par, index) => {
