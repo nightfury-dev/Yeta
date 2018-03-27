@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, Input } from 'native-base';
+import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 import ModalButton from './ModalButton';
@@ -29,9 +30,9 @@ class AddPlayerModal extends React.Component {
 }
 
 AddPlayerModal.propTypes = {
-  visible: React.PropTypes.bool.isRequired,
-  onSave: React.PropTypes.func.isRequired,
-  onCancel: React.PropTypes.func.isRequired
+  visible: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
 };
 
 

@@ -3,6 +3,7 @@ import Interactable from 'react-native-interactable';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput as TextInputRN } from 'react-native';
+import PropTypes from 'prop-types';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
@@ -117,11 +118,11 @@ const HoleInfo = (props) => {
 };
 
 HoleInfo.propTypes = {
-  hole: React.PropTypes.object.isRequired,
-  onParIncreased: React.PropTypes.func.isRequired,
-  onParDecreased: React.PropTypes.func.isRequired,
-  onNoteUpdated: React.PropTypes.func.isRequired,
-  totalHoleCount: React.PropTypes.number.isRequired
+  hole: PropTypes.object.isRequired,
+  onParIncreased: PropTypes.func.isRequired,
+  onParDecreased: PropTypes.func.isRequired,
+  onNoteUpdated: PropTypes.func.isRequired,
+  totalHoleCount: PropTypes.number.isRequired
 };
 
 export default HoleInfo;

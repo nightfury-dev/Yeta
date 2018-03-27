@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
+import PropTypes from 'prop-types';
 
 const View = styled.View`
   flex: 1;
@@ -15,9 +15,9 @@ const CenteredView = (props) => (
 );
 
 CenteredView.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.array
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
   ])
 };
 

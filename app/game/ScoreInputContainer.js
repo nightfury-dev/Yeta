@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ScoreInputCollection from './ScoreInputCollection';
 import SwipeView from './SwipeView';
@@ -31,9 +32,9 @@ class ScoreInputContainer extends React.Component {
 }
 
 ScoreInputContainer.propTypes = {
-  game: React.PropTypes.object.isRequired,
-  nextHole: React.PropTypes.func.isRequired,
-  previousHole: React.PropTypes.func.isRequired
+  game: PropTypes.object.isRequired,
+  nextHole: PropTypes.func.isRequired,
+  previousHole: PropTypes.func.isRequired
 };
 
 export default ScoreInputContainer;

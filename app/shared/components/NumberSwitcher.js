@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
 import AnimatedText from '../../game/AnimatedText';
 import { ColorPalette } from '../../themes';
@@ -25,9 +26,9 @@ const NumberSwitcher = ({ onDecrease, onIncrease, number }) => (
 );
 
 NumberSwitcher.propTypes = {
-  onDecrease: React.PropTypes.func.isRequired,
-  onIncrease: React.PropTypes.func.isRequired,
-  number: React.PropTypes.number.isRequired
+  onDecrease: PropTypes.func.isRequired,
+  onIncrease: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired
 };
 
 export default NumberSwitcher;

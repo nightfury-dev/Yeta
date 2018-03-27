@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Fab } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
 import styles from './styles/AddActionButtonStyles';
 
@@ -18,7 +19,7 @@ const AddActionButton = (props) => (
 );
 
 AddActionButton.propTypes = {
-  onPress: React.PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired
 };
 
 export default AddActionButton;

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import { ColorPalette } from '../../themes';
 import BaseText from './BaseText';
@@ -22,8 +23,8 @@ const ModalButton = (props) => (
 );
 
 ModalButton.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  onPress: React.PropTypes.func.isRequired
+  text: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired
 };
 
 export default ModalButton;

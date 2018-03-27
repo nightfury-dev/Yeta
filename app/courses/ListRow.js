@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
@@ -28,9 +29,9 @@ const ListRow = ({ text, onDelete, onEdit }) => {
 };
 
 ListRow.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  onEdit: React.PropTypes.func.isRequired,
-  onDelete: React.PropTypes.func.isRequired
+  text: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default ListRow;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ScrollView, ListView, StyleSheet } from 'react-native';
 import { Button, ListItem, Radio, Right } from 'native-base';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import BaseText from '../shared/components/BaseText';
 import styles from './styles/SelectCourseStyles';
@@ -94,8 +95,8 @@ class SelectCourse extends React.Component {
 }
 
 SelectCourse.propTypes = {
-  courseSelected: React.PropTypes.func.isRequired,
-  courses: React.PropTypes.array.isRequired
+  courseSelected: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({

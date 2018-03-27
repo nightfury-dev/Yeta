@@ -1,4 +1,4 @@
-package com.joninevalainen.yada;
+package com.yada;
 
 import com.facebook.react.ReactActivity;
 

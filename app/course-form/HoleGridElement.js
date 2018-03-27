@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Row from './Row';
 import TextWrapper from './TextWrapper';
@@ -38,10 +39,10 @@ class HoleGridElement extends React.Component {
 }
 
 HoleGridElement.propTypes = {
-  par: React.PropTypes.number.isRequired,
-  holeNumber: React.PropTypes.number.isRequired,
-  onParIncreased: React.PropTypes.func.isRequired,
-  onParDecreased: React.PropTypes.func.isRequired
+  par: PropTypes.number.isRequired,
+  holeNumber: PropTypes.number.isRequired,
+  onParIncreased: PropTypes.func.isRequired,
+  onParDecreased: PropTypes.func.isRequired
 };
 
 export default HoleGridElement;

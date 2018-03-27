@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import PropTypes from 'prop-types';
 
 import Confirmation from '../shared/components/Confirmation';
 import Screen from '../shared/components/Screen';
@@ -78,9 +79,9 @@ class ResumeGame extends React.Component {
 }
 
 ResumeGame.propTypes = {
-  games: React.PropTypes.array.isRequired,
-  changeCurrentGame: React.PropTypes.func.isRequired,
-  removeGame: React.PropTypes.func.isRequired
+  games: PropTypes.array.isRequired,
+  changeCurrentGame: PropTypes.func.isRequired,
+  removeGame: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

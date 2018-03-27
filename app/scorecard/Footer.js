@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import Row from './Row';
 import { calculatePar } from '../helpers/course';
@@ -31,8 +32,8 @@ const Footer = ({ course, scores }) => {
 };
 
 Footer.propTypes = {
-  course: React.PropTypes.object.isRequired,
-  scores: React.PropTypes.array.isRequired
+  course: PropTypes.object.isRequired,
+  scores: PropTypes.array.isRequired
 };
 
 export default Footer;

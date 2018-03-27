@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ListView, View, Share, ScrollView, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { takeSnapshot } from 'react-native-view-shot';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -194,8 +195,8 @@ class Scorecard extends React.Component {
 }
 
 Scorecard.propTypes = {
-  game: React.PropTypes.object.isRequired,
-  takeScreenshot: React.PropTypes.bool
+  game: PropTypes.object.isRequired,
+  takeScreenshot: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({

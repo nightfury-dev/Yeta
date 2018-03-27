@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, ListView } from 'react-native';
+import PropTypes from 'prop-types';
 
 import ScoreInput from './ScoreInput';
 import { getPlayingOrders } from '../helpers/game';
@@ -52,8 +53,8 @@ class ScoreInputCollection extends React.Component {
 }
 
 ScoreInputCollection.propTypes = {
-  updateScore: React.PropTypes.func.isRequired,
-  game: React.PropTypes.object.isRequired,
+  updateScore: PropTypes.func.isRequired,
+  game: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

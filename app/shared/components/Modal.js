@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal as RNModal } from 'react-native';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import { ColorPalette } from '../../themes';
 
@@ -32,8 +33,8 @@ const Modal = (props) => (
 );
 
 Modal.propTypes = {
-  children: React.PropTypes.array,
-  visible: React.PropTypes.bool.isRequired
+  children: PropTypes.array,
+  visible: PropTypes.bool.isRequired
 };
 
 

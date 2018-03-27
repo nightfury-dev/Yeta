@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import { ColorPalette, Metrics } from '../../themes';
 
@@ -24,7 +25,7 @@ class Screen extends React.Component {
 }
 
 Screen.propTypes = {
-  children: React.PropTypes.any.isRequired
+  children: PropTypes.any.isRequired
 };
 
 export default Screen;

@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import PropTypes from 'prop-types';
 
 import Confirmation from '../shared/components/Confirmation';
 import AddActionButton from '../shared/components/AddActionButton';
@@ -77,8 +78,8 @@ class Courses extends React.Component {
 }
 
 Courses.propTypes = {
-  courses: React.PropTypes.array.isRequired,
-  removeCourse: React.PropTypes.func.isRequired
+  courses: PropTypes.array.isRequired,
+  removeCourse: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

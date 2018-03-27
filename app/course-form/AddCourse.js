@@ -5,6 +5,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 import { Button, InputGroup, Input } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import Row from './Row';
 import TextWrapper from './TextWrapper';
@@ -115,9 +116,9 @@ class AddCourse extends React.Component {
 }
 
 AddCourse.propTypes = {
-  addCourse: React.PropTypes.func.isRequired,
-  updateCourse: React.PropTypes.func.isRequired,
-  course: React.PropTypes.object
+  addCourse: PropTypes.func.isRequired,
+  updateCourse: PropTypes.func.isRequired,
+  course: PropTypes.object
 };
 
 const mapDispatchToProps = (dispatch) => ({

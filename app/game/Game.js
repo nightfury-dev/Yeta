@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import ScoreInputContainer from './ScoreInputContainer';
 import Screen from '../shared/components/Screen';
@@ -108,11 +109,11 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  game: React.PropTypes.object,
-  updateHole: React.PropTypes.func.isRequired,
-  creating: React.PropTypes.bool.isRequired,
-  updateCourse: React.PropTypes.func.isRequired,
-  updateNote: React.PropTypes.func.isRequired
+  game: PropTypes.object,
+  updateHole: PropTypes.func.isRequired,
+  creating: PropTypes.bool.isRequired,
+  updateCourse: PropTypes.func.isRequired,
+  updateNote: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

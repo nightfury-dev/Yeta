@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ScrollView, ListView, StyleSheet } from 'react-native';
 import { Button, CheckBox, ListItem, Right } from 'native-base';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import AddPlayerModal from '../shared/components/AddPlayerModal';
 import AddActionButton from '../shared/components/AddActionButton';
@@ -119,9 +120,9 @@ class SelectPlayers extends React.Component {
 }
 
 SelectPlayers.propTypes = {
-  addPlayer: React.PropTypes.func.isRequired,
-  players: React.PropTypes.array.isRequired,
-  playersSelected: React.PropTypes.func.isRequired
+  addPlayer: PropTypes.func.isRequired,
+  players: PropTypes.array.isRequired,
+  playersSelected: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

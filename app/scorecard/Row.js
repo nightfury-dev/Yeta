@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import { ColorPalette } from '../themes';
 
@@ -41,9 +42,9 @@ const Row = ({ collection, getContent, firstCellContent }) => {
 };
 
 Row.propTypes = {
-  collection: React.PropTypes.array.isRequired,
-  getContent: React.PropTypes.func.isRequired,
-  firstCellContent: React.PropTypes.object.isRequired
+  collection: PropTypes.array.isRequired,
+  getContent: PropTypes.func.isRequired,
+  firstCellContent: PropTypes.object.isRequired
 };
 
 export default Row;

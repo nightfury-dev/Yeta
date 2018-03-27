@@ -1,5 +1,6 @@
 import React from 'react';
 import { Animated } from 'react-native';
+import PropTypes from 'prop-types';
 
 import styles from './styles/AnimatedTextStyles';
 
@@ -21,7 +22,7 @@ class AnimatedText extends React.Component {
 }
 
 AnimatedText.propTypes = {
-  children: React.PropTypes.any.isRequired
+  children: PropTypes.any.isRequired
 };
 
 

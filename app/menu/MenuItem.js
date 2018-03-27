@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
 import styles from './styles/MenuItemStyles';
 import { ColorPalette, Fonts } from '../themes';
@@ -37,10 +38,10 @@ function MenuItem(props) {
 }
 
 MenuItem.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired,
-  icon: React.PropTypes.string.isRequired,
-  onPress: React.PropTypes.func.isRequired
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired
 };
 
 export default MenuItem;

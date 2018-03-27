@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import BaseText from '../shared/components/BaseText';
 import SwipableListItem from '../shared/components/SwipableListItem';
@@ -70,9 +71,9 @@ const GameListElement = ({ game, onDelete, onPress }) => {
 };
 
 GameListElement.propTypes = {
-  game: React.PropTypes.object.isRequired,
-  onDelete: React.PropTypes.func,
-  onPress: React.PropTypes.func
+  game: PropTypes.object.isRequired,
+  onDelete: PropTypes.func,
+  onPress: PropTypes.func
 };
 
 export default GameListElement;

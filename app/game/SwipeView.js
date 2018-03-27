@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, PanResponder } from 'react-native';
-
+import PropTypes from 'prop-types';
 
 const MOVE_THRESHOLD_PX = 75;
 
@@ -60,10 +60,10 @@ class SwipeView extends React.Component {
 }
 
 SwipeView.propTypes = {
-  onRightSwipe: React.PropTypes.func.isRequired,
-  onLeftSwipe: React.PropTypes.func.isRequired,
-  children: React.PropTypes.any,
-  style: React.PropTypes.any
+  onRightSwipe: PropTypes.func.isRequired,
+  onLeftSwipe: PropTypes.func.isRequired,
+  children: PropTypes.any,
+  style: PropTypes.any
 };
 
 export default SwipeView;

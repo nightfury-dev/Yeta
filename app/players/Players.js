@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListView } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Confirmation from '../shared/components/Confirmation';
 import Screen from '../shared/components/Screen';
@@ -116,10 +117,10 @@ class Players extends React.Component {
 }
 
 Players.propTypes = {
-  addPlayer: React.PropTypes.func.isRequired,
-  removePlayer: React.PropTypes.func.isRequired,
-  players: React.PropTypes.array.isRequired,
-  changeName: React.PropTypes.func.isRequired
+  addPlayer: PropTypes.func.isRequired,
+  removePlayer: PropTypes.func.isRequired,
+  players: PropTypes.array.isRequired,
+  changeName: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

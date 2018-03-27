@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import BaseText from '../shared/components/BaseText';
 import NumberSwitcher from '../shared/components/NumberSwitcher';
@@ -60,11 +61,11 @@ const ScoreInput = (props) => (
 );
 
 ScoreInput.propTypes = {
-  player: React.PropTypes.object.isRequired,
-  score: React.PropTypes.number.isRequired,
-  order: React.PropTypes.number.isRequired,
-  onScoreDecreased: React.PropTypes.func.isRequired,
-  onScoreIncreased: React.PropTypes.func.isRequired
+  player: PropTypes.object.isRequired,
+  score: PropTypes.number.isRequired,
+  order: PropTypes.number.isRequired,
+  onScoreDecreased: PropTypes.func.isRequired,
+  onScoreIncreased: PropTypes.func.isRequired
 };
 
 export default ScoreInput;

@@ -3,6 +3,7 @@ import './ReactotronConfig';
 /* eslint import/imports-first: 0 */
 import React from 'react';
 import { connect, Provider } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Navigation from './navigation';
 import createStore from './redux';
@@ -21,7 +22,7 @@ class RootComponent extends React.Component {
 }
 
 RootComponent.propTypes = {
-  startup: React.PropTypes.func.isRequired
+  startup: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

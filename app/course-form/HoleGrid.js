@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import HoleGridElement from './HoleGridElement';
 
@@ -46,8 +47,8 @@ class HoleGrid extends React.Component {
 }
 
 HoleGrid.propTypes = {
-  pars: React.PropTypes.array.isRequired,
-  onParsChanged: React.PropTypes.func.isRequired
+  pars: PropTypes.array.isRequired,
+  onParsChanged: PropTypes.func.isRequired
 };
 
 export default HoleGrid;

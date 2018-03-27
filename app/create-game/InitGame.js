@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import PropTypes from 'prop-types';
 
 import SelectPlayers from './SelectPlayers';
 import SelectCourse from './SelectCourse';
@@ -61,7 +62,7 @@ class InitGame extends React.Component {
 }
 
 InitGame.propTypes = {
-  createGame: React.PropTypes.func.isRequired,
+  createGame: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

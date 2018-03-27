@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 import Row from './Row';
 import { ColorPalette, Fonts } from '../themes';
@@ -21,7 +22,7 @@ const Header = ({ players }) => (
 );
 
 Header.propTypes = {
-  players: React.PropTypes.array.isRequired
+  players: PropTypes.array.isRequired
 };
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListItem } from 'native-base';
+import PropTypes from 'prop-types';
 
 /* eslint import/no-named-as-default: 0, import/no-named-as-default-member: 0 */
 import Swipeout from 'react-native-swipeout';
@@ -14,7 +15,7 @@ const CenteredIcon = ({ icon }) => (
 );
 
 CenteredIcon.propTypes = {
-  icon: React.PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired
 };
 
 const SwipableListItem = ({ children, buttons, onPress, style }) => {
@@ -34,10 +35,10 @@ const SwipableListItem = ({ children, buttons, onPress, style }) => {
 };
 
 SwipableListItem.propTypes = {
-  children: React.PropTypes.any.isRequired,
-  buttons: React.PropTypes.array.isRequired,
-  onPress: React.PropTypes.func,
-  style: React.PropTypes.any
+  children: PropTypes.any.isRequired,
+  buttons: PropTypes.array.isRequired,
+  onPress: PropTypes.func,
+  style: PropTypes.any
 };
 
 export default SwipableListItem;

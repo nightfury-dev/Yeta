@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 import ModalButton from './ModalButton';
@@ -14,10 +15,10 @@ const Confirmation = (props) => (
 );
 
 Confirmation.propTypes = {
-  visible: React.PropTypes.bool.isRequired,
-  onConfirm: React.PropTypes.func.isRequired,
-  onCancel: React.PropTypes.func.isRequired,
-  message: React.PropTypes.string.isRequired
+  visible: PropTypes.bool.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired
 };
 
 
