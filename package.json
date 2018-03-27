@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "node node_modules/eslint/bin/eslint.js app/",
-    "test": "jest",
-    "storybook": "storybook start -p 7007"
+    "test": "jest"
   },
   "dependencies": {
     "lodash": "^4.13.1",
@@ -30,7 +29,6 @@
     "styled-components": "^1.4.6"
   },
   "devDependencies": {
-    "@kadira/react-native-storybook": "^2.0.0",
     "babel-eslint": "^6.0.4",
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
