@@ -1,6 +1,3 @@
-import './ReactotronConfig';
-
-/* eslint import/imports-first: 0 */
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 import PropTypes from 'prop-types';

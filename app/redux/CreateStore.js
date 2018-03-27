@@ -3,20 +3,22 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-
 // creates the store
 export default (rootReducer, rootSaga) => {
   const middleware = [];
   const enhancers = [];
 
-  /* eslint no-console: 0 */
-  const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null;
-  const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+  const sagaMiddleware = createSagaMiddleware();
   middleware.push(sagaMiddleware);
 
   enhancers.push(applyMiddleware(...middleware));
 
-  const store = createStore(rootReducer, compose(...enhancers));
+  /* eslint-disable no-underscore-dangle */
+  /* eslint-disable no-undef */
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    || compose;
+  const store = createStore(rootReducer, composeEnhancers(...enhancers));
+  /* eslint-enable */
 
   // kick off root saga
   sagaMiddleware.run(rootSaga);
