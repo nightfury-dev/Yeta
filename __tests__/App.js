@@ -1,12 +1,16 @@
-import 'react-native';
-import React from 'react';
-import App from '../App';
+const wdio = require('webdriverio');
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+const opts = {
+  port: 4723,
+  desiredCapabilities: {
+    platformName: 'iOS',
+    platformVersion: '11.2',
+    deviceName: 'iPhone 7',
+    app: './ios/build/Build/Products/Debug-iphonesimulator/yada.app',
+    automationName: 'XCUITest'
+  }
+};
 
-it('renders correctly', () => {
-  const tree = renderer.create(
-    <App />
-  );
-});
+const client = wdio.remote(opts);
+
+client.init().end();

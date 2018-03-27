@@ -29,6 +29,8 @@
     "styled-components": "^1.4.6"
   },
   "devDependencies": {
+    "appium": "^1.7.2",
+    "appium-doctor": "^1.4.3",
     "babel-eslint": "^6.0.4",
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
@@ -42,7 +44,8 @@
     "react-test-renderer": "^16.3.0-alpha.1",
     "reactotron-react-native": "^1.1.4",
     "reactotron-redux": "^1.1.4",
-    "reactotron-redux-saga": "^1.11.1"
+    "reactotron-redux-saga": "^1.11.1",
+    "webdriverio": "^4.12.0"
   },
   "jest": {
     "preset": "react-native"
