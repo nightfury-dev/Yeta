@@ -6,7 +6,7 @@ const opts = {
     platformName: 'iOS',
     platformVersion: '11.2',
     deviceName: 'iPhone 7',
-    app: './ios/build/Build/Products/Debug-iphonesimulator/yada.app',
+    app: './ios/build/Build/Products/Debug-iphonesimulator/yeta.app',
     automationName: 'XCUITest'
   }
 };

@@ -1,6 +1,6 @@
 # Yet Another Discgolf App
 
-[![Build Status](https://travis-ci.org/joni-/yada.svg?branch=master)](https://travis-ci.org/joni-/yada)
+[![Build Status](https://travis-ci.org/joni-/yeta.svg?branch=master)](https://travis-ci.org/joni-/yeta)
 
 Discgolf scorecard app
 

@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "yada-tvOS.app"
-               BlueprintName = "yada-tvOS"
-               ReferencedContainer = "container:yada.xcodeproj">
+               BuildableName = "yeta-tvOS.app"
+               BlueprintName = "yeta-tvOS"
+               ReferencedContainer = "container:yeta.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "yada-tvOSTests.xctest"
-               BlueprintName = "yada-tvOSTests"
-               ReferencedContainer = "container:yada.xcodeproj">
+               BuildableName = "yeta-tvOSTests.xctest"
+               BlueprintName = "yeta-tvOSTests"
+               ReferencedContainer = "container:yeta.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "yada-tvOSTests.xctest"
-               BlueprintName = "yada-tvOSTests"
-               ReferencedContainer = "container:yada.xcodeproj">
+               BuildableName = "yeta-tvOSTests.xctest"
+               BlueprintName = "yeta-tvOSTests"
+               ReferencedContainer = "container:yeta.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "yada-tvOS.app"
-            BlueprintName = "yada-tvOS"
-            ReferencedContainer = "container:yada.xcodeproj">
+            BuildableName = "yeta-tvOS.app"
+            BlueprintName = "yeta-tvOS"
+            ReferencedContainer = "container:yeta.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "yada-tvOS.app"
-            BlueprintName = "yada-tvOS"
-            ReferencedContainer = "container:yada.xcodeproj">
+            BuildableName = "yeta-tvOS.app"
+            BlueprintName = "yeta-tvOS"
+            ReferencedContainer = "container:yeta.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "yada-tvOS.app"
-            BlueprintName = "yada-tvOS"
-            ReferencedContainer = "container:yada.xcodeproj">
+            BuildableName = "yeta-tvOS.app"
+            BlueprintName = "yeta-tvOS"
+            ReferencedContainer = "container:yeta.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

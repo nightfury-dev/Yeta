@@ -1,4 +1,4 @@
-package com.yada;
+package com.yeta;
 
 import android.app.Application;
 
